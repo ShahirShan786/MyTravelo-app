@@ -16,11 +16,13 @@ import 'package:my_travelo_app/profileSubScreen/privacyPage.dart';
 import 'package:my_travelo_app/screens/homescreens.dart';
 import 'package:my_travelo_app/screens/logIn_page.dart';
 import 'package:my_travelo_app/servies/profileServies.dart';
+import 'package:my_travelo_app/servies/signInService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Profilescreen extends StatefulWidget {
-  const Profilescreen({super.key, this.userDetails});
-  final Singinmodel? userDetails;
+  const Profilescreen({
+    super.key,
+  });
 
   @override
   State<Profilescreen> createState() => _ProfilescreenState();
@@ -43,30 +45,19 @@ class _ProfilescreenState extends State<Profilescreen> {
     Icons.logout_outlined
   ];
 
-  // final Profileservies _profileservies = Profileservies();
+  final Signinservice _signinservice = Signinservice();
 
-  Profilemodel? userProfile;
-  String username = "";
+  List<Singinmodel>? profileDetails;
 
-  Future<void> getUsername() async {
-    SharedPreferences prefsUsername = await SharedPreferences.getInstance();
-    username = prefsUsername.getString("username") ?? ' ';
-  }
-
-  Future<void> _loadProfileData(String username) async {
-    userProfile = await Profileservies().getProfileData(username);
+  Future<void> _loadProfileData() async {
+    profileDetails = await _signinservice.getsignInData();
     setState(() {});
   }
 
   @override
   void initState() {
     super.initState();
-    getUsername().then(
-      (value) {
-        log('Username: $username');
-        _loadProfileData(username);
-      },
-    );
+    _loadProfileData();
   }
 
   @override
@@ -81,40 +72,6 @@ class _ProfilescreenState extends State<Profilescreen> {
           fontSize: 20,
           fontWeight: FontWeight.bold,
         ),
-        actions: [
-          InkWell(
-            child: Padding(
-              padding: const EdgeInsets.only(right: 15),
-              child: Container(
-                height: 35,
-                width: 35,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  // border: Border.all(color: Colors.grey.shade500),
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey.shade400,
-                        spreadRadius: 1.5,
-                        blurRadius: 2.5),
-                  ],
-                ),
-                child: const Icon(Icons.add),
-              ),
-            ),
-            onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (context) => AddInfoScreen(
-                      // userData: userProfile!,
-                      )).then(
-                (value) {
-                  _loadProfileData(username);
-                },
-              );
-            },
-          )
-        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -135,30 +92,54 @@ class _ProfilescreenState extends State<Profilescreen> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(10),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(50),
-                              child: Image.network(
-                                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2ugjmkZZ-tnWNEZKCesBHKSRX2gEeX1zWeE9Iy26eoIrdcWG-oJ_XNvekGTrMbcEdy1M&usqp=CAU"),
+                      child: SizedBox(
+                        width: 272,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.white,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(50),
+                                child: Image.network(
+                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2ugjmkZZ-tnWNEZKCesBHKSRX2gEeX1zWeE9Iy26eoIrdcWG-oJ_XNvekGTrMbcEdy1M&usqp=CAU"),
+                              ),
+                              radius: 40,
                             ),
-                            radius: 40,
-                            // child: Image.asset(userProfile!.userImage!),
-                            // child: userProfile!.userImage == null ?
-                            //    Image.network("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2ugjmkZZ-tnWNEZKCesBHKSRX2gEeX1zWeE9Iy26eoIrdcWG-oJ_XNvekGTrMbcEdy1M&usqp=CAU") :
-                            //    Image.asset(userProfile!.userImage!),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15, top: 10),
-                            child: TextWidget(
-                                content: widget.userDetails!.username,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
+                            Padding(
+                              padding: const EdgeInsets.only(top: 5, left: 12),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  TextWidget(
+                                      content: profileDetails != null
+                                          ? profileDetails![0].username ?? " "
+                                          : "User",
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w700),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  TextWidget(
+                                      content: profileDetails != null
+                                          ? profileDetails![0].email ?? "email"
+                                          : "email",
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500),
+                                  SizedBox(
+                                    height: 2,
+                                  ),
+                                  TextWidget(
+                                      content: profileDetails != null
+                                          ? profileDetails![0].phone ?? "phone"
+                                          : 'phone',
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400)
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     Padding(
@@ -225,7 +206,7 @@ class _ProfilescreenState extends State<Profilescreen> {
                                                     (Route<dynamic> route) =>
                                                         false);
                                             currentScreen = Homescreen();
-                                            currentPageIndex = 0;
+                                            // currentPageIndex = 0;
                                             SharedPreferences prefs =
                                                 await SharedPreferences
                                                     .getInstance();

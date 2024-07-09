@@ -10,24 +10,35 @@ import 'package:my_travelo_app/screens/scheduleScreen.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key, this.userDetails});
-  final Singinmodel? userDetails;
+ final Singinmodel? userDetails;
 
+ 
   @override
   State<Dashboard> createState() => _DashboardState();
 }
 
-int currentPageIndex = 0;
-List<Widget> screens = [
-  Homescreen(),
-  Schedulescreen(),
-  Favoritescreen(),
-   Profilescreen(),
-];
+
 
 final PageStorageBucket bucket = PageStorageBucket();
 Widget currentScreen = Homescreen();
 
 class _DashboardState extends State<Dashboard> {
+
+int currentPageIndex = 0;
+late List<Widget> screens;
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    List<Widget> screens = [
+  Homescreen(),
+  Schedulescreen(),
+  Favoritescreen(),
+   Profilescreen(),
+];
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,7 +125,7 @@ class _DashboardState extends State<Dashboard> {
                       onPressed: () {
                         setState(() {
                           currentScreen = Profilescreen(
-                            userDetails: widget.userDetails!,
+                            // userDetails: widget.userDetails,
                           );
                           currentPageIndex = 3;
                         });
