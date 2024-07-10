@@ -23,10 +23,10 @@ class Singinmodel {
   String? phone;
 
   Singinmodel(
-      {required this.username,
-      required this.password,
-      required this.id,
-      required this.email,
-      required this.phone,
+      {this.username,
+      this.password,
+      this.id,
+      this.email,
+      this.phone,
       this.image});
 }

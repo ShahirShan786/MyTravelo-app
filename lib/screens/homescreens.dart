@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:my_travelo_app/listes/places_list.dart';
+import 'package:my_travelo_app/sub_Screens/place_detailes_page.dart';
 
 class Homescreen extends StatefulWidget {
   Homescreen({super.key});
@@ -44,6 +46,7 @@ class _HomescreenState extends State<Homescreen> {
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Stack(
                   children: [
@@ -83,9 +86,79 @@ class _HomescreenState extends State<Homescreen> {
                             fontSize: 12,
                             fontWeight: FontWeight.w700),
                       ),
-                    )
+                    ),
                   ],
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: TextWidget(
+                      content: "Featured guides from users",
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600),
+                ),
+                Container(
+                  height: 260,
+                  width: double.infinity,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: placeList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(4),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                              return PlaceDetailesPage(placeImg: placeList[index].placeImage, description: placeList[index].placeDescription, place: placeList[index].destination, placeName: placeList[index].placename,);
+                            },));
+                          },
+                          child: Card(
+                            child: Container(
+                              width: 220,
+                              height: 160,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.network(
+                                      placeList[index].placeImage,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 5),
+                                    child: TextWidget(
+                                        content: placeList[index].placename,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(5),
+                                    child: Text(
+                                      placeList[index].placeDescription,
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 4,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                )
               ],
             ),
           ),

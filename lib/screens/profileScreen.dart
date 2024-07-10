@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:my_travelo_app/SectionScreens/addInfoScreen.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
@@ -12,7 +13,7 @@ import 'package:my_travelo_app/models/singInModel.dart';
 import 'package:my_travelo_app/profileSubScreen/TermsPage.dart';
 import 'package:my_travelo_app/profileSubScreen/aboutPage.dart';
 import 'package:my_travelo_app/profileSubScreen/logoutPAge.dart';
-import 'package:my_travelo_app/profileSubScreen/privacyPage.dart';
+import 'package:my_travelo_app/profileSubScreen/privacy_page.dart';
 import 'package:my_travelo_app/screens/homescreens.dart';
 import 'package:my_travelo_app/screens/logIn_page.dart';
 import 'package:my_travelo_app/servies/profileServies.dart';
@@ -47,7 +48,7 @@ class _ProfilescreenState extends State<Profilescreen> {
 
   final Signinservice _signinservice = Signinservice();
 
-  List<Singinmodel>? profileDetails;
+  List<Singinmodel>? profileDetails = [];
 
   Future<void> _loadProfileData() async {
     profileDetails = await _signinservice.getsignInData();
@@ -59,6 +60,9 @@ class _ProfilescreenState extends State<Profilescreen> {
     super.initState();
     _loadProfileData();
   }
+
+  File? pickedImage;
+  File? selectedImage;
 
   @override
   Widget build(
@@ -97,14 +101,47 @@ class _ProfilescreenState extends State<Profilescreen> {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.white,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(50),
-                                child: Image.network(
-                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2ugjmkZZ-tnWNEZKCesBHKSRX2gEeX1zWeE9Iy26eoIrdcWG-oJ_XNvekGTrMbcEdy1M&usqp=CAU"),
-                              ),
-                              radius: 40,
+                            Stack(
+                              children: [
+                                GestureDetector(
+                                  onTap: () async {
+                                    pickedImage = await getImage();
+
+                                    setState(() {
+                                      selectedImage = pickedImage;
+                                    });
+                                  },
+                                  child: ClipOval(
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.white,
+                                      child: selectedImage != null
+                                          ? Image.file(
+                                              selectedImage!,
+                                              height: 150,
+                                              width: 150,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : Image.network(
+                                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2ugjmkZZ-tnWNEZKCesBHKSRX2gEeX1zWeE9Iy26eoIrdcWG-oJ_XNvekGTrMbcEdy1M&usqp=CAU"),
+                                      radius: 40,
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  right: 0,
+                                  bottom: 2,
+                                  child: Container(
+                                    width: 25,
+                                    height: 25,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle),
+                                    child: Icon(
+                                      Icons.add,
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 5, left: 12),
@@ -112,7 +149,8 @@ class _ProfilescreenState extends State<Profilescreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   TextWidget(
-                                      content: profileDetails != null
+                                      content: profileDetails != null &&
+                                              profileDetails!.isNotEmpty
                                           ? profileDetails![0].username ?? " "
                                           : "User",
                                       fontSize: 20,
@@ -121,7 +159,8 @@ class _ProfilescreenState extends State<Profilescreen> {
                                     height: 5,
                                   ),
                                   TextWidget(
-                                      content: profileDetails != null
+                                      content: profileDetails != null &&
+                                              profileDetails!.isNotEmpty
                                           ? profileDetails![0].email ?? "email"
                                           : "email",
                                       fontSize: 15,
@@ -130,7 +169,8 @@ class _ProfilescreenState extends State<Profilescreen> {
                                     height: 2,
                                   ),
                                   TextWidget(
-                                      content: profileDetails != null
+                                      content: profileDetails != null &&
+                                              profileDetails!.isNotEmpty
                                           ? profileDetails![0].phone ?? "phone"
                                           : 'phone',
                                       fontSize: 14,
@@ -232,5 +272,19 @@ class _ProfilescreenState extends State<Profilescreen> {
         ),
       ),
     );
+  }
+
+  Future<File?> getImage() async {
+    final pickImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickImage != null) {
+      final picture = Singinmodel(image: pickImage.path);
+      await _signinservice.addsignInData(picture);
+      setState(() {
+        selectedImage = File(pickImage.path);
+      });
+      return selectedImage;
+    }
+    return null;
   }
 }
