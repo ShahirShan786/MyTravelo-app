@@ -3,8 +3,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:my_travelo_app/SectionScreens/addInfoScreen.dart';
+
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/dashboard.dart';
@@ -287,4 +288,5 @@ class _ProfilescreenState extends State<Profilescreen> {
     }
     return null;
   }
+
 }

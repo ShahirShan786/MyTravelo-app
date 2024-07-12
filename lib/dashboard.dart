@@ -3,10 +3,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/models/singInModel.dart';
 import 'package:my_travelo_app/screens/addTrip_screens.dart';
-import 'package:my_travelo_app/screens/favoriteScreen.dart';
+import 'package:my_travelo_app/screens/favorite_screen.dart';
 import 'package:my_travelo_app/screens/homescreens.dart';
 import 'package:my_travelo_app/screens/profileScreen.dart';
-import 'package:my_travelo_app/screens/scheduleScreen.dart';
+import 'package:my_travelo_app/screens/schedule_screen.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key, this.userDetails});
@@ -32,8 +32,8 @@ late List<Widget> screens;
     super.initState();
     List<Widget> screens = [
   Homescreen(),
-  Schedulescreen(),
-  Favoritescreen(),
+  ScheduleScreen(),
+  FavoriteScreen(),
    Profilescreen(),
 ];
   }
@@ -88,7 +88,7 @@ late List<Widget> screens;
                   IconButton(
                     onPressed: () {
                       setState(() {
-                        currentScreen = Schedulescreen();
+                        currentScreen = ScheduleScreen();
                         currentPageIndex = 1;
                       });
                     },
@@ -107,7 +107,7 @@ late List<Widget> screens;
                   IconButton(
                     onPressed: () {
                       setState(() {
-                        currentScreen = Favoritescreen();
+                        currentScreen =const FavoriteScreen();
                         currentPageIndex = 2;
                       });
                     },

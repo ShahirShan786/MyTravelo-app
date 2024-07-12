@@ -11,7 +11,11 @@ class PlaceDetailesPage extends StatelessWidget {
   String? place;
   String? placeName;
 
- PlaceDetailesPage({required this.placeImg , required this.description , required this.place, required this.placeName});
+  PlaceDetailesPage(
+      {required this.placeImg,
+      required this.description,
+      required this.place,
+      required this.placeName});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +60,7 @@ class PlaceDetailesPage extends StatelessWidget {
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(10),
                     child: Column(
                       children: [
                         PictureSection(),
