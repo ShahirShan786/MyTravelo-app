@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:my_travelo_app/constants/constable.dart';
+
 
 class PrimaryButton extends StatelessWidget {
   final Widget? content;

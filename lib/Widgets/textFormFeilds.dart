@@ -1,8 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:my_travelo_app/constants/constable.dart';
 
- typedef String? ValidatorFunction(String? value);
+
+
 
 class Textformfeilds extends StatelessWidget {
 
@@ -12,20 +14,27 @@ class Textformfeilds extends StatelessWidget {
   String? labelText;
   Color? labelColor;
   Widget? suffics;
- final ValidatorFunction? validator;
+  Color? borderColor;
+  Color? focusedColor;
+  bool? obscureText;
+final String? Function(String?)? validator;
 
  Textformfeilds({super.key, 
     this.controller,
     this.labelColor,
     this.labelText,
     this.suffics,
-    this.validator
+    this.validator,
+    this.borderColor,
+    this.focusedColor,
+    this.obscureText = false,
+    
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      
+        obscureText: obscureText!,
                         controller: controller,
                         decoration:  InputDecoration(
                           labelText: labelText,
@@ -34,16 +43,16 @@ class Textformfeilds extends StatelessWidget {
                               fontWeight: FontWeight.w700,
                               color: labelColor),
                           suffixIcon: suffics,
-                          enabledBorder:const UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.red),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: borderColor!),
                           ),
-                          focusedBorder: const UnderlineInputBorder(
+                          focusedBorder:  UnderlineInputBorder(
                               borderSide:
-                                  BorderSide(color: primaryColor, width: 2)),
-                          errorBorder:const UnderlineInputBorder(
-                              borderSide: BorderSide(color: primaryColor)),
-                          focusedErrorBorder: const UnderlineInputBorder(
-                              borderSide: BorderSide(color: primaryColor)),
+                                  BorderSide(color: focusedColor!, width: 2)),
+                          errorBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: focusedColor!)),
+                          focusedErrorBorder:  UnderlineInputBorder(
+                              borderSide: BorderSide(color: focusedColor!)),
                         ),
                         validator: validator,
                       );

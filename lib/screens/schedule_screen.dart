@@ -3,7 +3,7 @@ import 'package:my_travelo_app/SectionScreens/SchedulSection/completed_page.dart
 import 'package:my_travelo_app/SectionScreens/SchedulSection/upcoming_page.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/constants/primary_button.dart';
+
 
 class ScheduleScreen extends StatelessWidget {
   const ScheduleScreen({super.key});
@@ -19,7 +19,7 @@ class ScheduleScreen extends StatelessWidget {
               dividerColor: Colors.white,
               indicatorSize: TabBarIndicatorSize.tab,
               indicatorPadding:
-                  EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                const  EdgeInsets.symmetric(horizontal: 15, vertical: 5),
               labelColor: Colors.white,
               indicator: BoxDecoration(
                   shape: BoxShape.rectangle,

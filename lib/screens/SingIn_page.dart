@@ -6,7 +6,7 @@ import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/models/singInModel.dart';
 import 'package:my_travelo_app/screens/logIn_page.dart';
-import 'package:my_travelo_app/servies/signInService.dart';
+import 'package:my_travelo_app/servies/signIn_service.dart';
 
 class SinginPage extends StatefulWidget {
   const SinginPage({super.key});
@@ -67,6 +67,8 @@ class _SinginPageState extends State<SinginPage> {
                         height: 15,
                       ),
                       Textformfeilds(
+                        borderColor: Colors.red,
+                        focusedColor: primaryColor,
                         controller: _usernameController,
                         labelText: "Username",
                         labelColor: secondaryColor,
@@ -89,6 +91,8 @@ class _SinginPageState extends State<SinginPage> {
                         controller: _emailController,
                         labelText: "E-mail",
                         labelColor: secondaryColor,
+                        borderColor: Colors.red,
+                        focusedColor: primaryColor,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return "Please Enter an Email";
@@ -105,6 +109,8 @@ class _SinginPageState extends State<SinginPage> {
                         height: 10,
                       ),
                       Textformfeilds(
+                        borderColor: Colors.red,
+                        focusedColor: primaryColor,
                         controller: _PhoneController,
                         labelText: "Phone",
                         labelColor: secondaryColor,
@@ -121,26 +127,43 @@ class _SinginPageState extends State<SinginPage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      TextFormField(
+                      // TextFormField(
+                      //   controller: _passwordController,
+                      //   obscureText: true,
+                      //   decoration: const InputDecoration(
+                      //     labelText: "Password",
+                      //     labelStyle: TextStyle(
+                      //         fontSize: 15,
+                      //         fontWeight: FontWeight.w600,
+                      //         color: secondaryColor),
+                      //     enabledBorder: UnderlineInputBorder(
+                      //       borderSide: BorderSide(color: Colors.red),
+                      //     ),
+                      //     focusedBorder: UnderlineInputBorder(
+                      //         borderSide:
+                      //             BorderSide(color: primaryColor, width: 2)),
+                      //     errorBorder: UnderlineInputBorder(
+                      //         borderSide: BorderSide(color: primaryColor)),
+                      //     focusedErrorBorder: UnderlineInputBorder(
+                      //         borderSide: BorderSide(color: primaryColor)),
+                      //   ),
+                      //   validator: (value) {
+                      //     if (value == null || value.isEmpty) {
+                      //       return "Please enter the password";
+                      //     }
+                      //     if (value.length < 6) {
+                      //       return "Password must be at least 6 characters long";
+                      //     }
+                      //     return null;
+                      //   },
+                      // ),
+                      Textformfeilds(
+                        borderColor: Colors.red,
+                        focusedColor: primaryColor,
                         controller: _passwordController,
+                        labelText: "Password",
+                        labelColor: secondaryColor,
                         obscureText: true,
-                        decoration: const InputDecoration(
-                          labelText: "Password",
-                          labelStyle: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: secondaryColor),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: primaryColor, width: 2)),
-                          errorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: primaryColor)),
-                          focusedErrorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: primaryColor)),
-                        ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return "Please enter the password";
@@ -204,7 +227,11 @@ class _SinginPageState extends State<SinginPage> {
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600),
                               ));
-                             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage(),));
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => LoginPage(),
+                                  ));
                             },
                             child: TextWidget(
                                 content: "sing Up",

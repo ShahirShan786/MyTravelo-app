@@ -1,13 +1,14 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:my_travelo_app/Widgets/textFormFeilds.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/dashboard.dart';
-import 'package:my_travelo_app/models/profileModel.dart';
+
 import 'package:my_travelo_app/models/singInModel.dart';
 import 'package:my_travelo_app/screens/SingIn_page.dart';
-import 'package:my_travelo_app/servies/signInService.dart';
+import 'package:my_travelo_app/servies/signIn_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
@@ -79,55 +80,43 @@ class _LoginPageState extends State<LoginPage> {
                       "assets/logo/logo1.png",
                       width: 250,
                     ),
-                    TextFormField(
+                    Textformfeilds(
+                      borderColor: Colors.red,
+                      focusedColor: primaryColor,
+                      labelText: "Username",
+                      labelColor: secondaryColor,
                       controller: _loginUsername,
-                      decoration: const InputDecoration(
-                        labelText: "Username",
-                        labelStyle: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: secondaryColor),
-                        suffixIcon: Icon(
-                          Icons.check_circle_outline_outlined,
-                          color: primaryColor,
-                          size: 22,
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(color: primaryColor, width: 2)),
-                        errorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: primaryColor)),
-                        focusedErrorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: primaryColor)),
+                      suffics: const Icon(
+                        Icons.check_circle_outline_outlined,
+                        color: primaryColor,
+                        size: 22,
                       ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter your username";
+                        }
+                        return null;
+                      },
                     ),
                     const SizedBox(
                       height: 10,
                     ),
-                    TextFormField(
+                    Textformfeilds(
+                      borderColor: Colors.red,
+                      focusedColor: primaryColor,
+                      labelText: "Password",
+                      labelColor: secondaryColor,
                       controller: _loginPasssword,
                       obscureText: true,
-                      decoration: const InputDecoration(
-                        
-                        labelText: "Password",
-                        labelStyle: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: secondaryColor),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(color: primaryColor, width: 2)),
-                        errorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: primaryColor)),
-                        focusedErrorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: primaryColor)),
-                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter the password";
+                        }
+                        if (value.length < 6) {
+                          return "Password must be at least 6 characters long";
+                        }
+                        return null;
+                      },
                     ),
                     const SizedBox(
                       height: 40,
@@ -198,19 +187,12 @@ class _LoginPageState extends State<LoginPage> {
 
     bool userFount = false;
     for (var elements in getSignData) {
-      if( loguser.isEmpty || logpass.isEmpty){
-         return  showScafoldMessage(context);
+      if (loguser.isEmpty || logpass.isEmpty) {
+        return showScafoldMessage(context);
       }
       if (elements.username == loguser && elements.password == logpass) {
         log("${elements.username}");
         log("${elements.password}");
-
-        // add username to profile Database
-        Profilemodel(userName: loguser);
-
-        //  store username to sharedpreferences
-        SharedPreferences prefsUsername = await SharedPreferences.getInstance();
-        prefsUsername.setString("username", loguser);
 
         _loginUsername.clear();
         _loginPasssword.clear();
@@ -218,7 +200,9 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>  Dashboard(userDetails: elements,),
+              builder: (context) => Dashboard(
+                userDetails: elements,
+              ),
             ));
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: Colors.green,
@@ -254,16 +238,14 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  Future<void> showScafoldMessage(BuildContext context)async{
-
-   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          backgroundColor: Colors.red,
-          content: TextWidget(
-              color: Colors.white,
-              content: "Please enter username and password",
-              fontSize: 15,
-              fontWeight: FontWeight.w600),
-        ));
-
+  Future<void> showScafoldMessage(BuildContext context) async {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      backgroundColor: Colors.red,
+      content: TextWidget(
+          color: Colors.white,
+          content: "Please enter username and password",
+          fontSize: 15,
+          fontWeight: FontWeight.w600),
+    ));
   }
 }

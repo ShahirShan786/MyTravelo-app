@@ -4,7 +4,7 @@ import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/constants/primary_button.dart';
 import 'package:my_travelo_app/listes/places_list.dart';
-import 'package:my_travelo_app/sub_Screens/place_detailes_page.dart';
+import 'package:my_travelo_app/SubScreens/place_detailes_page.dart';
 
 class FavoriteScreen extends StatelessWidget {
   const FavoriteScreen({super.key});

@@ -11,7 +11,7 @@ class TextWidget extends StatelessWidget {
   String? fontFamily;
 
   TextWidget(
-      {this.color,
+      {super.key, this.color,
       required this.content,
       required this.fontSize,
       required this.fontWeight,

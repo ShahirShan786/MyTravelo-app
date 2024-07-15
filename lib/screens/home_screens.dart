@@ -3,7 +3,8 @@ import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:my_travelo_app/listes/places_list.dart';
-import 'package:my_travelo_app/sub_Screens/place_detailes_page.dart';
+import 'package:my_travelo_app/SubScreens/place_detailes_page.dart';
+import 'package:my_travelo_app/screens/add_trip_screen.dart';
 
 class Homescreen extends StatefulWidget {
   Homescreen({super.key});
@@ -79,7 +80,9 @@ class _HomescreenState extends State<Homescreen> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: primaryColor,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AddTripScreens(),));
+                        },
                         child: TextWidget(
                             color: Colors.white,
                             content: "Create new trip plan",
@@ -89,7 +92,7 @@ class _HomescreenState extends State<Homescreen> {
                     ),
                   ],
                 ),
-                SizedBox(
+               const SizedBox(
                   height: 10,
                 ),
                 Padding(
@@ -99,7 +102,7 @@ class _HomescreenState extends State<Homescreen> {
                       fontSize: 20,
                       fontWeight: FontWeight.w600),
                 ),
-                Container(
+                SizedBox(
                   height: 260,
                   width: double.infinity,
                   child: ListView.builder(
@@ -129,7 +132,7 @@ class _HomescreenState extends State<Homescreen> {
                                       placeList[index].placeImage,
                                     ),
                                   ),
-                                  SizedBox(
+                                const  SizedBox(
                                     height: 4,
                                   ),
                                   Padding(
@@ -143,7 +146,7 @@ class _HomescreenState extends State<Homescreen> {
                                     padding: const EdgeInsets.all(5),
                                     child: Text(
                                       placeList[index].placeDescription,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 13,
                                           fontWeight: FontWeight.w500),
                                       overflow: TextOverflow.ellipsis,

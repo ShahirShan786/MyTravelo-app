@@ -2,26 +2,21 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_travelo_app/dashboard.dart';
-import 'package:my_travelo_app/models/profileModel.dart';
 import 'package:my_travelo_app/models/singInModel.dart';
 import 'package:my_travelo_app/screens/logIn_page.dart';
-import 'package:my_travelo_app/servies/profileServies.dart';
-import 'package:my_travelo_app/servies/signInService.dart';
+import 'package:my_travelo_app/servies/signIn_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(SinginmodelAdapter());
   await Signinservice().openBox();
-  Hive.registerAdapter(ProfilemodelAdapter());
-  await Profileservies().openBox();
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +30,13 @@ class MyApp extends StatelessWidget {
         title: "myTravelApp",
         home: FutureBuilder(
           future: checkUserLogin(),
-          builder: (BuildContext contex ,snapshot ){
-            if(snapshot.connectionState == ConnectionState.waiting){
+          builder: (BuildContext contex, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
               return const CircularProgressIndicator();
-            }else{
-              return snapshot.data == true ? const Dashboard() : const LoginPage();
+            } else {
+              return snapshot.data == true
+                  ? const Dashboard()
+                  : const LoginPage();
             }
           },
         ));
@@ -50,7 +47,7 @@ class MyApp extends StatelessWidget {
     return prefs.getBool("isLogedIn") ?? false;
   }
 
-  Future<String?>saveUserName(String username)async{
+  Future<String?> saveUserName(String username) async {
     SharedPreferences prefsUsername = await SharedPreferences.getInstance();
     await prefsUsername.setString("username", username);
     return null;

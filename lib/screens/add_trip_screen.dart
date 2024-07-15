@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/screens/homescreens.dart';
+
 
 class AddTripScreens extends StatelessWidget {
   const AddTripScreens({super.key});
@@ -10,7 +10,7 @@ class AddTripScreens extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
+        body: SizedBox(
       width: double.infinity,
       height: double.infinity,
       child: Stack(
@@ -27,20 +27,20 @@ class AddTripScreens extends StatelessWidget {
                       color: Colors.grey[300], shape: BoxShape.circle),
                   width: 40,
                   height: 40,
-                  child: Icon(Icons.close),
+                  child:const Icon(Icons.close),
                 ),
               )),
           Center(
             child: Column(
-              children: [
-                SizedBox(
+              children: <Widget>[
+              const  SizedBox(
                   height: 50,
                 ),
                 TextWidget(
                     content: "plan a new trip",
                     fontSize: 22,
                     fontWeight: FontWeight.bold),
-                SizedBox(
+              const  SizedBox(
                   height: 30,
                 ),
                 SizedBox(
