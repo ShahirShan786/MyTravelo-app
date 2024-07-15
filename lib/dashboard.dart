@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/models/singInModel.dart';
-import 'package:my_travelo_app/screens/addTrip_screens.dart';
+import 'package:my_travelo_app/screens/add_trip_screen.dart';
 import 'package:my_travelo_app/screens/favorite_screen.dart';
-import 'package:my_travelo_app/screens/homescreens.dart';
-import 'package:my_travelo_app/screens/profileScreen.dart';
+import 'package:my_travelo_app/screens/home_screens.dart';
+import 'package:my_travelo_app/screens/profile_screen.dart';
 import 'package:my_travelo_app/screens/schedule_screen.dart';
 
 class Dashboard extends StatefulWidget {
@@ -31,10 +31,10 @@ late List<Widget> screens;
     // TODO: implement initState
     super.initState();
     List<Widget> screens = [
-  Homescreen(),
-  ScheduleScreen(),
-  FavoriteScreen(),
-   Profilescreen(),
+       Homescreen(),
+ const ScheduleScreen(),
+ const FavoriteScreen(),
+ const  Profilescreen(),
 ];
   }
 
@@ -88,7 +88,7 @@ late List<Widget> screens;
                   IconButton(
                     onPressed: () {
                       setState(() {
-                        currentScreen = ScheduleScreen();
+                        currentScreen = const ScheduleScreen();
                         currentPageIndex = 1;
                       });
                     },
@@ -124,7 +124,7 @@ late List<Widget> screens;
                   IconButton(
                       onPressed: () {
                         setState(() {
-                          currentScreen = Profilescreen(
+                          currentScreen = const Profilescreen(
                             // userDetails: widget.userDetails,
                           );
                           currentPageIndex = 3;
