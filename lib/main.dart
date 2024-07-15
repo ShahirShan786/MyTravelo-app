@@ -47,9 +47,9 @@ class MyApp extends StatelessWidget {
     return prefs.getBool("isLogedIn") ?? false;
   }
 
-  Future<String?> saveUserName(String username) async {
+  Future<String?> saveUserName(String id) async {
     SharedPreferences prefsUsername = await SharedPreferences.getInstance();
-    await prefsUsername.setString("username", username);
+    await prefsUsername.setString("currentuserId",id);
     return null;
   }
 }

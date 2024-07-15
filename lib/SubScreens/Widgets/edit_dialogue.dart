@@ -11,7 +11,7 @@ import 'package:my_travelo_app/servies/signIn_service.dart';
 class EditDialogue extends StatefulWidget {
   final Singinmodel user;
 
-  EditDialogue({required this.user});
+  const EditDialogue({required this.user});
 
   @override
   State<EditDialogue> createState() => _EditDialogueState();
@@ -26,7 +26,7 @@ class _EditDialogueState extends State<EditDialogue> {
 
   final _editformKey = GlobalKey<FormState>();
 
-  Signinservice _signservies = Signinservice();
+ final Signinservice _signservies = Signinservice();
 
   @override
   Widget build(BuildContext context) {

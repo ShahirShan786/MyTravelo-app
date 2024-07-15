@@ -1,15 +1,19 @@
 
+import 'dart:developer';
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
+import 'package:my_travelo_app/dashboard.dart';
 import 'package:my_travelo_app/models/singInModel.dart';
 import 'package:my_travelo_app/profileSubScreen/Terms_page.dart';
 import 'package:my_travelo_app/profileSubScreen/about_page.dart';
 import 'package:my_travelo_app/profileSubScreen/logout_page.dart';
 import 'package:my_travelo_app/profileSubScreen/privacy_page.dart';
+import 'package:my_travelo_app/screens/home_screens.dart';
 import 'package:my_travelo_app/screens/logIn_page.dart';
 import 'package:my_travelo_app/servies/signIn_service.dart';
 import 'package:my_travelo_app/SubScreens/Widgets/edit_dialogue.dart';
@@ -44,9 +48,12 @@ class _ProfilescreenState extends State<Profilescreen> {
   Singinmodel? profileDetail;
 
   Future<void> _loadProfileData() async {
-    final details = await _signinservice.getsignInData();
-    if (details.isNotEmpty) {
-      profileDetail = details[0];
+   
+    SharedPreferences prefz = await SharedPreferences.getInstance();
+    final currentUserId = prefz.getString("currentuserId");
+    log("recieved currentuderId is :$currentUserId");
+    if(currentUserId != null){
+      profileDetail = await _signinservice.getSignInDataById(currentUserId);
     }
     setState(() {});
   }
@@ -243,10 +250,15 @@ class _ProfilescreenState extends State<Profilescreen> {
                                                     ),
                                                     (Route<dynamic> route) =>
                                                         false);
+                                                        SharedPreferences prefz = await SharedPreferences.getInstance();
+                                                        prefz.remove("currentuserId");
+                                                        log("currentuserId removed");
                                             SharedPreferences prefs =
                                                 await SharedPreferences
                                                     .getInstance();
                                             prefs.setBool("isLogedIn", false);
+                                            currentScreen = Homescreen();
+                                            
                                           },
                                           child: const Text("Log out"),
                                         )

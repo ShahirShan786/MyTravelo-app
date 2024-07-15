@@ -42,4 +42,15 @@ class Signinservice {
     }
     return _signInBox!.values.toList();
   }
+
+
+//  Get  sing in Data by Id
+Future<Singinmodel?>getSignInDataById(String id)async{
+  if(_signInBox == null){
+    await openBox();
+  }
+  return _signInBox!.values.firstWhere((element)=> element.id == id);
+}
+
+
 }

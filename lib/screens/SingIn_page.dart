@@ -7,6 +7,7 @@ import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/models/singInModel.dart';
 import 'package:my_travelo_app/screens/logIn_page.dart';
 import 'package:my_travelo_app/servies/signIn_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SinginPage extends StatefulWidget {
   const SinginPage({super.key});
@@ -21,11 +22,11 @@ class _SinginPageState extends State<SinginPage> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _usernameController = TextEditingController();
-    TextEditingController _passwordController = TextEditingController();
-    TextEditingController _emailController = TextEditingController();
-    TextEditingController _PhoneController = TextEditingController();
-    final _formkey = GlobalKey<FormState>();
+    TextEditingController usernameController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    TextEditingController emailController = TextEditingController();
+    TextEditingController phoneController = TextEditingController();
+    final formkey = GlobalKey<FormState>();
 
     Signinservice _signInService = Signinservice();
     return Scaffold(
@@ -37,7 +38,7 @@ class _SinginPageState extends State<SinginPage> {
               child: Padding(
                 padding: const EdgeInsets.all(25),
                 child: Form(
-                  key: _formkey,
+                  key: formkey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -69,7 +70,7 @@ class _SinginPageState extends State<SinginPage> {
                       Textformfeilds(
                         borderColor: Colors.red,
                         focusedColor: primaryColor,
-                        controller: _usernameController,
+                        controller: usernameController,
                         labelText: "Username",
                         labelColor: secondaryColor,
                         suffics: const Icon(
@@ -88,7 +89,7 @@ class _SinginPageState extends State<SinginPage> {
                         height: 10,
                       ),
                       Textformfeilds(
-                        controller: _emailController,
+                        controller: emailController,
                         labelText: "E-mail",
                         labelColor: secondaryColor,
                         borderColor: Colors.red,
@@ -111,7 +112,7 @@ class _SinginPageState extends State<SinginPage> {
                       Textformfeilds(
                         borderColor: Colors.red,
                         focusedColor: primaryColor,
-                        controller: _PhoneController,
+                        controller: phoneController,
                         labelText: "Phone",
                         labelColor: secondaryColor,
                         validator: (value) {
@@ -127,40 +128,11 @@ class _SinginPageState extends State<SinginPage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      // TextFormField(
-                      //   controller: _passwordController,
-                      //   obscureText: true,
-                      //   decoration: const InputDecoration(
-                      //     labelText: "Password",
-                      //     labelStyle: TextStyle(
-                      //         fontSize: 15,
-                      //         fontWeight: FontWeight.w600,
-                      //         color: secondaryColor),
-                      //     enabledBorder: UnderlineInputBorder(
-                      //       borderSide: BorderSide(color: Colors.red),
-                      //     ),
-                      //     focusedBorder: UnderlineInputBorder(
-                      //         borderSide:
-                      //             BorderSide(color: primaryColor, width: 2)),
-                      //     errorBorder: UnderlineInputBorder(
-                      //         borderSide: BorderSide(color: primaryColor)),
-                      //     focusedErrorBorder: UnderlineInputBorder(
-                      //         borderSide: BorderSide(color: primaryColor)),
-                      //   ),
-                      //   validator: (value) {
-                      //     if (value == null || value.isEmpty) {
-                      //       return "Please enter the password";
-                      //     }
-                      //     if (value.length < 6) {
-                      //       return "Password must be at least 6 characters long";
-                      //     }
-                      //     return null;
-                      //   },
-                      // ),
+                  
                       Textformfeilds(
                         borderColor: Colors.red,
                         focusedColor: primaryColor,
-                        controller: _passwordController,
+                        controller: passwordController,
                         labelText: "Password",
                         labelColor: secondaryColor,
                         obscureText: true,
@@ -189,36 +161,38 @@ class _SinginPageState extends State<SinginPage> {
                                     const EdgeInsets.symmetric(
                                         horizontal: 130, vertical: 15))),
                             onPressed: () async {
-                              final username = _usernameController.text;
-                              final password = _passwordController.text;
-                              if (_usernameController.text.isEmpty ||
-                                  _passwordController.text.isEmpty) {
+                              final username = usernameController.text;
+                              final password = passwordController.text;
+                              if (usernameController.text.isEmpty ||
+                                  passwordController.text.isEmpty) {
                                 return showScafoldMessage(context);
                               }
-                              if (_formkey.currentState!.validate()) {
+                              if (formkey.currentState!.validate()) {
                                 final signData = Singinmodel(
                                   username: username,
                                   password: password,
                                   id: DateTime.now()
                                       .millisecondsSinceEpoch
                                       .toString(),
-                                  email: _emailController.text,
-                                  phone: _PhoneController.text,
+                                  email: emailController.text,
+                                  phone: phoneController.text,
                                 );
 
                                 log('signing up');
                                 await _signInService.addsignInData(signData);
+                               
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => LoginPage(),
+                                      builder: (context) => const LoginPage(),
                                     ));
                               }
-                              _usernameController.clear();
-                              _passwordController.clear();
-                              _emailController.clear();
-                              _PhoneController.clear();
+                              usernameController.clear();
+                              passwordController.clear();
+                              emailController.clear();
+                              phoneController.clear();
                               ScaffoldMessenger.of(context)
+
                                   .showSnackBar(SnackBar(
                                 backgroundColor: Colors.green,
                                 content: TextWidget(
@@ -230,7 +204,7 @@ class _SinginPageState extends State<SinginPage> {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => LoginPage(),
+                                    builder: (context) =>const LoginPage(),
                                   ));
                             },
                             child: TextWidget(

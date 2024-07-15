@@ -189,11 +189,14 @@ class _LoginPageState extends State<LoginPage> {
     for (var elements in getSignData) {
       if (loguser.isEmpty || logpass.isEmpty) {
         return showScafoldMessage(context);
+        
       }
       if (elements.username == loguser && elements.password == logpass) {
         log("${elements.username}");
         log("${elements.password}");
-
+         SharedPreferences prefz = await SharedPreferences.getInstance();
+        prefz.setString("currentuserId", elements.id.toString());
+        log("id===${elements.id}");
         _loginUsername.clear();
         _loginPasssword.clear();
 
@@ -213,7 +216,7 @@ class _LoginPageState extends State<LoginPage> {
               fontWeight: FontWeight.w600),
         ));
         userFount = true;
-
+       
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setBool("isLogedIn", true);
 
