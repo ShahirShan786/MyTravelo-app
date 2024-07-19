@@ -6,6 +6,8 @@ const secondaryColor = Color.fromARGB(255, 134, 129, 130);
 const ScaffoldColor = Color.fromARGB(255, 239, 239, 239);
 const BoxColor = Color.fromARGB(45, 221, 162, 197);
 
+const white = Colors.white;
+
 final imageItems = [
   "https://images.unsplash.com/photo-1519178614-68673b201f36?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTR8fHBsYWNlc3xlbnwwfHwwfHx8MA%3D%3D",
   "https://images.unsplash.com/photo-1646853587743-5a33b1d5d6c8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjZ8fHBsYWNlcyUyMGRhcmt8ZW58MHx8MHx8fDA%3D",

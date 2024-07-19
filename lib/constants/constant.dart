@@ -10,14 +10,14 @@ class TextWidget extends StatelessWidget {
   FontWeight? fontWeight;
   String? fontFamily;
 
-  TextWidget(
-      {super.key, this.color,
-      required this.content,
-      required this.fontSize,
-      required this.fontWeight,
-      this.fontFamily,
-      
-      });
+  TextWidget({
+    super.key,
+    this.color,
+    required this.content,
+    required this.fontSize,
+    required this.fontWeight,
+    this.fontFamily,
+  });
 
   @override
   Widget build(BuildContext context) {

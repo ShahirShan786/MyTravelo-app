@@ -6,6 +6,7 @@ import 'package:my_travelo_app/models/singInModel.dart';
 import 'package:my_travelo_app/screens/logIn_page.dart';
 import 'package:my_travelo_app/servies/signIn_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Future<void> main() async {
   await Hive.initFlutter();
@@ -20,26 +21,29 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(
-          primaryColor: Colors.green,
-          scaffoldBackgroundColor: Colors.white,
-          fontFamily: "PrimaryFont",
-        ),
-        debugShowCheckedModeBanner: false,
-        title: "myTravelApp",
-        home: FutureBuilder(
-          future: checkUserLogin(),
-          builder: (BuildContext contex, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
-            } else {
-              return snapshot.data == true
-                  ? const Dashboard()
-                  : const LoginPage();
-            }
-          },
-        ));
+    return ScreenUtilInit(
+      builder: (Context , Widget) => MaterialApp(
+          theme: ThemeData(
+            primaryColor: Colors.green,
+            scaffoldBackgroundColor: Colors.white,
+            fontFamily: "PrimaryFont",
+          ),
+          debugShowCheckedModeBanner: false,
+          title: "myTravelApp",
+          home: FutureBuilder(
+            future: checkUserLogin(),
+            builder: (BuildContext contex, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              } else {
+                return snapshot.data == true
+                    ? const Dashboard()
+                    : const LoginPage();
+              }
+            },
+          )),
+          designSize:const Size(392.72, 825.45),
+    );
   }
 
   Future<bool> checkUserLogin() async {

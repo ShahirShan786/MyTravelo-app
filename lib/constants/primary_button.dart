@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class PrimaryButton extends StatelessWidget {
@@ -23,7 +24,7 @@ class PrimaryButton extends StatelessWidget {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
             // fixedSize: Size(width!, height!),
-            minimumSize: Size(width!, height!),
+            minimumSize: Size(width!.w, height!.h),
             backgroundColor: backgroundColor,
             foregroundColor: Colors.white),
         onPressed: onPressed,

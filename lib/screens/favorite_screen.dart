@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
@@ -15,10 +16,12 @@ class FavoriteScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: TextWidget(
-            content: "Saved Trips", fontSize: 20, fontWeight: FontWeight.bold),
+            content: "Saved Trips",
+            fontSize: 20.sp,
+            fontWeight: FontWeight.bold),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: EdgeInsets.all(10.w),
         child: ListView.builder(
             itemCount: placeList.length - 3,
             itemBuilder: (BuildContext context, int index) {
@@ -36,31 +39,30 @@ class FavoriteScreen extends StatelessWidget {
                 child: Card(
                   child: Container(
                     width: MediaQuery.of(context).size.width,
-                    height: 115,
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(15)),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.r)),
                     child: Padding(
-                      padding: const EdgeInsets.all(5),
+                      padding: EdgeInsets.all(5.w),
                       child: Row(
                         children: [
                           ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
+                            borderRadius: BorderRadius.circular(15.r),
                             child: Image.network(
                               placeList[index].placeImage,
-                              width: 150,
+                              width: 150.w,
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(9),
+                            padding: EdgeInsets.all(9.w),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 TextWidget(
                                     content: placeList[index].placename,
-                                    fontSize: 17,
+                                    fontSize: 17.sp,
                                     fontWeight: FontWeight.w600),
                                 SizedBox(
-                                  height: 1,
+                                  height: 1.h,
                                 ),
                                 Row(
                                   children: [
@@ -70,7 +72,7 @@ class FavoriteScreen extends StatelessWidget {
                                     ),
                                     TextWidget(
                                         content: placeList[index].destination,
-                                        fontSize: 14,
+                                        fontSize: 14.sp,
                                         fontWeight: FontWeight.normal),
                                   ],
                                 ),
@@ -82,22 +84,22 @@ class FavoriteScreen extends StatelessWidget {
                                         backgroundColor: primaryColor,
                                         content: TextWidget(
                                             content: "Direction",
-                                            fontSize: 10,
+                                            fontSize: 10.sp,
                                             fontWeight: FontWeight.normal),
-                                        width: 85,
-                                        height: 25,
+                                        width: 85.w,
+                                        height: 25.h,
                                         onPressed: () {}),
                                     SizedBox(
-                                      width: 5,
+                                      width: 5.sp,
                                     ),
                                     PrimaryButton(
                                         backgroundColor: primaryColor,
                                         content: TextWidget(
                                             content: "Remove",
-                                            fontSize: 10,
+                                            fontSize: 10.sp,
                                             fontWeight: FontWeight.normal),
-                                        width: 85,
-                                        height: 25,
+                                        width: 85.w,
+                                        height: 25.h,
                                         onPressed: () {}),
                                   ],
                                 )

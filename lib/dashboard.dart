@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/models/singInModel.dart';
-import 'package:my_travelo_app/screens/add_trip_screen.dart';
+import 'package:my_travelo_app/screens/AddTripScreens/add_trip_screen.dart';
 import 'package:my_travelo_app/screens/favorite_screen.dart';
 import 'package:my_travelo_app/screens/home_screens.dart';
 import 'package:my_travelo_app/screens/profile_screen.dart';

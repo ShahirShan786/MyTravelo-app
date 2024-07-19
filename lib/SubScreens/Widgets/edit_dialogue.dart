@@ -18,15 +18,29 @@ class EditDialogue extends StatefulWidget {
 }
 
 class _EditDialogueState extends State<EditDialogue> {
-  TextEditingController usernameEditController = TextEditingController();
-
-  TextEditingController emailEditController = TextEditingController();
-
-  TextEditingController phoneEditController = TextEditingController();
+  late TextEditingController usernameEditController = TextEditingController();
+  late TextEditingController emailEditController = TextEditingController();
+  late TextEditingController phoneEditController = TextEditingController();
 
   final _editformKey = GlobalKey<FormState>();
 
- final Signinservice _signservies = Signinservice();
+  final Signinservice _signservies = Signinservice();
+
+  @override
+  void initState() {
+    usernameEditController = TextEditingController(text: widget.user.username);
+    emailEditController = TextEditingController(text: widget.user.email);
+    phoneEditController = TextEditingController(text: widget.user.phone);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    usernameEditController.dispose();
+    emailEditController.dispose();
+    phoneEditController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +114,7 @@ class _EditDialogueState extends State<EditDialogue> {
               content: "Cancel", fontSize: 15, fontWeight: FontWeight.w500),
         ),
         TextButton(
-          onPressed: () {
+          onPressed: () async {
             if (_editformKey.currentState!.validate()) {
               final updatedUser = Singinmodel(
                 username: usernameEditController.text,
@@ -109,9 +123,14 @@ class _EditDialogueState extends State<EditDialogue> {
                 id: widget.user.id,
                 image: widget.user.image,
               );
+              log("Updated User Data :$updatedUser");
 
-              _signservies.updatesignInData(updatedUser);
+              await _signservies.updatesignInData(updatedUser);
               log("Data passed!!!!");
+
+              final userAfterUpdate = await _signservies
+                  .getSignInDataById(widget.user.id.toString());
+              log("User Data After Updated :$userAfterUpdate");
               Navigator.pop(context, updatedUser);
             }
           },
