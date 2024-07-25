@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 
 class TExtFeilds extends StatelessWidget {
@@ -17,24 +18,21 @@ class TExtFeilds extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: TextField(
-          controller: controller,
-          keyboardType: TextInputType.text,
-          decoration: InputDecoration(
-            labelText: labelText,
-            labelStyle: const TextStyle(
-                fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black),
-            hintText: hintText,
-            hintStyle: const TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w400,
-                color: secondaryColor),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
+      padding: EdgeInsets.all(8.w),
+      child: TextField(
+        controller: controller,
+        keyboardType: TextInputType.text,
+        decoration: InputDecoration(
+          labelText: labelText,
+          labelStyle: TextStyle(
+              fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.black),
+          hintText: hintText,
+          hintStyle:TextStyle(
+              fontSize: 15.sp,
+              fontWeight: FontWeight.w400,
+              color: secondaryColor),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15.r),
           ),
         ),
       ),

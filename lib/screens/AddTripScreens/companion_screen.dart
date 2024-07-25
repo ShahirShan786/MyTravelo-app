@@ -1,23 +1,51 @@
 import 'dart:developer';
 
-import 'package:flutter/foundation.dart';
+import 'package:contacts_service/contacts_service.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_native_contact_picker/flutter_native_contact_picker.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:my_travelo_app/Widgets/multi_contact_picker.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/constants/primary_button.dart';
 import 'package:my_travelo_app/screens/AddTripScreens/trip_plan_screen.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class CompanionScreen extends StatefulWidget {
-  const CompanionScreen({super.key});
+  final String destination;
+  final DateTime selectedRangeStart;
+  final DateTime selectedRangeEnd;
+  final String finalSelectTime;
+  const CompanionScreen({
+    super.key,
+    required this.destination,
+    required this.selectedRangeStart,
+    required this.selectedRangeEnd,
+    required this.finalSelectTime,
+  });
 
   @override
   State<CompanionScreen> createState() => _CompanionScreenState();
 }
 
 class _CompanionScreenState extends State<CompanionScreen> {
-  final FlutterContactPicker _contactPicker = FlutterContactPicker();
-  Contact? _contact;
+  List<Contact> selectedContacts = [];
+  // List<Contact> contacts = [];
+  Future<List<Contact>> getContacts() async {
+    if (await Permission.contacts.request().isGranted) {
+      return await ContactsService.getContacts();
+    } else {
+      return [];
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // if (selectedContact.isNotEmpty) {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,46 +53,57 @@ class _CompanionScreenState extends State<CompanionScreen> {
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15),
+            padding: EdgeInsets.only(left: 15.w, right: 15.w),
             child: Column(
               children: [
                 SizedBox(
-                  height: 20,
+                  height: 20.h,
                 ),
                 TextWidget(
                     content: "Invite your tripmates",
-                    fontSize: 22,
+                    fontSize: 22.sp,
                     fontWeight: FontWeight.bold),
                 SizedBox(
-                  height: 20,
+                  height: 20.h,
                 ),
                 TextWidget(
                     content: "plan with your friends: your changes sync in",
-                    fontSize: 17,
+                    fontSize: 17.sp,
                     color: secondaryColor,
                     fontWeight: FontWeight.w600),
                 TextWidget(
                     content: "real-time,keeping everyone in the loop",
-                    fontSize: 17,
+                    fontSize: 17.sp,
                     color: secondaryColor,
                     fontWeight: FontWeight.w600),
                 SizedBox(
-                  height: 20,
+                  height: 20.h,
                 ),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: TextWidget(
                       content: "Companions",
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.w700),
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 30.h,
                 ),
-                TextWidget(
-                    content: "Name :${_contact?.fullName}",
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600)
+                Expanded(
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ListView.builder(
+                        itemCount: selectedContacts.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final contactz = selectedContacts[index];
+                          return Padding(
+                              padding: const EdgeInsets.all(5),
+                              child: ListTile(
+                                title: Text(contactz.displayName ?? "No Name"),
+                              ));
+                        }),
+                  ),
+                )
               ],
             ),
           ),
@@ -72,44 +111,97 @@ class _CompanionScreenState extends State<CompanionScreen> {
       ),
       bottomSheet: Container(
         color: Colors.white,
-        height: 140,
+        height: 140.h,
         width: double.infinity,
         child: Column(
           children: [
             TextButton(
-                onPressed: () {
-                  contactPicker();
+                onPressed: () async {
+                  showLoadingDialogue(context);
+                  List<Contact> contacts = await getContacts();
+
+                  Navigator.of(context).pop();
+                  await showDialog(
+                    context: context,
+                    builder: (context) => ContactPicker(
+                      contacts: contacts,
+                      selectedContacts: selectedContacts,
+                    ),
+                  );
+                  log('SelectContacts length: ${selectedContacts.length}');
+                  setState(() {});
+                  // setState(() {
+                  //   selectedContact.clear();
+                  //   selectedContact.addAll(contacts.where((contact) =>
+                  //       selectedContactId.contains(contact.identifier)));
+                  // });
                 },
                 child: TextWidget(
                     content: "Invite tripmate",
-                    fontSize: 20,
+                    fontSize: 20.sp,
                     fontWeight: FontWeight.w600)),
             SizedBox(
-              height: 5,
+              height: 5.h,
             ),
             PrimaryButton(
                 backgroundColor: primaryColor,
                 content: TextWidget(
-                    content: "Next", fontSize: 18, fontWeight: FontWeight.w700),
-                width: 250,
-                height: 45,
+                    content: "Next",
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w700),
+                width: 250.w,
+                height: 45.h,
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => TripPlanScreen(),
-                  ));
-                })
+                  if (selectedContacts.isNotEmpty) {
+                    // userSelectedContacts = selectedContact.toList();
+                    log("userSelectContact length is :${selectedContacts.length}");
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => TripPlanScreen(
+                        destination: widget.destination,
+                        finalSelectTime: widget.finalSelectTime,
+                        selectedRangeEnd: widget.selectedRangeEnd,
+                        selectedRangeStart: widget.selectedRangeStart,
+                        selectedContacts: selectedContacts,
+                      ),
+                    ));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        backgroundColor: red,
+                        content: TextWidget(
+                          content: "Please select your companion",
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.normal,
+                        )));
+                  }
+                }),
           ],
         ),
       ),
     );
   }
+}
 
-  Future<void> contactPicker() async {
-    final contact = await _contactPicker.selectContact();
-    if (contact != null) {
-      setState(() {
-        _contact = contact;
+void showLoadingDialogue(BuildContext context) {
+  showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const CircularProgressIndicator(
+                color: primaryColor,
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              TextWidget(
+                  content: "Loading, please wait...",
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.normal)
+            ],
+          ),
+        );
       });
-    }
-  }
 }

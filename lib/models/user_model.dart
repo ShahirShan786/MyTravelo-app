@@ -1,31 +1,28 @@
+import 'package:contacts_service/contacts_service.dart';
 import 'package:hive_flutter/adapters.dart';
 
 part 'user_model.g.dart';
 
-
-@HiveType(typeId: 1)
+@HiveType(typeId: 2)
 class TripModel {
   @HiveField(0)
-  final String? destination;
+  final String destination;
   @HiveField(1)
-  final DateTime? date;
-  @HiveField(2)
   final DateTime rangeStart;
-  @HiveField(3)
+  @HiveField(2)
   final DateTime rangeEnd;
+  @HiveField(3)
+  final String id;
   @HiveField(4)
-  final String? uId;
+  late List<Contact> companion;
   @HiveField(5)
-  final String? companion;
-  @HiveField(6)
   final Map<String, List<String>> activities;
-
+  @HiveField(6)
   TripModel({
     required this.destination,
-    required this.date,
     required this.rangeStart,
     required this.rangeEnd,
-    required this.uId,
+    required this.id,
     required this.companion,
     required this.activities,
   });

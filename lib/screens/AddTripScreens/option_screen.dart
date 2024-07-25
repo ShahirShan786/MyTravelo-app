@@ -8,7 +8,17 @@ import 'package:my_travelo_app/screens/AddTripScreens/companion_screen.dart';
 import 'package:my_travelo_app/screens/AddTripScreens/trip_plan_screen.dart';
 
 class OptionScreen extends StatelessWidget {
-  const OptionScreen({super.key});
+  final String? destination;
+  final DateTime? selectedRangeStart;
+  final DateTime? selectedRangeEnd;
+  final String finalSelectTime;
+  const OptionScreen({
+    super.key,
+    required this.destination,
+    required this.selectedRangeStart,
+    required this.selectedRangeEnd,
+    required this.finalSelectTime,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +36,7 @@ class OptionScreen extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Align(
@@ -44,7 +54,12 @@ class OptionScreen extends StatelessWidget {
                 title: "Solo",
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => TripPlanScreen(),
+                    builder: (context) => TripPlanScreen(
+                      destination: destination,
+                      finalSelectTime: finalSelectTime,
+                      selectedRangeEnd: selectedRangeEnd,
+                      selectedRangeStart: selectedRangeStart,
+                    ),
                   ));
                 },
               ),
@@ -56,7 +71,12 @@ class OptionScreen extends StatelessWidget {
                 title: "Companion",
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => CompanionScreen(),
+                    builder: (context) => CompanionScreen(
+                      destination: destination ?? '',
+                      finalSelectTime: finalSelectTime,
+                      selectedRangeEnd: selectedRangeEnd !,
+                      selectedRangeStart: selectedRangeStart!,
+                    ),
                   ));
                 },
               ),

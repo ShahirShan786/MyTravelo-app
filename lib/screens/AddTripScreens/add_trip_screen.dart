@@ -1,9 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_travelo_app/Widgets/calender_view.dart';
 import 'package:my_travelo_app/Widgets/text_feilds.dart';
+import 'package:my_travelo_app/Widgets/time_picker.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/constants/primary_button.dart';
+import 'package:my_travelo_app/models/user_model.dart';
 import 'package:my_travelo_app/screens/AddTripScreens/option_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -15,11 +21,20 @@ class AddTripScreens extends StatefulWidget {
 }
 
 class _AddTripScreensState extends State<AddTripScreens> {
+    TextEditingController destinationController = TextEditingController();
+  String? destination;
+  DateTime? selectedRangeStart;
+  DateTime? selectedRangeEnd;
+  String finalSelectTime = "";
+
+  String getTime() {
+    return finalSelectTime;
+  }
+
   @override
   Widget build(BuildContext context) {
-    late TextEditingController destinationController = TextEditingController();
-    DateTime today = DateTime.now();
 
+    TimeOfDay? selectedTime;
     return Scaffold(
         body: SizedBox(
       width: double.infinity,
@@ -28,8 +43,8 @@ class _AddTripScreensState extends State<AddTripScreens> {
         child: Stack(
           children: [
             Positioned(
-                top: 50,
-                left: 20,
+                top: 50.h,
+                left: 20.w,
                 child: InkWell(
                   onTap: () {
                     Navigator.pop(context);
@@ -37,104 +52,120 @@ class _AddTripScreensState extends State<AddTripScreens> {
                   child: Container(
                     decoration: BoxDecoration(
                         color: Colors.grey[300], shape: BoxShape.circle),
-                    width: 40,
-                    height: 40,
+                    width: 40.w,
+                    height: 40.h,
                     child: const Icon(Icons.close),
                   ),
                 )),
             Center(
               child: Column(
                 children: <Widget>[
-                  const SizedBox(
-                    height: 50,
+                  SizedBox(
+                    height: 50.h,
                   ),
                   TextWidget(
                       content: "plan a new trip",
-                      fontSize: 22,
+                      fontSize: 22.sp,
                       fontWeight: FontWeight.bold),
-                  const SizedBox(
-                    height: 30,
+                  SizedBox(
+                    height: 30.h,
                   ),
                   SizedBox(
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 15, right: 15),
+                      padding: EdgeInsets.only(left: 15.w, right: 15.w),
                       child: Column(
                         children: [
                           TextWidget(
                               content: "Build an itinerary and map out your",
                               color: secondaryColor,
-                              fontSize: 17,
+                              fontSize: 17.sp,
                               fontWeight: FontWeight.w600),
                           TextWidget(
                               content: "upcoming travel plans",
                               color: secondaryColor,
-                              fontSize: 17,
+                              fontSize: 17.sp,
                               fontWeight: FontWeight.w600),
-                          const SizedBox(
-                            height: 15,
+                          SizedBox(
+                            height: 15.h,
                           ),
                           TExtFeilds(
                             labelText: "Where to?",
                             hintText: "eg., Munnar, Kodak",
                             controller: destinationController,
                           ),
-                          const SizedBox(
-                            height: 5,
+                          SizedBox(
+                            height: 5.h,
                           ),
                           Align(
                             alignment: Alignment.centerLeft,
                             child: TextWidget(
                                 content: "Pick your Dates and Time",
-                                fontSize: 20,
+                                fontSize: 20.sp,
                                 fontWeight: FontWeight.w700),
                           ),
-                          TableCalendar(
-                            focusedDay: today,
-                            rowHeight: 40,
-                            headerStyle: const HeaderStyle(
-                                formatButtonVisible: false,
-                                titleCentered: true),
-                            firstDay: DateTime.utc(2010, 10, 14),
-                            lastDay: DateTime.utc(2030, 10, 14),
+                          CalenderView(),
+                          SizedBox(
+                            height: 25.h,
                           ),
-                          const SizedBox(
-                            height: 25,
+                          // Text(finalSelectTime?.format(context).toString());
+
+                          finalSelectTime.isEmpty
+                              ? TextWidget(
+                                  content: "Time not selected",
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold)
+                              : TextWidget(
+                                  content: "Time is : $finalSelectTime",
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+
+                          SizedBox(
+                            height: 20.h,
                           ),
-                          TextWidget(
-                              content: "Time is 10 : 15 AM",
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                          const SizedBox(
-                            height: 20,
+                          TimePicker(
+                            onTimeSelected: (time) {
+                              setState(() {
+                                finalSelectTime = time;
+                              });
+                            },
                           ),
-                          TextButton(
-                              style: TextButton.styleFrom(
-                                  fixedSize: const Size(150, 25),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20)),
-                                  side: const BorderSide(color: Colors.black)),
-                              onPressed: () {
-                                _showTimePicker(context);
-                              },
-                              child: const Text(
-                                "Pick your time",
-                                style: TextStyle(color: Colors.purple),
-                              )),
-                          const SizedBox(
-                            height: 25,
+                          SizedBox(
+                            height: 25.h,
                           ),
                           PrimaryButton(
                               backgroundColor: primaryColor,
                               content: TextWidget(
                                   content: "Start planning",
-                                  fontSize: 18,
+                                  fontSize: 18.sp,
                                   fontWeight: FontWeight.w700),
-                              width: 250,
-                              height: 45,
+                              width: 250.w,
+                              height: 45.h,
                               onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => OptionScreen(),
-                                ));
+                                selectedRangeStart = getCalenderRangeStart();
+                                selectedRangeEnd = getCalenderRangeEnd();
+                                finalSelectTime = getTime();
+
+                                if (selectedRangeStart != null &&
+                                    selectedRangeEnd != null &&
+                                    finalSelectTime.isNotEmpty &&
+                                    destinationController.text.isNotEmpty) {
+                                  destination = destinationController.text;
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => OptionScreen(
+                                      destination: destination,
+                                      selectedRangeEnd: selectedRangeEnd,
+                                      selectedRangeStart: selectedRangeStart,
+                                      finalSelectTime: finalSelectTime,
+                                    ),
+                                  ));
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text("Select all feilds..."),
+                                      backgroundColor: red,
+                                    ),
+                                  );
+                                }
                               })
                         ],
                       ),
@@ -147,9 +178,5 @@ class _AddTripScreensState extends State<AddTripScreens> {
         ),
       ),
     ));
-  }
-
-  Future<void> _showTimePicker(BuildContext context) async {
-    await showTimePicker(context: context, initialTime: TimeOfDay.now());
   }
 }

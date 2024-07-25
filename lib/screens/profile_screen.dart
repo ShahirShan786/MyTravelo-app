@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 import 'dart:io';
 
@@ -49,11 +48,10 @@ class _ProfilescreenState extends State<Profilescreen> {
   Singinmodel? profileDetail;
 
   Future<void> _loadProfileData() async {
-   
     SharedPreferences prefz = await SharedPreferences.getInstance();
     final currentUserId = prefz.getString("currentuserId");
     log("recieved currentuderId is :$currentUserId");
-    if(currentUserId != null){
+    if (currentUserId != null) {
       profileDetail = await _signinservice.getSignInDataById(currentUserId);
     }
     setState(() {});
@@ -83,7 +81,7 @@ class _ProfilescreenState extends State<Profilescreen> {
           padding: EdgeInsets.all(20.w),
           child: Column(
             children: [
-               SizedBox(height: 20.h),
+              SizedBox(height: 20.h),
               Container(
                 width: double.infinity,
                 height: 110.h,
@@ -94,7 +92,7 @@ class _ProfilescreenState extends State<Profilescreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding:  EdgeInsets.all(10.w),
+                      padding: EdgeInsets.all(10.w),
                       child: SizedBox(
                         width: 272.w,
                         child: Row(
@@ -146,7 +144,7 @@ class _ProfilescreenState extends State<Profilescreen> {
                               ],
                             ),
                             Padding(
-                              padding:  EdgeInsets.only(top: 5.h, left: 12.w),
+                              padding: EdgeInsets.only(top: 5.h, left: 12.w),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -156,7 +154,7 @@ class _ProfilescreenState extends State<Profilescreen> {
                                           : "User",
                                       fontSize: 20.sp,
                                       fontWeight: FontWeight.w700),
-                                 SizedBox(height: 5.h),
+                                  SizedBox(height: 5.h),
                                   TextWidget(
                                       content: profileDetail != null
                                           ? profileDetail!.email ?? "email"
@@ -178,7 +176,7 @@ class _ProfilescreenState extends State<Profilescreen> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(right: 10.w, top: 10.h),
+                      padding: EdgeInsets.only(right: 8.w, top: 10.h),
                       child: IconButton(
                           onPressed: () async {
                             final updatedUser = await showDialog<Singinmodel>(
@@ -192,7 +190,7 @@ class _ProfilescreenState extends State<Profilescreen> {
                               });
                             }
                           },
-                          icon:  FaIcon(
+                          icon: FaIcon(
                             FontAwesomeIcons.pencil,
                             size: 20.r,
                           )),
@@ -201,14 +199,14 @@ class _ProfilescreenState extends State<Profilescreen> {
                 ),
               ),
               Container(
-                margin:  EdgeInsets.only(top: 20.h),
+                margin: EdgeInsets.only(top: 20.h),
                 width: double.infinity,
                 height: 450.w,
                 decoration: BoxDecoration(
                     color: Colors.grey[100],
                     borderRadius: BorderRadius.circular(20.r)),
                 child: Padding(
-                  padding:  EdgeInsets.all(8.0.w),
+                  padding: EdgeInsets.all(8.0.w),
                   child: ListView.builder(
                       itemCount: profileScreens.length,
                       itemBuilder: (BuildContext context, index) {
@@ -251,15 +249,16 @@ class _ProfilescreenState extends State<Profilescreen> {
                                                     ),
                                                     (Route<dynamic> route) =>
                                                         false);
-                                                        SharedPreferences prefz = await SharedPreferences.getInstance();
-                                                        prefz.remove("currentuserId");
-                                                        log("currentuserId removed");
+                                            SharedPreferences prefz =
+                                                await SharedPreferences
+                                                    .getInstance();
+                                            prefz.remove("currentuserId");
+                                            log("currentuserId removed");
                                             SharedPreferences prefs =
                                                 await SharedPreferences
                                                     .getInstance();
                                             prefs.setBool("isLogedIn", false);
                                             currentScreen = Homescreen();
-                                            
                                           },
                                           child: const Text("Log out"),
                                         )
