@@ -8,7 +8,6 @@ import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/models/singInModel.dart';
 import 'package:my_travelo_app/screens/logIn_page.dart';
 import 'package:my_travelo_app/servies/signIn_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SinginPage extends StatefulWidget {
   const SinginPage({super.key});
@@ -27,7 +26,7 @@ class _SinginPageState extends State<SinginPage> {
     TextEditingController passwordController = TextEditingController();
     TextEditingController emailController = TextEditingController();
     TextEditingController phoneController = TextEditingController();
-    final formkey = GlobalKey<FormState>();
+    final GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
     Signinservice signInService = Signinservice();
     return Scaffold(
@@ -74,11 +73,8 @@ class _SinginPageState extends State<SinginPage> {
                     focusedColor: primaryColor,
                     controller: usernameController,
                     labelText: "Username",
+                    keyboardType: TextInputType.text,
                     labelColor: secondaryColor,
-                    suffics: const Icon(
-                      Icons.check_circle_outline_rounded,
-                      color: primaryColor,
-                    ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Please Enter username";
@@ -86,6 +82,8 @@ class _SinginPageState extends State<SinginPage> {
 
                       return null;
                     },
+                   
+
                   ),
                   SizedBox(
                     height: 10.h,
@@ -93,6 +91,7 @@ class _SinginPageState extends State<SinginPage> {
                   Textformfeilds(
                     controller: emailController,
                     labelText: "E-mail",
+                    keyboardType: TextInputType.emailAddress,
                     labelColor: secondaryColor,
                     borderColor: Colors.red,
                     focusedColor: primaryColor,
@@ -115,8 +114,10 @@ class _SinginPageState extends State<SinginPage> {
                     borderColor: Colors.red,
                     focusedColor: primaryColor,
                     controller: phoneController,
+                    keyboardType: TextInputType.number,
                     labelText: "Phone",
                     labelColor: secondaryColor,
+                    textColor: formkey.currentState?.validate()== false ? red : Colors.black,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "please enter phone number";
@@ -134,6 +135,7 @@ class _SinginPageState extends State<SinginPage> {
                     borderColor: Colors.red,
                     focusedColor: primaryColor,
                     controller: passwordController,
+                    keyboardType: TextInputType.visiblePassword,
                     labelText: "Password",
                     labelColor: secondaryColor,
                     obscureText: true,
@@ -156,19 +158,15 @@ class _SinginPageState extends State<SinginPage> {
                         style: ButtonStyle(
                             backgroundColor:
                                 WidgetStateProperty.all(primaryColor),
-                            foregroundColor:
-                                WidgetStateProperty.all(Colors.white),
+                            foregroundColor: WidgetStateProperty.all(white),
                             padding: WidgetStateProperty.all(
                                 EdgeInsets.symmetric(
                                     horizontal: 130.w, vertical: 15.h))),
                         onPressed: () async {
+                       
+                          if (formkey.currentState!.validate()) {
                           final username = usernameController.text;
                           final password = passwordController.text;
-                          if (usernameController.text.isEmpty ||
-                              passwordController.text.isEmpty) {
-                            return showScafoldMessage(context);
-                          }
-                          if (formkey.currentState!.validate()) {
                             final signData = Singinmodel(
                               username: username,
                               password: password,
@@ -182,17 +180,12 @@ class _SinginPageState extends State<SinginPage> {
                             log('signing up');
                             await signInService.addsignInData(signData);
 
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const LoginPage(),
-                                ));
-                          }
                           usernameController.clear();
                           passwordController.clear();
                           emailController.clear();
                           phoneController.clear();
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             backgroundColor: Colors.green,
                             content: TextWidget(
                                 color: Colors.white,
@@ -205,6 +198,10 @@ class _SinginPageState extends State<SinginPage> {
                               MaterialPageRoute(
                                 builder: (context) => const LoginPage(),
                               ));
+                          }
+                         
+                          // ignore: use_build_context_synchronously
+                         
                         },
                         child: TextWidget(
                             content: "sing Up",
@@ -220,14 +217,18 @@ class _SinginPageState extends State<SinginPage> {
     );
   }
 
-  Future<void> showScafoldMessage(BuildContext context) async {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      backgroundColor: Colors.red,
-      content: TextWidget(
-          color: Colors.white,
-          content: "Please fill this form Section",
-          fontSize: 15.sp,
-          fontWeight: FontWeight.w600),
-    ));
-  }
+
+
+  // Future<void> showScafoldMessage(BuildContext context) async {
+  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //     backgroundColor: red,
+  //     content: TextWidget(
+  //         color: white,
+  //         content: "Please fill this form Section",
+  //         fontSize: 15.sp,
+  //         fontWeight: FontWeight.w600),
+  //   ));
+  // }
 }
+
+

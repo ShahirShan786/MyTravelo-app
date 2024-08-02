@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_travelo_app/SectionScreens/SchedulSection/completed_page.dart';
-import 'package:my_travelo_app/SectionScreens/SchedulSection/upcoming_page.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
-
+import 'package:my_travelo_app/dashboard.dart';
+import 'package:my_travelo_app/screens/AddTripScreens/TripScreens/Completed/completed_page.dart';
+import 'package:my_travelo_app/screens/AddTripScreens/TripScreens/Upcomming/upcoming_page.dart';
+import 'package:my_travelo_app/screens/home_screens.dart';
 
 class ScheduleScreen extends StatelessWidget {
-  const ScheduleScreen({super.key});
+  final String? userId;
+  const ScheduleScreen({super.key, this.userId});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class ScheduleScreen extends StatelessWidget {
               dividerColor: Colors.white,
               indicatorSize: TabBarIndicatorSize.tab,
               indicatorPadding:
-                EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
+                  EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
               labelColor: Colors.white,
               indicator: BoxDecoration(
                   shape: BoxShape.rectangle,
@@ -41,23 +43,34 @@ class ScheduleScreen extends StatelessWidget {
                 ),
               ]),
           centerTitle: true,
+          leading: IconButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => Dashboard(),
+                ));
+              },
+              icon: Icon(Icons.arrow_back)),
           title: TextWidget(
-              content: "My Trips", fontSize: 20.sp, fontWeight: FontWeight.bold),
+              content: "My Trips",
+              fontSize: 20.sp,
+              fontWeight: FontWeight.bold),
         ),
-        body: const TabBarView(children: [
+        body: TabBarView(children: [
           SizedBox(
             width: double.infinity,
             height: double.infinity,
             child: Center(
-              child: UpcomingPage(),
-            ),
+                child: UpcomingPage(
+              userId: userId.toString(),
+            )),
           ),
           SizedBox(
             width: double.infinity,
             height: double.infinity,
             child: Center(
-              child: CompletedPage(),
-            ),
+                child: CompletedPage(
+              userId: userId.toString(),
+            )),
           )
         ]),
       ),

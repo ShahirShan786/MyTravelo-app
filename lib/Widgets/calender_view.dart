@@ -50,7 +50,7 @@ class _CalenderViewState extends State<CalenderView> {
       rangeEndDay: rangeEnd,
       rangeSelectionMode: RangeSelectionMode.toggledOn,
       firstDay: DateTime.utc(2010),
-      lastDay: DateTime.utc(2025),
+      lastDay: DateTime.utc(2050),
       availableGestures: AvailableGestures.all,
       selectedDayPredicate: (day) => isSameDay(day, DateTime.now()),
       onRangeSelected: (start, end, focusedDay) {

@@ -1,7 +1,6 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+
 
 
 
@@ -17,6 +16,11 @@ class Textformfeilds extends StatelessWidget {
   Color? borderColor;
   Color? focusedColor;
   bool? obscureText;
+  Color? textColor;
+  Function()? ontap;
+
+  TextInputType? keyboardType;
+  
 final String? Function(String?)? validator;
 
  Textformfeilds({super.key, 
@@ -28,14 +32,20 @@ final String? Function(String?)? validator;
     this.borderColor,
     this.focusedColor,
     this.obscureText = false,
+    this.keyboardType,
+    this.textColor,
+    this.ontap
+    
     
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      
         obscureText: obscureText!,
                         controller: controller,
+                        keyboardType: keyboardType,
                         decoration:  InputDecoration(
                           labelText: labelText,
                           labelStyle: TextStyle(
@@ -55,6 +65,11 @@ final String? Function(String?)? validator;
                               borderSide: BorderSide(color: focusedColor!)),
                         ),
                         validator: validator,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        style: TextStyle(
+                          color: textColor
+                        ),
+                      onTap: ontap,
                       );
   }
 }

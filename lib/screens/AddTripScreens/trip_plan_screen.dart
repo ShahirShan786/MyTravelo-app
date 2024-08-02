@@ -1,24 +1,21 @@
 import 'dart:core';
 import 'dart:developer';
-
 import 'package:contacts_service/contacts_service.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
 import 'package:my_travelo_app/Functions/user_functions.dart';
-import 'package:my_travelo_app/Widgets/multi_contact_picker.dart';
 import 'package:my_travelo_app/Widgets/textFormFeilds.dart';
 import 'package:my_travelo_app/Widgets/trip_deatails_screen_widget.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/dashboard.dart';
+import 'package:my_travelo_app/models/singInModel.dart';
 import 'package:my_travelo_app/models/user_model.dart';
-
-import 'package:my_travelo_app/screens/AddTripScreens/add_trip_screen.dart';
-import 'package:my_travelo_app/screens/AddTripScreens/companion_screen.dart';
-import 'package:my_travelo_app/screens/home_screens.dart';
+import 'package:my_travelo_app/screens/AddTripScreens/TripScreens/Upcomming/upcoming_page.dart';
+import 'package:my_travelo_app/screens/schedule_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TripPlanScreen extends StatefulWidget {
   final String? destination;
@@ -42,6 +39,7 @@ class TripPlanScreen extends StatefulWidget {
 Map<String, List<String>> _stringMap = {};
 
 class _TripPlanScreenState extends State<TripPlanScreen> {
+  // String? userId;
   int _selectTab = 0;
   final TextEditingController _addPlanController = TextEditingController();
   List<DateTime> _days = [];
@@ -78,32 +76,35 @@ class _TripPlanScreenState extends State<TripPlanScreen> {
               onTap: () async {
                 log("button Taped!!!");
                 log("Enter to the button fuction");
+                SharedPreferences prefz = await SharedPreferences.getInstance();
+                final userId = prefz.getString("currentuserId");
+                log("Current passed userId is :$userId");
+                // userId = userId;
+                final companion = widget.selectedContacts
+                    .map((contact) => contact.displayName ?? "")
+                    .toList();
                 if (widget.destination != null &&
                     widget.selectedRangeStart != null &&
                     widget.selectedRangeEnd != null) {
                   final trip = TripModel(
-                      destination: widget.destination!,
-                      rangeStart: widget.selectedRangeStart!,
-                      rangeEnd: widget.selectedRangeEnd!,
-                      id: DateTime.now().millisecondsSinceEpoch.toString(),
-                      companion: widget.selectedContacts,
-                      activities: _stringMap);
+                    destination: widget.destination!,
+                    rangeStart: widget.selectedRangeStart!,
+                    rangeEnd: widget.selectedRangeEnd!,
+                    id: DateTime.now().millisecondsSinceEpoch.toString(),
+                    companion: companion,
+                    time: widget.finalSelectTime,
+                    activities: _stringMap,
+                    userId: userId.toString(),
+                  );
 
                   await addTrip(trip: trip);
 
-                  // final tripBox = Hive.box<TripModel>(tripDbName);
-                  // tripBox.add(TripModel(
-                  //     destination: widget-w.destination!,
-                  //     rangeStart: widget.selectedRangeStart!,
-                  //     rangeEnd: widget.selectedRangeEnd!,
-                  //     id: DateTime.now().millisecondsSinceEpoch ~/ 1000,
-                  //     companion: widget.selectedContacts,
-                  //     activities: _stringMap));
-
                   log('Selected contacts: ${widget.selectedContacts}');
+                  // ignore: use_build_context_synchronously
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => Dashboard(),
-                  ));
+                      builder: (context) => ScheduleScreen(
+                            userId: userId,
+                          )));
                 } else {
                   log("Data couldn't passed");
                 }
@@ -148,6 +149,7 @@ class _TripPlanScreenState extends State<TripPlanScreen> {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   for (int i = 0; i < _days.length; i++)
                     tabContainer(
@@ -184,33 +186,43 @@ class _TripPlanScreenState extends State<TripPlanScreen> {
               height: 15.h,
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: _stringMap["Day ${_selectTab + 1}"]?.length ?? 0,
-                itemBuilder: (BuildContext context, int index) {
-                  List<String>? plans = _stringMap["Day ${_selectTab + 1}"];
-                  return Card(
-                    child: ListTile(
-                      leading: Container(
-                        height: 25.h,
-                        width: 25.w,
-                        decoration: const BoxDecoration(
-                            color: white, shape: BoxShape.circle),
-                        child: Center(child: Text("${index + 1}")),
-                      ),
-                      title: Text(plans![index]),
-                      trailing: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _stringMap["Day ${_selectTab + 1}"]
-                                  ?.remove(plans[index]);
-                            });
-                          },
-                          icon: Icon(Icons.remove)),
-                    ),
-                  );
-                },
-              ),
-            ),
+                child: _stringMap["Day ${_selectTab + 1}"]!.isNotEmpty
+                    ? ListView.builder(
+                        itemCount:
+                            _stringMap["Day ${_selectTab + 1}"]?.length ?? 0,
+                        itemBuilder: (BuildContext context, int index) {
+                          List<String>? plans =
+                              _stringMap["Day ${_selectTab + 1}"];
+                          return Card(
+                            child: ListTile(
+                              leading: Container(
+                                height: 25.h,
+                                width: 25.w,
+                                decoration: const BoxDecoration(
+                                    color: white, shape: BoxShape.circle),
+                                child: Center(child: Text("${index + 1}")),
+                              ),
+                              title: Text(plans![index]),
+                              trailing: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      _stringMap["Day ${_selectTab + 1}"]
+                                          ?.remove(plans[index]);
+                                    });
+                                  },
+                                  icon: const Icon(Icons.remove)),
+                            ),
+                          );
+                        },
+                      )
+                    : Center(
+                        child: TextWidget(
+                          content: "No plans are available",
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: secondaryColor,
+                        ),
+                      )),
           ],
         ),
       ),

@@ -1,6 +1,5 @@
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_travelo_app/Widgets/companion_card.dart';
 import 'package:my_travelo_app/constants/constant.dart';

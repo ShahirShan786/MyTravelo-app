@@ -66,7 +66,7 @@ class FavoriteScreen extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
-                                    Icon(
+                                  const  Icon(
                                       Icons.location_on,
                                       size: 15,
                                     ),

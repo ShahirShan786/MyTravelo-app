@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
                 return const CircularProgressIndicator();
               } else {
                 return snapshot.data == true
-                    ? const Dashboard()
+                    ?  Dashboard()
                     : const LoginPage();
               }
             },

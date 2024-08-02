@@ -1,49 +1,56 @@
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
+import 'package:my_travelo_app/Functions/user_functions.dart';
+import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
+import 'package:my_travelo_app/models/user_model.dart';
 
-class UpcomingPage extends StatelessWidget {
-  const UpcomingPage({super.key});
+class TripListCard extends StatefulWidget {
+  final TripModel trip;
+  final  int index;
+  final BuildContext context;
+  const TripListCard({super.key, required this.trip, required this.index, required this.context});
 
   @override
+  State<TripListCard> createState() => _TripListCardState();
+}
+
+class _TripListCardState extends State<TripListCard> {
+  late String startDay;
+  late String endDay;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    TripModel trip = tripList.value[widget.index];
+    startDay = DateFormat('dd MMM yyyy').format(trip.rangeStart);
+    endDay = DateFormat('dd MMM yyyy').format(trip.rangeEnd);
+  }
+  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(10.w),
-      child: ListView.builder(
-          physics: BouncingScrollPhysics(),
-          itemCount: 3,
-          itemBuilder: (BuildContext context, int index) {
-            return Card(
-              color: Colors.blue[50],
+    TripModel trip = widget.trip;
+    return  Card(
+              color: Colors.green[50],
               child: SizedBox(
                   width: MediaQuery.of(context).size.width,
-                  height: 115.h,
+                  
                   child: Padding(
                     padding: EdgeInsets.all(8.0.w),
                     child: Row(
                       children: [
                         CircleAvatar(
-                          backgroundColor: Colors.white,
+                          backgroundColor: Colors.greenAccent[100],
                           radius: 32.r,
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: 6.h,
-                              ),
-                              TextWidget(
-                                  content: "$index",
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w600),
-                              TextWidget(
-                                  content: "Wed",
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w600)
-                            ],
+                          child: Icon( 
+                            Icons.check_sharp,
+                            size: 25.r,
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(5.w),
+                          padding:  EdgeInsets.all(5.w),
                           child: SizedBox(
                             width: 274.w,
                             child: Column(
@@ -52,13 +59,13 @@ class UpcomingPage extends StatelessWidget {
                                   height: 15.h,
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(left: 10.w),
+                                  padding:  EdgeInsets.only(left: 10.w),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       TextWidget(
-                                          content: "Vagamon",
+                                          content: trip.destination,
                                           fontSize: 14.sp,
                                           fontWeight: FontWeight.w600),
                                       TextWidget(
@@ -72,18 +79,21 @@ class UpcomingPage extends StatelessWidget {
                                   height: 5.h,
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(left: 10.w),
+                                  padding:  EdgeInsets.only(left: 10.w),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       TextWidget(
-                                          content: "19 jun 2024 to 21 jun 2024",
+                                          content: "${startDay} to ${endDay}",
                                           fontSize: 13.sp,
                                           fontWeight: FontWeight.normal),
                                       IconButton(
                                           onPressed: () {},
-                                          icon: Icon(Icons.edit_note_outlined))
+                                          icon: Icon(
+                                            Icons.delete,
+                                            color: primaryColor,
+                                          ))
                                     ],
                                   ),
                                 )
@@ -95,7 +105,5 @@ class UpcomingPage extends StatelessWidget {
                     ),
                   )),
             );
-          }),
-    );
   }
 }

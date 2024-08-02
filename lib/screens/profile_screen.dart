@@ -258,7 +258,7 @@ class _ProfilescreenState extends State<Profilescreen> {
                                                 await SharedPreferences
                                                     .getInstance();
                                             prefs.setBool("isLogedIn", false);
-                                            currentScreen = Homescreen();
+                                            currentScreen = const Homescreen();
                                           },
                                           child: const Text("Log out"),
                                         )

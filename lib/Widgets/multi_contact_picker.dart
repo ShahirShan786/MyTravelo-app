@@ -1,10 +1,8 @@
 import 'dart:developer';
-
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
-import 'package:multi_contact_picker/multi_contact_picker.dart';
 import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/screens/AddTripScreens/companion_screen.dart';
+
 
 // List<String> selectedContactId = [];
 
@@ -23,12 +21,12 @@ class _ContactPickerState extends State<ContactPicker> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      contentPadding: EdgeInsets.all(15),
+      contentPadding: const EdgeInsets.all(15),
       title: TextWidget(
           content: "Select Companion",
           fontSize: 22,
           fontWeight: FontWeight.bold),
-      content: Container(
+      content: SizedBox(
         width: double.maxFinite,
         height: 500,
         // color: Colors.grey[200],
@@ -73,7 +71,7 @@ class _ContactPickerState extends State<ContactPicker> {
               content: "DISMISS",
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 74, 166, 77),
+              color:const Color.fromARGB(255, 74, 166, 77),
             )),
         TextButton(
           onPressed: () {
@@ -84,7 +82,7 @@ class _ContactPickerState extends State<ContactPicker> {
             content: "OK",
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 74, 166, 77),
+            color: const Color.fromARGB(255, 74, 166, 77),
           ),
         )
       ],

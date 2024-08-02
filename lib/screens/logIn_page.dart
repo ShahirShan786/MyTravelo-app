@@ -89,13 +89,10 @@ class _LoginPageState extends State<LoginPage> {
                           borderColor: Colors.red,
                           focusedColor: primaryColor,
                           labelText: "Username",
+                          keyboardType: TextInputType.text,
                           labelColor: secondaryColor,
                           controller: _loginUsername,
-                          suffics: Icon(
-                            Icons.check_circle_outline_outlined,
-                            color: primaryColor,
-                            size: 22.r,
-                          ),
+                       
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return "Please enter your username";
@@ -107,6 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                         Textformfeilds(
                           borderColor: Colors.red,
                           focusedColor: primaryColor,
+                          keyboardType: TextInputType.visiblePassword,
                           labelText: "Password",
                           labelColor: secondaryColor,
                           controller: _loginPasssword,
@@ -199,12 +197,14 @@ class _LoginPageState extends State<LoginPage> {
         _loginPasssword.clear();
 
         Navigator.push(
+            // ignore: use_build_context_synchronously
             context,
             MaterialPageRoute(
               builder: (context) => Dashboard(
                 userDetails: elements,
               ),
             ));
+        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: Colors.green,
           content: TextWidget(

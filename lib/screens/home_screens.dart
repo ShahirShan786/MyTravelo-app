@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:my_travelo_app/listes/places_list.dart';
@@ -10,14 +8,16 @@ import 'package:my_travelo_app/SubScreens/place_detailes_page.dart';
 import 'package:my_travelo_app/screens/AddTripScreens/add_trip_screen.dart';
 
 class Homescreen extends StatefulWidget {
-  Homescreen({super.key});
+  const Homescreen({super.key});
+
+
 
   @override
   State<Homescreen> createState() => _HomescreenState();
 }
 
 class _HomescreenState extends State<Homescreen> {
-  Widget SliderWidget(String urlImage, int index) {
+  Widget sliderWidget(String urlImage, int index) {
     return Container(
       color: Colors.grey.shade600,
       width: double.infinity,
@@ -59,7 +59,7 @@ class _HomescreenState extends State<Homescreen> {
                         itemBuilder:
                             (BuildContext context, int index, int realIndex) {
                           final urlImage = imageItems[index];
-                          return SliderWidget(urlImage, index);
+                          return sliderWidget(urlImage, index);
                         },
                         options: CarouselOptions(
                             height: 350.h,

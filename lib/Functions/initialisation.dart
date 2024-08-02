@@ -12,8 +12,12 @@ initialisation() async {
     Hive.registerAdapter(SinginmodelAdapter());
     await Signinservice().openBox();
   }
-  // if (!Hive.isAdapterRegistered(TripModelAdapter().typeId)) {
-  // await Hive.openBox<TripModel>(tripDbName);
-  Hive.registerAdapter(TripModelAdapter());
-  // }
+  if (!Hive.isAdapterRegistered(TripModelAdapter().typeId)) {
+    Hive.registerAdapter(TripModelAdapter());
+    // await Hive.openBox<TripModel>(tripDbName);
+
+    if (!Hive.isAdapterRegistered(CompletedTripModelPhotosAdapter().typeId)) {
+      Hive.registerAdapter(CompletedTripModelPhotosAdapter());
+    }
+  }
 }

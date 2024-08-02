@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_travelo_app/Widgets/calender_view.dart';
 import 'package:my_travelo_app/Widgets/text_feilds.dart';
@@ -9,9 +6,8 @@ import 'package:my_travelo_app/Widgets/time_picker.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/constants/primary_button.dart';
-import 'package:my_travelo_app/models/user_model.dart';
 import 'package:my_travelo_app/screens/AddTripScreens/option_screen.dart';
-import 'package:table_calendar/table_calendar.dart';
+
 
 class AddTripScreens extends StatefulWidget {
   const AddTripScreens({super.key});
