@@ -1,5 +1,5 @@
 
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -23,7 +23,7 @@ class _TripListCardState extends State<TripListCard> {
   late String endDay;
   @override
   void initState() {
-    // TODO: implement initState
+ 
     super.initState();
     TripModel trip = tripList.value[widget.index];
     startDay = DateFormat('dd MMM yyyy').format(trip.rangeStart);
@@ -85,12 +85,12 @@ class _TripListCardState extends State<TripListCard> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       TextWidget(
-                                          content: "${startDay} to ${endDay}",
+                                          content: "$startDay to $endDay",
                                           fontSize: 13.sp,
                                           fontWeight: FontWeight.normal),
                                       IconButton(
                                           onPressed: () {},
-                                          icon: Icon(
+                                          icon:const Icon(
                                             Icons.delete,
                                             color: primaryColor,
                                           ))

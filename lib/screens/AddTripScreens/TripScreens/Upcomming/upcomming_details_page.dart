@@ -103,6 +103,7 @@ class _UpcommingDetailsPageState extends State<UpcommingDetailsPage> {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   for (int i = 0; i < days.length; i++)
                     tabContainer(

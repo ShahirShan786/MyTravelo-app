@@ -1,12 +1,13 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:my_travelo_app/Functions/signIn_service.dart';
 import 'package:my_travelo_app/Widgets/textFormFeilds.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/models/singInModel.dart';
 
-import 'package:my_travelo_app/servies/signIn_service.dart';
+
 
 class EditDialogue extends StatefulWidget {
   final Singinmodel user;
@@ -131,6 +132,7 @@ class _EditDialogueState extends State<EditDialogue> {
               final userAfterUpdate = await _signservies
                   .getSignInDataById(widget.user.id.toString());
               log("User Data After Updated :$userAfterUpdate");
+              // ignore: use_build_context_synchronously
               Navigator.pop(context, updatedUser);
             }
           },

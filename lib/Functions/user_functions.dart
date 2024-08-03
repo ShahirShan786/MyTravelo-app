@@ -91,6 +91,7 @@ Future<void> addMemmories(
   await completedTripBox.put(completedTrips.id, completedTrips);
   log("Date added successfully");
   await completedTripToList();
+  completedTripListPhotos.notifyListeners(); 
 }
 
 Future<List<CompletedTripModelPhotos>> getcompletedTrip() async {
@@ -113,4 +114,5 @@ completedTripToList() async {
 
   completedTripListPhotos.value = List.from(completedTrip);
   log("---- lenth :${completedTripListPhotos.value.length}");
+  completedTripListPhotos.notifyListeners(); 
 }

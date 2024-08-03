@@ -1,11 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_travelo_app/Functions/initialisation.dart';
 import 'package:my_travelo_app/dashboard.dart';
-import 'package:my_travelo_app/models/singInModel.dart';
 import 'package:my_travelo_app/screens/logIn_page.dart';
-import 'package:my_travelo_app/servies/signIn_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

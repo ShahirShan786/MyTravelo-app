@@ -1,4 +1,4 @@
-import 'package:contacts_service/contacts_service.dart';
+
 import 'package:hive_flutter/adapters.dart';
 
 part 'user_model.g.dart';

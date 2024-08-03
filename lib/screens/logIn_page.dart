@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_travelo_app/Functions/signIn_service.dart';
 import 'package:my_travelo_app/Widgets/textFormFeilds.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
@@ -9,7 +10,6 @@ import 'package:my_travelo_app/dashboard.dart';
 
 import 'package:my_travelo_app/models/singInModel.dart';
 import 'package:my_travelo_app/screens/SingIn_page.dart';
-import 'package:my_travelo_app/servies/signIn_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {

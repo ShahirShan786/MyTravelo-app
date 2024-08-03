@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:my_travelo_app/Widgets/picture_section.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/constants/primary_button.dart';
-import 'package:my_travelo_app/listes/places_list.dart';
-import 'package:my_travelo_app/SubScreens/Widgets/picture_section.dart';
+
+
 
 class PlaceDetailesPage extends StatelessWidget {
   String? placeImg;

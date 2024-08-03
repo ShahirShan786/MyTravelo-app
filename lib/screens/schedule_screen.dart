@@ -5,7 +5,7 @@ import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/dashboard.dart';
 import 'package:my_travelo_app/screens/AddTripScreens/TripScreens/Completed/completed_page.dart';
 import 'package:my_travelo_app/screens/AddTripScreens/TripScreens/Upcomming/upcoming_page.dart';
-import 'package:my_travelo_app/screens/home_screens.dart';
+
 
 class ScheduleScreen extends StatelessWidget {
   final String? userId;
@@ -49,7 +49,7 @@ class ScheduleScreen extends StatelessWidget {
                   builder: (context) => Dashboard(),
                 ));
               },
-              icon: Icon(Icons.arrow_back)),
+              icon:const Icon(Icons.arrow_back)),
           title: TextWidget(
               content: "My Trips",
               fontSize: 20.sp,

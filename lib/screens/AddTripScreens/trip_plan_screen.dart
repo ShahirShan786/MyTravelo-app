@@ -3,17 +3,15 @@ import 'dart:developer';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-
 import 'package:my_travelo_app/Functions/user_functions.dart';
 import 'package:my_travelo_app/Widgets/textFormFeilds.dart';
 import 'package:my_travelo_app/Widgets/trip_deatails_screen_widget.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/dashboard.dart';
-import 'package:my_travelo_app/models/singInModel.dart';
+
+
 import 'package:my_travelo_app/models/user_model.dart';
-import 'package:my_travelo_app/screens/AddTripScreens/TripScreens/Upcomming/upcoming_page.dart';
+
 import 'package:my_travelo_app/screens/schedule_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

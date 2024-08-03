@@ -35,7 +35,7 @@ late List<Widget> screens;
     super.initState();
     List<Widget> screens = [
      const  Homescreen(),
-    ScheduleScreen(),
+   const ScheduleScreen(),
     const FavoriteScreen(),
     const  Profilescreen(),
 ];
@@ -74,7 +74,7 @@ late List<Widget> screens;
                   IconButton(
                     onPressed: () {
                       setState(() {
-                        currentScreen = Homescreen();
+                        currentScreen = const Homescreen();
                         currentPageIndex = 0;
                       });
                     },

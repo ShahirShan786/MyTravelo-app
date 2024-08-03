@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:my_travelo_app/Functions/user_functions.dart';
 import 'package:my_travelo_app/Widgets/textFormFeilds.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/dashboard.dart';
 import 'package:my_travelo_app/models/user_model.dart';
 import 'package:my_travelo_app/screens/schedule_screen.dart';
-import 'package:table_calendar/table_calendar.dart';
+
 
 class EditTripDialogueBox {
   final BuildContext context;
@@ -49,7 +47,7 @@ class EditTripDialogueBox {
                 fontSize: 20,
                 fontWeight: FontWeight.bold),
             content: SingleChildScrollView(
-              child: Container(
+              child: SizedBox(
                 width: double.maxFinite,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -90,10 +88,10 @@ class EditTripDialogueBox {
                       labelColor: secondaryColor,
                       labelText: "Stating Date",
                       ontap: () async {
-                        await selectDate(context, startDate, (PickedFile) {
-                          startDate = PickedFile;
+                        await selectDate(context, startDate, (pickedFile) {
+                          startDate = pickedFile;
                           startDateController.text =
-                              DateFormat("yyy-MM-dd").format(PickedFile);
+                              DateFormat("yyy-MM-dd").format(pickedFile);
                         });
                       },
                       validator: (value) {
@@ -146,7 +144,7 @@ class EditTripDialogueBox {
                     trip.rangeStart = startDate;
                     trip.rangeEnd = endDate;
                     updateTrip(trip: trip);
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ScheduleScreen()));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) =>const ScheduleScreen()));
                   },
                   child: TextWidget(
                       content: "Update",

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:my_travelo_app/Functions/signIn_service.dart';
+import 'package:my_travelo_app/Widgets/edit_dialogue.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/dashboard.dart';
@@ -15,8 +17,6 @@ import 'package:my_travelo_app/profileSubScreen/logout_page.dart';
 import 'package:my_travelo_app/profileSubScreen/privacy_page.dart';
 import 'package:my_travelo_app/screens/home_screens.dart';
 import 'package:my_travelo_app/screens/logIn_page.dart';
-import 'package:my_travelo_app/servies/signIn_service.dart';
-import 'package:my_travelo_app/SubScreens/Widgets/edit_dialogue.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Profilescreen extends StatefulWidget {
