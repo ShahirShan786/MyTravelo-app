@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:my_travelo_app/Functions/user_functions.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/models/user_model.dart';
+import 'package:my_travelo_app/screens/AddTripScreens/TripScreens/Completed/blog_page.dart';
 
 class CompletedDetailsPage extends StatefulWidget {
   final TripModel trip;
@@ -19,11 +20,13 @@ class CompletedDetailsPage extends StatefulWidget {
 
 class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
   bool _photosEmpty = true;
+  bool _blogEmpty = true;
   late String startDate;
   late String endDate;
-
+  List<CompletedTripModelBlog> blog = [];
   @override
   void initState() {
+    completedTripToList();
     _checkPhotos();
 
     completedTripListPhotos.addListener(_checkPhotos);
@@ -67,6 +70,26 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
             child: const Icon(Icons.photo_library_outlined),
             label: "Add Photos",
           ),
+          SpeedDialChild(
+              onTap: () {
+                blog.isEmpty
+                    ? Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => BlogPage(
+                              trip: widget.trip,
+                              startDate: startDate,
+                              endDate: endDate,
+                            )))
+                    : Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => BlogPage(
+                          trip: widget.trip,
+                          startDate: startDate,
+                          endDate: endDate,
+                          blog: blog[0],
+                        ),
+                      ));
+              },
+              child: Icon(Icons.message_outlined),
+              label: "Add Blogs")
         ],
       ),
       appBar: AppBar(
@@ -75,7 +98,15 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
             content: "Trip Details", fontSize: 20, fontWeight: FontWeight.bold),
       ),
       body: SingleChildScrollView(
-        child: Padding(
+        child:ValueListenableBuilder(valueListenable: completedTripListBlog,
+         builder: (context , value , child){
+          for(var value in completedTripListBlog.value){
+            if(value.tripId == widget.trip.id){
+              blog.add(value);
+              _blogEmpty = true;
+            }
+          }
+          return  Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,22 +115,23 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
                   content: "To ${widget.trip.destination}",
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
-            const  SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               TextWidget(
                   content: "Started on $startDate to $endDate ",
                   fontSize: 15,
                   fontWeight: FontWeight.w600),
-            const  SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               TextWidget(
-                  content: "Add Your memmor",
+                  content: "Add Your memmories",
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
+                  
               _photosEmpty
-                  ?const SizedBox()
+                  ? const SizedBox()
                   : SizedBox(
                       height: MediaQuery.of(context).size.height,
                       child: ValueListenableBuilder(
@@ -129,10 +161,10 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
                                   ],
                                 )
                               : GridView.builder(
-                                  physics:const NeverScrollableScrollPhysics(),
+                                  physics: const NeverScrollableScrollPhysics(),
                                   itemCount: lis.length,
                                   gridDelegate:
-                                     const SliverGridDelegateWithFixedCrossAxisCount(
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
                                           crossAxisSpacing: 3,
                                           childAspectRatio: 1.2),
@@ -175,10 +207,7 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
                                               },
                                             );
                                           },
-
-                                          onTap: () {
-                                            
-                                          },
+                                          onTap: () {},
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(20),
@@ -196,7 +225,8 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
                     ),
             ],
           ),
-        ),
+        );
+         })
       ),
     );
   }

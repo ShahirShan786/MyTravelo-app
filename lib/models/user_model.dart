@@ -51,7 +51,7 @@ class CompletedTripModelPhotos {
 class CompletedTripModelBlog {
   final String blog;
   final String id;
-  final int tripId;
+  final String tripId;
 
   CompletedTripModelBlog({
     required this.blog,

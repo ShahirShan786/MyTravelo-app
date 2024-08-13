@@ -105,6 +105,7 @@ Future<void> removeImage(
   final completedTripBox =
       await Hive.openBox<CompletedTripModelPhotos>(completedTripDbNamePhotos);
   await completedTripBox.delete(completedTripImage.id);
+  log("blog data added successfully");
   await completedTripToList();
 }
 
@@ -115,4 +116,29 @@ completedTripToList() async {
   completedTripListPhotos.value = List.from(completedTrip);
   log("---- lenth :${completedTripListPhotos.value.length}");
   completedTripListPhotos.notifyListeners(); 
+}
+
+// to add blogs in database 
+
+Future<void>addBlogs({required CompletedTripModelBlog blog})async{
+  log("entered to the blog function ");
+ final completedTripModelBox = await Hive.openBox<CompletedTripModelBlog>(completedTripDbNameBlogs);
+ await completedTripModelBox.put(blog.id, blog);
+ log("blog data added successfully");
+ completedTripToList();
+ completedTripListBlog.notifyListeners();
+
+}
+
+Future<List<CompletedTripModelBlog>>getBlog()async{
+  final completedTripModelBox = await Hive.openBox<CompletedTripModelBlog>(completedTripDbNameBlogs);
+    return completedTripModelBox.values.toList();
+}
+
+completedBlogList()async{
+  completedTripListBlog.value.clear();
+
+  final completedBlog = await getBlog();
+  completedTripListBlog.value = List.from(completedBlog);
+
 }

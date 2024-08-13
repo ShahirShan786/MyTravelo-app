@@ -9,7 +9,7 @@ class TExtFeilds extends StatelessWidget {
 
   TExtFeilds({
     required this.labelText,
-    required this.hintText,
+    this.hintText,
     required this.controller,
   });
 

@@ -8,6 +8,7 @@ const secondaryColor = Color.fromARGB(255, 134, 129, 130);
 const ScaffoldColor = Color.fromARGB(255, 239, 239, 239);
 const BoxColor = Color.fromARGB(45, 221, 162, 197);
 const black = Colors.black;
+const green = Colors.green;
 
 const white = Colors.white;
 

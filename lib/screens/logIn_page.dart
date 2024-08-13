@@ -3,9 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_travelo_app/Functions/signIn_service.dart';
+import 'package:my_travelo_app/Widgets/adminButton.dart';
 import 'package:my_travelo_app/Widgets/textFormFeilds.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
+import 'package:my_travelo_app/constants/primary_button.dart';
 import 'package:my_travelo_app/dashboard.dart';
 
 import 'package:my_travelo_app/models/singInModel.dart';
@@ -83,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                           width: 250.w,
                         ),
                         SizedBox(
-                          height: 55.w,
+                          height: 40.w,
                         ),
                         Textformfeilds(
                           borderColor: Colors.red,
@@ -92,7 +94,6 @@ class _LoginPageState extends State<LoginPage> {
                           keyboardType: TextInputType.text,
                           labelColor: secondaryColor,
                           controller: _loginUsername,
-                       
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return "Please enter your username";
@@ -137,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                               }
                             },
                             child: TextWidget(
-                                content: "sing Up",
+                                content: "Sign Up",
                                 fontSize: 17.sp,
                                 fontWeight: FontWeight.w600)),
                         SizedBox(height: 10.h),
@@ -165,7 +166,11 @@ class _LoginPageState extends State<LoginPage> {
                             child: TextWidget(
                                 content: "Create Account",
                                 fontSize: 15.sp,
-                                fontWeight: FontWeight.w600))
+                                fontWeight: FontWeight.w600)),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Adminbutton()
                       ],
                     ),
                   ),
@@ -206,7 +211,7 @@ class _LoginPageState extends State<LoginPage> {
             ));
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          backgroundColor: Colors.green,
+          backgroundColor: green,
           content: TextWidget(
               color: Colors.white,
               content: "Loged in Successfully",
