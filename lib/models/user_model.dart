@@ -1,4 +1,3 @@
-
 import 'package:hive_flutter/adapters.dart';
 
 part 'user_model.g.dart';
@@ -48,14 +47,34 @@ class CompletedTripModelPhotos {
   });
 }
 
+@HiveType(typeId: 4)
 class CompletedTripModelBlog {
+  @HiveField(0)
   final String blog;
+  @HiveField(1)
   final String id;
+  @HiveField(2)
   final String tripId;
 
   CompletedTripModelBlog({
     required this.blog,
     required this.id,
     required this.tripId,
+  });
+}
+
+@HiveType(typeId: 5)
+class FevoriteModel {
+  @HiveField(0)
+  final String id;
+  @HiveField(1)
+  final String fevoritePlace;
+  @HiveField(2)
+  final String userId;
+
+  FevoriteModel({
+    required this.id,
+    required this.fevoritePlace,
+    required this.userId,
   });
 }

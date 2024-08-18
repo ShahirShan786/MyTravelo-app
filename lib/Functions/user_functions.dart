@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:my_travelo_app/Functions/firebase_functions.dart';
+import 'package:my_travelo_app/models/admin_model.dart';
 import 'package:my_travelo_app/models/user_model.dart';
 import 'package:flutter/src/foundation/change_notifier.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,9 +11,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 const tripDbName = "trip-database";
 const completedTripDbNamePhotos = "completedTripPhotos-database";
 const completedTripDbNameBlogs = "completedTripBlog-database";
+const fevoriteDName = "fevoritePlace- database";
 
 ValueNotifier<List<TripModel>> tripList = ValueNotifier([]);
 ValueNotifier<List<TripModel>> tripListCompleted = ValueNotifier([]);
+ValueNotifier<List<PlaceModel>> fevoriteList = ValueNotifier([]);
 ValueNotifier<List<CompletedTripModelPhotos>> completedTripListPhotos =
     ValueNotifier([]);
 ValueNotifier<List<CompletedTripModelBlog>> completedTripListBlog =
@@ -91,7 +95,7 @@ Future<void> addMemmories(
   await completedTripBox.put(completedTrips.id, completedTrips);
   log("Date added successfully");
   await completedTripToList();
-  completedTripListPhotos.notifyListeners(); 
+  completedTripListPhotos.notifyListeners();
 }
 
 Future<List<CompletedTripModelPhotos>> getcompletedTrip() async {
@@ -115,30 +119,69 @@ completedTripToList() async {
 
   completedTripListPhotos.value = List.from(completedTrip);
   log("---- lenth :${completedTripListPhotos.value.length}");
-  completedTripListPhotos.notifyListeners(); 
+  completedTripListPhotos.notifyListeners();
 }
 
-// to add blogs in database 
+// to add blogs in database
 
-Future<void>addBlogs({required CompletedTripModelBlog blog})async{
+Future<void> addBlogs({required CompletedTripModelBlog blog}) async {
   log("entered to the blog function ");
- final completedTripModelBox = await Hive.openBox<CompletedTripModelBlog>(completedTripDbNameBlogs);
- await completedTripModelBox.put(blog.id, blog);
- log("blog data added successfully");
- completedTripToList();
- completedTripListBlog.notifyListeners();
-
+  final completedTripModelBox =
+      await Hive.openBox<CompletedTripModelBlog>(completedTripDbNameBlogs);
+  await completedTripModelBox.put(blog.id, blog);
+  log("blog data added successfully");
+  completedTripToList();
+  completedTripListBlog.notifyListeners();
 }
 
-Future<List<CompletedTripModelBlog>>getBlog()async{
-  final completedTripModelBox = await Hive.openBox<CompletedTripModelBlog>(completedTripDbNameBlogs);
-    return completedTripModelBox.values.toList();
+Future<List<CompletedTripModelBlog>> getBlog() async {
+  final completedTripModelBox =
+      await Hive.openBox<CompletedTripModelBlog>(completedTripDbNameBlogs);
+  return completedTripModelBox.values.toList();
 }
 
-completedBlogList()async{
+completedBlogList() async {
   completedTripListBlog.value.clear();
 
   final completedBlog = await getBlog();
   completedTripListBlog.value = List.from(completedBlog);
+}
 
+addFevorite({required FevoriteModel fevoritePlace}) async {
+  final fevoriteBox = await Hive.openBox<FevoriteModel>(fevoriteDName);
+  await fevoriteBox.put(fevoritePlace.id, fevoritePlace);
+  userRefresh();
+}
+
+removeFevorite({required String fevoritePlace}) async {
+  final fevoriteBox = await Hive.openBox<FevoriteModel>(fevoriteDName);
+  await fevoriteBox.delete(fevoritePlace);
+  log("Data removed");
+ await userRefresh();
+}
+
+Future<List<FevoriteModel>> getFevorite() async {
+  final fevoriteBox = await Hive.openBox<FevoriteModel>(fevoriteDName);
+  return fevoriteBox.values.toList();
+}
+
+userRefresh() async {
+  fevoriteList.value.clear();
+  final fevorite = await getFevorite();
+  SharedPreferences prefz = await SharedPreferences.getInstance();
+  final currentUserId = prefz.getString("currentuserId");
+
+  Future.forEach(fevorite, (elements) {
+    if (currentUserId != null) {
+      if (elements.userId == currentUserId) {
+        for (PlaceModel place in placeModelListener.value) {
+          if (elements.fevoritePlace == place.id) {
+            fevoriteList.value.add(place);
+            log("fev place added fevorite List");
+          }
+        }
+      }
+    }
+  });
+  fevoriteList.notifyListeners();
 }

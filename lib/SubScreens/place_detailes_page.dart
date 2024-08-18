@@ -4,22 +4,23 @@ import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/constants/primary_button.dart';
 
-
-
 class PlaceDetailesPage extends StatelessWidget {
   String? placeImg;
   String? description;
   String? place;
   String? placeName;
+  List<String>? placeSubImg;
 
   PlaceDetailesPage(
       {required this.placeImg,
       required this.description,
       required this.place,
-      required this.placeName});
+      required this.placeName,
+      required this.placeSubImg});
 
   @override
   Widget build(BuildContext context) {
+    print("subImages length :${placeSubImg?.length}");
     return Scaffold(
       body: SingleChildScrollView(
         child: SizedBox(
@@ -64,7 +65,34 @@ class PlaceDetailesPage extends StatelessWidget {
                     padding: const EdgeInsets.all(10),
                     child: Column(
                       children: [
-                        PictureSection(),
+                        // PictureSection(
+                        //   subImages: placeSubImg,
+                        // ),
+                        Center(
+                          child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: placeSubImg?.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: Container (
+                                    height: 55,
+                                    width: 60,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(15),
+                                      child: Image.network(
+                                        placeSubImg![index],
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }),
+                        ),
                         SizedBox(height: 2),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

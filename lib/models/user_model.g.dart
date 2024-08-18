@@ -102,3 +102,84 @@ class CompletedTripModelPhotosAdapter
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
+
+class CompletedTripModelBlogAdapter
+    extends TypeAdapter<CompletedTripModelBlog> {
+  @override
+  final int typeId = 4;
+
+  @override
+  CompletedTripModelBlog read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return CompletedTripModelBlog(
+      blog: fields[0] as String,
+      id: fields[1] as String,
+      tripId: fields[2] as String,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, CompletedTripModelBlog obj) {
+    writer
+      ..writeByte(3)
+      ..writeByte(0)
+      ..write(obj.blog)
+      ..writeByte(1)
+      ..write(obj.id)
+      ..writeByte(2)
+      ..write(obj.tripId);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CompletedTripModelBlogAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class FevoriteModelAdapter extends TypeAdapter<FevoriteModel> {
+  @override
+  final int typeId = 5;
+
+  @override
+  FevoriteModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return FevoriteModel(
+      id: fields[0] as String,
+      fevoritePlace: fields[1] as String,
+      userId: fields[2] as String,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, FevoriteModel obj) {
+    writer
+      ..writeByte(3)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.fevoritePlace)
+      ..writeByte(2)
+      ..write(obj.userId);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FevoriteModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}

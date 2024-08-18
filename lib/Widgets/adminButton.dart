@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
+import 'package:my_travelo_app/screens/AdminScreens/admin_addPlace_screen.dart';
+import 'package:my_travelo_app/screens/AdminScreens/admin_home_page.dart';
 import 'package:my_travelo_app/screens/AdminScreens/admin_login_screen.dart';
 
 class Adminbutton extends StatelessWidget {
@@ -17,7 +19,7 @@ class Adminbutton extends StatelessWidget {
             side: const BorderSide(color: primaryColor)),
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => AdminLoginScreen(),
+            builder: (context) => AdminHomePage()
           ));
         },
         child: TextWidget(
