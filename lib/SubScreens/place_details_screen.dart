@@ -80,11 +80,13 @@ class PlaceDetailsScreen extends StatelessWidget {
                 content: "Go to Direction",
                 fontSize: 18,
                 fontWeight: FontWeight.w600),
-            onPressed: () {},
+            onPressed: () {
+                  navigateToPlace(lat: place.lattitude, long: place.longitude);
+            },
             height: 50,
             width: 250,
             backgroundColor: primaryColor,
-          ),
+          ), 
         )),
       ),
     );

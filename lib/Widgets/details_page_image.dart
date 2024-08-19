@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:my_travelo_app/Functions/user_functions.dart';
+import 'package:my_travelo_app/Widgets/photo_view_page.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/models/admin_model.dart';
 import 'package:my_travelo_app/models/user_model.dart';
@@ -29,8 +30,24 @@ class _DetailsPageImageState extends State<DetailsPageImage> {
             Stack(
               children: [
                 CarouselSlider(
-                    items: widget.place?.subImage.map((images) {
-                      return CachedNetworkImage(
+                  options: CarouselOptions(
+                    height: 350,
+                    viewportFraction: 1,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        picture = index;
+                      });
+                    },
+                  ),
+                  items: widget.place?.subImage.map((images) {
+                    return InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => PhotoViewPage(
+                              photos: widget.place!.subImage, index: picture),
+                        ));
+                      },
+                      child: CachedNetworkImage(
                         imageUrl: widget.place!.subImage[picture],
                         placeholder: (context, url) => Center(
                           child: CircularProgressIndicator(
@@ -40,17 +57,10 @@ class _DetailsPageImageState extends State<DetailsPageImage> {
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.error),
                         fit: BoxFit.cover,
-                      );
-                    }).toList(),
-                    options: CarouselOptions(
-                      height: 350,
-                      viewportFraction: 1,
-                      onPageChanged: (index, reason) {
-                        setState(() {
-                          picture = index;
-                        });
-                      },
-                    )),
+                      ),
+                    );
+                  }).toList(),
+                ),
                 Positioned(
                   top: 40,
                   right: 20,
@@ -66,16 +76,16 @@ class _DetailsPageImageState extends State<DetailsPageImage> {
                             : setState(() {
                                 fevorite = true;
                               });
-                              SharedPreferences prefz = await SharedPreferences.getInstance();
-                              final userId = prefz.getString("currentuserId");
-                              final fevs = FevoriteModel(
-                                id: widget.place!.id,
-                               fevoritePlace: widget.place!.id,
-                                userId: userId!);
-                              fevorite ?
-                              addFevorite(fevoritePlace: fevs):
-                              removeFevorite(fevoritePlace: widget.place!.id);
-                              
+                        SharedPreferences prefz =
+                            await SharedPreferences.getInstance();
+                        final userId = prefz.getString("currentuserId");
+                        final fevs = FevoriteModel(
+                            id: widget.place!.id,
+                            fevoritePlace: widget.place!.id,
+                            userId: userId!);
+                        fevorite
+                            ? addFevorite(fevoritePlace: fevs)
+                            : removeFevorite(fevoritePlace: widget.place!.id);
                       },
                       icon: fevorite
                           ? Icon(

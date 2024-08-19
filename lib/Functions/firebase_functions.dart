@@ -14,7 +14,8 @@ class FireStoreServices {
     required String place,
     required String district,
     required String details,
-    required String location,
+    required double lattitude,
+    required double longitude,
     required String mainImage,
     required List<String> subImages,
   }) {
@@ -22,7 +23,8 @@ class FireStoreServices {
       "place": place,
       "district": district,
       "details": details,
-      "location": location,
+      "lattitude": lattitude,
+      "longitude": longitude,
       "mainImage": mainImage,
       "subImages": subImages
     });
@@ -40,17 +42,22 @@ class FireStoreServices {
         List<String> subImages =
             (data["subImages"] as List<dynamic>).cast<String>();
         String documentId = doc.id;
+        double lat = (data["lattitude"] as double? ) ?? 0.0;
+        double long = (data["longitude"] as double?) ?? 0.0;
         PlaceModel firebasePlaces = PlaceModel(
           id: documentId,
           place: data["place"] ?? "no",
           district: data["district"] ?? "no",
-          location: data["location"] ?? "no",
           details: data["details"] ?? "no",
+          lattitude: lat,
+          longitude: long,
           mainImage: mainImage,
           subImage: subImages,
         );
 
         placeModelListener.value.add(firebasePlaces);
+        
+
         log("placeModelListeners length :${placeModelListener.value.length}");
       }
     } catch (e) {

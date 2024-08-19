@@ -7,6 +7,7 @@ import 'package:my_travelo_app/models/admin_model.dart';
 import 'package:my_travelo_app/models/user_model.dart';
 import 'package:flutter/src/foundation/change_notifier.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 const tripDbName = "trip-database";
 const completedTripDbNamePhotos = "completedTripPhotos-database";
@@ -184,4 +185,15 @@ userRefresh() async {
     }
   });
   fevoriteList.notifyListeners();
+}
+
+// Google map function 
+
+void navigateToPlace({required double lat ,required double long}) async {
+  final Uri googleMapUrl = Uri.parse('https://www.google.com/maps/search/?api=1&query=$lat,$long');
+  if(await canLaunchUrl(googleMapUrl)){
+     await launchUrl(googleMapUrl);
+  } else{
+    throw "Could not launch $googleMapUrl";
+  }
 }

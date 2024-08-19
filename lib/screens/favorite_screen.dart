@@ -59,7 +59,12 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                               //       place: placeList[index].destination,
                               //       placeName: placeList[index].placename);
                               // }));
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => PlaceDetailsScreen(index: index,fav: true,),));
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => PlaceDetailsScreen(
+                                  index: index,
+                                  fav: true,
+                                ),
+                              ));
                             },
                             child: Card(
                               child: Container(
@@ -129,7 +134,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                                             FontWeight.normal),
                                                     width: 85.w,
                                                     height: 25.h,
-                                                    onPressed: () {}),
+                                                    onPressed: () {
+                                                      navigateToPlace(lat: fav.lattitude, long: fav.longitude);
+                                                    }),
                                                 SizedBox(
                                                   width: 5.sp,
                                                 ),

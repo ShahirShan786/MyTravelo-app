@@ -12,7 +12,6 @@ import 'package:my_travelo_app/Widgets/text_form_feild.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/constants/primary_button.dart';
-import 'package:my_travelo_app/constants/samplescreen.dart';
 
 class AdminAddPlaceScreen extends StatefulWidget {
   const AdminAddPlaceScreen({super.key});
@@ -22,10 +21,11 @@ class AdminAddPlaceScreen extends StatefulWidget {
 }
 
 class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
-  TextEditingController _placeController = TextEditingController();
-  TextEditingController _locationController = TextEditingController();
-  TextEditingController _detailsController = TextEditingController();
-  TextEditingController _districtController = TextEditingController();
+  final TextEditingController _placeController = TextEditingController();
+  final TextEditingController _detailsController = TextEditingController();
+  final TextEditingController _districtController = TextEditingController();
+  final TextEditingController _latController = TextEditingController();
+  final TextEditingController _logController = TextEditingController();
 
   XFile? _image;
   List<XFile> _imageFiles = [];
@@ -214,15 +214,33 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                 Align(
                     alignment: Alignment.topLeft,
                     child: TextWidget(
-                        content: "Location",
+                        content: "Lattitude Value",
                         fontSize: 18,
                         fontWeight: FontWeight.bold)),
                 TextFormFeild(
-                  hintText: "location of the place",
-                  controller: _locationController,
+                  hintText: "lattutude value of the place",
+                  controller: _latController,
+                  keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "Please enter the destination";
+                      return "Please enter the lattitude";
+                    }
+                    return null;
+                  },
+                ),
+                Align(
+                    alignment: Alignment.topLeft,
+                    child: TextWidget(
+                        content: "Longitude Value",
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold)),
+                TextFormFeild(
+                  hintText: "longitude value of the place",
+                  controller: _logController,
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter the lattitude";
                     }
                     return null;
                   },
@@ -258,7 +276,8 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                     onPressed: () async {
                       if (_placeController.text.isEmpty ||
                           _districtController.text.isEmpty ||
-                          _locationController.text.isEmpty ||
+                          _latController.text.isEmpty ||
+                          _logController.text.isEmpty ||
                           _detailsController.text.isEmpty) {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
@@ -281,11 +300,18 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                         urlOfMainImage = await uploadMainImage(image: _image);
                         urlsOfImage =
                             await uploadSubImages(images: _imageFiles);
+                        final double lattitude =
+                            double.parse(_latController.text);
+                        final double longitude =
+                            double.parse(_logController.text);
+                        log("lattitude value is :$lattitude ");
+                        log("longitude value is :$longitude");
                         await fireStoreServices.addPlace(
                             place: _placeController.text,
                             district: _districtController.text,
                             details: _detailsController.text,
-                            location: _locationController.text,
+                            lattitude: lattitude,
+                            longitude: longitude,
                             mainImage: urlOfMainImage!,
                             subImages: urlsOfImage);
                       }

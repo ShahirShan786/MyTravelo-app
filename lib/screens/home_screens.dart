@@ -123,7 +123,9 @@ class _HomescreenState extends State<Homescreen> {
                     child: ValueListenableBuilder(
                         valueListenable: placeModelListener,
                         builder: (context, value, child) {
-                          return ListView.builder(
+                          return placeModelListener.value.isEmpty ?
+                          Center(child: Text("No places Available"),)
+                          : ListView.builder(
                             // shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
                             itemCount: placeModelListener.value.length,

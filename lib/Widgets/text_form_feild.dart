@@ -6,6 +6,7 @@ class TextFormFeild extends StatelessWidget {
   final String? hintText;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
+  final TextInputType? keyboardType;
   final int? maxLength;
 
   const TextFormFeild(
@@ -13,6 +14,7 @@ class TextFormFeild extends StatelessWidget {
       @required this.hintText,
       @required this.controller,
       @required this.validator,
+      this.keyboardType,
       this.maxLength});
 
   @override
@@ -22,7 +24,7 @@ class TextFormFeild extends StatelessWidget {
       child: TextFormField(
         maxLines: maxLength,
         controller: controller,
-        keyboardType: TextInputType.name,
+        keyboardType: keyboardType ?? TextInputType.name,
         validator: validator!,
         decoration: InputDecoration(
             hintText: hintText,
