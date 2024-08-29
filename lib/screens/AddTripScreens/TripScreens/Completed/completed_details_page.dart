@@ -21,7 +21,7 @@ class CompletedDetailsPage extends StatefulWidget {
 
 class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
   bool _photosEmpty = true;
-  bool _blogEmpty = true;
+  // bool _blogEmpty = true;
   late String startDate;
   late String endDate;
   List<CompletedTripModelBlog> blog = [];
@@ -71,26 +71,26 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
             child: const Icon(Icons.photo_library_outlined),
             label: "Add Photos",
           ),
-          SpeedDialChild(
-              onTap: () {
-                blog.isEmpty
-                    ? Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => BlogPage(
-                              trip: widget.trip,
-                              startDate: startDate,
-                              endDate: endDate,
-                            )))
-                    : Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => BlogPage(
-                          trip: widget.trip,
-                          startDate: startDate,
-                          endDate: endDate,
-                          blog: blog[0],
-                        ),
-                      ));
-              },
-              child: Icon(Icons.message_outlined),
-              label: "Add Blogs")
+          // SpeedDialChild(
+          //     onTap: () {
+          //       blog.isEmpty
+          //           ? Navigator.of(context).push(MaterialPageRoute(
+          //               builder: (context) => BlogPage(
+          //                     trip: widget.trip,
+          //                     startDate: startDate,
+          //                     endDate: endDate,
+          //                   )))
+          //           : Navigator.of(context).push(MaterialPageRoute(
+          //               builder: (context) => BlogPage(
+          //                 trip: widget.trip,
+          //                 startDate: startDate,
+          //                 endDate: endDate,
+          //                 blog: blog[0],
+          //               ),
+          //             ));
+          //     },
+          //     child:const Icon(Icons.message_outlined),
+          //     label: "Add Blogs")
         ],
       ),
       appBar: AppBar(
@@ -105,7 +105,7 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
                 for (var value in completedTripListBlog.value) {
                   if (value.tripId == widget.trip.id) {
                     blog.add(value);
-                    _blogEmpty = true;
+                    // _blogEmpty = true;
                   }
                 }
                 return Padding(

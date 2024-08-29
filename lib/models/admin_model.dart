@@ -15,7 +15,17 @@ class PlaceModel {
     required this.lattitude,
     required this.longitude,
     required this.details,
-     required this.mainImage,
+    required this.mainImage,
     required this.subImage,
+  });
+}
+
+class HomePictureModel {
+  final String id;
+  final List<String> homePictures;
+
+  HomePictureModel({
+    required this.id,
+    required this.homePictures,
   });
 }

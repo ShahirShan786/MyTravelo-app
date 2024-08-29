@@ -4,8 +4,10 @@ import 'package:contacts_service/contacts_service.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import 'package:my_travelo_app/Widgets/multi_contact_picker.dart';
+import 'package:my_travelo_app/Widgets/show_dialogues.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/constants/primary_button.dart';
@@ -42,7 +44,6 @@ class _CompanionScreenState extends State<CompanionScreen> {
 
   @override
   void initState() {
-   
     super.initState();
     // if (selectedContact.isNotEmpty) {}
   }
@@ -117,7 +118,8 @@ class _CompanionScreenState extends State<CompanionScreen> {
           children: [
             TextButton(
                 onPressed: () async {
-                  showLoadingDialogue(context);
+                  showLoadingDialogue(
+                      context: context, content: "Loading, please wait...");
                   List<Contact> contacts = await getContacts();
 
                   // ignore: use_build_context_synchronously
@@ -157,15 +159,15 @@ class _CompanionScreenState extends State<CompanionScreen> {
                   if (selectedContacts.isNotEmpty) {
                     // userSelectedContacts = selectedContact.toList();
                     log("userSelectContact length is :${selectedContacts.length}");
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => TripPlanScreen(
-                        destination: widget.destination,
-                        finalSelectTime: widget.finalSelectTime,
-                        selectedRangeEnd: widget.selectedRangeEnd,
-                        selectedRangeStart: widget.selectedRangeStart,
-                        selectedContacts: selectedContacts,
-                      ),
-                    ));
+                    Get.to(
+                        () => TripPlanScreen(
+                              destination: widget.destination,
+                              finalSelectTime: widget.finalSelectTime,
+                              selectedRangeEnd: widget.selectedRangeEnd,
+                              selectedRangeStart: widget.selectedRangeStart,
+                              selectedContacts: selectedContacts,
+                            ),
+                        transition: Transition.rightToLeft);
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         backgroundColor: red,
@@ -181,29 +183,4 @@ class _CompanionScreenState extends State<CompanionScreen> {
       ),
     );
   }
-}
-
-void showLoadingDialogue(BuildContext context) {
-  showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const CircularProgressIndicator(
-                color: primaryColor,
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              TextWidget(
-                  content: "Loading, please wait...",
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.normal)
-            ],
-          ),
-        );
-      });
 }

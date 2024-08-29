@@ -39,3 +39,23 @@ Future<String?> uploadMainImage({required XFile? image})async{
     }
      
   }
+
+ Future<List<String>> uploadHomePicture({required List<XFile> pictures})async {
+   
+   Reference storageRef = FirebaseStorage.instance.ref();
+    Reference pictureRef = storageRef.child("homepicture${DateTime.now().millisecondsSinceEpoch}");
+    
+     List<String> imagUrl = [];
+
+     for(int i = 0; i < pictures.length ; i++){
+      Reference referencePictureUpload = pictureRef.child(pictures[i].name);
+      try{
+         await referencePictureUpload.putFile(File(pictures[i].path));
+        imagUrl.add(await referencePictureUpload.getDownloadURL());
+      }catch(e){
+        log("error uploading home image ==$e");
+      }
+      
+     }
+     return imagUrl;
+  }

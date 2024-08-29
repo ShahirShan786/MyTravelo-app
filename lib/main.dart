@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:my_travelo_app/Functions/initialisation.dart';
 import 'package:my_travelo_app/dashboard.dart';
 import 'package:my_travelo_app/screens/logIn_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
  
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      builder: (Context , Widget) => MaterialApp(
+      builder: (Context , Widget) => GetMaterialApp(
           theme: ThemeData(
             primaryColor: Colors.green,
             scaffoldBackgroundColor: Colors.white,
@@ -38,7 +37,7 @@ class MyApp extends StatelessWidget {
                 return const CircularProgressIndicator();
               } else {
                 return snapshot.data == true
-                    ?  Dashboard()
+                    ? const Dashboard()
                     : const LoginPage();
               }
             },
@@ -55,6 +54,7 @@ class MyApp extends StatelessWidget {
   Future<String?> saveUserName(String id) async {
     SharedPreferences prefsUsername = await SharedPreferences.getInstance();
     await prefsUsername.setString("currentuserId",id);
+    
     return null;
   }
 }

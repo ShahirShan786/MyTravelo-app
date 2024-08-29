@@ -17,7 +17,6 @@ class AdminLoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -103,7 +102,7 @@ class AdminLoginScreen extends StatelessWidget {
                             final name = _adminNameController.text;
                             final password = _adminPasswordController.text;
 
-                            if (name == "ShahirShan" && password == "123456") {
+                            if (name == "Shahir" && password == "12345") {
                               Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => AdminHomePage(),
                               ));

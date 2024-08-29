@@ -1,3 +1,5 @@
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_travelo_app/Functions/firebase_functions.dart';
 import 'package:my_travelo_app/Functions/user_functions.dart';
@@ -6,15 +8,13 @@ import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/constants/primary_button.dart';
 
-class PlaceDetailsScreen extends StatelessWidget {
-  final int index;
-  final bool fav;
-
-  PlaceDetailsScreen({required this.index, this.fav= false});
-
+class AdminPlaceDetailsScreen extends StatelessWidget {
+  final index;
+  const AdminPlaceDetailsScreen({super.key, this.index});
+  
   @override
   Widget build(BuildContext context) {
-    final place = fav ? fevoriteList.value[index] :  placeModelListener.value[index];
+    final place = placeModelListener.value[index];
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,7 +22,8 @@ class PlaceDetailsScreen extends StatelessWidget {
           DetailsPageImage(
             place: place,
             context: context,
-            isActive: true,
+            isActive: false,
+            index: index,
           ),
           Padding(
             padding: const EdgeInsets.all(10),
@@ -35,7 +36,7 @@ class PlaceDetailsScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Row(
               children: [
-               const Icon(
+                Icon(
                   Icons.location_on,
                   size: 20,
                   color: secondaryColor,
@@ -58,7 +59,7 @@ class PlaceDetailsScreen extends StatelessWidget {
                   child: Text(
                     place.details,
                     maxLines: 30,
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
                         color: Colors.black),

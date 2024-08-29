@@ -183,3 +183,55 @@ class FevoriteModelAdapter extends TypeAdapter<FevoriteModel> {
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
+
+class ExpenseModelAdapter extends TypeAdapter<ExpenseModel> {
+  @override
+  final int typeId = 6;
+
+  @override
+  ExpenseModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return ExpenseModel(
+      id: fields[0] as String,
+      tripId: fields[1] as String,
+      amount: fields[2] as String,
+      discription: fields[3] as String?,
+      category: fields[4] as String,
+      image: fields[5] as String,
+      color: Color(fields[6] as int), // Deserialize Color
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, ExpenseModel obj) {
+    writer
+      ..writeByte(7)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.tripId)
+      ..writeByte(2)
+      ..write(obj.amount)
+      ..writeByte(3)
+      ..write(obj.discription)
+      ..writeByte(4)
+      ..write(obj.category)
+      ..writeByte(5)
+      ..write(obj.image)
+      ..writeByte(6)
+      ..write(obj.color.value); // Serialize Color
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ExpenseModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}

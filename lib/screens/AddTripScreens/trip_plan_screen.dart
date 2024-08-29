@@ -3,12 +3,12 @@ import 'dart:developer';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:my_travelo_app/Functions/user_functions.dart';
 import 'package:my_travelo_app/Widgets/textFormFeilds.dart';
 import 'package:my_travelo_app/Widgets/trip_deatails_screen_widget.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
-
 
 import 'package:my_travelo_app/models/user_model.dart';
 
@@ -99,10 +99,11 @@ class _TripPlanScreenState extends State<TripPlanScreen> {
 
                   log('Selected contacts: ${widget.selectedContacts}');
                   // ignore: use_build_context_synchronously
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ScheduleScreen(
+                  Get.to(
+                      () => ScheduleScreen(
                             userId: userId,
-                          )));
+                          ),
+                      transition: Transition.rightToLeft);
                 } else {
                   log("Data couldn't passed");
                 }

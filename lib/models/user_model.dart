@@ -1,5 +1,7 @@
-import 'package:hive_flutter/adapters.dart';
 
+
+import 'package:hive_flutter/adapters.dart';
+import 'package:flutter/material.dart';
 part 'user_model.g.dart';
 
 @HiveType(typeId: 2)
@@ -77,4 +79,43 @@ class FevoriteModel {
     required this.fevoritePlace,
     required this.userId,
   });
+}
+
+@HiveType(typeId: 6)
+class ExpenseModel {
+  @HiveField(0)
+  final String id;
+  @HiveField(1)
+  final String tripId;
+  @HiveField(2)
+  final String amount;
+  @HiveField(3)
+  final String? discription;
+  @HiveField(4)
+  final String category;
+  @HiveField(5)
+  final String image;
+  @HiveField(6)
+  final Color color;
+
+  ExpenseModel({
+    required this.id,
+    required this.tripId,
+    required this.amount,
+    required this.discription,
+    required this.category,
+    required this.image,
+    required this.color,
+  });
+}
+
+class DreamDestinationModel{
+  final String id;
+  final String tripId;
+  final String destination;
+  final String totalAmount;
+  final String totalsavings;
+
+  DreamDestinationModel({required this.id, required this.tripId, required this.destination, required this.totalAmount, required this.totalsavings});
+
 }

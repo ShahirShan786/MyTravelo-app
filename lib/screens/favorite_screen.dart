@@ -9,8 +9,6 @@ import 'package:my_travelo_app/SubScreens/place_details_screen.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/constants/primary_button.dart';
-import 'package:my_travelo_app/listes/places_list.dart';
-import 'package:my_travelo_app/SubScreens/place_detailes_page.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
@@ -22,7 +20,7 @@ class FavoriteScreen extends StatefulWidget {
 class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   void initState() {
-    // TODO: implement initState
+    
     super.initState();
     userRefresh();
   }
@@ -78,7 +76,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                       ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(15.r),
-                                          child: Container(
+                                          child: SizedBox(
                                             width: 150,
                                             height: 100,
                                             child: CachedNetworkImage(

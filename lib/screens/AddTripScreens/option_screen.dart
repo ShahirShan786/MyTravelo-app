@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:my_travelo_app/Widgets/companion_card.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/screens/AddTripScreens/companion_screen.dart';
@@ -52,14 +52,15 @@ class OptionScreen extends StatelessWidget {
                 icon: FontAwesomeIcons.person,
                 title: "Solo",
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => TripPlanScreen(
+                  Get.to(
+                    () => TripPlanScreen(
                       destination: destination,
                       finalSelectTime: finalSelectTime,
                       selectedRangeEnd: selectedRangeEnd,
                       selectedRangeStart: selectedRangeStart,
                     ),
-                  ));
+                    transition: Transition.rightToLeft,
+                  );
                 },
               ),
               const SizedBox(
@@ -69,14 +70,14 @@ class OptionScreen extends StatelessWidget {
                 icon: FontAwesomeIcons.peopleGroup,
                 title: "Companion",
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => CompanionScreen(
-                      destination: destination ?? '',
-                      finalSelectTime: finalSelectTime,
-                      selectedRangeEnd: selectedRangeEnd !,
-                      selectedRangeStart: selectedRangeStart!,
-                    ),
-                  ));
+                  Get.to(
+                      () => CompanionScreen(
+                            destination: destination ?? '',
+                            finalSelectTime: finalSelectTime,
+                            selectedRangeEnd: selectedRangeEnd!,
+                            selectedRangeStart: selectedRangeStart!,
+                          ),
+                      transition: Transition.rightToLeft);
                 },
               ),
             ],

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:my_travelo_app/Widgets/companion_box.dart';
 import 'package:my_travelo_app/Widgets/edit_plan_dialogue.dart';
@@ -9,6 +10,7 @@ import 'package:my_travelo_app/Widgets/trip_deatails_screen_widget.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/models/user_model.dart';
+import 'package:my_travelo_app/screens/AddTripScreens/TripScreens/Upcomming/expense_screen.dart';
 import 'package:my_travelo_app/screens/AddTripScreens/trip_plan_screen.dart';
 
 class UpcommingDetailsPage extends StatefulWidget {
@@ -37,12 +39,53 @@ class _UpcommingDetailsPageState extends State<UpcommingDetailsPage> {
     final TripModel trip = widget.trip;
     Map<String, List<String>> activities = trip.activities;
     final dateStart = DateFormat("dd MMM yyyy").format(trip.rangeStart);
-    final destination = trip.destination;
+    // final destination = trip.destination;
     final List<String> companions = trip.companion;
     List<DateTime> days = getDaysInRange(trip.rangeStart, trip.rangeEnd);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: white,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: InkWell(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ExpenseScreen( tripId: trip.id,),
+                ));
+              },
+              child: Container(
+                width: 100,
+                height: 45,
+                decoration: BoxDecoration(
+                    color: primaryColor,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        TextWidget(
+                          content: "Expense",
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: white,
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          size: 20,
+                          color: white,
+                          weight: 20,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
       ),
       body: Center(
           child: Padding(
@@ -64,14 +107,14 @@ class _UpcommingDetailsPageState extends State<UpcommingDetailsPage> {
                   child: Center(
                     child: Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 25,
                         ),
                         TextWidget(
                             content: trip.destination,
                             fontSize: 24,
                             fontWeight: FontWeight.bold),
-                        SizedBox(
+                        const SizedBox(
                           height: 12,
                         ),
                         TextWidget(
@@ -84,7 +127,7 @@ class _UpcommingDetailsPageState extends State<UpcommingDetailsPage> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             companions.isNotEmpty
@@ -92,12 +135,12 @@ class _UpcommingDetailsPageState extends State<UpcommingDetailsPage> {
                     companion: companions,
                     trip: trip,
                   )
-                : SizedBox(),
+                : const SizedBox(),
             TextWidget(
                 content: "Your plans are",
                 fontSize: 20,
                 fontWeight: FontWeight.w700),
-            SizedBox(
+            const SizedBox(
               height: 3,
             ),
             SingleChildScrollView(
@@ -157,7 +200,7 @@ class _UpcommingDetailsPageState extends State<UpcommingDetailsPage> {
             },
           ).showEditPlanDialogue();
         },
-        child: Icon(Icons.edit),
+        child: const Icon(Icons.edit),
       ),
     );
   }

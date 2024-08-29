@@ -7,9 +7,7 @@ import 'package:my_travelo_app/Widgets/adminButton.dart';
 import 'package:my_travelo_app/Widgets/textFormFeilds.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/constants/primary_button.dart';
 import 'package:my_travelo_app/dashboard.dart';
-
 import 'package:my_travelo_app/models/singInModel.dart';
 import 'package:my_travelo_app/screens/SingIn_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -170,7 +168,7 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(
                           height: 10.h,
                         ),
-                        Adminbutton()
+                        const Adminbutton()
                       ],
                     ),
                   ),
@@ -196,8 +194,13 @@ class _LoginPageState extends State<LoginPage> {
         log("${elements.username}");
         log("${elements.password}");
         SharedPreferences prefz = await SharedPreferences.getInstance();
-        prefz.setString("currentuserId", elements.id.toString());
+        prefz.setString(
+          "currentuserId",
+          elements.id.toString(),
+        );
+        prefz.setString("currentUserName", elements.username!);
         log("id===${elements.id}");
+
         _loginUsername.clear();
         _loginPasssword.clear();
 

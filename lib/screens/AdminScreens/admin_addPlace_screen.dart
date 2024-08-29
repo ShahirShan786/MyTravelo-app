@@ -1,20 +1,20 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_travelo_app/Functions/firebase_functions.dart';
 import 'package:my_travelo_app/Functions/image_upload.dart';
+import 'package:my_travelo_app/Widgets/show_dialogues.dart';
 import 'package:my_travelo_app/Widgets/text_form_feild.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/constants/primary_button.dart';
+import 'package:my_travelo_app/models/admin_model.dart';
 
 class AdminAddPlaceScreen extends StatefulWidget {
-  const AdminAddPlaceScreen({super.key});
+ 
+  const AdminAddPlaceScreen({super.key,});
 
   @override
   State<AdminAddPlaceScreen> createState() => _AdminAddPlaceScreenState();
@@ -37,19 +37,7 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
   final CollectionReference places =
       FirebaseFirestore.instance.collection("Places");
 
-//  void addData() async{
-//   urlOfMainImage = await uploadMainImage(image: _image);
-//   urlsOfImage = await uploadSubImages(images: _imageFiles);
-//  await places.add({
-//     "name" : "areekkal",
-//     "district" : "Edukki",
-//     "details" : "areekkal is belogns to edukki",
-//     "kilometer" : 55,
-//     "image" : urlOfMainImage,
-//     "subImages" : urlsOfImage,
-//   });
-//   log("Data passed to firebase");
-//  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +81,7 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                                 fit: BoxFit.cover,
                               ))),
                 ),
-                SizedBox(
+              const  SizedBox(
                   height: 10,
                 ),
                 Align(
@@ -103,7 +91,7 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                       fontSize: 20,
                       fontWeight: FontWeight.bold),
                 ),
-                _imageFiles.isEmpty && _imageFiles.length < 4
+                _imageFiles.isEmpty
                     ? Align(
                         alignment: Alignment.topLeft,
                         child: Padding(
@@ -117,14 +105,36 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.grey[200],
                               ),
-                              child: Center(
+                              child:const Center(
                                 child: Icon(Icons.photo_library_sharp),
                               ),
                             ),
                           ),
                         ),
                       )
-                    : Padding(
+                    :
+                    Align(
+                        alignment: Alignment.topLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: InkWell(
+                            onTap: pickSubImages,
+                            child: Container(
+                              width: 80,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.grey[200],
+                              ),
+                              child:const Center(
+                                child: Icon(Icons.photo_library_sharp),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                     Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Wrap(
                             spacing: 9,
@@ -152,7 +162,7 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                                                 onPressed: () {
                                                   Navigator.of(context).pop();
                                                 },
-                                                child: Text("Cancel")),
+                                                child:const Text("Cancel")),
                                             TextButton(
                                                 onPressed: () {
                                                   setState(() {
@@ -160,7 +170,7 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                                                   });
                                                   Navigator.of(context).pop();
                                                 },
-                                                child: Text("Delete")),
+                                                child:const Text("Delete")),
                                           ],
                                         );
                                       });
@@ -204,6 +214,7 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                 TextFormFeild(
                   hintText: "destrict",
                   controller: _districtController,
+                  
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Please enter the destination";
@@ -262,7 +273,7 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                     return null;
                   },
                 ),
-                SizedBox(
+              const  SizedBox(
                   height: 10,
                 ),
                 PrimaryButton(
@@ -297,6 +308,7 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                           backgroundColor: red,
                         ));
                       } else {
+                        showLoadingDialogue(context: context, content: "Adding data..");
                         urlOfMainImage = await uploadMainImage(image: _image);
                         urlsOfImage =
                             await uploadSubImages(images: _imageFiles);
@@ -306,6 +318,7 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                             double.parse(_logController.text);
                         log("lattitude value is :$lattitude ");
                         log("longitude value is :$longitude");
+                        
                         await fireStoreServices.addPlace(
                             place: _placeController.text,
                             district: _districtController.text,
@@ -314,11 +327,13 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                             longitude: longitude,
                             mainImage: urlOfMainImage!,
                             subImages: urlsOfImage);
+                            Navigator.of(context).pop();
                       }
-
+      
+                      // ignore: use_build_context_synchronously
                       Navigator.of(context).pop();
                     }),
-                SizedBox(
+              const  SizedBox(
                   height: 10,
                 ),
               ],
@@ -345,14 +360,7 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
 
     final images = await picker.pickMultiImage();
 
-    // await Future.forEach(file, (element) => images.add(element.path));
-
-    // setState(() {
-    //   images = images;
-
-    // });
-
-    if (images != null) {
+     if (images != null) {
       setState(() {
         _imageFiles = images;
       });

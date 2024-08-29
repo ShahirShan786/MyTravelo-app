@@ -1,6 +1,6 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:my_travelo_app/Functions/user_functions.dart';
@@ -20,12 +20,15 @@ class UpcomingPage extends StatefulWidget {
 
 class _UpcomingPageState extends State<UpcomingPage> {
   ValueNotifier<List<TripModel>> tripList = ValueNotifier([]);
+  ValueNotifier<List<TripModel>> filteredTripList = ValueNotifier([]);
+  final TextEditingController _searchController = TextEditingController();
   late String startDay;
   late String endDay;
   late String day;
   late String week;
   void initializeTrip() async {
     tripList.value = await getTrip();
+    filteredTripList.value = tripList.value;
     log("tripList lenth ${tripList.value.length}");
   }
 
@@ -35,150 +38,188 @@ class _UpcomingPageState extends State<UpcomingPage> {
     initializeTrip();
   }
 
+  void filteredTrips(String query) {
+    if (query.isEmpty) {
+      filteredTripList.value = tripList.value;
+    } else {
+      filteredTripList.value = tripList.value.where((trip) {
+        String formatDate = DateFormat("dd MMM yyyy").format(trip.rangeStart);
+        return formatDate.contains(query);
+      }).toList();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ValueListenableBuilder(
-          valueListenable: tripList,
-          builder: (context, value, child) {
-            return tripList.value.isNotEmpty
-                ? ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: tripList.value.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      TripModel tripDetailes = tripList.value[index];
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          child: TextField(
+            keyboardType: TextInputType.datetime,
+            controller: _searchController,
+            decoration: InputDecoration(
+                labelText: "Search by Date ( dd MMM yyyy)",
+                prefixIcon: const Icon(Icons.search_rounded),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: const BorderSide(width: 0.5))),
+            onChanged: (value) {
+              filteredTrips(value);
+            },
+          ),
+        ),
+        Expanded(
+          child: ValueListenableBuilder(
+              valueListenable: filteredTripList,
+              builder: (context, value, child) {
+                return filteredTripList.value.isNotEmpty
+                    ? ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: filteredTripList.value.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          TripModel tripDetailes =
+                              filteredTripList.value[index];
 
-                      startDay = DateFormat('dd MMM yyyy')
-                          .format(tripDetailes.rangeStart);
-                      endDay = DateFormat('dd MMM yyyy')
-                          .format(tripDetailes.rangeEnd);
-                      day = DateFormat("dd").format(tripDetailes.rangeStart);
-                      week = DateFormat("EEE").format(tripDetailes.rangeStart);
+                          startDay = DateFormat('dd MMM yyyy')
+                              .format(tripDetailes.rangeStart);
+                          endDay = DateFormat('dd MMM yyyy')
+                              .format(tripDetailes.rangeEnd);
+                          day =
+                              DateFormat("dd").format(tripDetailes.rangeStart);
+                          week =
+                              DateFormat("EEE").format(tripDetailes.rangeStart);
 
-                      return Card(
-                        child: InkWell(
-                          onTap: () {
-                            log("Card Tapped sucessfully");
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => UpcommingDetailsPage(
-                                    trip: tripDetailes,
-                                  ),
-                                ));
-                          },
-                          onLongPress: () {
-                            showDeleteDialogue(context, tripDetailes);
-                          },
-                          child: SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                              child: Padding(
-                                padding: EdgeInsets.all(8.0.w),
-                                child: Row(
-                                  children: [
-                                    CircleAvatar(
-                                        backgroundColor: white,
-                                        radius: 32.r,
-                                        child: Center(
-                                          child: Column(
-                                            children: [
-                                              const SizedBox(
-                                                height: 7,
-                                              ),
-                                              TextWidget(
-                                                  content: day,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                              TextWidget(
-                                                  content: week,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            ],
-                                          ),
-                                        )),
-                                    Padding(
-                                      padding: EdgeInsets.all(5.w),
-                                      child: SizedBox(
-                                        width: 274.w,
-                                        child: Column(
-                                          children: [
-                                            SizedBox(
-                                              height: 15.h,
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 10.w),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  TextWidget(
-                                                      content: tripDetailes
-                                                          .destination,
-                                                      fontSize: 18.sp,
-                                                      fontWeight:
-                                                          FontWeight.w600),
-                                                  TextWidget(
-                                                      content:
-                                                          tripDetailes.time,
-                                                      fontSize: 13.sp,
-                                                      fontWeight:
-                                                          FontWeight.normal)
-                                                ],
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 5.h,
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 10.w),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  TextWidget(
-                                                      content:
-                                                          "$startDay to $endDay",
-                                                      fontSize: 14.sp,
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                  IconButton(
-                                                      onPressed: () {
-                                                        EditTripDialogueBox(
-                                                          context: context,
-                                                          trip: tripDetailes,
-                                                          index: index,
-                                                          onSave: () {
-                                                            setState(() {});
-                                                          },
-                                                        ).showEditDialogue();
-                                                      },
-                                                      icon: const Icon(
-                                                        Icons
-                                                            .edit_note_outlined,
-                                                        color: secondaryColor,
-                                                      ))
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        ),
+                          return Card(
+                            child: InkWell(
+                              onTap: () {
+                                log("Card Tapped sucessfully");
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          UpcommingDetailsPage(
+                                        trip: tripDetailes,
                                       ),
-                                    )
-                                  ],
-                                ),
-                              )),
-                        ),
+                                    ));
+                              },
+                              onLongPress: () {
+                                showDeleteDialogue(context, tripDetailes);
+                              },
+                              child: SizedBox(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0.w),
+                                    child: Row(
+                                      children: [
+                                        CircleAvatar(
+                                            backgroundColor: white,
+                                            radius: 32.r,
+                                            child: Center(
+                                              child: Column(
+                                                children: [
+                                                  const SizedBox(
+                                                    height: 7,
+                                                  ),
+                                                  TextWidget(
+                                                      content: day,
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                  TextWidget(
+                                                      content: week,
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ],
+                                              ),
+                                            )),
+                                        Padding(
+                                          padding: EdgeInsets.all(5.w),
+                                          child: SizedBox(
+                                            width: 274.w,
+                                            child: Column(
+                                              children: [
+                                                SizedBox(
+                                                  height: 15.h,
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 10.w),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      TextWidget(
+                                                          content: tripDetailes
+                                                              .destination,
+                                                          fontSize: 18.sp,
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                      TextWidget(
+                                                          content:
+                                                              tripDetailes.time,
+                                                          fontSize: 13.sp,
+                                                          fontWeight:
+                                                              FontWeight.normal)
+                                                    ],
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 5.h,
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 10.w),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      TextWidget(
+                                                          content:
+                                                              "$startDay to $endDay",
+                                                          fontSize: 14.sp,
+                                                          fontWeight:
+                                                              FontWeight.w500),
+                                                      IconButton(
+                                                          onPressed: () {
+                                                            EditTripDialogueBox(
+                                                              context: context,
+                                                              trip:
+                                                                  tripDetailes,
+                                                              index: index,
+                                                              onSave: () {
+                                                                setState(() {});
+                                                              },
+                                                            ).showEditDialogue();
+                                                          },
+                                                          icon: const Icon(
+                                                            Icons
+                                                                .edit_note_outlined,
+                                                            color:
+                                                                secondaryColor,
+                                                          ))
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )),
+                            ),
+                          );
+                        })
+                    : const Center(
+                        child: Text("No trips Available"),
                       );
-                    })
-                : const Center(
-                    child: Text("No trips Available"),
-                  );
-          }),
+              }),
+        )
+      ],
     );
   }
 
@@ -201,7 +242,6 @@ class _UpcomingPageState extends State<UpcomingPage> {
                   child: TextWidget(
                       content: "Cancel",
                       fontSize: 15,
-                      
                       fontWeight: FontWeight.w600)),
               TextButton(
                   onPressed: () {

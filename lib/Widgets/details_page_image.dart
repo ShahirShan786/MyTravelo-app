@@ -6,14 +6,17 @@ import 'package:my_travelo_app/Widgets/photo_view_page.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/models/admin_model.dart';
 import 'package:my_travelo_app/models/user_model.dart';
+import 'package:my_travelo_app/screens/AdminScreens/admin_edit_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailsPageImage extends StatefulWidget {
   PlaceModel? place;
+  bool isActive;
   BuildContext? context;
+  int? index;
 
-  DetailsPageImage({super.key, required this.place, required this.context});
-
+  DetailsPageImage({super.key, required this.place, required this.context , required this.isActive , this.index});
+ 
   @override
   State<DetailsPageImage> createState() => _DetailsPageImageState();
 }
@@ -61,7 +64,8 @@ class _DetailsPageImageState extends State<DetailsPageImage> {
                     );
                   }).toList(),
                 ),
-                Positioned(
+                widget.isActive ?
+                  Positioned(
                   top: 40,
                   right: 20,
                   child: CircleAvatar(
@@ -95,8 +99,19 @@ class _DetailsPageImageState extends State<DetailsPageImage> {
                           : Icon(Icons.favorite_border),
                     ),
                   ),
-                )
-              ],
+                ): 
+                Positioned(
+                  top: 40,
+                  right: 20,
+                  child: CircleAvatar(
+                    backgroundColor: white,
+                  child: IconButton(onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder:  (context) => AdminEditPlaceScreen(firebasePlaceModel: widget.place, index: widget.index),));
+                  },
+                   icon: Icon(Icons.edit)),
+                ))
+                
+              ]
             ),
             SizedBox(
               height: 70,

@@ -13,6 +13,7 @@ const tripDbName = "trip-database";
 const completedTripDbNamePhotos = "completedTripPhotos-database";
 const completedTripDbNameBlogs = "completedTripBlog-database";
 const fevoriteDName = "fevoritePlace- database";
+const expenseDbName = "expense-database";
 
 ValueNotifier<List<TripModel>> tripList = ValueNotifier([]);
 ValueNotifier<List<TripModel>> tripListCompleted = ValueNotifier([]);
@@ -21,6 +22,7 @@ ValueNotifier<List<CompletedTripModelPhotos>> completedTripListPhotos =
     ValueNotifier([]);
 ValueNotifier<List<CompletedTripModelBlog>> completedTripListBlog =
     ValueNotifier([]);
+ValueNotifier<List<ExpenseModel>> expenseListener = ValueNotifier([]);
 
 addTrip({required TripModel trip}) async {
   log("Entered the Function");
@@ -59,21 +61,26 @@ deleteTrip({required TripModel trip}) async {
 Future<void> splitData(String userId) async {
   final trip = await getTrip();
 
+  // Clear both lists before processing
   tripList.value.clear();
-  tripListCompleted.value.clear();
+  // tripListCompleted.value.clear();
 
   for (var element in trip) {
     DateTime now = DateTime.now();
     log("Current Date and time $now");
     DateTime rangeEnd = element.rangeEnd;
-    log("Trip end data : $rangeEnd");
+    log("Trip end date : $rangeEnd");
 
     if (rangeEnd.isBefore(now)) {
-      tripListCompleted.value.add(element);
-      log("Added to completed trips :${element.destination}");
+      // Add to completed trips
+      if (!tripListCompleted.value.contains(element)) {
+        tripListCompleted.value.add(element);
+        log("Added to completed trips: ${element.destination}");
+      }
     } else {
+      // Add to upcoming trips
       tripList.value.add(element);
-      log("Added to upcomming trips :${element.destination}");
+      log("Added to upcoming trips: ${element.destination}");
     }
   }
 
@@ -96,6 +103,7 @@ Future<void> addMemmories(
   await completedTripBox.put(completedTrips.id, completedTrips);
   log("Date added successfully");
   await completedTripToList();
+  // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
   completedTripListPhotos.notifyListeners();
 }
 
@@ -120,6 +128,7 @@ completedTripToList() async {
 
   completedTripListPhotos.value = List.from(completedTrip);
   log("---- lenth :${completedTripListPhotos.value.length}");
+  // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
   completedTripListPhotos.notifyListeners();
 }
 
@@ -132,6 +141,7 @@ Future<void> addBlogs({required CompletedTripModelBlog blog}) async {
   await completedTripModelBox.put(blog.id, blog);
   log("blog data added successfully");
   completedTripToList();
+  // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
   completedTripListBlog.notifyListeners();
 }
 
@@ -158,7 +168,7 @@ removeFevorite({required String fevoritePlace}) async {
   final fevoriteBox = await Hive.openBox<FevoriteModel>(fevoriteDName);
   await fevoriteBox.delete(fevoritePlace);
   log("Data removed");
- await userRefresh();
+  await userRefresh();
 }
 
 Future<List<FevoriteModel>> getFevorite() async {
@@ -184,16 +194,51 @@ userRefresh() async {
       }
     }
   });
+  // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
   fevoriteList.notifyListeners();
 }
+// *****expense fuctions *****
 
-// Google map function 
+addExpense({required ExpenseModel expenses}) async {
+  final expenseBox = await Hive.openBox<ExpenseModel>(expenseDbName);
+  await expenseBox.put(expenses.id, expenses);
+  log("Expense added to the database");
+  // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
+  expenseListener.notifyListeners();
+  await getExpenses();
+}
 
-void navigateToPlace({required double lat ,required double long}) async {
-  final Uri googleMapUrl = Uri.parse('https://www.google.com/maps/search/?api=1&query=$lat,$long');
-  if(await canLaunchUrl(googleMapUrl)){
-     await launchUrl(googleMapUrl);
-  } else{
+Future<List<ExpenseModel>> getExpenses() async {
+  final expenseBox = await Hive.openBox<ExpenseModel>(expenseDbName);
+  return expenseBox.values.toList();
+}
+
+deleteExpense({required ExpenseModel expense}) async {
+  final expenseBox = await Hive.openBox<ExpenseModel>(expenseDbName);
+  await expenseBox.delete(expense.id);
+  getExpenses();
+  log("expense deleted successfully ");
+}
+
+expenseToList({required String tripId}) async {
+  expenseListener.value.clear();
+  final expense = await getExpenses();
+  Future.forEach(expense, (element) {
+    if (element.tripId == tripId) {
+      expenseListener.value.add(element);
+    }
+  });
+  expenseListener.notifyListeners();
+}
+
+// Google map function
+
+void navigateToPlace({required double lat, required double long}) async {
+  final Uri googleMapUrl =
+      Uri.parse('https://www.google.com/maps/search/?api=1&query=$lat,$long');
+  if (await canLaunchUrl(googleMapUrl)) {
+    await launchUrl(googleMapUrl);
+  } else {
     throw "Could not launch $googleMapUrl";
   }
 }

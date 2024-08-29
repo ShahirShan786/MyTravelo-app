@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:my_travelo_app/Widgets/calender_view.dart';
 import 'package:my_travelo_app/Widgets/text_feilds.dart';
 import 'package:my_travelo_app/Widgets/time_picker.dart';
@@ -7,7 +8,6 @@ import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/constants/primary_button.dart';
 import 'package:my_travelo_app/screens/AddTripScreens/option_screen.dart';
-
 
 class AddTripScreens extends StatefulWidget {
   const AddTripScreens({super.key});
@@ -17,7 +17,7 @@ class AddTripScreens extends StatefulWidget {
 }
 
 class _AddTripScreensState extends State<AddTripScreens> {
-    TextEditingController destinationController = TextEditingController();
+  TextEditingController destinationController = TextEditingController();
   String? destination;
   DateTime? selectedRangeStart;
   DateTime? selectedRangeEnd;
@@ -29,8 +29,7 @@ class _AddTripScreensState extends State<AddTripScreens> {
 
   @override
   Widget build(BuildContext context) {
-
-    TimeOfDay? selectedTime;
+    // TimeOfDay? selectedTime;
     return Scaffold(
         body: SizedBox(
       width: double.infinity,
@@ -146,14 +145,16 @@ class _AddTripScreensState extends State<AddTripScreens> {
                                     finalSelectTime.isNotEmpty &&
                                     destinationController.text.isNotEmpty) {
                                   destination = destinationController.text;
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => OptionScreen(
-                                      destination: destination,
-                                      selectedRangeEnd: selectedRangeEnd,
-                                      selectedRangeStart: selectedRangeStart,
-                                      finalSelectTime: finalSelectTime,
-                                    ),
-                                  ));
+                                  Get.to(
+                                      () => OptionScreen(
+                                            destination: destination,
+                                            selectedRangeEnd: selectedRangeEnd,
+                                            selectedRangeStart:
+                                                selectedRangeStart,
+                                            finalSelectTime: finalSelectTime,
+                                          ),
+                                      transition:
+                                          Transition.rightToLeftWithFade);
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(

@@ -7,56 +7,58 @@ import 'package:my_travelo_app/screens/favorite_screen.dart';
 import 'package:my_travelo_app/screens/home_screens.dart';
 import 'package:my_travelo_app/screens/profile_screen.dart';
 import 'package:my_travelo_app/screens/schedule_screen.dart';
+import 'package:get/get.dart';
 
 class Dashboard extends StatefulWidget {
-
   final Singinmodel? userDetails;
-  Dashboard({super.key, this.userDetails,});
- 
+  const Dashboard({
+    super.key,
+    this.userDetails,
+  });
 
- 
   @override
   State<Dashboard> createState() => _DashboardState();
 }
-
-
 
 final PageStorageBucket bucket = PageStorageBucket();
 
 Widget currentScreen = const Homescreen();
 
 class _DashboardState extends State<Dashboard> {
-
-int currentPageIndex = 0;
-late List<Widget> screens;
-@override
+  int currentPageIndex = 0;
+  late List<Widget> screens;
+  @override
   void initState() {
-  
     super.initState();
     List<Widget> screens = [
-     const  Homescreen(),
-   const ScheduleScreen(),
-    const FavoriteScreen(),
-    const  Profilescreen(),
-];
+      const Homescreen(),
+      const ScheduleScreen(),
+      const FavoriteScreen(),
+      const Profilescreen(),
+    ];
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageStorage(bucket: bucket, child: currentScreen),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: primaryColor,
-        shape: const CircleBorder(),
-        onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const AddTripScreens(),
-          ));
-        },
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
+      floatingActionButton: Visibility(
+        visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
+        child: FloatingActionButton(
+          backgroundColor: primaryColor,
+          shape: const CircleBorder(),
+          onPressed: () {
+            // Navigator.of(context).push(MaterialPageRoute(
+            //   builder: (context) => const AddTripScreens(),
+            // ));
+            Get.to(() => const AddTripScreens(),
+                transition: Transition.fade,
+                duration: const Duration(seconds: 1));
+          },
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -110,7 +112,7 @@ late List<Widget> screens;
                   IconButton(
                     onPressed: () {
                       setState(() {
-                        currentScreen =const FavoriteScreen();
+                        currentScreen = const FavoriteScreen();
                         currentPageIndex = 2;
                       });
                     },
@@ -128,8 +130,8 @@ late List<Widget> screens;
                       onPressed: () {
                         setState(() {
                           currentScreen = const Profilescreen(
-                            // userDetails: widget.userDetails,
-                          );
+                              // userDetails: widget.userDetails,
+                              );
                           currentPageIndex = 3;
                         });
                       },

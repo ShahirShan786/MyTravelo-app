@@ -39,7 +39,7 @@ class _CompletedPageState extends State<CompletedPage> {
             builder: (context, value, child) {
               return tripListCompleted.value.isNotEmpty
                   ? ListView.builder(
-                      physics: BouncingScrollPhysics(),
+                      physics:const BouncingScrollPhysics(),
                       itemCount: tripListCompleted.value.length,
                       itemBuilder: (BuildContext context, int index) {
                         TripModel completedTrip =
@@ -125,9 +125,10 @@ class _CompletedPageState extends State<CompletedPage> {
                                                             FontWeight.normal),
                                                     IconButton(
                                                         onPressed: () {},
-                                                        icon: Icon(
+                                                        icon:const Icon(
                                                           Icons.delete,
-                                                          color: primaryColor,
+                                                          color: Colors
+                                                              .transparent,
                                                         ))
                                                   ],
                                                 ),
@@ -142,7 +143,7 @@ class _CompletedPageState extends State<CompletedPage> {
                           ),
                         );
                       })
-                  : Center(
+                  :const Center(
                       child: Text("No completed trips yet."),
                     );
             }));
