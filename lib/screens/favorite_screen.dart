@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_travelo_app/Functions/user_functions.dart';
 import 'package:my_travelo_app/SubScreens/place_details_screen.dart';
+import 'package:my_travelo_app/Widgets/app_bar.dart';
 
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
@@ -20,7 +21,6 @@ class FavoriteScreen extends StatefulWidget {
 class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   void initState() {
-    
     super.initState();
     userRefresh();
   }
@@ -30,12 +30,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     log("fevoriteList length is : ${fevoriteList.value.length}");
 
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: TextWidget(
-            content: "Saved Trips",
-            fontSize: 20.sp,
-            fontWeight: FontWeight.bold),
+      appBar: PrimaryAppBar(
+        titles: "Saved Trips",
+        backgroundColors: BoxColor,
       ),
       body: Padding(
           padding: EdgeInsets.all(10.w),
@@ -133,7 +130,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                                     width: 85.w,
                                                     height: 25.h,
                                                     onPressed: () {
-                                                      navigateToPlace(lat: fav.lattitude, long: fav.longitude);
+                                                      navigateToPlace(
+                                                          lat: fav.lattitude,
+                                                          long: fav.longitude);
                                                     }),
                                                 SizedBox(
                                                   width: 5.sp,

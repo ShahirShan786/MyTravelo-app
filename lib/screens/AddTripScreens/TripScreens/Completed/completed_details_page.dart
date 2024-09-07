@@ -3,10 +3,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:my_travelo_app/Functions/user_functions.dart';
+import 'package:my_travelo_app/Widgets/app_bar.dart';
 import 'package:my_travelo_app/Widgets/photo_view_page.dart';
+import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/models/user_model.dart';
 import 'package:my_travelo_app/screens/AddTripScreens/TripScreens/Completed/blog_page.dart';
@@ -53,6 +56,8 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
 
     return Scaffold(
       floatingActionButton: SpeedDial(
+        backgroundColor: primaryColor,
+        foregroundColor: white,
         animatedIcon: AnimatedIcons.add_event,
         children: [
           SpeedDialChild(
@@ -93,10 +98,9 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
           //     label: "Add Blogs")
         ],
       ),
-      appBar: AppBar(
-        centerTitle: true,
-        title: TextWidget(
-            content: "Trip Details", fontSize: 20, fontWeight: FontWeight.bold),
+      appBar: const PrimaryAppBar(
+        titles: "Trip Details",
+        backgroundColors: BoxColor,
       ),
       body: SingleChildScrollView(
           child: ValueListenableBuilder(
@@ -220,21 +224,17 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
                                                     );
                                                   },
                                                   onTap: () {},
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
-                                                    child: InkWell(
-                                                      onTap: () {
-                                                        Navigator.of(context)
-                                                            .push(
-                                                                MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              PhotoViewPage(
-                                                                  photos: img,
-                                                                  index: index),
-                                                        ));
-                                                      },
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      Get.to(() =>
+                                                          PhotoViewPage(
+                                                              photos: img,
+                                                              index: index));
+                                                    },
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20),
                                                       child: Image.file(
                                                         File(lis[index].photos),
                                                         fit: BoxFit.cover,

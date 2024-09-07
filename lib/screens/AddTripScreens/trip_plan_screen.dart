@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_travelo_app/Functions/user_functions.dart';
+import 'package:my_travelo_app/Widgets/app_bar.dart';
 import 'package:my_travelo_app/Widgets/textFormFeilds.dart';
 import 'package:my_travelo_app/Widgets/trip_deatails_screen_widget.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
+import 'package:my_travelo_app/constants/primary_button.dart';
 
 import 'package:my_travelo_app/models/user_model.dart';
 
@@ -60,80 +62,10 @@ class _TripPlanScreenState extends State<TripPlanScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: white,
-        title: TextWidget(
-            content: "Add your trip plan",
-            fontSize: 20.sp,
-            fontWeight: FontWeight.bold),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 12.w),
-            child: InkWell(
-              onTap: () async {
-                log("button Taped!!!");
-                log("Enter to the button fuction");
-                SharedPreferences prefz = await SharedPreferences.getInstance();
-                final userId = prefz.getString("currentuserId");
-                log("Current passed userId is :$userId");
-                // userId = userId;
-                final companion = widget.selectedContacts
-                    .map((contact) => contact.displayName ?? "")
-                    .toList();
-                if (widget.destination != null &&
-                    widget.selectedRangeStart != null &&
-                    widget.selectedRangeEnd != null) {
-                  final trip = TripModel(
-                    destination: widget.destination!,
-                    rangeStart: widget.selectedRangeStart!,
-                    rangeEnd: widget.selectedRangeEnd!,
-                    id: DateTime.now().millisecondsSinceEpoch.toString(),
-                    companion: companion,
-                    time: widget.finalSelectTime,
-                    activities: _stringMap,
-                    userId: userId.toString(),
-                  );
-
-                  await addTrip(trip: trip);
-
-                  log('Selected contacts: ${widget.selectedContacts}');
-                  // ignore: use_build_context_synchronously
-                  Get.to(
-                      () => ScheduleScreen(
-                            userId: userId,
-                          ),
-                      transition: Transition.rightToLeft);
-                } else {
-                  log("Data couldn't passed");
-                }
-              },
-              child: Container(
-                height: 45.h,
-                width: 75.w,
-                decoration: BoxDecoration(
-                    color: primaryColor,
-                    borderRadius: BorderRadius.circular(10.r)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextWidget(
-                      content: "Add",
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w600,
-                      color: white,
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios_outlined,
-                      size: 18.r,
-                      color: white,
-                    )
-                  ],
-                ),
-              ),
-            ),
-          )
-        ],
+      appBar: PrimaryAppBar(
+        titles: "Add your trip plan",
+        backgroundColors: BoxColor,
+        actions: [addPlanButton()],
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -223,6 +155,73 @@ class _TripPlanScreenState extends State<TripPlanScreen> {
                         ),
                       )),
           ],
+        ),
+      ),
+    );
+  }
+
+  Padding addPlanButton() {
+    return Padding(
+      padding: EdgeInsets.only(right: 12.w),
+      child: InkWell(
+        onTap: () async {
+          log("button Taped!!!");
+          log("Enter to the button fuction");
+          SharedPreferences prefz = await SharedPreferences.getInstance();
+          final userId = prefz.getString("currentuserId");
+          log("Current passed userId is :$userId");
+          // userId = userId;
+          final companion = widget.selectedContacts
+              .map((contact) => contact.displayName ?? "")
+              .toList();
+          if (widget.destination != null &&
+              widget.selectedRangeStart != null &&
+              widget.selectedRangeEnd != null) {
+            final trip = TripModel(
+              destination: widget.destination!,
+              rangeStart: widget.selectedRangeStart!,
+              rangeEnd: widget.selectedRangeEnd!,
+              id: DateTime.now().millisecondsSinceEpoch.toString(),
+              companion: companion,
+              time: widget.finalSelectTime,
+              activities: _stringMap,
+              userId: userId.toString(),
+            );
+
+            await addTrip(trip: trip);
+
+            log('Selected contacts: ${widget.selectedContacts}');
+            // ignore: use_build_context_synchronously
+            Get.to(
+                () => ScheduleScreen(
+                      userId: userId,
+                    ),
+                transition: Transition.rightToLeft);
+          } else {
+            log("Data couldn't passed");
+          }
+        },
+        child: Container(
+          height: 45.h,
+          width: 75.w,
+          decoration: BoxDecoration(
+              color: primaryColor, borderRadius: BorderRadius.circular(10.r)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextWidget(
+                content: "Add",
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w600,
+                color: white,
+              ),
+              Icon(
+                Icons.arrow_forward_ios_outlined,
+                size: 18.r,
+                color: white,
+              )
+            ],
+          ),
         ),
       ),
     );

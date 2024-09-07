@@ -14,6 +14,7 @@ const completedTripDbNamePhotos = "completedTripPhotos-database";
 const completedTripDbNameBlogs = "completedTripBlog-database";
 const fevoriteDName = "fevoritePlace- database";
 const expenseDbName = "expense-database";
+const dreamDestinationDbName = "dream-destinatiion-database";
 
 ValueNotifier<List<TripModel>> tripList = ValueNotifier([]);
 ValueNotifier<List<TripModel>> tripListCompleted = ValueNotifier([]);
@@ -23,6 +24,8 @@ ValueNotifier<List<CompletedTripModelPhotos>> completedTripListPhotos =
 ValueNotifier<List<CompletedTripModelBlog>> completedTripListBlog =
     ValueNotifier([]);
 ValueNotifier<List<ExpenseModel>> expenseListener = ValueNotifier([]);
+ValueNotifier<List<DreamDestinationModel>> dreamDestinationListener =
+    ValueNotifier([]);
 
 addTrip({required TripModel trip}) async {
   log("Entered the Function");
@@ -139,7 +142,7 @@ Future<void> addBlogs({required CompletedTripModelBlog blog}) async {
   final completedTripModelBox =
       await Hive.openBox<CompletedTripModelBlog>(completedTripDbNameBlogs);
   await completedTripModelBox.put(blog.id, blog);
-  log("blog data added successfully");
+
   completedTripToList();
   // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
   completedTripListBlog.notifyListeners();
@@ -167,7 +170,7 @@ addFevorite({required FevoriteModel fevoritePlace}) async {
 removeFevorite({required String fevoritePlace}) async {
   final fevoriteBox = await Hive.openBox<FevoriteModel>(fevoriteDName);
   await fevoriteBox.delete(fevoritePlace);
-  log("Data removed");
+
   await userRefresh();
 }
 
@@ -188,7 +191,6 @@ userRefresh() async {
         for (PlaceModel place in placeModelListener.value) {
           if (elements.fevoritePlace == place.id) {
             fevoriteList.value.add(place);
-            log("fev place added fevorite List");
           }
         }
       }
@@ -202,7 +204,7 @@ userRefresh() async {
 addExpense({required ExpenseModel expenses}) async {
   final expenseBox = await Hive.openBox<ExpenseModel>(expenseDbName);
   await expenseBox.put(expenses.id, expenses);
-  log("Expense added to the database");
+
   // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
   expenseListener.notifyListeners();
   await getExpenses();
@@ -217,7 +219,6 @@ deleteExpense({required ExpenseModel expense}) async {
   final expenseBox = await Hive.openBox<ExpenseModel>(expenseDbName);
   await expenseBox.delete(expense.id);
   getExpenses();
-  log("expense deleted successfully ");
 }
 
 expenseToList({required String tripId}) async {
@@ -228,7 +229,93 @@ expenseToList({required String tripId}) async {
       expenseListener.value.add(element);
     }
   });
+  // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
   expenseListener.notifyListeners();
+}
+
+// dream destination Hive functions
+
+Future<void> addDreamPlace(
+    {required DreamDestinationModel destinationTrip}) async {
+  final dreamDestinatinBox =
+      await Hive.openBox<DreamDestinationModel>(dreamDestinationDbName);
+  await dreamDestinatinBox.put(destinationTrip.id, destinationTrip);
+  log("Added place: ${destinationTrip.destination}");
+  dreamDestinationListener.notifyListeners();
+//  await getDreamPlace();
+  await dreamPlaceToList(userId: destinationTrip.userId);
+}
+
+Future<List<DreamDestinationModel>> getDreamPlace() async {
+  final dreamDestinationBox =
+      await Hive.openBox<DreamDestinationModel>(dreamDestinationDbName);
+  final places = dreamDestinationBox.values.toList();
+  log("Retrieved ${places.length} places from the database");
+  return places;
+}
+
+deleteDreamPlace({required DreamDestinationModel destination}) async {
+  final dreamDestiantionBox =
+      await Hive.openBox<DreamDestinationModel>(dreamDestinationDbName);
+  log("Before deletion :${dreamDestinationListener.value.length}");
+  await dreamDestiantionBox.delete(destination.id);
+  log("after deletion :${dreamDestinationListener.value.length}");
+  final updatedList = dreamDestiantionBox.values.toList();
+  dreamDestinationListener.value = updatedList;
+  dreamDestinationListener.notifyListeners();
+}
+
+updateDreamPlace({required DreamDestinationModel destination}) async {
+  try {
+    final dreamDestinationBox =
+        await Hive.openBox<DreamDestinationModel>(dreamDestinationDbName);
+
+    if (dreamDestinationBox.containsKey(destination.id)) {
+      await dreamDestinationBox.put(destination.id, destination);
+    } else {
+      log("The destination with id${destination.id}does not exist");
+      return;
+    }
+    log("Dream destination succussfully updated");
+    dreamDestinationListener.value = dreamDestinationBox.values.toList();
+    dreamDestinationListener.notifyListeners();
+  } catch (e) {
+    log("fail to update :$e");
+  }
+}
+
+Future<void> dreamPlaceToList({required String userId}) async {
+  dreamDestinationListener.value.clear();
+  final dreamPlaces = await getDreamPlace();
+
+  for (var place in dreamPlaces) {
+    if (place.userId == userId) {
+      log("Adding place: ${place.destination}");
+      dreamDestinationListener.value.add(place);
+    }
+  }
+
+  dreamDestinationListener.notifyListeners();
+}
+
+Future<void> addSavigs(
+    int index, double amount, DreamDestinationModel destination) async {
+  final dreamDestinationBox =
+      await Hive.openBox<DreamDestinationModel>(dreamDestinationDbName);
+  final newSavings = destination.totalSavings + amount;
+
+  final updatedSaving = DreamDestinationModel(
+      id: destination.id,
+      userId: destination.userId,
+      destination: destination.destination,
+      totalExpense: destination.totalExpense,
+      totalSavings: newSavings,
+      placeImage: destination.placeImage);
+
+  await dreamDestinationBox.putAt(index, updatedSaving);
+  dreamDestinationListener.value[index] = updatedSaving;
+  dreamDestinationListener.notifyListeners();
+  log("Add saving amound updated");
 }
 
 // Google map function

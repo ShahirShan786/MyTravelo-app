@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:my_travelo_app/Widgets/app_bar.dart';
 import 'package:my_travelo_app/Widgets/companion_box.dart';
 import 'package:my_travelo_app/Widgets/edit_plan_dialogue.dart';
 import 'package:my_travelo_app/Widgets/trip_deatails_screen_widget.dart';
@@ -14,19 +16,11 @@ import 'package:my_travelo_app/screens/AddTripScreens/TripScreens/Upcomming/expe
 import 'package:my_travelo_app/screens/AddTripScreens/trip_plan_screen.dart';
 
 class UpcommingDetailsPage extends StatefulWidget {
-  // final String destination;
-  // final String startDate;
-  // final List<String> companion;
-  // final Map<String, List<String>> activities;
+  
   final TripModel trip;
 
   const UpcommingDetailsPage(
-      {super.key,
-      // required this.destination,
-      // required this.startDate,
-      // required this.companion,
-      // required this.activities,
-      required this.trip});
+      {super.key,required this.trip});
 
   @override
   State<UpcommingDetailsPage> createState() => _UpcommingDetailsPageState();
@@ -34,58 +28,26 @@ class UpcommingDetailsPage extends StatefulWidget {
 
 class _UpcommingDetailsPageState extends State<UpcommingDetailsPage> {
   int selectTab = 0;
+  late TripModel trip;
+
+  @override
+  void initState() {
+    trip = widget.trip;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final TripModel trip = widget.trip;
     Map<String, List<String>> activities = trip.activities;
     final dateStart = DateFormat("dd MMM yyyy").format(trip.rangeStart);
-    // final destination = trip.destination;
     final List<String> companions = trip.companion;
     List<DateTime> days = getDaysInRange(trip.rangeStart, trip.rangeEnd);
+
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: white,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: InkWell(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ExpenseScreen( tripId: trip.id,),
-                ));
-              },
-              child: Container(
-                width: 100,
-                height: 45,
-                decoration: BoxDecoration(
-                    color: primaryColor,
-                    borderRadius: BorderRadius.circular(10)),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        TextWidget(
-                          content: "Expense",
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: white,
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          size: 20,
-                          color: white,
-                          weight: 20,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          )
-        ],
+      appBar: PrimaryAppBar(
+        backgroundColors: white,
+        actions: [expensePageButton(trip)],
       ),
       body: Center(
           child: Padding(
@@ -205,6 +167,49 @@ class _UpcommingDetailsPageState extends State<UpcommingDetailsPage> {
     );
   }
 
+  Padding expensePageButton(TripModel trip) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: InkWell(
+        onTap: () {
+          Get.to(() => ExpenseScreen(
+                tripId: trip.id,
+                tripStartDate: trip.rangeStart,
+                tripEndDate: trip.rangeEnd,
+              ));
+        },
+        child: Container(
+          width: 100,
+          height: 45,
+          decoration: BoxDecoration(
+              color: primaryColor, borderRadius: BorderRadius.circular(10)),
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextWidget(
+                    content: "Expense",
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: white,
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 20,
+                    color: white,
+                    weight: 20,
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget tabContainer({
     required BuildContext context,
     required String day,
@@ -227,4 +232,6 @@ class _UpcommingDetailsPageState extends State<UpcommingDetailsPage> {
       ),
     );
   }
+
+ 
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:my_travelo_app/constants/constable.dart';
@@ -19,18 +21,23 @@ class PhotoViewPage extends StatelessWidget {
       ),
       body: PhotoViewGallery.builder(
         itemCount: photos.length,
-        builder: ((context, index) => PhotoViewGalleryPageOptions.customChild(
-            child: CachedNetworkImage(
-              imageUrl: photos[index],
-              placeholder: (context, url) => CircularProgressIndicator(
-                color: indicatorColor,
-              ),
-              errorWidget: (context, url, error) => const Icon(
-                Icons.error,
-                color: red,
-              ),
-            ),
-            minScale: PhotoViewComputedScale.covered)),
+        builder: ((context, index) {
+          final isLocalFile = File(photos[index]).existsSync();
+          return PhotoViewGalleryPageOptions.customChild(
+              child: isLocalFile
+                  ? Image.file(File(photos[index]), fit: BoxFit.contain)
+                  : CachedNetworkImage(
+                      imageUrl: photos[index],
+                      placeholder: (context, url) => CircularProgressIndicator(
+                        color: indicatorColor,
+                      ),
+                      errorWidget: (context, url, error) => const Icon(
+                        Icons.error,
+                        color: red,
+                      ),
+                    ),
+              minScale: PhotoViewComputedScale.covered);
+        }),
         pageController: PageController(initialPage: index),
         enableRotation: true,
       ),

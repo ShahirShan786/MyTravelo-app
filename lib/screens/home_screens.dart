@@ -10,6 +10,7 @@ import 'package:my_travelo_app/constants/constant.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:my_travelo_app/models/admin_model.dart';
 import 'package:my_travelo_app/screens/AddTripScreens/add_trip_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -57,10 +58,15 @@ class _HomescreenState extends State<Homescreen> {
           leadingWidth: 120.w,
           actions: [
             IconButton(
-                onPressed: () {
-                  Get.to(() => const DreamDestinationScreen());
+                onPressed: () async {
+                  SharedPreferences prefz =
+                      await SharedPreferences.getInstance();
+                  final userId = prefz.getString("currentuserId");
+                  Get.to(() => DreamDestinationScreen(
+                        userId: userId.toString(),
+                      ));
                 },
-                icon:const Icon(
+                icon: const Icon(
                   Icons.public,
                   size: 33,
                   color: primaryColor,
@@ -149,21 +155,12 @@ class _HomescreenState extends State<Homescreen> {
                                       padding: const EdgeInsets.all(4),
                                       child: GestureDetector(
                                         onTap: () {
-                                          Navigator.push(context,
-                                              MaterialPageRoute(
-                                            builder: (context) {
-                                              return PlaceDetailsScreen(
-                                                index: index,
-                                              );
-                                              // PlaceDetailesPage(
-                                              //   placeImg: place.mainImage,
-                                              //   description: place.details,
-                                              //   place: place.district,
-                                              //   placeName: place.place,
-                                              //  placeSubImg: place.subImage,
-                                              // );
-                                            },
-                                          ));
+                                          Get.to(
+                                            () => PlaceDetailsScreen(
+                                              index: index,
+                                            ),
+                                            transition: Transition.native,
+                                          );
                                         },
                                         child: Container(
                                           width: 220.w,

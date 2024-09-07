@@ -4,8 +4,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_travelo_app/Functions/signIn_service.dart';
+import 'package:my_travelo_app/Widgets/app_bar.dart';
 import 'package:my_travelo_app/Widgets/edit_dialogue.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
@@ -68,13 +70,9 @@ class _ProfilescreenState extends State<Profilescreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: TextWidget(
-          content: "Profile",
-          fontSize: 20.sp,
-          fontWeight: FontWeight.bold,
-        ),
+      appBar:const PrimaryAppBar(
+        titles: "Profile",
+        backgroundColors: BoxColor,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -266,9 +264,9 @@ class _ProfilescreenState extends State<Profilescreen> {
                                     );
                                   });
                             } else {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => profileScreens[index],
-                              ));
+                              Get.to(
+                                () => profileScreens[index],
+                              );
                             }
                           },
                         );

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:my_travelo_app/Widgets/app_bar.dart';
 import 'package:my_travelo_app/Widgets/companion_card.dart';
+import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/screens/AddTripScreens/companion_screen.dart';
 import 'package:my_travelo_app/screens/AddTripScreens/trip_plan_screen.dart';
@@ -22,13 +24,9 @@ class OptionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        title: TextWidget(
-            content: "Travel Companions",
-            fontSize: 20,
-            fontWeight: FontWeight.bold),
+      appBar: PrimaryAppBar(
+        titles: "Travel Comapanions",
+        backgroundColors: white,
       ),
       body: SafeArea(
         child: Padding(

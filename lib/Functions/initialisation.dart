@@ -27,5 +27,8 @@ initialisation() async {
     if (!Hive.isAdapterRegistered(ExpenseModelAdapter().typeId)) {
       Hive.registerAdapter(ExpenseModelAdapter());
     }
+    if(!Hive.isAdapterRegistered(DreamDestinationModelAdapter().typeId)){
+      Hive.registerAdapter(DreamDestinationModelAdapter());
+    }
   }
 }

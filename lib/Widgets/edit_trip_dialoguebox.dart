@@ -159,7 +159,7 @@ class EditTripDialogueBox {
       Function(DateTime) onDateSelected) async {
     final DateTime? picked = await showDatePicker(
         context: context,
-        initialDate: initialDate,
+        initialDate:  initialDate,
         firstDate: DateTime(2010),
         lastDate: DateTime(2050));
 

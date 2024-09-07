@@ -1,5 +1,3 @@
-
-
 import 'package:hive_flutter/adapters.dart';
 import 'package:flutter/material.dart';
 part 'user_model.g.dart';
@@ -97,6 +95,8 @@ class ExpenseModel {
   final String image;
   @HiveField(6)
   final Color color;
+  @HiveField(7)
+  final DateTime? date;
 
   ExpenseModel({
     required this.id,
@@ -106,16 +106,33 @@ class ExpenseModel {
     required this.category,
     required this.image,
     required this.color,
+    required this.date
   });
 }
 
-class DreamDestinationModel{
+@HiveType(typeId: 7)
+class DreamDestinationModel {
+  @HiveField(0)
   final String id;
-  final String tripId;
+  @HiveField(1)
+  final String userId;
+  @HiveField(2)
   final String destination;
-  final String totalAmount;
-  final String totalsavings;
+ @HiveField(3)
+  final double totalExpense;
+  @HiveField(4)
+  final double totalSavings;
+@HiveField(5)
+  final List<String> placeImage;
 
-  DreamDestinationModel({required this.id, required this.tripId, required this.destination, required this.totalAmount, required this.totalsavings});
 
+  DreamDestinationModel({
+    required this.id,
+    required this.userId,
+    required this.destination,
+    required this.totalExpense,
+    required this.totalSavings,
+    required this.placeImage,
+
+  });
 }

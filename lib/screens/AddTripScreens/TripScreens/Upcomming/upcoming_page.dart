@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:my_travelo_app/Functions/user_functions.dart';
 import 'package:my_travelo_app/Widgets/edit_trip_dialoguebox.dart';
@@ -94,14 +95,11 @@ class _UpcomingPageState extends State<UpcomingPage> {
                             child: InkWell(
                               onTap: () {
                                 log("Card Tapped sucessfully");
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          UpcommingDetailsPage(
-                                        trip: tripDetailes,
-                                      ),
-                                    ));
+                                Get.to(
+                                  () => UpcommingDetailsPage(
+                                    trip: tripDetailes,
+                                  ),
+                                );
                               },
                               onLongPress: () {
                                 showDeleteDialogue(context, tripDetailes);

@@ -18,6 +18,7 @@ class ScheduleScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
+          backgroundColor: BoxColor,
           bottom: TabBar(
               dividerColor: Colors.white,
               indicatorSize: TabBarIndicatorSize.tab,
@@ -49,7 +50,7 @@ class ScheduleScreen extends StatelessWidget {
                   builder: (context) => Dashboard(),
                 ));
               },
-              icon:const Icon(Icons.arrow_back)),
+              icon: const Icon(Icons.arrow_back)),
           title: TextWidget(
               content: "My Trips",
               fontSize: 20.sp,

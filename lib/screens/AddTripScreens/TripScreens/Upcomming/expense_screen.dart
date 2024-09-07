@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:my_travelo_app/Functions/signIn_service.dart';
 import 'package:my_travelo_app/Functions/user_functions.dart';
@@ -15,32 +16,28 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ExpenseScreen extends StatefulWidget {
   final String tripId;
+  final DateTime tripStartDate;
+  final DateTime tripEndDate;
 
-  const ExpenseScreen({super.key, required this.tripId});
+  const ExpenseScreen(
+      {super.key,
+      required this.tripId,
+      required this.tripStartDate,
+      required this.tripEndDate});
 
   @override
   State<ExpenseScreen> createState() => _ExpenseScreenState();
 }
 
 class _ExpenseScreenState extends State<ExpenseScreen> {
-  Signinservice _signinservice = Signinservice();
-  Singinmodel? profileData;
+  DateTime? selectedDate;
+
   @override
   void initState() {
     super.initState();
-
+    selectedDate = widget.tripStartDate; //setting here a default date;
     expenseToList(tripId: widget.tripId);
   }
-
-  //  Future<void> _loadProfileData() async {
-  //   SharedPreferences prefz = await SharedPreferences.getInstance();
-  //   final currentUserId = prefz.getString("currentuserId");
-  //   log("recieved currentuderId is :$currentUserId");
-  //   if (currentUserId != null) {
-  //     profileData = await _signinservice.getSignInDataById(currentUserId);
-  //   }
-  //   setState(() {});
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -118,199 +115,52 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
               ],
             ),
           ),
+          Container(
+            height: 60,
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: widget.tripEndDate.difference(widget.tripStartDate).inDays +1,
+                itemBuilder: (context, index) {
+                  DateTime date = widget.tripStartDate.add(Duration(days: index));
+                  bool isSelected = selectedDate == date;
+                  return InkWell(
+                    onTap: () {
+                      setState(() {
+                        selectedDate = date;
+                      });
+                    },
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 8),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      decoration: BoxDecoration(
+                          color: isSelected ? primaryColor : Colors.grey[300],
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Center(
+                        child: TextWidget(
+                          content: "${date.day}-${date.month}-${date.year}",
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: isSelected ? white : black,
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+          ),
           Expanded(
               child: ValueListenableBuilder(
             valueListenable: expenseListener,
             builder: (context, value, child) {
-              return expenseListener.value.isNotEmpty
+              List<ExpenseModel> filteredExpenses = value
+              .where((expense)=> isSameDay(expense.date, selectedDate)).toList();
+              return filteredExpenses.isNotEmpty
                   ? ListView.builder(
-                      itemCount: value.length,
+                      itemCount: filteredExpenses.length,
                       itemBuilder: (context, index) {
-                        ExpenseModel data = value[index];
+                        ExpenseModel data = filteredExpenses[index];
 
-                        return Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: RepaintBoundary(
-                            child: Stack(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 12),
-                                  height: 120,
-                                  child: Center(
-                                    child: Container(
-                                      height: 90,
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(15),
-                                        boxShadow: const [
-                                          BoxShadow(
-                                            color: Colors.black45,
-                                            spreadRadius: -8,
-                                            blurRadius: 32,
-                                          ),
-                                        ],
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            RepaintBoundary(
-                                              child: Container(
-                                                width: 75,
-                                                height: 60,
-                                                margin: const EdgeInsets.only(
-                                                    left: 10),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  child: SvgPicture.asset(
-                                                    data.image,
-                                                    height: 55,
-                                                    fit: BoxFit.fill,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                TextWidget(
-                                                    content: "₹ ${data.amount}",
-                                                    fontSize: 25,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                                Container(
-                                                  margin: const EdgeInsets.only(
-                                                      top: 5),
-                                                  width: 120,
-                                                  child: Center(
-                                                    child: Text(
-                                                      data.discription ?? '',
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              width: 100,
-                                              height: 50,
-                                              child: Center(
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
-                                                  children: [
-                                                    InkWell(
-                                                      onTap: () {
-                                                        Navigator.of(context)
-                                                            .push(
-                                                                MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              AddExpenseScreen(
-                                                            tripId:
-                                                                widget.tripId,
-                                                            editExpense: data,
-                                                          ),
-                                                        ));
-                                                      },
-                                                      child: Container(
-                                                        width: 42,
-                                                        height: 42,
-                                                        decoration:
-                                                            const BoxDecoration(
-                                                                color: Color
-                                                                    .fromRGBO(
-                                                                        214,
-                                                                        214,
-                                                                        214,
-                                                                        1),
-                                                                shape: BoxShape
-                                                                    .circle),
-                                                        child: const Center(
-                                                          child: Icon(
-                                                              Icons.edit_note),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    InkWell(
-                                                      onTap: () {
-                                                        showDeleteDialogue(
-                                                            context: context,
-                                                            content:
-                                                                "Are you sure you want to delete this ?",
-                                                            onpressed: () {
-                                                              deleteExpense(
-                                                                  expense:
-                                                                      data);
-                                                              expenseToList(
-                                                                  tripId: data
-                                                                      .tripId);
-                                                              log("delete pressed");
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                            });
-                                                      },
-                                                      child: Container(
-                                                        width: 42,
-                                                        height: 42,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                                color: Colors
-                                                                    .grey[350],
-                                                                shape: BoxShape
-                                                                    .circle),
-                                                        child: const Center(
-                                                          child: Icon(
-                                                            Icons
-                                                                .delete_outlined,
-                                                            color: red,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  top: 2,
-                                  left: 30,
-                                  child: Container(
-                                    width: 115,
-                                    height: 25,
-                                    decoration: BoxDecoration(
-                                        color: Colors.red,
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    child: Center(
-                                      child: Text(
-                                        data.category,
-                                        style: const TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                            color: white),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
+                        return buildExpenseContainer(data, context);
                       },
                     )
                   : Center(
@@ -326,11 +176,13 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: primaryColor,
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => AddExpenseScreen(
+          Get.to(
+            () => AddExpenseScreen(
               tripId: widget.tripId,
+              tripStartDate: widget.tripStartDate,
+              tripEndDate: widget.tripEndDate,
             ),
-          ));
+          );
         },
         child: const Icon(
           Icons.add,
@@ -338,5 +190,164 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
         ),
       ),
     );
+  }
+
+  Padding buildExpenseContainer(ExpenseModel data, BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: RepaintBoundary(
+        child: Stack(
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              height: 120,
+              child: Center(
+                child: Container(
+                  height: 90,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black45,
+                        spreadRadius: -8,
+                        blurRadius: 32,
+                      ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        RepaintBoundary(
+                          child: Container(
+                            width: 75,
+                            height: 60,
+                            margin: const EdgeInsets.only(left: 10),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: SvgPicture.asset(
+                                data.image,
+                                height: 55,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextWidget(
+                                content: "₹ ${data.amount}",
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold),
+                            Container(
+                              margin: const EdgeInsets.only(top: 5),
+                              width: 120,
+                              child: Center(
+                                child: Text(
+                                  data.discription ?? '',
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          width: 100,
+                          height: 50,
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    Get.to(
+                                      () => AddExpenseScreen(
+                                        tripId: widget.tripId,
+                                        editExpense: data,
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    width: 42,
+                                    height: 42,
+                                    decoration: const BoxDecoration(
+                                        color: Color.fromRGBO(214, 214, 214, 1),
+                                        shape: BoxShape.circle),
+                                    child: const Center(
+                                      child: Icon(Icons.edit_note),
+                                    ),
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    showDeleteDialogue(
+                                        context: context,
+                                        content:
+                                            "Are you sure you want to delete this ?",
+                                        onpressed: () {
+                                          deleteExpense(expense: data);
+                                          expenseToList(tripId: data.tripId);
+                                          log("delete pressed");
+                                          Navigator.of(context).pop();
+                                        });
+                                  },
+                                  child: Container(
+                                    width: 42,
+                                    height: 42,
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey[350],
+                                        shape: BoxShape.circle),
+                                    child: const Center(
+                                      child: Icon(
+                                        Icons.delete_outlined,
+                                        color: red,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 2,
+              left: 30,
+              child: Container(
+                width: 115,
+                height: 25,
+                decoration: BoxDecoration(
+                    color: Colors.red, borderRadius: BorderRadius.circular(20)),
+                child: Center(
+                  child: Text(
+                    data.category,
+                    style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: white),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  bool isSameDay(DateTime? firstDay, DateTime? lastDay) {
+    if (firstDay == null || lastDay == null) return false;
+    return firstDay.year == lastDay.year &&
+        firstDay.month == lastDay.month &&
+        firstDay.day == lastDay.day;
   }
 }

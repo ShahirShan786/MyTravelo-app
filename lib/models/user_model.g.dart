@@ -201,14 +201,15 @@ class ExpenseModelAdapter extends TypeAdapter<ExpenseModel> {
       discription: fields[3] as String?,
       category: fields[4] as String,
       image: fields[5] as String,
-      color: Color(fields[6] as int), // Deserialize Color
+      color: Color(fields[6] as int), // Convert the stored int back to Color
+      date: fields[7] != null ? fields[7] as DateTime : null, // Handle nullable DateTime
     );
   }
 
   @override
   void write(BinaryWriter writer, ExpenseModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8) // Update to the new number of fields
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -222,7 +223,9 @@ class ExpenseModelAdapter extends TypeAdapter<ExpenseModel> {
       ..writeByte(5)
       ..write(obj.image)
       ..writeByte(6)
-      ..write(obj.color.value); // Serialize Color
+      ..write(obj.color.value) // Convert Color to int and store it
+      ..writeByte(7)
+      ..write(obj.date); // Write DateTime (nullable field handled correctly)
   }
 
   @override
@@ -235,3 +238,54 @@ class ExpenseModelAdapter extends TypeAdapter<ExpenseModel> {
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
+
+
+class DreamDestinationModelAdapter extends TypeAdapter<DreamDestinationModel> {
+  @override
+  final int typeId = 7;
+
+  @override
+  DreamDestinationModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return DreamDestinationModel(
+      id: fields[0] as String,
+      userId: fields[1] as String,
+      destination: fields[2] as String,
+      totalExpense: fields[3] as double,
+      totalSavings: fields[4] as double,
+      placeImage: (fields[5] as List).cast<String>(),
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, DreamDestinationModel obj) {
+    writer
+      ..writeByte(6)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.userId)
+      ..writeByte(2)
+      ..write(obj.destination)
+      ..writeByte(3)
+      ..write(obj.totalExpense)
+      ..writeByte(4)
+      ..write(obj.totalSavings)
+      ..writeByte(5)
+      ..write(obj.placeImage);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DreamDestinationModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
