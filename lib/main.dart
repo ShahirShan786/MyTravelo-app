@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_travelo_app/Functions/initialisation.dart';
+import 'package:my_travelo_app/Controller/Hive/initialisation.dart';
 import 'package:my_travelo_app/dashboard.dart';
-import 'package:my_travelo_app/screens/logIn_page.dart';
+import 'package:my_travelo_app/Views/Screens/Main_Screens/Login/Pages/logIn_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

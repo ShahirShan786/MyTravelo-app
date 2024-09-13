@@ -11,8 +11,8 @@ class PrimaryButton extends StatelessWidget {
   final Color? backgroundColor;
   final VoidCallback? onPressed;
 
-  PrimaryButton(
-      {required this.content,
+  const PrimaryButton(
+      {super.key, required this.content,
       required this.width,
       required this.height,
       this.backgroundColor,

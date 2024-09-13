@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/models/singInModel.dart';
-import 'package:my_travelo_app/screens/AddTripScreens/add_trip_screen.dart';
-import 'package:my_travelo_app/screens/favorite_screen.dart';
-import 'package:my_travelo_app/screens/home_screens.dart';
-import 'package:my_travelo_app/screens/profile_screen.dart';
-import 'package:my_travelo_app/screens/schedule_screen.dart';
+import 'package:my_travelo_app/Models/singInModel.dart';
+import 'package:my_travelo_app/Views/Screens/Trip_Screens/Add_Trip_screens/add_trip_screen.dart';
+import 'package:my_travelo_app/Views/Screens/Primary_Screens/favorite_screen.dart';
+import 'package:my_travelo_app/Views/Screens/Primary_Screens/Home/pages/home_screens.dart';
+import 'package:my_travelo_app/Views/Screens/Primary_Screens/profile_screen.dart';
+import 'package:my_travelo_app/Views/Screens/Primary_Screens/schedule_screen.dart';
 import 'package:get/get.dart';
 
 class Dashboard extends StatefulWidget {
