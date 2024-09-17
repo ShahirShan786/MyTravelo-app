@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_travelo_app/Controller/Hive/user_functions.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/photo_view_page.dart';
 import 'package:my_travelo_app/constants/constable.dart';
@@ -34,7 +35,7 @@ class _DetailsPageImageState extends State<DetailsPageImage> {
               children: [
                 CarouselSlider(
                   options: CarouselOptions(
-                    height: 350,
+                    height: 350.h,
                     viewportFraction: 1,
                     onPageChanged: (index, reason) {
                       setState(() {
@@ -66,11 +67,11 @@ class _DetailsPageImageState extends State<DetailsPageImage> {
                 ),
                 widget.isActive ?
                   Positioned(
-                  top: 40,
-                  right: 20,
+                  top: 40.h,
+                  right: 20.w,
                   child: CircleAvatar(
                     backgroundColor: transperant,
-                    radius: 25,
+                    radius: 25.sp,
                     child: IconButton(
                       onPressed: () async {
                         fevorite
@@ -101,8 +102,8 @@ class _DetailsPageImageState extends State<DetailsPageImage> {
                   ),
                 ): 
                 Positioned(
-                  top: 40,
-                  right: 20,
+                  top: 40.h,
+                  right: 20.w,
                   child: CircleAvatar(
                     backgroundColor: white,
                   child: IconButton(onPressed: (){
@@ -113,8 +114,8 @@ class _DetailsPageImageState extends State<DetailsPageImage> {
                 
               ]
             ),
-            const SizedBox(
-              height: 70,
+             SizedBox(
+              height: 70.h,
             )
           ],
         ),
@@ -122,19 +123,19 @@ class _DetailsPageImageState extends State<DetailsPageImage> {
             bottom: 0,
             child: Container(
               width: MediaQuery.of(context).size.width,
-              height: 90,
-              decoration: const BoxDecoration(
+              height: 90.h,
+              decoration:  BoxDecoration(
                   color: white,
                   borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(20))),
+                      BorderRadius.vertical(top: Radius.circular(20.r))),
               child: Padding(
-                padding: const EdgeInsets.only(top: 5),
+                padding:  EdgeInsets.only(top: 5.h),
                 child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: widget.place!.subImage.length,
                     itemBuilder: (context, index) {
                       return Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding:  EdgeInsets.all(10.w),
                         child: InkWell(
                           onTap: () {
                             setState(() {
@@ -143,14 +144,14 @@ class _DetailsPageImageState extends State<DetailsPageImage> {
                           },
                           child: index == picture
                               ? Container(
-                                  width: 80,
-                                  height: 50,
+                                  width: 80.w,
+                                  height: 50.h,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(13),
+                                      borderRadius: BorderRadius.circular(13.r),
                                       border: Border.all(
-                                          color: primaryColor, width: 3)),
+                                          color: primaryColor, width: 3.w)),
                                   child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(10.r),
                                     child: CachedNetworkImage(
                                       imageUrl: widget.place!.subImage[index],
                                       fit: BoxFit.cover,
@@ -163,10 +164,10 @@ class _DetailsPageImageState extends State<DetailsPageImage> {
                                   ),
                                 )
                               : SizedBox(
-                                  width: 80,
-                                  height: 50,
+                                  width: 80.w,
+                                  height: 50.h,
                                   child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(10.r),
                                     child: CachedNetworkImage(
                                       imageUrl: widget.place!.subImage[index],
                                       fit: BoxFit.cover,

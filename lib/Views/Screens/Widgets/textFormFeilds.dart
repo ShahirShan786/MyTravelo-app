@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Textformfeilds extends StatelessWidget {
   TextEditingController? controller;
@@ -40,13 +41,13 @@ class Textformfeilds extends StatelessWidget {
       decoration: InputDecoration(
         labelText: labelText,
         labelStyle: TextStyle(
-            fontSize: 16, fontWeight: FontWeight.w700, color: labelColor),
+            fontSize: 16.sp, fontWeight: FontWeight.w700, color: labelColor),
         suffixIcon: suffics,
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: borderColor!),
         ),
         focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: focusedColor!, width: 2)),
+            borderSide: BorderSide(color: focusedColor!, width: 2.w)),
         errorBorder:
             UnderlineInputBorder(borderSide: BorderSide(color: focusedColor!)),
         focusedErrorBorder:

@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TimePicker extends StatefulWidget {
   late TimeOfDay? selectedtime;
@@ -27,9 +28,9 @@ class _TimePickerState extends State<TimePicker> {
   Widget build(BuildContext context) {
     return TextButton(
       style: TextButton.styleFrom(
-        fixedSize: const Size(150, 25),
+        fixedSize:  Size(150.w, 25.h),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20.r),
         ),
         side: const BorderSide(color: Colors.black),
       ),

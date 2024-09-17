@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_travelo_app/Controller/Firebase/firebase_functions.dart';
 import 'package:my_travelo_app/Controller/Hive/user_functions.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/details_page_image.dart';
@@ -25,41 +26,41 @@ class PlaceDetailsScreen extends StatelessWidget {
             isActive: true,
           ),
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding:  EdgeInsets.all(10.w),
             child: TextWidget(
                 content: place.place,
-                fontSize: 25,
+                fontSize: 25.sp,
                 fontWeight: FontWeight.bold),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding:  EdgeInsets.symmetric(horizontal: 10.w),
             child: Row(
               children: [
-               const Icon(
+                Icon(
                   Icons.location_on,
-                  size: 20,
+                  size: 20.w,
                   color: secondaryColor,
                 ),
                 TextWidget(
                     content: place.district,
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     color: secondaryColor,
                     fontWeight: FontWeight.normal),
               ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            padding:  EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
             child: SizedBox(
               width: double.infinity,
-              height: 230,
+              height: 230.h,
               child: SingleChildScrollView(
                 child: SizedBox(
                   child: Text(
                     place.details,
                     maxLines: 30,
-                    style: const TextStyle(
-                        fontSize: 15,
+                    style:  TextStyle(
+                        fontSize: 15.sp,
                         fontWeight: FontWeight.w500,
                         color: Colors.black),
                   ),
@@ -71,7 +72,7 @@ class PlaceDetailsScreen extends StatelessWidget {
       ),
       bottomSheet: Container(
         width: double.infinity,
-        height: 70,
+        height: 70.h,
         color: ScaffoldColor,
         child: Center(
             child: Padding(
@@ -79,13 +80,13 @@ class PlaceDetailsScreen extends StatelessWidget {
           child: PrimaryButton(
             content: TextWidget(
                 content: "Go to Direction",
-                fontSize: 18,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.w600),
             onPressed: () {
                   navigateToPlace(lat: place.lattitude, long: place.longitude);
             },
-            height: 50,
-            width: 250,
+            height: 50.h,
+            width: 250.w,
             backgroundColor: primaryColor,
           ), 
         )),

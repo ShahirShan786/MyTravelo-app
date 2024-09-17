@@ -2,15 +2,20 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_travelo_app/Controller/Firebase/firebase_functions.dart';
 import 'package:my_travelo_app/Controller/Hive/image_upload.dart';
+import 'package:my_travelo_app/Views/Admin-screens/Add_Place/widgets/details_text_field.dart';
+import 'package:my_travelo_app/Views/Admin-screens/Add_Place/widgets/district_text_field.dart';
+import 'package:my_travelo_app/Views/Admin-screens/Add_Place/widgets/lattitude_text_field.dart';
+import 'package:my_travelo_app/Views/Admin-screens/Add_Place/widgets/logitude_text_field.dart';
+import 'package:my_travelo_app/Views/Admin-screens/Add_Place/widgets/place_text_field.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/show_dialogues.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/text_form_feild.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/constants/primary_button.dart';
-import 'package:my_travelo_app/Models/admin_model.dart';
 
 class AdminAddPlaceScreen extends StatefulWidget {
  
@@ -44,28 +49,28 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding:  EdgeInsets.all(8.0.w),
           child: Center(
             child: Column(
               children: [
-                const SizedBox(
-                  height: 50,
+                SizedBox(
+                  height: 50.h,
                 ),
                 Align(
                   alignment: Alignment.topLeft,
                   child: TextWidget(
                       content: "Add main image",
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(
-                  height: 20,
+                 SizedBox(
+                  height: 20.h,
                 ),
                 InkWell(
                   onTap: pickMainImage,
                   child: Container(
-                      width: 240,
-                      height: 160,
+                      width: 240.w,
+                      height: 160.h,
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
                         borderRadius: BorderRadius.circular(15),
@@ -81,26 +86,26 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                                 fit: BoxFit.cover,
                               ))),
                 ),
-              const  SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: 10.h,
                 ),
                 Align(
                   alignment: Alignment.topLeft,
                   child: TextWidget(
                       content: "Add sub images",
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.bold),
                 ),
                 _imageFiles.isEmpty
                     ? Align(
                         alignment: Alignment.topLeft,
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding:  EdgeInsets.all(8.0.w),
                           child: InkWell(
                             onTap: pickSubImages,
                             child: Container(
-                              width: 80,
-                              height: 80,
+                              width: 80.w,
+                              height: 80.h,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.grey[200],
@@ -116,14 +121,14 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                     Align(
                         alignment: Alignment.topLeft,
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding:  EdgeInsets.all(8.0.sp),
                           child: InkWell(
                             onTap: pickSubImages,
                             child: Container(
-                              width: 80,
-                              height: 80,
+                              width: 80.w,
+                              height: 80.h,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(10.r),
                                 color: Colors.grey[200],
                               ),
                               child:const Center(
@@ -135,10 +140,10 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                       ),
 
                      Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding:  EdgeInsets.all(8.0.w),
                         child: Wrap(
-                            spacing: 9,
-                            runSpacing: 9,
+                            spacing: 9.w,
+                            runSpacing: 9.h,
                             children: _imageFiles.map((file) {
                               return InkWell(
                                 onLongPress: () {
@@ -150,7 +155,7 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                                         return AlertDialog(
                                           title: TextWidget(
                                               content: "Delete",
-                                              fontSize: 22,
+                                              fontSize: 22.sp,
                                               fontWeight: FontWeight.bold),
                                           content: TextWidget(
                                               content:
@@ -176,8 +181,8 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                                       });
                                 },
                                 child: SizedBox(
-                                  width: 80,
-                                  height: 80,
+                                  width: 80.w,
+                                  height: 80.h,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
                                     child: Image.file(
@@ -193,97 +198,48 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                     alignment: Alignment.topLeft,
                     child: TextWidget(
                         content: "Place",
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.bold)),
-                TextFormFeild(
-                  hintText: "Name of place",
-                  controller: _placeController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Please enter the place name";
-                    }
-                    return null;
-                  },
-                ),
+                BuildPlaceTextFields(placeController: _placeController),
                 Align(
                     alignment: Alignment.topLeft,
                     child: TextWidget(
                         content: "District",
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.bold)),
-                TextFormFeild(
-                  hintText: "destrict",
-                  controller: _districtController,
-                  
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Please enter the destination";
-                    }
-                    return null;
-                  },
-                ),
+                BuildDistrictTextField(districtController: _districtController),
                 Align(
                     alignment: Alignment.topLeft,
                     child: TextWidget(
                         content: "Lattitude Value",
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.bold)),
-                TextFormFeild(
-                  hintText: "lattutude value of the place",
-                  controller: _latController,
-                  keyboardType: TextInputType.number,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Please enter the lattitude";
-                    }
-                    return null;
-                  },
-                ),
+                BuildLattitudeTextField(latController: _latController),
                 Align(
                     alignment: Alignment.topLeft,
                     child: TextWidget(
                         content: "Longitude Value",
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.bold)),
-                TextFormFeild(
-                  hintText: "longitude value of the place",
-                  controller: _logController,
-                  keyboardType: TextInputType.number,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Please enter the lattitude";
-                    }
-                    return null;
-                  },
-                ),
+                BuildLogitudeTextField(logController: _logController),
                 Align(
                     alignment: Alignment.topLeft,
                     child: TextWidget(
                         content: "Details",
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.bold)),
-                TextFormFeild(
-                  maxLength: 4,
-                  hintText: "details of the place",
-                  controller: _detailsController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Please enter the destination";
-                    }
-                    return null;
-                  },
-                ),
-              const  SizedBox(
-                  height: 10,
+                BuildDetailsTextField(detailsController: _detailsController),
+                SizedBox(
+                  height: 10.h,
                 ),
                 PrimaryButton(
                     backgroundColor: primaryColor,
                     content: TextWidget(
                         content: "Add Details",
-                        fontSize: 20,
+                        fontSize: 20.sp,
                         fontWeight: FontWeight.bold),
-                    width: 250,
-                    height: 50,
+                    width: 250.w,
+                    height: 50.h,
                     onPressed: () async {
                       if (_placeController.text.isEmpty ||
                           _districtController.text.isEmpty ||
@@ -333,8 +289,8 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                       // ignore: use_build_context_synchronously
                       Navigator.of(context).pop();
                     }),
-              const  SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: 10.h,
                 ),
               ],
             ),
@@ -374,9 +330,19 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                 content: "Delete", fontSize: 22, fontWeight: FontWeight.bold),
             content: TextWidget(
                 content: "Are you sure you want to delete this image?",
-                fontSize: 14,
+                fontSize: 14.sp,
                 fontWeight: FontWeight.normal),
           );
         });
   }
 }
+
+
+
+
+
+
+
+
+
+

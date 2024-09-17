@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:my_travelo_app/Controller/Hive/signIn_service.dart';
 import 'package:my_travelo_app/Views/Screens/Main_Screens/SignIn/widgets/sign_email_feild.dart';
 import 'package:my_travelo_app/Views/Screens/Main_Screens/SignIn/widgets/sign_username_feild.dart';

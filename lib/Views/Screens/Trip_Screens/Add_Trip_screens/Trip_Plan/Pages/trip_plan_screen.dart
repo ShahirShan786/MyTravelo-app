@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_travelo_app/Controller/Hive/user_functions.dart';
+import 'package:my_travelo_app/Views/Screens/Trip_Screens/Add_Trip_screens/Trip_Plan/widgets/add_button.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/app_bar.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/textFormFeilds.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/trip_deatails_screen_widget.dart';
@@ -13,7 +14,7 @@ import 'package:my_travelo_app/constants/constant.dart';
 
 import 'package:my_travelo_app/Models/user_model.dart';
 
-import 'package:my_travelo_app/Views/Screens/Primary_Screens/schedule_screen.dart';
+import 'package:my_travelo_app/Views/Screens/Primary_Screens/Schedule/Pages/schedule_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TripPlanScreen extends StatefulWidget {
@@ -112,7 +113,7 @@ class _TripPlanScreenState extends State<TripPlanScreen> {
                   },
                   icon: const Icon(Icons.add)),
             ),
-            SizedBox(
+            SizedBox( 
               height: 15.h,
             ),
             Expanded(
@@ -148,7 +149,7 @@ class _TripPlanScreenState extends State<TripPlanScreen> {
                     : Center(
                         child: TextWidget(
                           content: "No plans are available",
-                          fontSize: 15,
+                          fontSize: 15.sp,
                           fontWeight: FontWeight.w500,
                           color: secondaryColor,
                         ),
@@ -200,28 +201,7 @@ class _TripPlanScreenState extends State<TripPlanScreen> {
             log("Data couldn't passed");
           }
         },
-        child: Container(
-          height: 45.h,
-          width: 75.w,
-          decoration: BoxDecoration(
-              color: primaryColor, borderRadius: BorderRadius.circular(10.r)),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextWidget(
-                content: "Add",
-                fontSize: 18.sp,
-                fontWeight: FontWeight.w600,
-                color: white,
-              ),
-              Icon(
-                Icons.arrow_forward_ios_outlined,
-                size: 18.r,
-                color: white,
-              )
-            ],
-          ),
-        ),
+        child:const AddButton(),
       ),
     );
   }
@@ -249,6 +229,8 @@ class _TripPlanScreenState extends State<TripPlanScreen> {
     );
   }
 }
+
+
 
 _buttonClick({
   required BuildContext context,

@@ -10,7 +10,7 @@ import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:my_travelo_app/Models/admin_model.dart';
-import 'package:my_travelo_app/Views/Screens/Trip_Screens/Add_Trip_screens/add_trip_screen.dart';
+import 'package:my_travelo_app/Views/Screens/Trip_Screens/Add_Trip_screens/Add_Trip/pages/add_trip_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Homescreen extends StatefulWidget {
@@ -22,11 +22,21 @@ class Homescreen extends StatefulWidget {
 
 class _HomescreenState extends State<Homescreen> {
   final FireStoreServices fireStoreServices = FireStoreServices();
-
+  List<String> homePictures = [];
+  bool isLoading = true;
   @override
   void initState() {
     super.initState();
+    loadHomepictureUrl();
     fireStoreServices.getFirebaseDetails();
+  }
+
+  void loadHomepictureUrl ()async{
+    final imageUrl = await fireStoreServices.getImageUrls();
+    setState(() {
+      homePictures = imageUrl;
+      isLoading = false;
+    });
   }
 
   @override
@@ -34,16 +44,18 @@ class _HomescreenState extends State<Homescreen> {
     return Scaffold(
       appBar: buildAppBar(),
       body: PreferredSize(
-        preferredSize: Size.fromWidth(500),
+        preferredSize:  Size.fromWidth(500.w),
         child: SafeArea(
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildSliderCarousel(),
+                isLoading 
+                ?const Center( child:  CircularProgressIndicator(),)
+                :  buildSliderCarousel(),
                 SizedBox(height: 10.h),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding:  EdgeInsets.only(left: 10.w),
                   child: TextWidget(
                     content: "Featured guides from users",
                     fontSize: 20.sp,
@@ -83,9 +95,9 @@ class _HomescreenState extends State<Homescreen> {
             final userId = prefz.getString("currentuserId");
             Get.to(() => DreamDestinationScreen(userId: userId.toString()));
           },
-          icon: const Icon(
+          icon:  Icon(
             Icons.public,
-            size: 33,
+            size: 33.w,
             color: primaryColor,
           ),
         ),
@@ -98,11 +110,10 @@ class _HomescreenState extends State<Homescreen> {
     return Container(
       color: Colors.grey.shade600,
       width: double.infinity,
-      child: Image.network(
-        urlImage,
-        fit: BoxFit.fill,
-        width: double.infinity,
-      ),
+      child: CachedNetworkImage(imageUrl: urlImage,
+      fit: BoxFit.fill,
+      width: double.infinity,
+      )
     );
   }
 
@@ -111,9 +122,9 @@ class _HomescreenState extends State<Homescreen> {
     return Stack(
       children: [
         CarouselSlider.builder(
-          itemCount: imageItems.length,
+          itemCount: homePictures.length,
           itemBuilder: (BuildContext context, int index, int realIndex) {
-            final urlImage = imageItems[index];
+            final urlImage = homePictures[index];
             return sliderWidget(urlImage);
           },
           options: CarouselOptions(
@@ -123,8 +134,8 @@ class _HomescreenState extends State<Homescreen> {
           ),
         ),
         Positioned(
-          bottom: 85,
-          left: 15,
+          bottom: 85.h,
+          left: 15.w,
           child: TextWidget(
             color: Colors.white,
             content: "Plan your next  \nadventure",
@@ -134,8 +145,8 @@ class _HomescreenState extends State<Homescreen> {
           ),
         ),
         Positioned(
-          bottom: 30,
-          left: 15,
+          bottom: 30.h,
+          left: 15.w,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: primaryColor,
@@ -207,7 +218,7 @@ class _HomescreenState extends State<Homescreen> {
                 child: CachedNetworkImage(
                   imageUrl: place.subImage[0],
                   fit: BoxFit.cover,
-                  height: 160,
+                  height: 160.h,
                   width: double.infinity,
                   placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(
@@ -225,7 +236,7 @@ class _HomescreenState extends State<Homescreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(5),
+                padding:  EdgeInsets.all(5.w),
                 child: Text(
                   place.details,
                   style: TextStyle(

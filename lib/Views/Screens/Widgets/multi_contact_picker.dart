@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 
 
@@ -21,14 +22,14 @@ class _ContactPickerState extends State<ContactPicker> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      contentPadding: const EdgeInsets.all(15),
+      contentPadding:  EdgeInsets.all(15.w),
       title: TextWidget(
           content: "Select Companion",
-          fontSize: 22,
+          fontSize: 22.sp,
           fontWeight: FontWeight.bold),
       content: SizedBox(
         width: double.maxFinite,
-        height: 500,
+        height: 500.h,
         // color: Colors.grey[200],
         child: ListView.builder(
             itemCount: widget.contacts.length,
@@ -69,7 +70,7 @@ class _ContactPickerState extends State<ContactPicker> {
             },
             child: TextWidget(
               content: "DISMISS",
-              fontSize: 16,
+              fontSize: 16.sp,
               fontWeight: FontWeight.bold,
               color:const Color.fromARGB(255, 74, 166, 77),
             )),
@@ -80,7 +81,7 @@ class _ContactPickerState extends State<ContactPicker> {
           },
           child: TextWidget(
             content: "OK",
-            fontSize: 16,
+            fontSize: 16.sp,
             fontWeight: FontWeight.bold,
             color: const Color.fromARGB(255, 74, 166, 77),
           ),

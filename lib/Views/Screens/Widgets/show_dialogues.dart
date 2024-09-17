@@ -3,13 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/admin_textfeild.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/textFormFeilds.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/text_form_feild.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/textfeild.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/Views/Admin-screens/admin_login_screen.dart';
 
 Future<void> showLoadingDialogue({
   required BuildContext context,
@@ -51,9 +47,9 @@ Future<void> showDeleteDialogue({
       ) {
         return AlertDialog(
           title: TextWidget(
-              content: "Delete", fontSize: 22, fontWeight: FontWeight.bold),
+              content: "Delete", fontSize: 22.sp, fontWeight: FontWeight.bold),
           content: TextWidget(
-              content: content, fontSize: 14, fontWeight: FontWeight.normal),
+              content: content, fontSize: 14.sp, fontWeight: FontWeight.normal),
           actions: [
             TextButton(
                 onPressed: () {
@@ -76,16 +72,16 @@ Future<void> showDeletedDialogue({
   Get.defaultDialog(
       title: tittle!,
       titleStyle:
-          const TextStyle(fontSize: 25, fontWeight: FontWeight.w600, color: black),
+           TextStyle(fontSize: 25.sp, fontWeight: FontWeight.w600, color: black),
       titlePadding: const EdgeInsets.only(right: 165, top: 15),
       content: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15),
+        padding:  EdgeInsets.symmetric(vertical: 15.h),
         child: TextWidget(
-            content: conformText, fontSize: 15, fontWeight: FontWeight.w400),
+            content: conformText, fontSize: 15.sp, fontWeight: FontWeight.w400),
       ),
       actions: [
         Padding(
-          padding: const EdgeInsets.only(bottom: 10),
+          padding:  EdgeInsets.only(bottom: 10.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -108,10 +104,10 @@ Future<void> showAddSavingDialogue(
   double? amount = 0;
   Get.defaultDialog(
       title: "Add Your Savings",
-      titlePadding: const EdgeInsets.symmetric(vertical: 15),
-      titleStyle: const TextStyle(
-          fontSize: 22, fontWeight: FontWeight.bold, color: purple),
-      contentPadding: const EdgeInsets.all(15),
+      titlePadding:  EdgeInsets.symmetric(vertical: 15.h),
+      titleStyle:  TextStyle(
+          fontSize: 22.sp, fontWeight: FontWeight.bold, color: purple),
+      contentPadding:  EdgeInsets.all(15.w),
       content: Textformfeilds(
         keyboardType: TextInputType.number,
         labelText: "Add Savings",
@@ -142,7 +138,7 @@ Future<void> showAddSavingDialogue(
                         content: TextWidget(
                           content:
                               "The entered amount exceeds the remainig expense.",
-                          fontSize: 15,
+                          fontSize: 15.sp,
                           fontWeight: FontWeight.w600,
                           color: white,
                         )));

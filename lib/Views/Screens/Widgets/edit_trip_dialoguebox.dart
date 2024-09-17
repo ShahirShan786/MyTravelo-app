@@ -1,13 +1,14 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:my_travelo_app/Controller/Hive/user_functions.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/textFormFeilds.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/Models/user_model.dart';
-import 'package:my_travelo_app/Views/Screens/Primary_Screens/schedule_screen.dart';
+import 'package:my_travelo_app/Views/Screens/Primary_Screens/Schedule/Pages/schedule_screen.dart';
 
 
 class EditTripDialogueBox {
@@ -30,7 +31,7 @@ class EditTripDialogueBox {
   }) {
     destinationController = TextEditingController(text: trip.destination);
     companionController =
-        TextEditingController(text: trip.companion.join(', '));
+        TextEditingController(text: trip.companion!.join(', '));
     startDateController = TextEditingController(
         text: DateFormat("yyyy-MM-dd").format(trip.rangeStart));
     endDateController = TextEditingController(
@@ -46,7 +47,7 @@ class EditTripDialogueBox {
           return AlertDialog(
             title: TextWidget(
                 content: "Edit your Trip",
-                fontSize: 20,
+                fontSize: 20.sp,
                 fontWeight: FontWeight.bold),
             content: SingleChildScrollView(
               child: SizedBox(
@@ -68,6 +69,7 @@ class EditTripDialogueBox {
                         return null;
                       },
                     ),
+                  trip.companion != null && trip.companion!.isNotEmpty?
                     Textformfeilds(
                       borderColor: secondaryColor,
                       focusedColor: black,
@@ -81,7 +83,7 @@ class EditTripDialogueBox {
                         }
                         return null;
                       },
-                    ),
+                    ): const SizedBox(),
                     Textformfeilds(
                       borderColor: secondaryColor,
                       focusedColor: black,
@@ -135,7 +137,7 @@ class EditTripDialogueBox {
                   },
                   child: TextWidget(
                       content: "Cancel",
-                      fontSize: 15,
+                      fontSize: 15.sp,
                       fontWeight: FontWeight.w600)),
               TextButton(
                   onPressed: () {
@@ -163,7 +165,7 @@ class EditTripDialogueBox {
                   },
                   child: TextWidget(
                       content: "Update",
-                      fontSize: 15,
+                      fontSize: 15.sp,
                       fontWeight: FontWeight.w600))
             ],
           );

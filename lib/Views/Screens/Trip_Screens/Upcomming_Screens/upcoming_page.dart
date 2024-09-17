@@ -26,16 +26,26 @@
     late String endDay;
     late String day;
     late String week;
-    void initializeTrip() async {
-      tripList.value = await getTrip();
-      filteredTripList.value = tripList.value;
-      log("tripList lenth ${tripList.value.length}");
-    }
+   
 
     @override
     void initState() {
       super.initState();
       initializeTrip();
+    }
+
+    // void initializeTrip()async{
+    //   await splitData(widget.userId);
+    //   setState(() {
+        
+    //   });
+    // }
+
+     void initializeTrip() async {
+      await splitData(widget.userId);
+      tripList.value = await getTrip();
+      filteredTripList.value = tripList.value;
+      log("tripList lenth ${tripList.value.length}");
     }
 
     void filteredTrips(String query) {
@@ -54,7 +64,7 @@
       return Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            padding:  EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
             child: TextField(
               keyboardType: TextInputType.datetime,
               controller: _searchController,
@@ -62,8 +72,8 @@
                   labelText: "Search by Date ( dd MMM yyyy)",
                   prefixIcon: const Icon(Icons.search_rounded),
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: const BorderSide(width: 0.5))),
+                      borderRadius: BorderRadius.circular(30.r),
+                      borderSide:  BorderSide(width: 0.5.w))),
               onChanged: (value) {
                 filteredTrips(value);
               },
@@ -120,12 +130,12 @@
                                                     ),
                                                     TextWidget(
                                                         content: day,
-                                                        fontSize: 15,
+                                                        fontSize: 15.sp,
                                                         fontWeight:
                                                             FontWeight.bold),
                                                     TextWidget(
                                                         content: week,
-                                                        fontSize: 15,
+                                                        fontSize: 15.sp,
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   ],
@@ -229,10 +239,10 @@
           builder: (BuildContext context) {
             return AlertDialog(
               title: TextWidget(
-                  content: "Delete", fontSize: 20, fontWeight: FontWeight.bold),
+                  content: "Delete", fontSize: 20.sp, fontWeight: FontWeight.bold),
               content: TextWidget(
                   content: "Are you sure you want to delete this trip?",
-                  fontSize: 15,
+                  fontSize: 15.sp,
                   fontWeight: FontWeight.normal),
               actions: [
                 TextButton(
@@ -241,7 +251,7 @@
                     },
                     child: TextWidget(
                         content: "Cancel",
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         fontWeight: FontWeight.w600)),
                 TextButton(
                     onPressed: () {
@@ -253,7 +263,7 @@
                     },
                     child: TextWidget(
                         content: "Delete",
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         fontWeight: FontWeight.w600)),
               ],
             );

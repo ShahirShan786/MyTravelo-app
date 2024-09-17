@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 
 
@@ -22,7 +23,7 @@ class TextFormFeild extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding:  EdgeInsets.all(8.0.w),
       child: TextFormField(
         maxLines: maxLength,
         controller: controller,
@@ -31,11 +32,11 @@ class TextFormFeild extends StatelessWidget {
         decoration: InputDecoration(
             hintText: hintText,
             enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(color: purple, width: 1)),
+                borderRadius: BorderRadius.circular(10.r),
+                borderSide:  BorderSide(color: purple, width: 1.w)),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(color: primaryColor, width: 2))),
+                borderRadius: BorderRadius.circular(10.r),
+                borderSide:  BorderSide(color: primaryColor, width: 2.w))),
       ),
     );
   }

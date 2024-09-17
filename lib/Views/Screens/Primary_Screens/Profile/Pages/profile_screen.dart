@@ -4,21 +4,18 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_travelo_app/Controller/Hive/signIn_service.dart';
+import 'package:my_travelo_app/Views/Screens/Primary_Screens/Profile/widgets/profile_info_section.dart';
+import 'package:my_travelo_app/Views/Screens/Primary_Screens/Profile/widgets/settings_section.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/app_bar.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/edit_dialogue.dart';
 import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/dashboard.dart';
 import 'package:my_travelo_app/Models/singInModel.dart';
 import 'package:my_travelo_app/Views/Screens/Settings_Screens/Terms_page.dart';
 import 'package:my_travelo_app/Views/Screens/Settings_Screens/about_page.dart';
 import 'package:my_travelo_app/Views/Screens/Settings_Screens/logout_page.dart';
 import 'package:my_travelo_app/Views/Screens/Settings_Screens/privacy_page.dart';
-import 'package:my_travelo_app/Views/Screens/Primary_Screens/Home/pages/home_screens.dart';
-import 'package:my_travelo_app/Views/Screens/Main_Screens/Login/Pages/logIn_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Profilescreen extends StatefulWidget {
@@ -141,34 +138,7 @@ class _ProfilescreenState extends State<Profilescreen> {
                                 )
                               ],
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 5.h, left: 12.w),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  TextWidget(
-                                      content: profileDetail != null
-                                          ? profileDetail!.username ?? " "
-                                          : "User",
-                                      fontSize: 20.sp,
-                                      fontWeight: FontWeight.w700),
-                                  SizedBox(height: 5.h),
-                                  TextWidget(
-                                      content: profileDetail != null
-                                          ? profileDetail!.email ?? "email"
-                                          : "email",
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.w500),
-                                  const SizedBox(height: 2),
-                                  TextWidget(
-                                      content: profileDetail != null
-                                          ? profileDetail!.phone ?? "phone"
-                                          : 'phone',
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400)
-                                ],
-                              ),
-                            ),
+                            profileInfoSection(profileDetail: profileDetail),
                           ],
                         ),
                       ),
@@ -196,83 +166,7 @@ class _ProfilescreenState extends State<Profilescreen> {
                   ],
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(top: 20.h),
-                width: double.infinity,
-                height: 450.w,
-                decoration: BoxDecoration(
-                    color: Colors.grey[100],
-                    borderRadius: BorderRadius.circular(20.r)),
-                child: Padding(
-                  padding: EdgeInsets.all(8.0.w),
-                  child: ListView.builder(
-                      itemCount: profileScreens.length,
-                      itemBuilder: (BuildContext context, index) {
-                        return ListTile(
-                          leading: Icon(icons[index]),
-                          title: TextWidget(
-                              content: titles[index],
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.bold),
-                          trailing:
-                              const Icon(Icons.arrow_forward_ios_outlined),
-                          onTap: () {
-                            if (index == profileScreens.length - 1) {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: TextWidget(
-                                          content: "Log out",
-                                          fontSize: 18.sp,
-                                          fontWeight: FontWeight.bold),
-                                      content: TextWidget(
-                                          content:
-                                              "Are you sure you want to logout?",
-                                          fontSize: 15.sp,
-                                          fontWeight: FontWeight.w400),
-                                      actions: [
-                                        TextButton(
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                            child: const Text("Cancel")),
-                                        TextButton(
-                                          onPressed: () async {
-                                            Navigator.of(context)
-                                                .pushAndRemoveUntil(
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const LoginPage(),
-                                                    ),
-                                                    (Route<dynamic> route) =>
-                                                        false);
-                                            SharedPreferences prefz =
-                                                await SharedPreferences
-                                                    .getInstance();
-                                            prefz.remove("currentuserId");
-                                            log("currentuserId removed");
-                                            SharedPreferences prefs =
-                                                await SharedPreferences
-                                                    .getInstance();
-                                            prefs.setBool("isLogedIn", false);
-                                            currentScreen = const Homescreen();
-                                          },
-                                          child: const Text("Log out"),
-                                        )
-                                      ],
-                                    );
-                                  });
-                            } else {
-                              Get.to(
-                                () => profileScreens[index],
-                              );
-                            }
-                          },
-                        );
-                      }),
-                ),
-              )
+              buildSettingsSection(profileScreens: profileScreens, icons: icons, titles: titles)
             ],
           ),
         ),
@@ -294,3 +188,6 @@ class _ProfilescreenState extends State<Profilescreen> {
     return null;
   }
 }
+
+
+

@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/app_bar.dart';
@@ -13,7 +10,7 @@ import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/Models/user_model.dart';
 import 'package:my_travelo_app/Views/Screens/Trip_Screens/Upcomming_Screens/expense_screen.dart';
-import 'package:my_travelo_app/Views/Screens/Trip_Screens/Add_Trip_screens/trip_plan_screen.dart';
+import 'package:my_travelo_app/Views/Screens/Trip_Screens/Add_Trip_screens/Trip_Plan/Pages/trip_plan_screen.dart';
 
 class UpcommingDetailsPage extends StatefulWidget {
   
@@ -41,7 +38,7 @@ class _UpcommingDetailsPageState extends State<UpcommingDetailsPage> {
     final TripModel trip = widget.trip;
     Map<String, List<String>> activities = trip.activities;
     final dateStart = DateFormat("dd MMM yyyy").format(trip.rangeStart);
-    final List<String> companions = trip.companion;
+    final List<String> companions = trip.companion!;
     List<DateTime> days = getDaysInRange(trip.rangeStart, trip.rangeEnd);
 
     return Scaffold(
@@ -51,37 +48,37 @@ class _UpcommingDetailsPageState extends State<UpcommingDetailsPage> {
       ),
       body: Center(
           child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+        padding:  EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 40,
+              padding:  EdgeInsets.symmetric(
+                horizontal: 40.w,
               ),
               child: Card(
                 elevation: 10,
                 child: Container(
                   width: double.infinity,
-                  height: 120,
+                  height: 120.h,
                   decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                      BoxDecoration(borderRadius: BorderRadius.circular(20.r)),
                   child: Center(
                     child: Column(
                       children: [
-                        const SizedBox(
-                          height: 25,
+                         SizedBox(
+                          height: 25.h,
                         ),
                         TextWidget(
                             content: trip.destination,
-                            fontSize: 24,
+                            fontSize: 24.sp,
                             fontWeight: FontWeight.bold),
-                        const SizedBox(
-                          height: 12,
+                         SizedBox(
+                          height: 12.h,
                         ),
                         TextWidget(
                             content: "Started on $dateStart",
-                            fontSize: 18,
+                            fontSize: 18.sp,
                             fontWeight: FontWeight.w600),
                       ],
                     ),
@@ -89,8 +86,8 @@ class _UpcommingDetailsPageState extends State<UpcommingDetailsPage> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 10,
+             SizedBox(
+              height: 10.h,
             ),
             companions.isNotEmpty
                 ? CompanionBox(
@@ -100,10 +97,10 @@ class _UpcommingDetailsPageState extends State<UpcommingDetailsPage> {
                 : const SizedBox(),
             TextWidget(
                 content: "Your plans are",
-                fontSize: 20,
+                fontSize: 20.sp,
                 fontWeight: FontWeight.w700),
-            const SizedBox(
-              height: 3,
+             SizedBox(
+              height: 3.h,
             ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -179,25 +176,25 @@ class _UpcommingDetailsPageState extends State<UpcommingDetailsPage> {
               ));
         },
         child: Container(
-          width: 100,
-          height: 45,
+          width: 100.w,
+          height: 45.h,
           decoration: BoxDecoration(
-              color: primaryColor, borderRadius: BorderRadius.circular(10)),
+              color: primaryColor, borderRadius: BorderRadius.circular(10.r)),
           child: Center(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding:  EdgeInsets.all(8.0.r),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TextWidget(
                     content: "Expense",
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
                     color: white,
                   ),
-                  const Icon(
+                   Icon(
                     Icons.arrow_forward_ios_rounded,
-                    size: 20,
+                    size: 20.w,
                     color: white,
                     weight: 20,
                   )
@@ -217,7 +214,7 @@ class _UpcommingDetailsPageState extends State<UpcommingDetailsPage> {
     required DateTime date,
   }) {
     return InkWell(
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(10.r),
       onTap: () {
         setState(() {
           selectTab = index;

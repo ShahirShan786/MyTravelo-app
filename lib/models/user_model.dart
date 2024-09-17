@@ -13,7 +13,7 @@ class TripModel {
   @HiveField(3)
   String id;
   @HiveField(4)
-  late List<String> companion;
+  late List<String>? companion;
   @HiveField(5)
   late Map<String, List<String>> activities;
   @HiveField(6)
@@ -25,10 +25,11 @@ class TripModel {
       required this.rangeStart,
       required this.rangeEnd,
       required this.id,
-      required this.companion,
       required this.activities,
       required this.time,
-      required this.userId});
+      required this.userId,
+      this.companion,
+      });
 }
 
 @HiveType(typeId: 3)

@@ -3,18 +3,17 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_travelo_app/Controller/Firebase/firebase_functions.dart';
 import 'package:my_travelo_app/Controller/Hive/image_upload.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/admin_textfeild.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/show_dialogues.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/text_form_feild.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/constants/primary_button.dart';
 import 'package:my_travelo_app/Models/admin_model.dart';
-import 'package:my_travelo_app/Views/Admin-screens/admin_home_page.dart';
-import 'package:my_travelo_app/Views/Admin-screens/admin_place_details_screen.dart';
+import 'package:my_travelo_app/Views/Admin-screens/Home_Page/Pages/admin_home_page.dart';
 
 class AdminEditPlaceScreen extends StatefulWidget {
   final PlaceModel? firebasePlaceModel;
@@ -49,31 +48,31 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding:  EdgeInsets.all(8.0.w),
           child: Center(
             child: Column(
               children: [
-                const SizedBox(
-                  height: 50,
+                 SizedBox(
+                  height: 50.h,
                 ),
                 Align(
                   alignment: Alignment.topLeft,
                   child: TextWidget(
                       content: "Add main image",
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(
-                  height: 20,
+                 SizedBox(
+                  height: 20.h,
                 ),
                 InkWell(
                   onTap: pickMainImage,
                   child: Container(
-                      width: 240,
-                      height: 160,
+                      width: 240.w,
+                      height: 160.h,
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(15.r),
                       ),
                       child: _image == null
                           ? const Center(
@@ -86,14 +85,14 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
                                 fit: BoxFit.cover,
                               ))),
                 ),
-                const SizedBox(
-                  height: 10,
+                 SizedBox(
+                  height: 10.h,
                 ),
                 Align(
                   alignment: Alignment.topLeft,
                   child: TextWidget(
                       content: "Add sub images",
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.bold),
                 ),
                 Column(
@@ -101,14 +100,14 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
                     Align(
                       alignment: Alignment.topLeft,
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding:  EdgeInsets.all(8.0.w),
                         child: InkWell(
                           onTap: pickSubImages,
                           child: Container(
-                            width: 80,
-                            height: 80,
+                            width: 80.w,
+                            height: 80.h,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(10.r),
                               color: Colors.grey[200],
                             ),
                             child: const Center(
@@ -119,7 +118,7 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding:  EdgeInsets.all(8.0.w),
                       child: SizedBox(
                           height: 100,
                           child: _imageFiles.isNotEmpty
@@ -137,13 +136,13 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
                                               return AlertDialog(
                                                 title: TextWidget(
                                                     content: "Delete",
-                                                    fontSize: 22,
+                                                    fontSize: 22.sp,
                                                     fontWeight:
                                                         FontWeight.bold),
                                                 content: TextWidget(
                                                     content:
                                                         "Are you sure you want to delete this image?",
-                                                    fontSize: 14,
+                                                    fontSize: 14.sp,
                                                     fontWeight:
                                                         FontWeight.normal),
                                                 actions: [
@@ -170,13 +169,13 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
                                             });
                                       },
                                       child: Padding(
-                                        padding: const EdgeInsets.all(5.0),
+                                        padding:  EdgeInsets.all(5.0.w),
                                         child: SizedBox(
-                                          width: 110,
-                                          height: 80,
+                                          width: 110.w,
+                                          height: 80.h,
                                           child: ClipRRect(
                                               borderRadius:
-                                                  BorderRadius.circular(10),
+                                                  BorderRadius.circular(10.r),
                                               child: Image.file(
                                                 File(
                                                   _imageFiles[index].path,
@@ -201,13 +200,13 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
                                               return AlertDialog(
                                                 title: TextWidget(
                                                     content: "Delete",
-                                                    fontSize: 22,
+                                                    fontSize: 22.sp,
                                                     fontWeight:
                                                         FontWeight.bold),
                                                 content: TextWidget(
                                                     content:
                                                         "Are you sure you want to delete this image?",
-                                                    fontSize: 14,
+                                                    fontSize: 14.sp,
                                                     fontWeight:
                                                         FontWeight.normal),
                                                 actions: [
@@ -234,13 +233,13 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
                                             });
                                       },
                                       child: Padding(
-                                        padding: const EdgeInsets.all(5.0),
+                                        padding:  EdgeInsets.all(5.0.w),
                                         child: SizedBox(
-                                          width: 110,
-                                          height: 80,
+                                          width: 110.w,
+                                          height: 80.h,
                                           child: ClipRRect(
                                               borderRadius:
-                                                  BorderRadius.circular(10),
+                                                  BorderRadius.circular(10.r),
                                               child: CachedNetworkImage(
                                                 imageUrl: firebaseImages[index],
                                                 fit: BoxFit.fill,
@@ -269,7 +268,7 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
                     alignment: Alignment.topLeft,
                     child: TextWidget(
                         content: "Place",
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.bold)),
                 textField(
                     label: "Place name",
@@ -279,7 +278,7 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
                     alignment: Alignment.topLeft,
                     child: TextWidget(
                         content: "District",
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.bold)),
                 textField(
                     label: "District",
@@ -289,23 +288,23 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
                     alignment: Alignment.topLeft,
                     child: TextWidget(
                         content: "Details",
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.bold)),
                 textField(
                     label: "place details",
                     controller: _detailsController,
                     text: widget.firebasePlaceModel?.details),
-                const SizedBox(
-                  height: 10,
+                 SizedBox(
+                  height: 10.h,
                 ),
                 PrimaryButton(
                     backgroundColor: primaryColor,
                     content: TextWidget(
                         content: "Update Details",
-                        fontSize: 20,
+                        fontSize: 20.sp,
                         fontWeight: FontWeight.bold),
-                    width: 250,
-                    height: 50,
+                    width: 250.w,
+                    height: 50.h,
                     onPressed: () async {
                       if (_placeController.text.isEmpty ||
                           _districtController.text.isEmpty ||
@@ -341,8 +340,8 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
                           ),
                           (Route<dynamic> route) => false);
                     }),
-                const SizedBox(
-                  height: 10,
+                 SizedBox(
+                  height: 10.h,
                 ),
               ],
             ),
@@ -382,7 +381,7 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
                 content: "Delete", fontSize: 22, fontWeight: FontWeight.bold),
             content: TextWidget(
                 content: "Are you sure you want to delete this image?",
-                fontSize: 14,
+                fontSize: 14.sp,
                 fontWeight: FontWeight.normal),
           );
         });

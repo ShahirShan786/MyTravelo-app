@@ -3,15 +3,14 @@ import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:my_travelo_app/Controller/Hive/user_functions.dart';
 import 'package:my_travelo_app/Views/Screens/Sub_Screens/add_dream_destination_screen.dart';
 import 'package:my_travelo_app/Views/Screens/Sub_Screens/edit_dream_destination.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/show_dialogues.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/constants/primary_button.dart';
 import 'package:my_travelo_app/Models/user_model.dart';
 
 class DreamDestinationScreen extends StatefulWidget {
@@ -45,7 +44,7 @@ class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
         centerTitle: true,
         title: TextWidget(
             content: "Dream Destination",
-            fontSize: 20,
+            fontSize: 20.sp,
             fontWeight: FontWeight.bold),
       ),
       body: ValueListenableBuilder(
@@ -53,18 +52,18 @@ class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
           builder: (context, value, child) {
             log("Rebuilding with ${value.length} items");
             return Padding(
-              padding: const EdgeInsets.all(15),
+              padding:  EdgeInsets.all(15.w),
               child: ListView.builder(
                   itemCount: value.length,
                   itemBuilder: (context, index) {
                     DreamDestinationModel data =
                         dreamDestinationListener.value[index];
                     return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      padding:  EdgeInsets.symmetric(vertical: 15.h),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(10.r),
                         child: Container(
-                            height: 230,
+                            height: 230.h,
                             width: double.infinity,
                             decoration: BoxDecoration(
                                 color: Colors.grey[300],
@@ -91,7 +90,7 @@ class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
                                         );
                                       },
                                       options: CarouselOptions(
-                                          height: 230,
+                                          height: 230.h,
                                           autoPlay: true,
                                           viewportFraction: 1.0)),
                                   Container(
@@ -99,28 +98,28 @@ class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
                                     height: double.infinity,
                                     color: Colors.black.withOpacity(0.4),
                                     child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding:  EdgeInsets.all(8.0.w),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          const SizedBox(
-                                            height: 58,
+                                           SizedBox(
+                                            height: 58.h,
                                           ),
                                           TextWidget(
                                             content:
                                                 "Destination       :  ${data.destination}",
-                                            fontSize: 20,
+                                            fontSize: 20.sp,
                                             fontWeight: FontWeight.bold,
                                             color: white,
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 5),
+                                            padding:  EdgeInsets.symmetric(
+                                                vertical: 5.h),
                                             child: TextWidget(
                                               content:
                                                   "Total Amount        :  ${data.totalExpense}",
-                                              fontSize: 17,
+                                              fontSize: 17.sp,
                                               fontWeight: FontWeight.bold,
                                               color: white,
                                             ),
@@ -128,16 +127,16 @@ class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
                                           TextWidget(
                                             content:
                                                 "Total Savings        :  ${data.totalSavings}",
-                                            fontSize: 17,
+                                            fontSize: 17.sp,
                                             fontWeight: FontWeight.bold,
                                             color: white,
                                           ),
-                                          const SizedBox(
-                                            height: 15,
+                                           SizedBox(
+                                            height: 15.h,
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 80),
+                                            padding:  EdgeInsets.only(
+                                                right: 80.w),
                                             child: LinearProgressIndicator(
                                               value: data.totalSavings >=
                                                       data.totalExpense
@@ -147,8 +146,8 @@ class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
                                               color: primaryColor,
                                             ),
                                           ),
-                                          const SizedBox(
-                                            height: 12,
+                                           SizedBox(
+                                            height: 12.w,
                                           ),
                                           ElevatedButton(
                                             onPressed: () {
@@ -157,16 +156,16 @@ class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
                                             style: ElevatedButton.styleFrom(
                                                 backgroundColor: primaryColor,
                                                 padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 52,
-                                                        vertical: 12),
+                                                     EdgeInsets.symmetric(
+                                                        horizontal: 52.w,
+                                                        vertical: 12.h),
                                                 shape: RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            10))),
+                                                            10.r))),
                                             child: TextWidget(
                                               content: "Add Savings",
-                                              fontSize: 15,
+                                              fontSize: 15.sp,
                                               fontWeight: FontWeight.bold,
                                               color: white,
                                             ),
@@ -176,15 +175,15 @@ class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 5),
+                                    padding:  EdgeInsets.symmetric(
+                                        horizontal: 10.w, vertical: 5.h),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         CircleAvatar(
                                           backgroundColor:
                                               white.withOpacity(0.3),
-                                          radius: 20,
+                                          radius: 20.r,
                                           child: IconButton(
                                               onPressed: () {
                                                 Get.to(() =>
@@ -195,13 +194,13 @@ class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
                                               },
                                               icon: const Icon(Icons.edit)),
                                         ),
-                                        const SizedBox(
-                                          width: 5,
+                                         SizedBox(
+                                          width: 5.w,
                                         ),
                                         CircleAvatar(
                                           backgroundColor:
                                               white.withOpacity(0.3),
-                                          radius: 20,
+                                          radius: 20.r,
                                           child: IconButton(
                                               onPressed: () async {
                                                 showDeletedDialogue(
@@ -231,7 +230,7 @@ class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
             );
           }),
       floatingActionButton: Padding(
-          padding: const EdgeInsets.only(bottom: 20),
+          padding:  EdgeInsets.only(bottom: 20.h),
           child: FloatingActionButton(
             backgroundColor: primaryColor,
             onPressed: () async {
@@ -263,7 +262,7 @@ class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
           backgroundColor: red,
           content: TextWidget(
             content: "Total savings have reached the total expense.",
-            fontSize: 15,
+            fontSize: 15.sp,
             fontWeight: FontWeight.w600,
             color: white,
           )));

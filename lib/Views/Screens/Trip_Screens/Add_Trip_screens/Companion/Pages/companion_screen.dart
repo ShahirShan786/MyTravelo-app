@@ -11,7 +11,7 @@ import 'package:my_travelo_app/Views/Screens/Widgets/show_dialogues.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/constants/primary_button.dart';
-import 'package:my_travelo_app/Views/Screens/Trip_Screens/Add_Trip_screens/trip_plan_screen.dart';
+import 'package:my_travelo_app/Views/Screens/Trip_Screens/Add_Trip_screens/Trip_Plan/Pages/trip_plan_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class CompanionScreen extends StatefulWidget {
@@ -98,7 +98,7 @@ class _CompanionScreenState extends State<CompanionScreen> {
                         itemBuilder: (BuildContext context, int index) {
                           final contactz = selectedContacts[index];
                           return Padding(
-                              padding: const EdgeInsets.all(5),
+                              padding:  EdgeInsets.all(5.w),
                               child: ListTile(
                                 title: Text(contactz.displayName ?? "No Name"),
                               ));

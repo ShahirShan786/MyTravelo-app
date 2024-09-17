@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/Models/singInModel.dart';
-import 'package:my_travelo_app/Views/Screens/Trip_Screens/Add_Trip_screens/add_trip_screen.dart';
-import 'package:my_travelo_app/Views/Screens/Primary_Screens/favorite_screen.dart';
+import 'package:my_travelo_app/Views/Screens/Trip_Screens/Add_Trip_screens/Add_Trip/pages/add_trip_screen.dart';
+import 'package:my_travelo_app/Views/Screens/Primary_Screens/Favorite/Pages/favorite_screen.dart';
 import 'package:my_travelo_app/Views/Screens/Primary_Screens/Home/pages/home_screens.dart';
-import 'package:my_travelo_app/Views/Screens/Primary_Screens/profile_screen.dart';
-import 'package:my_travelo_app/Views/Screens/Primary_Screens/schedule_screen.dart';
+import 'package:my_travelo_app/Views/Screens/Primary_Screens/Profile/Pages/profile_screen.dart';
+import 'package:my_travelo_app/Views/Screens/Primary_Screens/Schedule/Pages/schedule_screen.dart';
 import 'package:get/get.dart';
 
 class Dashboard extends StatefulWidget {
@@ -66,7 +67,7 @@ class _DashboardState extends State<Dashboard> {
         shape: const CircularNotchedRectangle(),
         notchMargin: 10,
         child: SizedBox(
-          height: 30,
+          height: 30.h,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -84,11 +85,11 @@ class _DashboardState extends State<Dashboard> {
                       Icons.home,
                       color:
                           currentPageIndex == 0 ? primaryColor : secondaryColor,
-                      size: 28,
+                      size: 28.w,
                     ),
                   ),
-                  const SizedBox(
-                    width: 22,
+                   SizedBox(
+                    width: 22.w,
                   ),
                   IconButton(
                     onPressed: () {
@@ -99,7 +100,7 @@ class _DashboardState extends State<Dashboard> {
                     },
                     icon: FaIcon(
                       FontAwesomeIcons.list,
-                      size: 24,
+                      size: 24.w,
                       color:
                           currentPageIndex == 1 ? primaryColor : secondaryColor,
                     ),
@@ -118,13 +119,13 @@ class _DashboardState extends State<Dashboard> {
                     },
                     icon: Icon(
                       Icons.favorite,
-                      size: 26,
+                      size: 26.w,
                       color:
                           currentPageIndex == 2 ? primaryColor : secondaryColor,
                     ),
                   ),
-                  const SizedBox(
-                    width: 20,
+                   SizedBox(
+                    width: 20.w,
                   ),
                   IconButton(
                       onPressed: () {
@@ -137,7 +138,7 @@ class _DashboardState extends State<Dashboard> {
                       },
                       icon: Icon(
                         Icons.person_2_rounded,
-                        size: 30,
+                        size: 30.w,
                         color: currentPageIndex == 3
                             ? primaryColor
                             : secondaryColor,

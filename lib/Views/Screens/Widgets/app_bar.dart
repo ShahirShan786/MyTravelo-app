@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 
 class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -31,7 +32,7 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: centerTitles ?? true,
       title: Text(titles ?? ""),
       titleTextStyle: TextStyle(
-        fontSize: 20,
+        fontSize: 20.sp,
         fontWeight: FontWeight.bold,
         color: titileColors ?? black,
       ),
@@ -40,5 +41,5 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(55);
+  Size get preferredSize =>  Size.fromHeight(55.h);
 }

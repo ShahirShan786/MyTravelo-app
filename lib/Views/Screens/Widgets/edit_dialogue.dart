@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_travelo_app/Controller/Hive/signIn_service.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/textFormFeilds.dart';
 import 'package:my_travelo_app/constants/constable.dart';
@@ -49,14 +50,14 @@ class _EditDialogueState extends State<EditDialogue> {
       title: TextWidget(
           content: "Edit Your Info", fontSize: 22, fontWeight: FontWeight.bold),
       content: SizedBox(
-        width: 500,
-        height: 230,
+        width: 500.w,
+        height: 230.h,
         child: Form(
           key: _editformKey,
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 1, bottom: 1),
+                padding:  EdgeInsets.only(top: 1.h, bottom: 1.h),
                 child: Textformfeilds(
                   borderColor: Colors.black,
                   focusedColor: Colors.purple,
@@ -72,7 +73,7 @@ class _EditDialogueState extends State<EditDialogue> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 1, bottom: 1),
+                padding:  EdgeInsets.only(top: 1.h, bottom: 1.h),
                 child: Textformfeilds(
                   borderColor: Colors.black,
                   focusedColor: Colors.purple,
@@ -88,7 +89,7 @@ class _EditDialogueState extends State<EditDialogue> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 1, bottom: 1),
+                padding:  EdgeInsets.only(top: 1.h, bottom: 1.h),
                 child: Textformfeilds(
                   borderColor: Colors.black,
                   focusedColor: Colors.purple,
@@ -112,7 +113,7 @@ class _EditDialogueState extends State<EditDialogue> {
             Navigator.pop(context);
           },
           child: TextWidget(
-              content: "Cancel", fontSize: 15, fontWeight: FontWeight.w500),
+              content: "Cancel", fontSize: 15.sp, fontWeight: FontWeight.w500),
         ),
         TextButton(
           onPressed: () async {

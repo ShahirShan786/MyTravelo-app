@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/app_bar.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/companion_card.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/Views/Screens/Trip_Screens/Add_Trip_screens/companion_screen.dart';
-import 'package:my_travelo_app/Views/Screens/Trip_Screens/Add_Trip_screens/trip_plan_screen.dart';
+import 'package:my_travelo_app/Views/Screens/Trip_Screens/Add_Trip_screens/Companion/Pages/companion_screen.dart';
+import 'package:my_travelo_app/Views/Screens/Trip_Screens/Add_Trip_screens/Trip_Plan/Pages/trip_plan_screen.dart';
 
 class OptionScreen extends StatelessWidget {
   final String? destination;
@@ -30,21 +31,21 @@ class OptionScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(10),
+          padding:  EdgeInsets.all(10.w),
           child: Column(
             children: [
-              const SizedBox(
-                height: 20,
+               SizedBox(
+                height: 20.h,
               ),
               Align(
                 alignment: Alignment.centerLeft,
                 child: TextWidget(
                     content: "Select your travel group type",
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.w500),
               ),
-              const SizedBox(
-                height: 60,
+               SizedBox(
+                height: 60.h,
               ),
               CompanionCard(
                 icon: FontAwesomeIcons.person,
@@ -61,8 +62,8 @@ class OptionScreen extends StatelessWidget {
                   );
                 },
               ),
-              const SizedBox(
-                height: 35,
+               SizedBox(
+                height: 35.h,
               ),
               CompanionCard(
                 icon: FontAwesomeIcons.peopleGroup,

@@ -2,19 +2,16 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_travelo_app/Controller/Hive/user_functions.dart';
 import 'package:my_travelo_app/Views/Screens/Sub_Screens/dream_destination_screen.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/textFormFeilds.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/textfeild.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/constants/primary_button.dart';
 import 'package:my_travelo_app/Models/user_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class EditDreamDestinationScreen extends StatefulWidget {
   final DreamDestinationModel editDestination;
@@ -64,7 +61,7 @@ class _EditDreamDestinationScreenState
         centerTitle: true,
         title: TextWidget(
           content: "Update Dream Destination",
-          fontSize: 20,
+          fontSize: 20.sp,
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -76,26 +73,26 @@ class _EditDreamDestinationScreenState
               Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding:  EdgeInsets.all(10.w),
                     child: InkWell(
                         onTap: pickPlaceImages,
                         child: Container(
                             width: double.infinity,
-                            height: 210,
+                            height: 210.h,
                             decoration: BoxDecoration(
                               color: Colors.grey[300],
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(10.r),
                             ),
                             child: selectedImages.isNotEmpty
                                 ? ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(10.r),
                                     child: Image.file(
                                       File(selectedImages[displayImage]),
                                       fit: BoxFit.cover,
                                     ),
                                   )
                                 : ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(10.r),
                                     child: Image.file(
                                       File(reSelectedImages[displayImage]),
                                       fit: BoxFit.cover,
@@ -104,15 +101,15 @@ class _EditDreamDestinationScreenState
                   ),
                   selectedImages.isNotEmpty
                       ? SizedBox(
-                          height: 100,
+                          height: 100.h,
                           width: double.infinity,
                           child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: selectedImages.length,
                               itemBuilder: (context, index) {
                                 return Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 10),
+                                  padding:  EdgeInsets.symmetric(
+                                      horizontal: 10.w, vertical: 10.h),
                                   child: InkWell(
                                     onTap: () {
                                       setState(() {
@@ -125,7 +122,7 @@ class _EditDreamDestinationScreenState
                                       decoration: BoxDecoration(
                                           color: green,
                                           borderRadius:
-                                              BorderRadius.circular(8),
+                                              BorderRadius.circular(8.r),
                                           image: DecorationImage(
                                               image: FileImage(File(
                                                 selectedImages[index],
@@ -136,15 +133,15 @@ class _EditDreamDestinationScreenState
                                 );
                               }))
                       : SizedBox(
-                          height: 100,
+                          height: 100.h,
                           width: double.infinity,
                           child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: reSelectedImages.length,
                               itemBuilder: (context, index) {
                                 return Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 10),
+                                  padding:  EdgeInsets.symmetric(
+                                      horizontal: 10.w, vertical: 10.h),
                                   child: InkWell(
                                     onTap: () {
                                       setState(() {
@@ -157,7 +154,7 @@ class _EditDreamDestinationScreenState
                                       decoration: BoxDecoration(
                                           color: green,
                                           borderRadius:
-                                              BorderRadius.circular(8),
+                                              BorderRadius.circular(8.r),
                                           image: DecorationImage(
                                               image: FileImage(File(
                                                 reSelectedImages[index],
@@ -169,8 +166,8 @@ class _EditDreamDestinationScreenState
                               })),
                 ],
               ),
-              const SizedBox(
-                height: 20,
+               SizedBox(
+                height: 20.h,
               ),
               newTextFeild(
                 labelText: "Destination Name",
@@ -205,8 +202,8 @@ class _EditDreamDestinationScreenState
                   return null;
                 },
               ),
-              const SizedBox(
-                height: 50,
+               SizedBox(
+                height: 50.h,
               ),
             ],
           ),
@@ -216,23 +213,23 @@ class _EditDreamDestinationScreenState
         visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
         child: Container(
           color: white,
-          height: 80,
+          height: 80.h,
           child: Center(
             child: PrimaryButton(
                 backgroundColor: primaryColor,
                 content: TextWidget(
                     content: "Update Destination",
-                    fontSize: 20,
+                    fontSize: 20.sp,
                     fontWeight: FontWeight.bold),
-                width: 250,
-                height: 50,
+                width: 250.w,
+                height: 50.h,
                 onPressed: () async {
                   if (reSelectedImages.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         backgroundColor: red,
                         content: TextWidget(
                           content: "please select the place images",
-                          fontSize: 15,
+                          fontSize: 15.sp,
                           fontWeight: FontWeight.bold,
                           color: white,
                         )));
@@ -266,7 +263,7 @@ class _EditDreamDestinationScreenState
                         content: TextWidget(
                           content:
                               "Your dream destination succsessfully updated",
-                          fontSize: 15,
+                          fontSize: 15.sp,
                           fontWeight: FontWeight.bold,
                           color: white,
                         )));

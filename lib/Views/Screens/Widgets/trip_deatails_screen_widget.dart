@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:intl/intl.dart';
@@ -12,7 +11,7 @@ Widget animatedContainerWidget({
   required date,
 }) {
   return Padding(
-    padding: const EdgeInsets.all(2),
+    padding:  EdgeInsets.all(2.w),
     child: AnimatedContainer(
         duration: const Duration(milliseconds: 400),
         curve: Curves.easeOut,

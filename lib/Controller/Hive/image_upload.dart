@@ -40,22 +40,24 @@ Future<String?> uploadMainImage({required XFile? image})async{
      
   }
 
- Future<List<String>> uploadHomePicture({required List<XFile> pictures})async {
-   
-   Reference storageRef = FirebaseStorage.instance.ref();
-    Reference pictureRef = storageRef.child("homepicture${DateTime.now().millisecondsSinceEpoch}");
-    
-     List<String> imagUrl = [];
+Future<String?> uploadHomeImage({required File? image}) async {
+  if (image == null) return null;
 
-     for(int i = 0; i < pictures.length ; i++){
-      Reference referencePictureUpload = pictureRef.child(pictures[i].name);
-      try{
-         await referencePictureUpload.putFile(File(pictures[i].path));
-        imagUrl.add(await referencePictureUpload.getDownloadURL());
-      }catch(e){
-        log("error uploading home image ==$e");
-      }
-      
-     }
-     return imagUrl;
+  try {
+ 
+    Reference storageRef = FirebaseStorage.instance.ref();
+    Reference imageRef = storageRef.child("mainImage_${DateTime.now().millisecondsSinceEpoch}");
+
+  
+    await imageRef.putFile(image);
+
+    
+    final downloadUrl = await imageRef.getDownloadURL();
+    
+    return downloadUrl; 
+  } catch (e) {
+    
+    log("Error uploading main image: $e");
+    return null; 
   }
+}

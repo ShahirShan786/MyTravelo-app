@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
 
     return Scaffold(
       body: PreferredSize(
-        preferredSize: Size.fromWidth(600),
+        preferredSize: const Size.fromWidth(600),
         child: SafeArea(
           child: LayoutBuilder(builder: (context, constraints) {
             return SingleChildScrollView(
@@ -110,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                                 }
                               },
                               child: TextWidget(
-                                  content: "Sign Up",
+                                  content: "Log In",
                                   fontSize: 17.sp,
                                   fontWeight: FontWeight.w600)),
                           SizedBox(height: 10.h),
@@ -129,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                                       horizontal: 115.w, vertical: 14.h),
                                   side: const BorderSide(color: primaryColor)),
                               onPressed: () {
-                              Get.to(()=> SinginPage());
+                              Get.to(()=> const SinginPage());
                               },
                               child: TextWidget(
                                   content: "Create Account",

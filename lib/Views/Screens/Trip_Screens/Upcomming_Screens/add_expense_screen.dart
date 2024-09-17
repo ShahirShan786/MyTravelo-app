@@ -71,10 +71,10 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding:  EdgeInsets.all(10.w),
             child: SizedBox(
               width: double.infinity,
-              height: 90,
+              height: 90.h,
               child: Row(
                 children: [
                   InkWell(
@@ -85,17 +85,17 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                               text: selectedText,
                               image: selectedImage,
                               color: selectedColor),
-                          const Positioned(
-                            right: -3,
-                            top: -3,
+                           Positioned(
+                            right: -3.w,
+                            top: -3.h,
                             child: CircleAvatar(
                               backgroundColor: ScaffoldColor,
-                              radius: 12,
+                              radius: 12.r,
                               child: Center(
                                 child: Icon(
                                   Icons.edit,
                                   color: black,
-                                  size: 13,
+                                  size: 13.w,
                                 ),
                               ),
                             ),
@@ -105,20 +105,20 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                   Stack(
                     children: [
                       SizedBox(
-                        width: 250,
+                        width: 250.w,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             TextWidget(
                                 content: "    Amount",
-                                fontSize: 16,
+                                fontSize: 16.sp,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.grey[700]),
                             TextField(
                               controller: _amountController,
                               style: TextStyle(
-                                  fontSize: 30,
+                                  fontSize: 30.sp,
                                   fontWeight: FontWeight.w500,
                                   color: Colors.grey[700]),
                               keyboardType: TextInputType.number,
@@ -143,10 +143,10 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                                   selectRangeNotifier.value = finalSelectDate;
                                 });
                           },
-                          child:const CircleAvatar(
+                          child: CircleAvatar(
                             backgroundColor: red,
-                            radius: 22,
-                            child:   Icon(
+                            radius: 22.r,
+                            child:   const Icon(
                               Icons.calendar_today,
                               color: white,
                             ),
@@ -160,19 +160,19 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding:  EdgeInsets.all(10.w),
             child: TextField(
               controller: _discriptionController,
               maxLines: 3,
               decoration: InputDecoration(
                   hintText: "Description (optional)",
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10.r),
                       borderSide: const BorderSide(color: primaryColor))),
             ),
           ),
-          const SizedBox(
-            height: 5,
+           SizedBox(
+            height: 5.h,
           ),
           ValueListenableBuilder(
               valueListenable: selectRangeNotifier,
@@ -181,11 +181,11 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     content: selectedRange != null
                         ? selectedRange.toString()
                         : "Selected Date",
-                    fontSize: 20,
+                    fontSize: 20.sp,
                     fontWeight: FontWeight.bold);
               }),
-        const  SizedBox(
-            height: 20,
+          SizedBox(
+            height: 20.sp,
           ),
           primaryButton(context)
         ],
@@ -197,20 +197,20 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     return PrimaryButton(
             content: TextWidget(
               content: widget.editExpense == null ? "Add" : "Update",
-              fontSize: 22,
+              fontSize: 22.sp,
               fontWeight: FontWeight.bold,
               color: white,
             ),
             backgroundColor: primaryColor,
-            width: 300,
-            height: 50,
+            width: 300.w,
+            height: 50.h,
             onPressed: () async {
               if (_amountController.text.isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     backgroundColor: red,
                     content: TextWidget(
                       content: "Enter amount",
-                      fontSize: 15,
+                      fontSize: 15.sp,
                       fontWeight: FontWeight.bold,
                       color: white,
                     )));
@@ -219,7 +219,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     backgroundColor: red,
                     content: TextWidget(
                       content: "please select the date",
-                      fontSize: 15,
+                      fontSize: 15.sp,
                       fontWeight: FontWeight.bold,
                       color: white,
                     )));
@@ -248,12 +248,12 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
 
   catogoryDialogue({required context}) => Get.defaultDialog(
       title: "Select Cotegory",
-      titleStyle: const TextStyle(
-        fontSize: 25,
+      titleStyle:  TextStyle(
+        fontSize: 25.sp,
         fontWeight: FontWeight.bold,
       ),
-      titlePadding:const EdgeInsets.only(right: 130, top: 20, bottom: 20),
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      titlePadding: EdgeInsets.only(right: 130.w, top: 20.h, bottom: 20.w),
+      contentPadding:  EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
       content: SizedBox(
         width: 350.w,
         height: 200.h,
@@ -387,26 +387,26 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     required Color color,
   }) {
     return Container(
-      width: 80,
-      height: 80,
+      width: 80.w,
+      height: 80.h,
       decoration:
           BoxDecoration(color: color, borderRadius: BorderRadius.circular(10)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            width: 53,
-            height: 42,
+            width: 53.w,
+            height: 42.h,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(8.r),
               child: SvgPicture.asset(
                 image,
-                height: 48,
+                height: 48.h,
                 fit: BoxFit.fill,
               ),
             ),
           ),
-          TextWidget(content: text, fontSize: 15, fontWeight: FontWeight.bold)
+          TextWidget(content: text, fontSize: 15.sp, fontWeight: FontWeight.bold)
         ],
       ),
     );

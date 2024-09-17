@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_travelo_app/constants/constable.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Widget textField(
     {required String label,
@@ -19,7 +19,7 @@ Widget textField(
     decoration: InputDecoration(
       border: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red),
-          borderRadius: BorderRadius.circular(10)),
+          borderRadius: BorderRadius.circular(10.r)),
       hintText: label,
       suffixIcon: icon,
     ),

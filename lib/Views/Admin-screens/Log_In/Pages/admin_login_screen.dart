@@ -2,11 +2,13 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_travelo_app/Views/Admin-screens/Log_In/widgets/admin_name_textfield.dart';
+import 'package:my_travelo_app/Views/Admin-screens/Log_In/widgets/admin_password_textfield.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/textFormFeilds.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/constants/primary_button.dart';
-import 'package:my_travelo_app/Views/Admin-screens/admin_home_page.dart';
+import 'package:my_travelo_app/Views/Admin-screens/Home_Page/Pages/admin_home_page.dart';
 
 class AdminLoginScreen extends StatelessWidget {
   AdminLoginScreen({super.key});
@@ -20,7 +22,7 @@ class AdminLoginScreen extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding:  EdgeInsets.all(8.0.w),
             child: Center(
               child: Form(
                 key: _adminkey,
@@ -33,7 +35,7 @@ class AdminLoginScreen extends StatelessWidget {
                       alignment: Alignment.topLeft,
                       child: TextWidget(
                         content: "Hello admin !\n    your Welcome",
-                        fontSize: 30,
+                        fontSize: 30.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -44,57 +46,25 @@ class AdminLoginScreen extends StatelessWidget {
                       "assets/logo/logo1.png",
                       width: 250.w,
                     ),
-                    const SizedBox(
-                      height: 20,
+                     SizedBox(
+                      height: 20.h,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Textformfeilds(
-                        borderColor: red,
-                        focusedColor: primaryColor,
-                        controller: _adminNameController,
-                        keyboardType: TextInputType.name,
-                        labelText: "Name",
-                        labelColor: secondaryColor,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Please enter the e-mail";
-                          }
-                          return null;
-                        },
-                      ),
+                    AdminNameTextField(adminNameController: _adminNameController),
+                     SizedBox(
+                      height: 15.h,
                     ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Textformfeilds(
-                        borderColor: red,
-                        controller: _adminPasswordController,
-                        focusedColor: primaryColor,
-                        keyboardType: TextInputType.visiblePassword,
-                        labelText: "Password",
-                        labelColor: secondaryColor,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Please enter the password";
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 30,
+                    AdminPasswordTextField(adminPasswordController: _adminPasswordController),
+                     SizedBox(
+                      height: 30.h,
                     ),
                     PrimaryButton(
                         backgroundColor: primaryColor,
                         content: TextWidget(
                             content: "Log In",
-                            fontSize: 20,
+                            fontSize: 20.sp,
                             fontWeight: FontWeight.bold),
-                        width: 250,
-                        height: 50,
+                        width: 250.w,
+                        height: 50.h,
                         onPressed: () {
                           log("name: ${_adminNameController.text}");
                           log("password : ${_adminPasswordController.text}");
@@ -127,14 +97,18 @@ class AdminLoginScreen extends StatelessWidget {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         backgroundColor: primaryColor,
         content: TextWidget(
-            content: failMessage, fontSize: 14, fontWeight: FontWeight.bold)));
+            content: failMessage, fontSize: 14.sp, fontWeight: FontWeight.bold)));
   }
 }
+
+
+
+
 
 Future<void> showLogSuccessSnackBar(BuildContext context) async {
   const successMessage = "Loged in successfully ";
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       backgroundColor: green,
       content: TextWidget(
-          content: successMessage, fontSize: 14, fontWeight: FontWeight.bold)));
+          content: successMessage, fontSize: 14.sp, fontWeight: FontWeight.bold)));
 }

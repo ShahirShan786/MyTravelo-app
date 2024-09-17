@@ -7,7 +7,7 @@ import 'package:my_travelo_app/Views/Screens/Widgets/time_picker.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/constants/primary_button.dart';
-import 'package:my_travelo_app/Views/Screens/Trip_Screens/Add_Trip_screens/option_screen.dart';
+import 'package:my_travelo_app/Views/Screens/Trip_Screens/Add_Trip_screens/Option/Pages/option_screen.dart';
 
 class AddTripScreens extends StatefulWidget {
   const AddTripScreens({super.key});
@@ -107,11 +107,11 @@ class _AddTripScreensState extends State<AddTripScreens> {
                           finalSelectTime.isEmpty
                               ? TextWidget(
                                   content: "Time not selected",
-                                  fontSize: 20,
+                                  fontSize: 20.sp,
                                   fontWeight: FontWeight.bold)
                               : TextWidget(
                                   content: "Time is : $finalSelectTime",
-                                  fontSize: 20,
+                                  fontSize: 20.sp,
                                   fontWeight: FontWeight.bold),
 
                           SizedBox(

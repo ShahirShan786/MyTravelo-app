@@ -23,6 +23,8 @@ initialisation() async {
 
     if (!Hive.isAdapterRegistered(CompletedTripModelPhotosAdapter().typeId)) {
       Hive.registerAdapter(CompletedTripModelPhotosAdapter());
+    }if(!Hive.isAdapterRegistered(CompletedTripModelBlogAdapter().typeId)){
+      Hive.registerAdapter(CompletedTripModelBlogAdapter());
     }
     if (!Hive.isAdapterRegistered(FevoriteModelAdapter().typeId)) {
       Hive.registerAdapter(FevoriteModelAdapter());

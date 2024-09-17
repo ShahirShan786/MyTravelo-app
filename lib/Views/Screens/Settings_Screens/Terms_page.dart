@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 
 class Termspage extends StatelessWidget {
@@ -11,17 +12,17 @@ class Termspage extends StatelessWidget {
           centerTitle: true,
           title: TextWidget(
               content: "Terms and Conditions",
-              fontSize: 20,
+              fontSize: 20.sp,
               fontWeight: FontWeight.bold),
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(10),
+            padding:  EdgeInsets.all(10.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-              const  SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: 10.h,
                 ),
                 _buildSubHEading(content: "1. Introduction"),
                 _buildParagraph(
@@ -87,19 +88,19 @@ class Termspage extends StatelessWidget {
 
   Widget _buildSubHEading({required String content}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
+      padding:  EdgeInsets.symmetric(vertical: 5.h),
       child: TextWidget(
-          content: content, fontSize: 23, fontWeight: FontWeight.bold),
+          content: content, fontSize: 23.sp, fontWeight: FontWeight.bold),
     );
   }
 
   Widget _buildParagraph({required String content}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 10,
+      padding:  EdgeInsets.symmetric(
+        vertical: 10.h,
       ),
       child: TextWidget(
-          content: content, fontSize: 18, fontWeight: FontWeight.w500),
+          content: content, fontSize: 18.sp, fontWeight: FontWeight.w500),
     );
   }
 
@@ -107,21 +108,21 @@ class Termspage extends StatelessWidget {
     return Column(
         children: items
             .map((item) => Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding:  EdgeInsets.all(8.0.w),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    const  Padding(
-                        padding:  EdgeInsets.only(top: 6, right: 10),
+                      Padding(
+                        padding:  EdgeInsets.only(top: 6.h, right: 10.w),
                         child:  Icon(
                           Icons.circle,
-                          size: 8,
+                          size: 8.w,
                         ),
                       ),
                       Expanded(
                           child: TextWidget(
                               content: item,
-                              fontSize: 18,
+                              fontSize: 18.sp,
                               fontWeight: FontWeight.w500))
                     ],
                   ),

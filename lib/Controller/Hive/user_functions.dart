@@ -64,36 +64,42 @@ deleteTrip({required TripModel trip}) async {
 Future<void> splitData(String userId) async {
   final trip = await getTrip();
 
-  // Clear both lists before processing
-  tripList.value.clear();
-  // tripListCompleted.value.clear();
+  // Log the total number of trips fetched
+  log("Total trips fetched: ${trip.length}");
 
   for (var element in trip) {
     DateTime now = DateTime.now();
-    log("Current Date and time $now");
     DateTime rangeEnd = element.rangeEnd;
-    log("Trip end date : $rangeEnd");
+
+    log("Checking trip: ${element.destination}, End Date: $rangeEnd");
 
     if (rangeEnd.isBefore(now)) {
-      // Add to completed trips
+      log("Adding to completed trips: ${element.destination}");
       if (!tripListCompleted.value.contains(element)) {
         tripListCompleted.value.add(element);
-        log("Added to completed trips: ${element.destination}");
+        
       }
-    } else {
-      // Add to upcoming trips
-      tripList.value.add(element);
-      log("Added to upcoming trips: ${element.destination}");
+    } else if(rangeEnd.isAfter(now)){
+      log("Adding to upcoming trips: ${element.destination}");
+      if (!tripList.value.contains(element)) {
+        tripList.value.add(element);
+      }
     }
   }
 
-  tripList.value
-      .sort((first, second) => first.rangeStart.compareTo(second.rangeStart));
-  tripListCompleted.value
-      .sort((first, second) => second.rangeStart.compareTo(first.rangeStart));
+  tripList.value.sort((a, b) => b.rangeStart.compareTo(a.rangeStart));
 
-  log("Upcomming trips Count :${tripList.value.length}");
-  log("Completed trips Count :${tripListCompleted.value.length}");
+  // Sort the completed trips: latest completed trips first (descending order)
+  tripListCompleted.value.sort((a, b) => b.rangeEnd.compareTo(a.rangeEnd));
+
+  log("Upcoming trips after sorting: ${tripList.value.map((e) => e.destination).toList()}");
+  log("Completed trips after sorting: ${tripListCompleted.value.map((e) => e.destination).toList()}");
+
+  log("Upcoming trips count: ${tripList.value.length}");
+  log("Completed trips count: ${tripListCompleted.value.length}");
+
+  tripList.notifyListeners();
+  tripListCompleted.notifyListeners();
 }
 
 // add image to Database
@@ -143,7 +149,7 @@ Future<void> addBlogs({required CompletedTripModelBlog blog}) async {
       await Hive.openBox<CompletedTripModelBlog>(completedTripDbNameBlogs);
   await completedTripModelBox.put(blog.id, blog);
 
-  completedTripToList();
+  await tripBlogToList();
   // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
   completedTripListBlog.notifyListeners();
 }
@@ -154,7 +160,7 @@ Future<List<CompletedTripModelBlog>> getBlog() async {
   return completedTripModelBox.values.toList();
 }
 
-completedBlogList() async {
+tripBlogToList() async {
   completedTripListBlog.value.clear();
 
   final completedBlog = await getBlog();

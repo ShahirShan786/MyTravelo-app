@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 
 class Privacypage extends StatelessWidget {
@@ -11,7 +12,7 @@ class Privacypage extends StatelessWidget {
           centerTitle: true,
           title: TextWidget(
               content: "Privacy Policy",
-              fontSize: 20,
+              fontSize: 20.sp,
               fontWeight: FontWeight.bold),
         ),
         body: SingleChildScrollView(
@@ -20,8 +21,8 @@ class Privacypage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const  SizedBox(
-                  height: 10,
+                  SizedBox(
+                  height: 10.h,
                 ),
                 _buildBigHeading(content: "Privacy Policy"),
                 _buildParagraph(content: "Last updated: August 27, 2024"),
@@ -147,10 +148,10 @@ class Privacypage extends StatelessWidget {
 
   Widget _buildBigHeading({required String content}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding:  EdgeInsets.symmetric(vertical: 10.h),
       child: TextWidget(
         content: content,
-        fontSize: 25,
+        fontSize: 25.sp,
         fontWeight: FontWeight.w900,
       ),
     );
@@ -158,7 +159,7 @@ class Privacypage extends StatelessWidget {
 
   Widget _buildSubHEading({required String content}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
+      padding:  EdgeInsets.symmetric(vertical: 5.h),
       child: TextWidget(
           content: content, fontSize: 23, fontWeight: FontWeight.bold),
     );
@@ -166,8 +167,8 @@ class Privacypage extends StatelessWidget {
 
   Widget _buildParagraph({required String content}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 10,
+      padding:  EdgeInsets.symmetric(
+        vertical: 10.h,
       ),
       child: TextWidget(
           content: content, fontSize: 18, fontWeight: FontWeight.w500),
@@ -178,21 +179,21 @@ class Privacypage extends StatelessWidget {
     return Column(
         children: items
             .map((item) => Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding:  EdgeInsets.all(8.0.w),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    const  Padding(
-                        padding:  EdgeInsets.only(top: 6, right: 10),
+                      Padding(
+                        padding:  EdgeInsets.only(top: 6.h, right: 10.w),
                         child: Icon(
                           Icons.circle,
-                          size: 8,
+                          size: 8.w,
                         ),
                       ),
                       Expanded(
                           child: TextWidget(
                               content: item,
-                              fontSize: 18,
+                              fontSize: 18.sp,
                               fontWeight: FontWeight.w500))
                     ],
                   ),

@@ -1,5 +1,4 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_travelo_app/Controller/Firebase/firebase_functions.dart';
 import 'package:my_travelo_app/Controller/Hive/user_functions.dart';

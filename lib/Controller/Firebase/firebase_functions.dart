@@ -118,7 +118,7 @@ class FireStoreServices {
     homePictureListener.value.clear();
     final FireStoreServices fireStoreServices = FireStoreServices();
     await fireStoreServices.getAllPlaces();
-
+    await fireStoreServices.getHomePictures();
     // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
     placeModelListener.notifyListeners();
     // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
@@ -127,7 +127,7 @@ class FireStoreServices {
 
   // add home Images to firebase
 
-  addHomepictue({required List<String> homePics}) {
+  addHomepictue({required String homePics}) {
     homePicture.add({
       "homePictures": homePics,
     });
@@ -141,6 +141,18 @@ class FireStoreServices {
     return querySnapshot.docs
         .map((doc) => {"id": doc.id, "url": doc["homePictures"]})
         .toList();
+  }
+
+   deleteHomePicture({required String id}) async {
+    homePicture.doc(id).delete();
+    getFirebaseDetails();
+  }
+
+   Future<List<String>> getImageUrls() async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection('homePictures')
+        .get();
+    return snapshot.docs.map((doc) => doc['homePictures'] as String).toList();
   }
 
   Future<void> deleteImage(

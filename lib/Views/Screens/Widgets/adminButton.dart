@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/Views/Admin-screens/admin_login_screen.dart';
+import 'package:my_travelo_app/Views/Admin-screens/Log_In/Pages/admin_login_screen.dart';
 
 class Adminbutton extends StatelessWidget {
   const Adminbutton({super.key});

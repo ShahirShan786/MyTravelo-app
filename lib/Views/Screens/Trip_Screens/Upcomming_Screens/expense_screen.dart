@@ -1,20 +1,16 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
-import 'package:my_travelo_app/Controller/Hive/signIn_service.dart';
 import 'package:my_travelo_app/Controller/Hive/user_functions.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/show_dialogues.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/trip_deatails_screen_widget.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/Models/singInModel.dart';
 import 'package:my_travelo_app/Models/user_model.dart';
-import 'package:lottie/lottie.dart';
 import 'package:my_travelo_app/Views/Screens/Trip_Screens/Upcomming_Screens/add_expense_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ExpenseScreen extends StatefulWidget {
   final String tripId;
@@ -49,36 +45,36 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
       body: Column(
         children: [
           SizedBox(
-            height: 220,
+            height: 220.h,
             child: Stack(
               children: [
                 Container(
-                  height: 180,
+                  height: 180.h,
                   width: MediaQuery.of(context).size.width,
                   color: ScaffoldColor,
-                  padding: const EdgeInsets.only(left: 30, top: 56),
+                  padding:  EdgeInsets.only(left: 30.r, top: 56.h),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextWidget(
                         content: "Welcome again",
-                        fontSize: 24,
+                        fontSize: 24.sp,
                         fontWeight: FontWeight.bold,
                       ),
                       TextWidget(
                           content: "Add your expenses here",
-                          fontSize: 26,
+                          fontSize: 26.sp,
                           fontWeight: FontWeight.bold)
                     ],
                   ),
                 ),
                 Positioned(
-                  bottom: 5,
+                  bottom: 5.h,
                   left: 0,
                   child: Container(
-                    width: 270,
-                    height: 80,
-                    margin: const EdgeInsets.only(left: 10),
+                    width: 270.w,
+                    height: 80.h,
+                    margin:  EdgeInsets.only(left: 10.w),
                     decoration: BoxDecoration(
                         color: primaryColor,
                         borderRadius: BorderRadius.circular(50)),
@@ -87,12 +83,12 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                       children: [
                         TextWidget(
                           content: "Total Trip\n   Spend",
-                          fontSize: 15,
+                          fontSize: 15.sp,
                           fontWeight: FontWeight.bold,
                           color: white,
                         ),
-                        const SizedBox(
-                          width: 20,
+                         SizedBox(
+                          width: 20.w,
                         ),
                         ValueListenableBuilder(
                           valueListenable: expenseListener,
@@ -104,7 +100,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                             });
                             return TextWidget(
                               content: "₹$totalExpense",
-                              fontSize: 25,
+                              fontSize: 25.sp,
                               fontWeight: FontWeight.bold,
                               color: white,
                             );
@@ -118,9 +114,9 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 5),
+            padding:  EdgeInsets.only(top: 5.h),
             child: SizedBox(
-              height: 60,
+              height: 60.h,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: widget.tripEndDate
@@ -138,21 +134,21 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                           });
                         },
                         child: Padding(
-                          padding: const EdgeInsets.all(2),
+                          padding:  EdgeInsets.all(2.w),
                           child: AnimatedContainer(
                             duration: const Duration(
                               milliseconds: 400,
                             ),
                             curve: Curves.easeOut,
                             width: isSelected ? 100 : 80,
-                            height: 50,
+                            height: 50.h,
                             decoration: BoxDecoration(
                                 color: isSelected ? primaryColor : primaryLight,
                                 borderRadius: BorderRadius.circular(10)),
                             child: Center(
                               child: TextWidget(
                                 content: DateFormat("dd MMM").format(date),
-                                fontSize: isSelected ? 16 : 13,
+                                fontSize: isSelected ? 16.sp : 13.sp,
                                 fontWeight: FontWeight.bold,
                                 color: isSelected ? white : black,
                               ),
@@ -181,8 +177,8 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                   : Center(
                       child: Lottie.network(
                           "https://lottie.host/11affa91-4de3-4aca-8340-6fa60f2b1a6c/dt6OPkTq9j.json",
-                          width: 200,
-                          height: 200),
+                          width: 200.w,
+                          height: 200.h),
                     );
             },
           ))
@@ -209,20 +205,20 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
 
   Padding buildExpenseContainer(ExpenseModel data, BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding:  EdgeInsets.all(10.w),
       child: RepaintBoundary(
         child: Stack(
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              height: 120,
+              padding:  EdgeInsets.symmetric(horizontal: 12.w),
+              height: 120.h,
               child: Center(
                 child: Container(
-                  height: 90,
+                  height: 90.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(15.r),
                     boxShadow: const [
                       BoxShadow(
                         color: Colors.black45,
@@ -232,20 +228,20 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                     ],
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(5.0),
+                    padding:  EdgeInsets.all(5.0.w),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         RepaintBoundary(
                           child: Container(
-                            width: 75,
-                            height: 60,
-                            margin: const EdgeInsets.only(left: 10),
+                            width: 75.w,
+                            height: 60.h,
+                            margin:  EdgeInsets.only(left: 10.w),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(10.r),
                               child: SvgPicture.asset(
                                 data.image,
-                                height: 55,
+                                height: 55.h,
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -256,11 +252,11 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                           children: [
                             TextWidget(
                                 content: "₹ ${data.amount}",
-                                fontSize: 25,
+                                fontSize: 25.sp,
                                 fontWeight: FontWeight.bold),
                             Container(
-                              margin: const EdgeInsets.only(top: 5),
-                              width: 120,
+                              margin:  EdgeInsets.only(top: 5.h),
+                              width: 120.w,
                               child: Center(
                                 child: Text(
                                   data.discription ?? '',
@@ -271,8 +267,8 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                           ],
                         ),
                         SizedBox(
-                          width: 100,
-                          height: 50,
+                          width: 100.w,
+                          height: 50.h,
                           child: Center(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -287,8 +283,8 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                     );
                                   },
                                   child: Container(
-                                    width: 42,
-                                    height: 42,
+                                    width: 42.w,
+                                    height: 42.h,
                                     decoration: const BoxDecoration(
                                         color: Color.fromRGBO(214, 214, 214, 1),
                                         shape: BoxShape.circle),
@@ -311,7 +307,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                         });
                                   },
                                   child: Container(
-                                    width: 42,
+                                    width: 42.w,
                                     height: 42,
                                     decoration: BoxDecoration(
                                         color: Colors.grey[350],
@@ -335,18 +331,18 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
               ),
             ),
             Positioned(
-              top: 2,
-              left: 30,
+              top: 2.h,
+              left: 30.w,
               child: Container(
-                width: 115,
-                height: 25,
+                width: 115.w,
+                height: 25.h,
                 decoration: BoxDecoration(
-                    color: Colors.red, borderRadius: BorderRadius.circular(20)),
+                    color: Colors.red, borderRadius: BorderRadius.circular(20.r)),
                 child: Center(
                   child: Text(
                     data.category,
-                    style: const TextStyle(
-                        fontSize: 18,
+                    style:  TextStyle(
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.bold,
                         color: white),
                   ),
