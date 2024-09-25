@@ -77,7 +77,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
               label: "Add Place"),
           SpeedDialChild(
               onTap: () {
-                Get.to(() => AddHomePictureScreen());
+                Get.to(() => const AddHomePictureScreen());
               },
               child: const Icon(Icons.add_a_photo_outlined),
               label: "Add Home Pictures")

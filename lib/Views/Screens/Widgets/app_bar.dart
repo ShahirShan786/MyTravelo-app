@@ -19,12 +19,12 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.backgroundColors,
       this.actions,
       this.elevations,
-       this.leadings, this.leadingsWidth});
+      this.leadings,
+      this.leadingsWidth});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      
       backgroundColor: backgroundColors ?? primaryColor,
       leading: leadings,
       elevation: elevations,
@@ -32,7 +32,7 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: centerTitles ?? true,
       title: Text(titles ?? ""),
       titleTextStyle: TextStyle(
-        fontSize: 20.sp,
+        fontSize: 8.sp,
         fontWeight: FontWeight.bold,
         color: titileColors ?? black,
       ),
@@ -41,5 +41,5 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize =>  Size.fromHeight(55.h);
+  Size get preferredSize => Size.fromHeight(55.h);
 }

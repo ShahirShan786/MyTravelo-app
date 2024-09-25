@@ -1,6 +1,4 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:my_travelo_app/Controller/Hive/user_functions.dart';
@@ -15,7 +13,7 @@ class AddExpenseScreen extends StatefulWidget {
   final DateTime? tripStartDate;
   final DateTime? tripEndDate;
   ExpenseModel? editExpense;
-  
+
   AddExpenseScreen(
       {super.key,
       required this.tripId,
@@ -32,8 +30,8 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
   String selectedText = "General";
   String selectedImage = general;
   Color selectedColor = primaryLight;
- late final DateTime? selectedDateRange;
-  
+  late final DateTime? selectedDateRange;
+
   final TextEditingController _amountController = TextEditingController();
   final TextEditingController _discriptionController = TextEditingController();
   final ValueNotifier<String?> selectRangeNotifier =
@@ -49,13 +47,13 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
       _amountController.text = widget.editExpense!.amount;
       _discriptionController.text = widget.editExpense!.discription ?? "";
       selectedDateRange = widget.editExpense!.date;
-      selectRangeNotifier.value = DateFormat("dd MM yyyy").format(widget.editExpense!.date!);
+      selectRangeNotifier.value =
+          DateFormat("dd MM yyyy").format(widget.editExpense!.date!);
     }
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _amountController.dispose();
     _discriptionController.dispose();
     super.dispose();
@@ -63,39 +61,47 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Apply MediaQuery for responsiveness
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: TextWidget(
-            content: widget.editExpense == null ? "Add Expenses" : "Edit Expenses", fontSize: 20, fontWeight: FontWeight.bold),
+            content:
+                widget.editExpense == null ? "Add Expenses" : "Edit Expenses",
+            fontSize: 20,
+            fontWeight: FontWeight.bold),
       ),
       body: Column(
         children: [
           Padding(
-            padding:  EdgeInsets.all(10.w),
+            padding: EdgeInsets.all(width * 0.02),
             child: SizedBox(
               width: double.infinity,
-              height: 90.h,
+              height: height * 0.12,
               child: Row(
                 children: [
                   InkWell(
-                      onTap: () =>  catogoryDialogue(context: context),
+                      onTap: () => catogoryDialogue(context: context),
                       child: Stack(
                         children: [
                           catogoryBox(
                               text: selectedText,
                               image: selectedImage,
                               color: selectedColor),
-                           Positioned(
-                            right: -3.w,
-                            top: -3.h,
+                          Positioned(
+                            right: -width * 0.01,
+                            top: -height * 0.01,
                             child: CircleAvatar(
                               backgroundColor: ScaffoldColor,
-                              radius: 12.r,
+                              radius: width * 0.005,
                               child: Center(
                                 child: Icon(
                                   Icons.edit,
                                   color: black,
-                                  size: 13.w,
+                                  size: width * 0.002,
                                 ),
                               ),
                             ),
@@ -105,20 +111,20 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                   Stack(
                     children: [
                       SizedBox(
-                        width: 250.w,
+                        width: width * 0.65,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             TextWidget(
                                 content: "    Amount",
-                                fontSize: 16.sp,
+                                fontSize: width * 0.02,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.grey[700]),
                             TextField(
                               controller: _amountController,
                               style: TextStyle(
-                                  fontSize: 30.sp,
+                                  fontSize: width * 0.016,
                                   fontWeight: FontWeight.w500,
                                   color: Colors.grey[700]),
                               keyboardType: TextInputType.number,
@@ -139,14 +145,15 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                             selectDate(context, widget.tripStartDate!,
                                 widget.tripEndDate!, (selectedDate) {
                               selectedDateRange = selectedDate;
-                              final finalSelectDate = DateFormat("dd MM yyyy").format(selectedDate);
-                                  selectRangeNotifier.value = finalSelectDate;
-                                });
+                              final finalSelectDate =
+                                  DateFormat("dd MM yyyy").format(selectedDate);
+                              selectRangeNotifier.value = finalSelectDate;
+                            });
                           },
                           child: CircleAvatar(
                             backgroundColor: red,
-                            radius: 22.r,
-                            child:   const Icon(
+                            radius: width * 0.02,
+                            child: const Icon(
                               Icons.calendar_today,
                               color: white,
                             ),
@@ -160,19 +167,19 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
             ),
           ),
           Padding(
-            padding:  EdgeInsets.all(10.w),
+            padding: EdgeInsets.symmetric(horizontal: width * 0.10),
             child: TextField(
               controller: _discriptionController,
               maxLines: 3,
               decoration: InputDecoration(
                   hintText: "Description (optional)",
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(width * 0.03),
                       borderSide: const BorderSide(color: primaryColor))),
             ),
           ),
-           SizedBox(
-            height: 5.h,
+          SizedBox(
+            height: height * 0.01,
           ),
           ValueListenableBuilder(
               valueListenable: selectRangeNotifier,
@@ -181,11 +188,11 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     content: selectedRange != null
                         ? selectedRange.toString()
                         : "Selected Date",
-                    fontSize: 20.sp,
+                    fontSize: width * 0.02,
                     fontWeight: FontWeight.bold);
               }),
           SizedBox(
-            height: 20.sp,
+            height: width * 0.02,
           ),
           primaryButton(context)
         ],
@@ -194,192 +201,205 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
   }
 
   PrimaryButton primaryButton(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+
     return PrimaryButton(
-            content: TextWidget(
-              content: widget.editExpense == null ? "Add" : "Update",
-              fontSize: 22.sp,
-              fontWeight: FontWeight.bold,
-              color: white,
-            ),
-            backgroundColor: primaryColor,
-            width: 300.w,
-            height: 50.h,
-            onPressed: () async {
-              if (_amountController.text.isEmpty) {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    backgroundColor: red,
-                    content: TextWidget(
-                      content: "Enter amount",
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.bold,
-                      color: white,
-                    )));
-              }else if(selectedDateRange == null ){
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    backgroundColor: red,
-                    content: TextWidget(
-                      content: "please select the date",
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.bold,
-                      color: white,
-                    )));
-              }else {
-                final expenseData = ExpenseModel(
-                    id: widget.editExpense == null
-                        ? DateTime.now().millisecondsSinceEpoch.toString()
-                        : widget.editExpense!.id,
-                    tripId: widget.editExpense == null
-                        ? widget.tripId
-                        : widget.editExpense!.tripId,
-                    amount: _amountController.text,
-                    discription: _discriptionController.text,
-                    category: selectedText,
-                    image: selectedImage,
-                    color: selectedColor,
-                    date: selectedDateRange!
-                    );
-                await addExpense(expenses: expenseData);
-                await expenseToList(tripId: widget.tripId);
-                // ignore: use_build_context_synchronously
-                Get.back();
-              }
-            });
+        content: TextWidget(
+          content: widget.editExpense == null ? "Add" : "Update",
+          fontSize: width * 0.010,
+          fontWeight: FontWeight.bold,
+          color: white,
+        ),
+        backgroundColor: primaryColor,
+        width: width * 0.05,
+        height: width * 0.04,
+        onPressed: () async {
+          if (_amountController.text.isEmpty) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                backgroundColor: red,
+                content: TextWidget(
+                  content: "Enter amount",
+                  fontSize: width * 0.04,
+                  fontWeight: FontWeight.bold,
+                  color: white,
+                )));
+          } else if (selectedDateRange == null) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                backgroundColor: red,
+                content: TextWidget(
+                  content: "please select the date",
+                  fontSize: width * 0.04,
+                  fontWeight: FontWeight.bold,
+                  color: white,
+                )));
+          } else {
+            final expenseData = ExpenseModel(
+                id: widget.editExpense == null
+                    ? DateTime.now().millisecondsSinceEpoch.toString()
+                    : widget.editExpense!.id,
+                tripId: widget.editExpense == null
+                    ? widget.tripId
+                    : widget.editExpense!.tripId,
+                amount: _amountController.text,
+                discription: _discriptionController.text,
+                category: selectedText,
+                image: selectedImage,
+                color: selectedColor,
+                date: selectedDateRange!);
+            await addExpense(expenses: expenseData);
+            await expenseToList(tripId: widget.tripId);
+            Get.back();
+          }
+        });
   }
 
   catogoryDialogue({required context}) => Get.defaultDialog(
-      title: "Select Cotegory",
-      titleStyle:  TextStyle(
-        fontSize: 25.sp,
-        fontWeight: FontWeight.bold,
-      ),
-      titlePadding: EdgeInsets.only(right: 130.w, top: 20.h, bottom: 20.w),
-      contentPadding:  EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-      content: SizedBox(
-        width: 350.w,
-        height: 200.h,
-        child: GridView(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        title: "Select Category",
+        titleStyle: TextStyle(
+          fontSize: MediaQuery.of(context).size.width * 0.04,
+          fontWeight: FontWeight.bold,
+        ),
+        titlePadding: EdgeInsets.only(
+          right: MediaQuery.of(context).size.width * 0.3,
+          top: MediaQuery.of(context).size.height * 0.02,
+          bottom: MediaQuery.of(context).size.width * 0.05,
+        ),
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width * 0.05,
+          vertical: MediaQuery.of(context).size.height * 0.01,
+        ),
+        content: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.9,
+          height: MediaQuery.of(context).size.height * 0.25,
+          child: GridView(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4,
               mainAxisSpacing: 8,
-              crossAxisSpacing: 8,
-              childAspectRatio: 0.9),
-          children: [
-            InkWell(
-              onTap: () {
-                setState(() {
-                  selectedText = "General";
-                  selectedImage = general;
-                  selectedColor = primaryLight;
-                });
-                Navigator.of(context).pop();
-              },
-              child: catogoryBox(
-                text: "General",
-                image: general,
-                color: primaryLight,
+              crossAxisSpacing: 2,
+              childAspectRatio: 2,
+            ),
+            children: [
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    selectedText = "General";
+                    selectedImage = general;
+                    selectedColor = primaryLight;
+                  });
+                  Navigator.of(context).pop();
+                },
+                child: catogoryBox(
+                  text: "General",
+                  image: general,
+                  color: primaryLight,
+                ),
               ),
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  selectedText = "Meal";
-                  selectedImage = meal;
-                  selectedColor = mealColor;
-                });
-                Navigator.of(context).pop();
-              },
-              child: catogoryBox(
-                text: "Meal",
-                image: meal,
-                color: mealColor,
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    selectedText = "Meal";
+                    selectedImage = meal;
+                    selectedColor = mealColor;
+                  });
+                  Navigator.of(context).pop();
+                },
+                child: catogoryBox(
+                  text: "Meal",
+                  image: meal,
+                  color: mealColor,
+                ),
               ),
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  selectedText = "Groceries";
-                  selectedImage = groceries;
-                  selectedColor = groceriesColor;
-                });
-                Navigator.of(context).pop();
-              },
-              child: catogoryBox(
-                  text: "Groceries", image: groceries, color: groceriesColor),
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  selectedText = "Drinks";
-                  selectedImage = drink;
-                  selectedColor = drinksColor;
-                });
-                Navigator.of(context).pop();
-              },
-              child: catogoryBox(
-                text: "Drinks",
-                image: drink,
-                color: drinksColor,
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    selectedText = "Groceries";
+                    selectedImage = groceries;
+                    selectedColor = groceriesColor;
+                  });
+                  Navigator.of(context).pop();
+                },
+                child: catogoryBox(
+                  text: "Groceries",
+                  image: groceries,
+                  color: groceriesColor,
+                ),
               ),
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  selectedText = "Snacks";
-                  selectedImage = snacks;
-                  selectedColor = snacksColor;
-                });
-                Navigator.of(context).pop();
-              },
-              child: catogoryBox(
-                text: "Snacks",
-                image: snacks,
-                color: snacksColor,
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    selectedText = "Drinks";
+                    selectedImage = drink;
+                    selectedColor = drinksColor;
+                  });
+                  Navigator.of(context).pop();
+                },
+                child: catogoryBox(
+                  text: "Drinks",
+                  image: drink,
+                  color: drinksColor,
+                ),
               ),
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  selectedText = "Hotel";
-                  selectedImage = hotel;
-                  selectedColor = hotelColor;
-                });
-                Navigator.of(context).pop();
-              },
-              child: catogoryBox(
-                text: "Hotel",
-                image: hotel,
-                color: hotelColor,
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    selectedText = "Snacks";
+                    selectedImage = snacks;
+                    selectedColor = snacksColor;
+                  });
+                  Navigator.of(context).pop();
+                },
+                child: catogoryBox(
+                  text: "Snacks",
+                  image: snacks,
+                  color: snacksColor,
+                ),
               ),
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  selectedText = "Taxi";
-                  selectedImage = taxi;
-                  selectedColor = taxiColor;
-                });
-                Navigator.of(context).pop();
-              },
-              child: catogoryBox(
-                text: "Taxi",
-                image: taxi,
-                color: taxiColor,
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    selectedText = "Hotel";
+                    selectedImage = hotel;
+                    selectedColor = hotelColor;
+                  });
+                  Navigator.of(context).pop();
+                },
+                child: catogoryBox(
+                  text: "Hotel",
+                  image: hotel,
+                  color: hotelColor,
+                ),
               ),
-            ),
-          ],
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    selectedText = "Taxi";
+                    selectedImage = taxi;
+                    selectedColor = taxiColor;
+                  });
+                  Navigator.of(context).pop();
+                },
+                child: catogoryBox(
+                  text: "Taxi",
+                  image: taxi,
+                  color: taxiColor,
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-      actions: [
-        Align(
-          alignment: Alignment.bottomRight,
-          child: TextButton(
+        actions: [
+          Align(
+            alignment: Alignment.bottomRight,
+            child: TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text("Close")),
-        )
-      ],
-    );
+              child: const Text("Close"),
+            ),
+          )
+        ],
+      );
 
   Widget catogoryBox({
     required String text,
@@ -387,26 +407,32 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     required Color color,
   }) {
     return Container(
-      width: 80.w,
-      height: 80.h,
-      decoration:
-          BoxDecoration(color: color, borderRadius: BorderRadius.circular(10)),
+      width: MediaQuery.of(context).size.width * 0.06,
+      height: MediaQuery.of(context).size.height * 0.10,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            width: 53.w,
-            height: 42.h,
+            width: MediaQuery.of(context).size.width * 0.13,
+            height: MediaQuery.of(context).size.height * 0.06,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.r),
+              borderRadius: BorderRadius.circular(8),
               child: SvgPicture.asset(
                 image,
-                height: 48.h,
+                height: MediaQuery.of(context).size.height * 0.02,
                 fit: BoxFit.fill,
               ),
             ),
           ),
-          TextWidget(content: text, fontSize: 15.sp, fontWeight: FontWeight.bold)
+          TextWidget(
+            content: text,
+            fontSize: MediaQuery.of(context).size.width * 0.01,
+            fontWeight: FontWeight.bold,
+          ),
         ],
       ),
     );

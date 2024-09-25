@@ -5,13 +5,14 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_travelo_app/Controller/Hive/signIn_service.dart';
 import 'package:my_travelo_app/Models/singInModel.dart';
 import 'package:my_travelo_app/Models/user_model.dart';
-
+import 'package:my_travelo_app/firebase_options.dart';
+  
 import 'package:firebase_core/firebase_core.dart';
 
 initialisation() async {
   WidgetsFlutterBinding.ensureInitialized();
    try{
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Hive.initFlutter();
   if (!Hive.isAdapterRegistered(SinginmodelAdapter().typeId)) {
     Hive.registerAdapter(SinginmodelAdapter());

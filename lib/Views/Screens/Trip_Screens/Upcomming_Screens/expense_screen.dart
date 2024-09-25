@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -41,40 +40,46 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
   Widget build(BuildContext context) {
     log("Expense Length :${expenseListener.value.length}");
 
+    double heightFactor = MediaQuery.of(context).size.height /
+        812; // Assuming 812 is the height of the design
+    double widthFactor = MediaQuery.of(context).size.width /
+        375; // Assuming 375 is the width of the design
+
     return Scaffold(
       body: Column(
         children: [
           SizedBox(
-            height: 220.h,
+            height: 220 * heightFactor,
             child: Stack(
               children: [
                 Container(
-                  height: 180.h,
+                  height: 180 * heightFactor,
                   width: MediaQuery.of(context).size.width,
                   color: ScaffoldColor,
-                  padding:  EdgeInsets.only(left: 30.r, top: 56.h),
+                  padding: EdgeInsets.only(
+                      left: 30 * widthFactor, top: 25 * heightFactor),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextWidget(
                         content: "Welcome again",
-                        fontSize: 24.sp,
+                        fontSize: 8 * widthFactor,
                         fontWeight: FontWeight.bold,
                       ),
                       TextWidget(
                           content: "Add your expenses here",
-                          fontSize: 26.sp,
+                          fontSize: 8 * widthFactor,
                           fontWeight: FontWeight.bold)
                     ],
                   ),
                 ),
                 Positioned(
-                  bottom: 5.h,
+                  bottom: 9 * heightFactor,
                   left: 0,
                   child: Container(
-                    width: 270.w,
-                    height: 80.h,
-                    margin:  EdgeInsets.only(left: 10.w),
+                    width: 160 * widthFactor,
+                    height: 80 * heightFactor,
+                    margin: EdgeInsets.only(left: 10 * widthFactor),
                     decoration: BoxDecoration(
                         color: primaryColor,
                         borderRadius: BorderRadius.circular(50)),
@@ -83,12 +88,12 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                       children: [
                         TextWidget(
                           content: "Total Trip\n   Spend",
-                          fontSize: 15.sp,
+                          fontSize: 7 * widthFactor,
                           fontWeight: FontWeight.bold,
                           color: white,
                         ),
-                         SizedBox(
-                          width: 20.w,
+                        SizedBox(
+                          width: 15 * widthFactor,
                         ),
                         ValueListenableBuilder(
                           valueListenable: expenseListener,
@@ -100,7 +105,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                             });
                             return TextWidget(
                               content: "₹$totalExpense",
-                              fontSize: 25.sp,
+                              fontSize: 10 * widthFactor,
                               fontWeight: FontWeight.bold,
                               color: white,
                             );
@@ -114,9 +119,9 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
             ),
           ),
           Padding(
-            padding:  EdgeInsets.only(top: 5.h),
+            padding: EdgeInsets.only(top: 5 * heightFactor),
             child: SizedBox(
-              height: 60.h,
+              height: 60 * heightFactor,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: widget.tripEndDate
@@ -134,21 +139,25 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                           });
                         },
                         child: Padding(
-                          padding:  EdgeInsets.all(2.w),
+                          padding: EdgeInsets.all(2 * widthFactor),
                           child: AnimatedContainer(
                             duration: const Duration(
                               milliseconds: 400,
                             ),
                             curve: Curves.easeOut,
-                            width: isSelected ? 100 : 80,
-                            height: 50.h,
+                            width: isSelected
+                                ? 60 * widthFactor
+                                : 50 * widthFactor,
+                            height: 100 * heightFactor,
                             decoration: BoxDecoration(
                                 color: isSelected ? primaryColor : primaryLight,
                                 borderRadius: BorderRadius.circular(10)),
                             child: Center(
                               child: TextWidget(
                                 content: DateFormat("dd MMM").format(date),
-                                fontSize: isSelected ? 16.sp : 13.sp,
+                                fontSize: isSelected
+                                    ? 8 * widthFactor
+                                    : 5 * widthFactor,
                                 fontWeight: FontWeight.bold,
                                 color: isSelected ? white : black,
                               ),
@@ -177,8 +186,8 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                   : Center(
                       child: Lottie.network(
                           "https://lottie.host/11affa91-4de3-4aca-8340-6fa60f2b1a6c/dt6OPkTq9j.json",
-                          width: 200.w,
-                          height: 200.h),
+                          width: 200 * widthFactor,
+                          height: 200 * heightFactor),
                     );
             },
           ))
@@ -204,21 +213,24 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
   }
 
   Padding buildExpenseContainer(ExpenseModel data, BuildContext context) {
+    double heightFactor = MediaQuery.of(context).size.height / 812;
+    double widthFactor = MediaQuery.of(context).size.width / 375;
+
     return Padding(
-      padding:  EdgeInsets.all(10.w),
+      padding: EdgeInsets.all(10 * widthFactor),
       child: RepaintBoundary(
         child: Stack(
           children: [
             Container(
-              padding:  EdgeInsets.symmetric(horizontal: 12.w),
-              height: 120.h,
+              padding: EdgeInsets.symmetric(horizontal: 12 * widthFactor),
+              height: 120 * heightFactor,
               child: Center(
                 child: Container(
-                  height: 90.h,
+                  height: 130 * heightFactor,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(15.r),
+                    borderRadius: BorderRadius.circular(15 * widthFactor),
                     boxShadow: const [
                       BoxShadow(
                         color: Colors.black45,
@@ -228,20 +240,21 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                     ],
                   ),
                   child: Padding(
-                    padding:  EdgeInsets.all(5.0.w),
+                    padding: EdgeInsets.all(5.0 * widthFactor),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         RepaintBoundary(
                           child: Container(
-                            width: 75.w,
-                            height: 60.h,
-                            margin:  EdgeInsets.only(left: 10.w),
+                            width: 75 * widthFactor,
+                            height: 60 * heightFactor,
+                            margin: EdgeInsets.only(left: 10 * widthFactor),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10.r),
+                              borderRadius:
+                                  BorderRadius.circular(10 * widthFactor),
                               child: SvgPicture.asset(
                                 data.image,
-                                height: 55.h,
+                                height: 5 * heightFactor,
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -252,11 +265,11 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                           children: [
                             TextWidget(
                                 content: "₹ ${data.amount}",
-                                fontSize: 25.sp,
+                                fontSize: 7 * widthFactor,
                                 fontWeight: FontWeight.bold),
                             Container(
-                              margin:  EdgeInsets.only(top: 5.h),
-                              width: 120.w,
+                              margin: EdgeInsets.only(top: 5 * heightFactor),
+                              width: 15 * widthFactor,
                               child: Center(
                                 child: Text(
                                   data.discription ?? '',
@@ -267,8 +280,8 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                           ],
                         ),
                         SizedBox(
-                          width: 100.w,
-                          height: 50.h,
+                          width: 100 * widthFactor,
+                          height: 50 * heightFactor,
                           child: Center(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -283,8 +296,8 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                     );
                                   },
                                   child: Container(
-                                    width: 42.w,
-                                    height: 42.h,
+                                    width: 42 * widthFactor,
+                                    height: 42 * heightFactor,
                                     decoration: const BoxDecoration(
                                         color: Color.fromRGBO(214, 214, 214, 1),
                                         shape: BoxShape.circle),
@@ -300,15 +313,12 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                         content:
                                             "Are you sure you want to delete this ?",
                                         onpressed: () {
-                                          deleteExpense(expense: data);
-                                          expenseToList(tripId: data.tripId);
-                                          log("delete pressed");
                                           Navigator.of(context).pop();
                                         });
                                   },
                                   child: Container(
-                                    width: 42.w,
-                                    height: 42,
+                                    width: 42 * widthFactor,
+                                    height: 42 * heightFactor,
                                     decoration: BoxDecoration(
                                         color: Colors.grey[350],
                                         shape: BoxShape.circle),
@@ -331,18 +341,19 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
               ),
             ),
             Positioned(
-              top: 2.h,
-              left: 30.w,
+              top: 1 * heightFactor,
+              left: 30 * widthFactor,
               child: Container(
-                width: 115.w,
-                height: 25.h,
+                width: 50 * widthFactor,
+                height: 25 * heightFactor,
                 decoration: BoxDecoration(
-                    color: Colors.red, borderRadius: BorderRadius.circular(20.r)),
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(20 * widthFactor)),
                 child: Center(
                   child: Text(
                     data.category,
-                    style:  TextStyle(
-                        fontSize: 18.sp,
+                    style: TextStyle(
+                        fontSize: 4 * widthFactor,
                         fontWeight: FontWeight.bold,
                         color: white),
                   ),

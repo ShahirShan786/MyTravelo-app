@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Textformfeilds extends StatelessWidget {
   TextEditingController? controller;
@@ -34,6 +33,8 @@ class Textformfeilds extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return TextFormField(
       obscureText: obscureText!,
       controller: controller,
@@ -41,13 +42,16 @@ class Textformfeilds extends StatelessWidget {
       decoration: InputDecoration(
         labelText: labelText,
         labelStyle: TextStyle(
-            fontSize: 16.sp, fontWeight: FontWeight.w700, color: labelColor),
+            fontSize: screenHeight * 0.025,
+            fontWeight: FontWeight.w700,
+            color: labelColor),
         suffixIcon: suffics,
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: borderColor!),
         ),
         focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: focusedColor!, width: 2.w)),
+            borderSide:
+                BorderSide(color: focusedColor!, width: screenWidth * 0.002)),
         errorBorder:
             UnderlineInputBorder(borderSide: BorderSide(color: focusedColor!)),
         focusedErrorBorder:

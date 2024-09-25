@@ -12,7 +12,6 @@ import 'package:my_travelo_app/Views/Admin-screens/Add_Place/widgets/lattitude_t
 import 'package:my_travelo_app/Views/Admin-screens/Add_Place/widgets/logitude_text_field.dart';
 import 'package:my_travelo_app/Views/Admin-screens/Add_Place/widgets/place_text_field.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/show_dialogues.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/text_form_feild.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
 import 'package:my_travelo_app/constants/primary_button.dart';

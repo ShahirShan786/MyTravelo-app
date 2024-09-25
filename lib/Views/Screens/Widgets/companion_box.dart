@@ -19,7 +19,7 @@ class CompanionBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 140.h,
+      // height: 140.h,
       // color: Colors.blueAccent,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

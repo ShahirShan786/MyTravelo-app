@@ -1,13 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_travelo_app/Controller/Firebase/firebase_functions.dart';
 import 'package:my_travelo_app/Views/Screens/Sub_Screens/dream_destination_screen.dart';
 import 'package:my_travelo_app/Views/Screens/Sub_Screens/place_details_screen.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/app_bar.dart';
 import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:my_travelo_app/Models/admin_model.dart';
 import 'package:my_travelo_app/Views/Screens/Trip_Screens/Add_Trip_screens/Add_Trip/pages/add_trip_screen.dart';
@@ -24,6 +22,7 @@ class _HomescreenState extends State<Homescreen> {
   final FireStoreServices fireStoreServices = FireStoreServices();
   List<String> homePictures = [];
   bool isLoading = true;
+
   @override
   void initState() {
     super.initState();
@@ -31,40 +30,48 @@ class _HomescreenState extends State<Homescreen> {
     fireStoreServices.getFirebaseDetails();
   }
 
-  void loadHomepictureUrl ()async{
+  void loadHomepictureUrl() async {
     final imageUrl = await fireStoreServices.getImageUrls();
-    setState(() {
-      homePictures = imageUrl;
-      isLoading = false;
-    });
+    if (mounted) {
+      setState(() {
+        homePictures = imageUrl;
+        isLoading = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    // Fetch screen size using MediaQuery
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      appBar: buildAppBar(),
-      body: PreferredSize(
-        preferredSize:  Size.fromWidth(500.w),
-        child: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                isLoading 
-                ?const Center( child:  CircularProgressIndicator(),)
-                :  buildSliderCarousel(),
-                SizedBox(height: 10.h),
-                Padding(
-                  padding:  EdgeInsets.only(left: 10.w),
-                  child: TextWidget(
-                    content: "Featured guides from users",
-                    fontSize: 20.sp,
+      appBar: buildAppBar(screenWidth),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              isLoading
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : buildSliderCarousel(screenHeight),
+              const SizedBox(height: 10), // Remove screenutil-based height
+              Padding(
+                padding: EdgeInsets.only(left: screenWidth * 0.03),
+                child: Text(
+                  "Featured guides from users",
+                  style: TextStyle(
+                    fontSize:
+                        screenWidth * 0.04, // Adjust for responsive font size
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                buildFeaturedPlaces(),
-              ],
-            ),
+              ),
+              buildFeaturedPlaces(screenHeight, screenWidth),
+            ],
           ),
         ),
       ),
@@ -72,19 +79,21 @@ class _HomescreenState extends State<Homescreen> {
   }
 
   // Widget for the app bar
-  PrimaryAppBar buildAppBar() {
+  PrimaryAppBar buildAppBar(double screenWidth) {
     return PrimaryAppBar(
       backgroundColors: BoxColor,
-      leadingsWidth: 120.w,
+      leadingsWidth: screenWidth * 0.1,
       leadings: Padding(
-        padding: EdgeInsets.only(left: 10.w),
+        padding: EdgeInsets.only(left: screenWidth * 0.02),
         child: Center(
-          child: TextWidget(
-            color: primaryColor,
-            content: "MyTravelo",
-            fontSize: 19.sp,
-            fontWeight: FontWeight.w600,
-            fontFamily: "HeaderFont",
+          child: Text(
+            "MyTravelo",
+            style: TextStyle(
+              color: primaryColor,
+              fontSize: screenWidth * 0.01, // Adjust font size
+              fontWeight: FontWeight.w600,
+              fontFamily: "HeaderFont",
+            ),
           ),
         ),
       ),
@@ -95,9 +104,9 @@ class _HomescreenState extends State<Homescreen> {
             final userId = prefz.getString("currentuserId");
             Get.to(() => DreamDestinationScreen(userId: userId.toString()));
           },
-          icon:  Icon(
+          icon: Icon(
             Icons.public,
-            size: 33.w,
+            size: screenWidth * 0.03, // Responsive icon size
             color: primaryColor,
           ),
         ),
@@ -110,15 +119,16 @@ class _HomescreenState extends State<Homescreen> {
     return Container(
       color: Colors.grey.shade600,
       width: double.infinity,
-      child: CachedNetworkImage(imageUrl: urlImage,
-      fit: BoxFit.fill,
-      width: double.infinity,
-      )
+      child: CachedNetworkImage(
+        imageUrl: urlImage,
+        fit: BoxFit.fill,
+        width: double.infinity,
+      ),
     );
   }
 
   // Slider Carousel Widget
-  Widget buildSliderCarousel() {
+  Widget buildSliderCarousel(double screenHeight) {
     return Stack(
       children: [
         CarouselSlider.builder(
@@ -128,25 +138,27 @@ class _HomescreenState extends State<Homescreen> {
             return sliderWidget(urlImage);
           },
           options: CarouselOptions(
-            height: 350.h,
+            height: screenHeight * 0.7, // Adjust height based on screen size
             autoPlay: true,
             viewportFraction: 1.0,
           ),
         ),
         Positioned(
-          bottom: 85.h,
-          left: 15.w,
-          child: TextWidget(
-            color: Colors.white,
-            content: "Plan your next  \nadventure",
-            fontSize: 28.sp,
-            fontWeight: FontWeight.w700,
-            fontFamily: "MainFont",
+          bottom: screenHeight * 0.12,
+          left: 15,
+          child: Text(
+            "Plan your next  \nadventure",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: screenHeight * 0.07,
+              fontWeight: FontWeight.w700,
+              fontFamily: "MainFont",
+            ),
           ),
         ),
         Positioned(
-          bottom: 30.h,
-          left: 15.w,
+          bottom: screenHeight * 0.05,
+          left: 15,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: primaryColor,
@@ -154,11 +166,13 @@ class _HomescreenState extends State<Homescreen> {
             onPressed: () {
               Get.to(() => const AddTripScreens());
             },
-            child: TextWidget(
-              color: Colors.white,
-              content: "Create new trip plan",
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w700,
+            child: Text(
+              "Create new trip plan",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: screenHeight * 0.02,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
         ),
@@ -167,9 +181,9 @@ class _HomescreenState extends State<Homescreen> {
   }
 
   // Widget for the list of featured places
-  Widget buildFeaturedPlaces() {
+  Widget buildFeaturedPlaces(double screenHeight, double screenWidth) {
     return SizedBox(
-      height: 270.w,
+      height: screenHeight * 0.65,
       width: double.infinity,
       child: ValueListenableBuilder(
         valueListenable: placeModelListener,
@@ -184,7 +198,7 @@ class _HomescreenState extends State<Homescreen> {
               itemCount: placeModelListener.value.length,
               itemBuilder: (BuildContext context, int index) {
                 PlaceModel place = placeModelListener.value[index];
-                return buildPlaceCard(place, index);
+                return buildPlaceCard(place, index, screenWidth, screenHeight);
               },
             );
           }
@@ -194,7 +208,8 @@ class _HomescreenState extends State<Homescreen> {
   }
 
   // Widget for individual place card
-  Widget buildPlaceCard(PlaceModel place, int index) {
+  Widget buildPlaceCard(
+      PlaceModel place, int index, double screenWidth, double screenHeight) {
     return Padding(
       padding: const EdgeInsets.all(4),
       child: GestureDetector(
@@ -205,20 +220,20 @@ class _HomescreenState extends State<Homescreen> {
           );
         },
         child: Container(
-          width: 220.w,
+          width: screenWidth * 0.5,
           decoration: BoxDecoration(
             color: ScaffoldColor,
-            borderRadius: BorderRadius.circular(10.r),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(10.r),
+                borderRadius: BorderRadius.circular(10),
                 child: CachedNetworkImage(
                   imageUrl: place.subImage[0],
                   fit: BoxFit.cover,
-                  height: 160.h,
+                  height: screenHeight * 0.3,
                   width: double.infinity,
                   placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(
@@ -228,19 +243,21 @@ class _HomescreenState extends State<Homescreen> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(left: 5.w, top: 4.h),
-                child: TextWidget(
-                  content: place.place,
-                  fontSize: 15.sp,
-                  fontWeight: FontWeight.bold,
+                padding: const EdgeInsets.only(left: 5, top: 4),
+                child: Text(
+                  place.place,
+                  style: TextStyle(
+                    fontSize: screenWidth * 0.03,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               Padding(
-                padding:  EdgeInsets.all(5.w),
+                padding: const EdgeInsets.all(5),
                 child: Text(
                   place.details,
                   style: TextStyle(
-                    fontSize: 13.sp,
+                    fontSize: screenWidth * 0.020,
                     fontWeight: FontWeight.w500,
                   ),
                   overflow: TextOverflow.ellipsis,

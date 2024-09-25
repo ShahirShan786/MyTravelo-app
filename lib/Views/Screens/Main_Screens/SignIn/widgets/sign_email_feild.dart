@@ -15,24 +15,27 @@ class BuildSignEmailFeild extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Textformfeilds(
-      controller: emailController,
-      labelText: "E-mail",
-      keyboardType: TextInputType.emailAddress,
-      labelColor: secondaryColor,
-      borderColor: Colors.red,
-      focusedColor: primaryColor,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return "Please Enter an Email";
-        }
-        RegExp regex = RegExp(emailPattern);
-        if (!regex.hasMatch(value)) {
-          return "Enter a valid email address";
-        }
-    
-        return null;
-      },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 300),
+      child: Textformfeilds(
+        controller: emailController,
+        labelText: "E-mail",
+        keyboardType: TextInputType.emailAddress,
+        labelColor: secondaryColor,
+        borderColor: Colors.red,
+        focusedColor: primaryColor,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return "Please Enter an Email";
+          }
+          RegExp regex = RegExp(emailPattern);
+          if (!regex.hasMatch(value)) {
+            return "Enter a valid email address";
+          }
+      
+          return null;
+        },
+      ),
     );
   }
 }

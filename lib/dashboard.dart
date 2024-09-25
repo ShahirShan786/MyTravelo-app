@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/Models/singInModel.dart';
@@ -28,10 +27,11 @@ Widget currentScreen = const Homescreen();
 class _DashboardState extends State<Dashboard> {
   int currentPageIndex = 0;
   late List<Widget> screens;
+
   @override
   void initState() {
     super.initState();
-    List<Widget> screens = [
+    screens = [
       const Homescreen(),
       const ScheduleScreen(),
       const FavoriteScreen(),
@@ -41,6 +41,9 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: PageStorage(bucket: bucket, child: currentScreen),
       floatingActionButton: Visibility(
@@ -49,9 +52,6 @@ class _DashboardState extends State<Dashboard> {
           backgroundColor: primaryColor,
           shape: const CircleBorder(),
           onPressed: () {
-            // Navigator.of(context).push(MaterialPageRoute(
-            //   builder: (context) => const AddTripScreens(),
-            // ));
             Get.to(() => const AddTripScreens(),
                 transition: Transition.fade,
                 duration: const Duration(seconds: 1));
@@ -67,7 +67,7 @@ class _DashboardState extends State<Dashboard> {
         shape: const CircularNotchedRectangle(),
         notchMargin: 10,
         child: SizedBox(
-          height: 30.h,
+          height: screenHeight * 0.08, // Adjusted for better responsiveness
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -85,11 +85,11 @@ class _DashboardState extends State<Dashboard> {
                       Icons.home,
                       color:
                           currentPageIndex == 0 ? primaryColor : secondaryColor,
-                      size: 28.w,
+                      size: screenWidth * 0.03500, // Adjust icon size
                     ),
                   ),
-                   SizedBox(
-                    width: 22.w,
+                  SizedBox(
+                    width: screenWidth * 0.06, // Adjust spacing between icons
                   ),
                   IconButton(
                     onPressed: () {
@@ -100,7 +100,7 @@ class _DashboardState extends State<Dashboard> {
                     },
                     icon: FaIcon(
                       FontAwesomeIcons.list,
-                      size: 24.w,
+                      size: screenWidth * 0.03, // Adjust icon size
                       color:
                           currentPageIndex == 1 ? primaryColor : secondaryColor,
                     ),
@@ -119,26 +119,24 @@ class _DashboardState extends State<Dashboard> {
                     },
                     icon: Icon(
                       Icons.favorite,
-                      size: 26.w,
+                      size: screenWidth * 0.03, // Adjust icon size
                       color:
                           currentPageIndex == 2 ? primaryColor : secondaryColor,
                     ),
                   ),
-                   SizedBox(
-                    width: 20.w,
+                  SizedBox(
+                    width: screenWidth * 0.06, // Adjust spacing between icons
                   ),
                   IconButton(
                       onPressed: () {
                         setState(() {
-                          currentScreen = const Profilescreen(
-                              // userDetails: widget.userDetails,
-                              );
+                          currentScreen = const Profilescreen();
                           currentPageIndex = 3;
                         });
                       },
                       icon: Icon(
                         Icons.person_2_rounded,
-                        size: 30.w,
+                        size: screenWidth * 0.03, // Adjust icon size
                         color: currentPageIndex == 3
                             ? primaryColor
                             : secondaryColor,

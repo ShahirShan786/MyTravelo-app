@@ -78,7 +78,7 @@ class _AddDreamDestinationScreenState extends State<AddDreamDestinationScreen> {
                   ),
                   selectedImages.isNotEmpty
                       ? SizedBox(
-                          height: 100,
+                          height: 100.h,
                           width: double.infinity,
                           child: ListView.builder(
                               scrollDirection: Axis.horizontal,
@@ -97,7 +97,7 @@ class _AddDreamDestinationScreenState extends State<AddDreamDestinationScreen> {
                                       width: 100.w,
                                       height: 80.h,
                                       decoration: BoxDecoration(
-                                          color: green,
+                                          color: Colors.grey[600],
                                           borderRadius:
                                               BorderRadius.circular(8.r),
                                           image: DecorationImage(

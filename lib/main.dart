@@ -8,10 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Future<void> main() async {
- 
-  
   initialisation();
-  
 
   runApp(const MyApp());
 }
@@ -22,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      builder: (Context , Widget) => GetMaterialApp(
+      builder: (Context, Widget) => GetMaterialApp(
           theme: ThemeData(
             primaryColor: Colors.green,
             scaffoldBackgroundColor: Colors.white,
@@ -42,7 +39,7 @@ class MyApp extends StatelessWidget {
               }
             },
           )),
-          designSize:const Size(392.72, 825.45),
+      designSize: const Size(392.72, 825.45),
     );
   }
 
@@ -53,8 +50,8 @@ class MyApp extends StatelessWidget {
 
   Future<String?> saveUserName(String id) async {
     SharedPreferences prefsUsername = await SharedPreferences.getInstance();
-    await prefsUsername.setString("currentuserId",id);
-    
+    await prefsUsername.setString("currentuserId", id);
+
     return null;
   }
 }

@@ -1,0 +1,30 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "my-travelo-6c57a",
+          "appId": "1:605480071892:android:f66cd0469fce93a9f28141",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "my-travelo-6c57a",
+          "configurations": {
+            "android": "1:605480071892:android:f66cd0469fce93a9f28141",
+            "web": "1:605480071892:web:75d89fb30c51b1c0f28141"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

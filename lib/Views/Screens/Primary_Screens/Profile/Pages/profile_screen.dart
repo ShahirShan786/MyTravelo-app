@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_travelo_app/Controller/Hive/signIn_service.dart';
@@ -27,7 +26,7 @@ class Profilescreen extends StatefulWidget {
 
 class _ProfilescreenState extends State<Profilescreen> {
   List<Widget> profileScreens = [
-    const Aboutpage(),
+    const AboutPage(),
     const Privacypage(),
     const Termspage(),
     const Logoutpage()
@@ -66,30 +65,37 @@ class _ProfilescreenState extends State<Profilescreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Get screen width and height using MediaQuery
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      appBar:const PrimaryAppBar(
+      appBar: const PrimaryAppBar(
         titles: "Profile",
         backgroundColors: BoxColor,
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(20.w),
+          padding: EdgeInsets.all(
+              screenWidth * 0.05), // 5% padding for responsiveness
           child: Column(
             children: [
-              SizedBox(height: 20.h),
+              SizedBox(height: screenHeight * 0.02), // 2% height spacing
               Container(
                 width: double.infinity,
-                height: 110.h,
+                height: screenHeight * 0.18, // 15% of the screen height
                 decoration: BoxDecoration(
-                    color: BoxColor, borderRadius: BorderRadius.circular(20.r)),
+                  color: BoxColor,
+                  borderRadius: BorderRadius.circular(20), // Fixed radius value
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(10.w),
+                      padding: EdgeInsets.all(screenWidth * 0.02), // 2% padding
                       child: SizedBox(
-                        width: 272.w,
+                        width: screenWidth * 0.2, // 70% of screen width
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -103,20 +109,23 @@ class _ProfilescreenState extends State<Profilescreen> {
                                   child: ClipOval(
                                     child: CircleAvatar(
                                       backgroundColor: Colors.white,
-                                      radius: 40.r,
+                                      radius: screenWidth *
+                                          0.05, // 10% of screen width
                                       child: pickedImage != null
                                           ? Image.file(
                                               pickedImage!,
-                                              height: 150.h,
-                                              width: 150.w,
+                                              height: screenHeight *
+                                                  0.06, // Adjusted image height
+                                              width: screenWidth *
+                                                  0.06, // Adjusted image width
                                               fit: BoxFit.cover,
                                             )
                                           : (profileDetail != null &&
                                                   profileDetail!.image != null)
                                               ? Image.file(
                                                   File(profileDetail!.image!),
-                                                  height: 150.h,
-                                                  width: 150.w,
+                                                  height: screenHeight * 0.4,
+                                                  width: screenWidth * 0.4,
                                                   fit: BoxFit.cover,
                                                 )
                                               : Image.network(
@@ -125,48 +134,55 @@ class _ProfilescreenState extends State<Profilescreen> {
                                   ),
                                 ),
                                 Positioned(
-                                  right: 0.w,
-                                  bottom: 2.h,
+                                  right: screenWidth * 0.02,
+                                  bottom: screenHeight * 0.01,
                                   child: Container(
-                                    width: 25.w,
-                                    height: 25.h,
+                                    width: screenWidth * 0.06,
+                                    height: screenHeight * 0.03,
                                     decoration: const BoxDecoration(
                                         color: Colors.white,
                                         shape: BoxShape.circle),
                                     child: const Icon(Icons.add),
                                   ),
-                                )
+                                ),
                               ],
                             ),
-                            profileInfoSection(profileDetail: profileDetail),
+                            ProfileInfoSection(profileDetail: profileDetail)
                           ],
                         ),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(right: 8.w, top: 10.h),
+                      padding: EdgeInsets.only(
+                        right: screenWidth * 0.02,
+                        top: screenHeight * 0.01,
+                      ),
                       child: IconButton(
-                          onPressed: () async {
-                            final updatedUser = await showDialog<Singinmodel>(
-                              context: context,
-                              builder: (context) =>
-                                  EditDialogue(user: profileDetail!),
-                            );
-                            if (updatedUser != null) {
-                              setState(() {
-                                profileDetail = updatedUser;
-                              });
-                            }
-                          },
-                          icon: FaIcon(
-                            FontAwesomeIcons.pencil,
-                            size: 20.r,
-                          )),
+                        onPressed: () async {
+                          final updatedUser = await showDialog<Singinmodel>(
+                            context: context,
+                            builder: (context) =>
+                                EditDialogue(user: profileDetail!),
+                          );
+                          if (updatedUser != null) {
+                            setState(() {
+                              profileDetail = updatedUser;
+                            });
+                          }
+                        },
+                        icon: FaIcon(
+                          FontAwesomeIcons.pencil,
+                          size: screenWidth *
+                              0.02, // 5% of screen width for icon size
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ),
-              buildSettingsSection(profileScreens: profileScreens, icons: icons, titles: titles)
+
+              BuildSettingsSection(
+                  profileScreens: profileScreens, icons: icons, titles: titles)
             ],
           ),
         ),
@@ -188,6 +204,3 @@ class _ProfilescreenState extends State<Profilescreen> {
     return null;
   }
 }
-
-
-

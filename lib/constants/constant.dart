@@ -9,6 +9,7 @@ class TextWidget extends StatelessWidget {
   double? fontSize;
   FontWeight? fontWeight;
   String? fontFamily;
+  TextOverflow? textOverflow;
 
   TextWidget({
     super.key,
@@ -17,6 +18,7 @@ class TextWidget extends StatelessWidget {
     required this.fontSize,
     required this.fontWeight,
     this.fontFamily,
+    this.textOverflow
   });
 
   @override
@@ -28,6 +30,8 @@ class TextWidget extends StatelessWidget {
         fontSize: fontSize,
         fontWeight: fontWeight,
         fontFamily: fontFamily,
+        overflow: textOverflow,
+        
       ),
     );
   }

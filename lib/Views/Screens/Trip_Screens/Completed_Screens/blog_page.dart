@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:my_travelo_app/Controller/Hive/user_functions.dart';
 import 'package:my_travelo_app/Views/Screens/Trip_Screens/Completed_Screens/completed_details_page.dart';
 import 'package:my_travelo_app/constants/constable.dart';
@@ -29,7 +28,7 @@ class _BlogPageState extends State<BlogPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    
     super.initState();
     widget.blog != null ? blogController.text = widget.blog!.blog : "";
   }

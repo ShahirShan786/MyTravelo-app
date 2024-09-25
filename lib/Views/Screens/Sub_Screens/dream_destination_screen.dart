@@ -24,7 +24,7 @@ class DreamDestinationScreen extends StatefulWidget {
 class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
   @override
   void initState() {
-    // TODO: implement initState
+   
     super.initState();
     loadData();
   }
@@ -36,6 +36,7 @@ class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double ScreenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
@@ -52,18 +53,18 @@ class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
           builder: (context, value, child) {
             log("Rebuilding with ${value.length} items");
             return Padding(
-              padding:  EdgeInsets.all(15.w),
+              padding: EdgeInsets.all(15.w),
               child: ListView.builder(
                   itemCount: value.length,
                   itemBuilder: (context, index) {
                     DreamDestinationModel data =
                         dreamDestinationListener.value[index];
                     return Padding(
-                      padding:  EdgeInsets.symmetric(vertical: 15.h),
+                      padding: EdgeInsets.symmetric(vertical: 15.h),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10.r),
                         child: Container(
-                            height: 230.h,
+                            height: ScreenHeight * 0.28,
                             width: double.infinity,
                             decoration: BoxDecoration(
                                 color: Colors.grey[300],
@@ -98,13 +99,13 @@ class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
                                     height: double.infinity,
                                     color: Colors.black.withOpacity(0.4),
                                     child: Padding(
-                                      padding:  EdgeInsets.all(8.0.w),
+                                      padding: EdgeInsets.all(8.0.w),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                           SizedBox(
-                                            height: 58.h,
+                                          SizedBox(
+                                            height: 53.h,
                                           ),
                                           TextWidget(
                                             content:
@@ -114,7 +115,7 @@ class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
                                             color: white,
                                           ),
                                           Padding(
-                                            padding:  EdgeInsets.symmetric(
+                                            padding: EdgeInsets.symmetric(
                                                 vertical: 5.h),
                                             child: TextWidget(
                                               content:
@@ -131,12 +132,12 @@ class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
                                             fontWeight: FontWeight.bold,
                                             color: white,
                                           ),
-                                           SizedBox(
+                                          SizedBox(
                                             height: 15.h,
                                           ),
                                           Padding(
-                                            padding:  EdgeInsets.only(
-                                                right: 80.w),
+                                            padding:
+                                                EdgeInsets.only(right: 80.w),
                                             child: LinearProgressIndicator(
                                               value: data.totalSavings >=
                                                       data.totalExpense
@@ -146,7 +147,7 @@ class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
                                               color: primaryColor,
                                             ),
                                           ),
-                                           SizedBox(
+                                          SizedBox(
                                             height: 12.w,
                                           ),
                                           ElevatedButton(
@@ -155,10 +156,9 @@ class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
                                             },
                                             style: ElevatedButton.styleFrom(
                                                 backgroundColor: primaryColor,
-                                                padding:
-                                                     EdgeInsets.symmetric(
-                                                        horizontal: 52.w,
-                                                        vertical: 12.h),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 52.w,
+                                                    vertical: 12.h),
                                                 shape: RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -175,7 +175,7 @@ class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
                                     ),
                                   ),
                                   Padding(
-                                    padding:  EdgeInsets.symmetric(
+                                    padding: EdgeInsets.symmetric(
                                         horizontal: 10.w, vertical: 5.h),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
@@ -194,7 +194,7 @@ class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
                                               },
                                               icon: const Icon(Icons.edit)),
                                         ),
-                                         SizedBox(
+                                        SizedBox(
                                           width: 5.w,
                                         ),
                                         CircleAvatar(
@@ -215,7 +215,8 @@ class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
                                                   },
                                                 );
                                               },
-                                              icon: const Icon(Icons.delete_rounded,
+                                              icon: const Icon(
+                                                  Icons.delete_rounded,
                                                   color: primaryColor)),
                                         )
                                       ],
@@ -230,7 +231,7 @@ class _DreamDestinationScreenState extends State<DreamDestinationScreen> {
             );
           }),
       floatingActionButton: Padding(
-          padding:  EdgeInsets.only(bottom: 20.h),
+          padding: EdgeInsets.only(bottom: 20.h),
           child: FloatingActionButton(
             backgroundColor: primaryColor,
             onPressed: () async {

@@ -7,7 +7,8 @@ class TExtFeilds extends StatelessWidget {
   String? hintText;
   TextEditingController? controller;
 
-  TExtFeilds({super.key, 
+  TExtFeilds({
+    super.key,
     required this.labelText,
     this.hintText,
     required this.controller,
@@ -16,17 +17,17 @@ class TExtFeilds extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(8.w),
+      padding: const EdgeInsets.symmetric(horizontal: 150, vertical: 50),
       child: TextField(
         controller: controller,
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
           labelText: labelText,
           labelStyle: TextStyle(
-              fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.black),
+              fontSize: 5.sp, fontWeight: FontWeight.w600, color: Colors.black),
           hintText: hintText,
-          hintStyle:TextStyle(
-              fontSize: 15.sp,
+          hintStyle: TextStyle(
+              fontSize: 4.sp,
               fontWeight: FontWeight.w400,
               color: secondaryColor),
           border: OutlineInputBorder(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_travelo_app/Views/Screens/Widgets/textFormFeilds.dart';
 import 'package:my_travelo_app/constants/constable.dart';
 import 'package:my_travelo_app/constants/constant.dart';
@@ -15,13 +14,15 @@ class EditPlanDialogue {
   }
 
   void showEditPlanDialogue() {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: TextWidget(
                 content: "Add Plans",
-                fontSize: 20.sp,
+                fontSize: screenWidth * 0.02,
                 fontWeight: FontWeight.bold),
             content: Textformfeilds(
               borderColor: secondaryColor,
@@ -37,7 +38,7 @@ class EditPlanDialogue {
                   },
                   child: TextWidget(
                       content: "Cancel",
-                      fontSize: 15.sp,
+                      fontSize: screenWidth * 0.015,
                       fontWeight: FontWeight.w600)),
               TextButton(
                   onPressed: () {
@@ -48,7 +49,7 @@ class EditPlanDialogue {
                   },
                   child: TextWidget(
                       content: "Add",
-                      fontSize: 15.sp,
+                      fontSize: screenWidth * 0.015,
                       fontWeight: FontWeight.w600))
             ],
           );

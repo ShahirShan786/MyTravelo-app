@@ -52,13 +52,6 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
     setState(() {});
   }
 
-  // void _checkBlogs(){
-  //   _blogEmpty =!completedTripListBlog.value
-  //   .any((blog)=> blog.tripId == widget.trip.id);
-  //   setState(() {
-
-  //   });
-  // }
 
   @override
   void dispose() {

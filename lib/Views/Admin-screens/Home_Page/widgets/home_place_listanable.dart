@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_travelo_app/Controller/Firebase/firebase_functions.dart';
 import 'package:my_travelo_app/Models/admin_model.dart';
@@ -91,8 +90,16 @@ class HomePlaceListenableBuilder extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10.r),
                         child: Image.network(
                           place.mainImage,
-                          // loadingBuilder: (context, child, loadingProgress) =>  Center(child: CircularProgressIndicator(color: indicatorColor,)),
+                  
                           fit: BoxFit.cover,
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if(loadingProgress == null){
+                              return child;
+                            }else{
+                              return Center(child: CircularProgressIndicator(color: indicatorColor,));
+                              
+                            }
+                          },
                         ),
                       ),
                     ),
