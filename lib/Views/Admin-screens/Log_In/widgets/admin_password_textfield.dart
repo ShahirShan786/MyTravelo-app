@@ -1,8 +1,7 @@
-
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/textFormFeilds.dart';
-import 'package:my_travelo_app/constants/constable.dart';
+import 'package:My Travelo/Views/Screens/Widgets/textFormFeilds.dart';
+import 'package:My Travelo/constants/constable.dart';
 
 class AdminPasswordTextField extends StatelessWidget {
   const AdminPasswordTextField({
@@ -15,7 +14,7 @@ class AdminPasswordTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 10.w),
+      padding: EdgeInsets.symmetric(horizontal: 10.w),
       child: Textformfeilds(
         borderColor: red,
         controller: _adminPasswordController,

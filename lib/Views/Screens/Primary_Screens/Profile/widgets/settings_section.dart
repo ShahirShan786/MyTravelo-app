@@ -1,13 +1,10 @@
-
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_travelo_app/Views/Screens/Main_Screens/Login/Pages/logIn_page.dart';
-import 'package:my_travelo_app/Views/Screens/Primary_Screens/Home/pages/home_screens.dart';
-import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/dashboard.dart';
+import 'package:My Travelo/Views/Screens/Main_Screens/Login/Pages/logIn_page.dart';
+import 'package:My Travelo/Views/Screens/Primary_Screens/Home/pages/home_screens.dart';
+import 'package:My Travelo/constants/constant.dart';
+import 'package:My Travelo/dashboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class buildSettingsSection extends StatelessWidget {
@@ -29,8 +26,7 @@ class buildSettingsSection extends StatelessWidget {
       width: double.infinity,
       height: 450.w,
       decoration: BoxDecoration(
-          color: Colors.grey[100],
-          borderRadius: BorderRadius.circular(20.r)),
+          color: Colors.grey[100], borderRadius: BorderRadius.circular(20.r)),
       child: Padding(
         padding: EdgeInsets.all(8.0.w),
         child: ListView.builder(
@@ -42,8 +38,7 @@ class buildSettingsSection extends StatelessWidget {
                     content: titles[index],
                     fontSize: 20.sp,
                     fontWeight: FontWeight.bold),
-                trailing:
-                    const Icon(Icons.arrow_forward_ios_outlined),
+                trailing: const Icon(Icons.arrow_forward_ios_outlined),
                 onTap: () {
                   if (index == profileScreens.length - 1) {
                     showDialog(
@@ -55,8 +50,7 @@ class buildSettingsSection extends StatelessWidget {
                                 fontSize: 18.sp,
                                 fontWeight: FontWeight.bold),
                             content: TextWidget(
-                                content:
-                                    "Are you sure you want to logout?",
+                                content: "Are you sure you want to logout?",
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.w400),
                             actions: [
@@ -67,22 +61,17 @@ class buildSettingsSection extends StatelessWidget {
                                   child: const Text("Cancel")),
                               TextButton(
                                 onPressed: () async {
-                                  Navigator.of(context)
-                                      .pushAndRemoveUntil(
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const LoginPage(),
-                                          ),
-                                          (Route<dynamic> route) =>
-                                              false);
+                                  Navigator.of(context).pushAndRemoveUntil(
+                                      MaterialPageRoute(
+                                        builder: (context) => const LoginPage(),
+                                      ),
+                                      (Route<dynamic> route) => false);
                                   SharedPreferences prefz =
-                                      await SharedPreferences
-                                          .getInstance();
+                                      await SharedPreferences.getInstance();
                                   prefz.remove("currentuserId");
-                                  
+
                                   SharedPreferences prefs =
-                                      await SharedPreferences
-                                          .getInstance();
+                                      await SharedPreferences.getInstance();
                                   prefs.setBool("isLogedIn", false);
                                   currentScreen = const Homescreen();
                                 },

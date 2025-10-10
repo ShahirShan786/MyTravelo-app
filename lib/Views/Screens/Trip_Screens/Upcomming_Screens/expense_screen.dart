@@ -5,12 +5,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
-import 'package:my_travelo_app/Controller/Hive/user_functions.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/show_dialogues.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/Models/user_model.dart';
-import 'package:my_travelo_app/Views/Screens/Trip_Screens/Upcomming_Screens/add_expense_screen.dart';
+import 'package:My Travelo/Controller/Hive/user_functions.dart';
+import 'package:My Travelo/Views/Screens/Widgets/show_dialogues.dart';
+import 'package:My Travelo/constants/constable.dart';
+import 'package:My Travelo/constants/constant.dart';
+import 'package:My Travelo/Models/user_model.dart';
+import 'package:My Travelo/Views/Screens/Trip_Screens/Upcomming_Screens/add_expense_screen.dart';
 
 class ExpenseScreen extends StatefulWidget {
   final String tripId;
@@ -52,7 +52,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                   height: 180.h,
                   width: MediaQuery.of(context).size.width,
                   color: ScaffoldColor,
-                  padding:  EdgeInsets.only(left: 30.r, top: 56.h),
+                  padding: EdgeInsets.only(left: 30.r, top: 56.h),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -74,7 +74,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                   child: Container(
                     width: 270.w,
                     height: 80.h,
-                    margin:  EdgeInsets.only(left: 10.w),
+                    margin: EdgeInsets.only(left: 10.w),
                     decoration: BoxDecoration(
                         color: primaryColor,
                         borderRadius: BorderRadius.circular(50)),
@@ -87,7 +87,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                           fontWeight: FontWeight.bold,
                           color: white,
                         ),
-                         SizedBox(
+                        SizedBox(
                           width: 20.w,
                         ),
                         ValueListenableBuilder(
@@ -114,7 +114,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
             ),
           ),
           Padding(
-            padding:  EdgeInsets.only(top: 5.h),
+            padding: EdgeInsets.only(top: 5.h),
             child: SizedBox(
               height: 60.h,
               child: ListView.builder(
@@ -134,7 +134,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                           });
                         },
                         child: Padding(
-                          padding:  EdgeInsets.all(2.w),
+                          padding: EdgeInsets.all(2.w),
                           child: AnimatedContainer(
                             duration: const Duration(
                               milliseconds: 400,
@@ -205,12 +205,12 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
 
   Padding buildExpenseContainer(ExpenseModel data, BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.all(10.w),
+      padding: EdgeInsets.all(10.w),
       child: RepaintBoundary(
         child: Stack(
           children: [
             Container(
-              padding:  EdgeInsets.symmetric(horizontal: 12.w),
+              padding: EdgeInsets.symmetric(horizontal: 12.w),
               height: 120.h,
               child: Center(
                 child: Container(
@@ -228,7 +228,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                     ],
                   ),
                   child: Padding(
-                    padding:  EdgeInsets.all(5.0.w),
+                    padding: EdgeInsets.all(5.0.w),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -236,7 +236,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                           child: Container(
                             width: 75.w,
                             height: 60.h,
-                            margin:  EdgeInsets.only(left: 10.w),
+                            margin: EdgeInsets.only(left: 10.w),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10.r),
                               child: SvgPicture.asset(
@@ -255,7 +255,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                 fontSize: 25.sp,
                                 fontWeight: FontWeight.bold),
                             Container(
-                              margin:  EdgeInsets.only(top: 5.h),
+                              margin: EdgeInsets.only(top: 5.h),
                               width: 120.w,
                               child: Center(
                                 child: Text(
@@ -337,11 +337,12 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                 width: 115.w,
                 height: 25.h,
                 decoration: BoxDecoration(
-                    color: Colors.red, borderRadius: BorderRadius.circular(20.r)),
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(20.r)),
                 child: Center(
                   child: Text(
                     data.category,
-                    style:  TextStyle(
+                    style: TextStyle(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.bold,
                         color: white),

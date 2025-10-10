@@ -2,22 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/app_bar.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/companion_box.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/edit_plan_dialogue.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/trip_deatails_screen_widget.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/Models/user_model.dart';
-import 'package:my_travelo_app/Views/Screens/Trip_Screens/Upcomming_Screens/expense_screen.dart';
-import 'package:my_travelo_app/Views/Screens/Trip_Screens/Add_Trip_screens/Trip_Plan/Pages/trip_plan_screen.dart';
+import 'package:My Travelo/Views/Screens/Widgets/app_bar.dart';
+import 'package:My Travelo/Views/Screens/Widgets/companion_box.dart';
+import 'package:My Travelo/Views/Screens/Widgets/edit_plan_dialogue.dart';
+import 'package:My Travelo/Views/Screens/Widgets/trip_deatails_screen_widget.dart';
+import 'package:My Travelo/constants/constable.dart';
+import 'package:My Travelo/constants/constant.dart';
+import 'package:My Travelo/Models/user_model.dart';
+import 'package:My Travelo/Views/Screens/Trip_Screens/Upcomming_Screens/expense_screen.dart';
+import 'package:My Travelo/Views/Screens/Trip_Screens/Add_Trip_screens/Trip_Plan/Pages/trip_plan_screen.dart';
 
 class UpcommingDetailsPage extends StatefulWidget {
-  
   final TripModel trip;
 
-  const UpcommingDetailsPage(
-      {super.key,required this.trip});
+  const UpcommingDetailsPage({super.key, required this.trip});
 
   @override
   State<UpcommingDetailsPage> createState() => _UpcommingDetailsPageState();
@@ -48,12 +46,12 @@ class _UpcommingDetailsPageState extends State<UpcommingDetailsPage> {
       ),
       body: Center(
           child: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding:  EdgeInsets.symmetric(
+              padding: EdgeInsets.symmetric(
                 horizontal: 40.w,
               ),
               child: Card(
@@ -66,14 +64,14 @@ class _UpcommingDetailsPageState extends State<UpcommingDetailsPage> {
                   child: Center(
                     child: Column(
                       children: [
-                         SizedBox(
+                        SizedBox(
                           height: 25.h,
                         ),
                         TextWidget(
                             content: trip.destination,
                             fontSize: 24.sp,
                             fontWeight: FontWeight.bold),
-                         SizedBox(
+                        SizedBox(
                           height: 12.h,
                         ),
                         TextWidget(
@@ -86,7 +84,7 @@ class _UpcommingDetailsPageState extends State<UpcommingDetailsPage> {
                 ),
               ),
             ),
-             SizedBox(
+            SizedBox(
               height: 10.h,
             ),
             companions.isNotEmpty
@@ -99,7 +97,7 @@ class _UpcommingDetailsPageState extends State<UpcommingDetailsPage> {
                 content: "Your plans are",
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w700),
-             SizedBox(
+            SizedBox(
               height: 3.h,
             ),
             SingleChildScrollView(
@@ -182,7 +180,7 @@ class _UpcommingDetailsPageState extends State<UpcommingDetailsPage> {
               color: primaryColor, borderRadius: BorderRadius.circular(10.r)),
           child: Center(
             child: Padding(
-              padding:  EdgeInsets.all(8.0.r),
+              padding: EdgeInsets.all(8.0.r),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -192,7 +190,7 @@ class _UpcommingDetailsPageState extends State<UpcommingDetailsPage> {
                     fontWeight: FontWeight.bold,
                     color: white,
                   ),
-                   Icon(
+                  Icon(
                     Icons.arrow_forward_ios_rounded,
                     size: 20.w,
                     color: white,
@@ -230,10 +228,9 @@ class _UpcommingDetailsPageState extends State<UpcommingDetailsPage> {
     );
   }
 
- void updateTripActivities(Map<String , List<String>>updatedActivities){
-  setState(() {
-    trip.activities = updatedActivities;
-
-  });
- }
+  void updateTripActivities(Map<String, List<String>> updatedActivities) {
+    setState(() {
+      trip.activities = updatedActivities;
+    });
+  }
 }

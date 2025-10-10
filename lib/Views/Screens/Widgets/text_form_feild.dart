@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-
+import 'package:My Travelo/constants/constable.dart';
 
 class TextFormFeild extends StatelessWidget {
   final String? hintText;
@@ -9,7 +8,6 @@ class TextFormFeild extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
   final int? maxLength;
-  
 
   const TextFormFeild(
       {super.key,
@@ -21,9 +19,8 @@ class TextFormFeild extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
-      padding:  EdgeInsets.all(8.0.w),
+      padding: EdgeInsets.all(8.0.w),
       child: TextFormField(
         maxLines: maxLength,
         controller: controller,
@@ -33,10 +30,10 @@ class TextFormFeild extends StatelessWidget {
             hintText: hintText,
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.r),
-                borderSide:  BorderSide(color: purple, width: 1.w)),
+                borderSide: BorderSide(color: purple, width: 1.w)),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.r),
-                borderSide:  BorderSide(color: primaryColor, width: 2.w))),
+                borderSide: BorderSide(color: primaryColor, width: 2.w))),
       ),
     );
   }

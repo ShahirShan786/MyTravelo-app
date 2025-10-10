@@ -1,20 +1,21 @@
 import 'dart:core';
 import 'dart:developer';
-import 'package:contacts_service/contacts_service.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_travelo_app/Controller/Hive/user_functions.dart';
-import 'package:my_travelo_app/Views/Screens/Trip_Screens/Add_Trip_screens/Trip_Plan/widgets/add_button.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/app_bar.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/textFormFeilds.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/trip_deatails_screen_widget.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
+import 'package:My Travelo/Controller/Hive/user_functions.dart';
+import 'package:My Travelo/Views/Screens/Trip_Screens/Add_Trip_screens/Trip_Plan/widgets/add_button.dart';
+import 'package:My Travelo/Views/Screens/Widgets/app_bar.dart';
+import 'package:My Travelo/Views/Screens/Widgets/textFormFeilds.dart';
+import 'package:My Travelo/Views/Screens/Widgets/trip_deatails_screen_widget.dart';
+import 'package:My Travelo/constants/constable.dart';
+import 'package:My Travelo/constants/constant.dart';
 
-import 'package:my_travelo_app/Models/user_model.dart';
+import 'package:My Travelo/Models/user_model.dart';
 
-import 'package:my_travelo_app/Views/Screens/Primary_Screens/Schedule/Pages/schedule_screen.dart';
+import 'package:My Travelo/Views/Screens/Primary_Screens/Schedule/Pages/schedule_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TripPlanScreen extends StatefulWidget {
@@ -113,7 +114,7 @@ class _TripPlanScreenState extends State<TripPlanScreen> {
                   },
                   icon: const Icon(Icons.add)),
             ),
-            SizedBox( 
+            SizedBox(
               height: 15.h,
             ),
             Expanded(
@@ -201,7 +202,7 @@ class _TripPlanScreenState extends State<TripPlanScreen> {
             log("Data couldn't passed");
           }
         },
-        child:const AddButton(),
+        child: const AddButton(),
       ),
     );
   }
@@ -229,8 +230,6 @@ class _TripPlanScreenState extends State<TripPlanScreen> {
     );
   }
 }
-
-
 
 _buttonClick({
   required BuildContext context,

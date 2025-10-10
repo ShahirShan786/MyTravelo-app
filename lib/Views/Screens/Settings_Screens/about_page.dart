@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_travelo_app/constants/constant.dart';
+import 'package:My Travelo/constants/constant.dart';
 
 class Aboutpage extends StatelessWidget {
   const Aboutpage({super.key});
@@ -15,11 +15,11 @@ class Aboutpage extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding:  EdgeInsets.all(10.w),
+            padding: EdgeInsets.all(10.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 SizedBox(
+                SizedBox(
                   height: 10.h,
                 ),
                 _buildBigHeading(content: "About us "),
@@ -49,7 +49,7 @@ class Aboutpage extends StatelessWidget {
 
   Widget _buildBigHeading({required String content}) {
     return Padding(
-      padding:  EdgeInsets.symmetric(vertical: 10.h),
+      padding: EdgeInsets.symmetric(vertical: 10.h),
       child: TextWidget(
         content: content,
         fontSize: 25.sp,
@@ -57,8 +57,6 @@ class Aboutpage extends StatelessWidget {
       ),
     );
   }
-
-
 
   Widget _buildParagraph({required String content}) {
     return Padding(
@@ -69,6 +67,4 @@ class Aboutpage extends StatelessWidget {
           content: content, fontSize: 18, fontWeight: FontWeight.w500),
     );
   }
-
- 
 }

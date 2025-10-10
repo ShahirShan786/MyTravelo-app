@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
-import 'package:my_travelo_app/Controller/Firebase/firebase_functions.dart';
-import 'package:my_travelo_app/Views/Admin-screens/Home_Page/widgets/home_picture_stream.dart';
-import 'package:my_travelo_app/Views/Admin-screens/Home_Page/widgets/home_place_listanable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/Views/Admin-screens/Home_picture/Pages/add_homepicture_screen.dart';
-import 'package:my_travelo_app/Views/Admin-screens/Add_Place/pages/admin_addPlace_screen.dart';
-
+import 'package:My Travelo/Controller/Firebase/firebase_functions.dart';
+import 'package:My Travelo/Views/Admin-screens/Home_Page/widgets/home_picture_stream.dart';
+import 'package:My Travelo/Views/Admin-screens/Home_Page/widgets/home_place_listanable.dart';
+import 'package:My Travelo/constants/constant.dart';
+import 'package:My Travelo/Views/Admin-screens/Home_picture/Pages/add_homepicture_screen.dart';
+import 'package:My Travelo/Views/Admin-screens/Add_Place/pages/admin_addPlace_screen.dart';
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({super.key});
@@ -38,16 +37,18 @@ class _AdminHomePageState extends State<AdminHomePage> {
       appBar: AppBar(
         centerTitle: true,
         title: TextWidget(
-            content: "Admin Pannel", fontSize: 20.sp, fontWeight: FontWeight.bold),
+            content: "Admin Pannel",
+            fontSize: 20.sp,
+            fontWeight: FontWeight.bold),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding:  EdgeInsets.all(8.0.w),
+          padding: EdgeInsets.all(8.0.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding:  EdgeInsets.symmetric(vertical: 10.h),
+                padding: EdgeInsets.symmetric(vertical: 10.h),
                 child: TextWidget(
                     content: "Home Pictures",
                     fontSize: 22.sp,
@@ -55,7 +56,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
               ),
               HomePictureStreem(fireStoreServices: fireStoreServices),
               Padding(
-                padding:  EdgeInsets.only(top: 10.h, bottom: 5.h),
+                padding: EdgeInsets.only(top: 10.h, bottom: 5.h),
                 child: TextWidget(
                     content: "Place Detailes",
                     fontSize: 22.sp,
@@ -77,7 +78,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
               label: "Add Place"),
           SpeedDialChild(
               onTap: () {
-                Get.to(() => AddHomePictureScreen());
+                Get.to(() => const AddHomePictureScreen());
               },
               child: const Icon(Icons.add_a_photo_outlined),
               label: "Add Home Pictures")
@@ -86,7 +87,3 @@ class _AdminHomePageState extends State<AdminHomePage> {
     );
   }
 }
-
-
-
-

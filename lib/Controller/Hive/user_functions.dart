@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:my_travelo_app/Controller/Firebase/firebase_functions.dart';
-import 'package:my_travelo_app/Models/admin_model.dart';
-import 'package:my_travelo_app/Models/user_model.dart';
+import 'package:My Travelo/Controller/Firebase/firebase_functions.dart';
+import 'package:My Travelo/Models/admin_model.dart';
+import 'package:My Travelo/Models/user_model.dart';
 import 'package:flutter/src/foundation/change_notifier.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -77,9 +77,8 @@ Future<void> splitData(String userId) async {
       log("Adding to completed trips: ${element.destination}");
       if (!tripListCompleted.value.contains(element)) {
         tripListCompleted.value.add(element);
-        
       }
-    } else if(rangeEnd.isAfter(now)){
+    } else if (rangeEnd.isAfter(now)) {
       log("Adding to upcoming trips: ${element.destination}");
       if (!tripList.value.contains(element)) {
         tripList.value.add(element);

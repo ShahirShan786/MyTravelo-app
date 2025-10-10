@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_travelo_app/constants/constable.dart';
+import 'package:My Travelo/constants/constable.dart';
 
 class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? titles;
@@ -19,12 +19,12 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.backgroundColors,
       this.actions,
       this.elevations,
-       this.leadings, this.leadingsWidth});
+      this.leadings,
+      this.leadingsWidth});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      
       backgroundColor: backgroundColors ?? primaryColor,
       leading: leadings,
       elevation: elevations,
@@ -41,5 +41,5 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize =>  Size.fromHeight(55.h);
+  Size get preferredSize => Size.fromHeight(55.h);
 }

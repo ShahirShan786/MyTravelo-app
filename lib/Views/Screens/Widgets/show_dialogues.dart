@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/textFormFeilds.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
+import 'package:My Travelo/Views/Screens/Widgets/textFormFeilds.dart';
+import 'package:My Travelo/constants/constable.dart';
+import 'package:My Travelo/constants/constant.dart';
 
 Future<void> showLoadingDialogue({
   required BuildContext context,
@@ -72,16 +72,16 @@ Future<void> showDeletedDialogue({
   Get.defaultDialog(
       title: tittle!,
       titleStyle:
-           TextStyle(fontSize: 25.sp, fontWeight: FontWeight.w600, color: black),
+          TextStyle(fontSize: 25.sp, fontWeight: FontWeight.w600, color: black),
       titlePadding: const EdgeInsets.only(right: 165, top: 15),
       content: Padding(
-        padding:  EdgeInsets.symmetric(vertical: 15.h),
+        padding: EdgeInsets.symmetric(vertical: 15.h),
         child: TextWidget(
             content: conformText, fontSize: 15.sp, fontWeight: FontWeight.w400),
       ),
       actions: [
         Padding(
-          padding:  EdgeInsets.only(bottom: 10.h),
+          padding: EdgeInsets.only(bottom: 10.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -104,10 +104,10 @@ Future<void> showAddSavingDialogue(
   double? amount = 0;
   Get.defaultDialog(
       title: "Add Your Savings",
-      titlePadding:  EdgeInsets.symmetric(vertical: 15.h),
-      titleStyle:  TextStyle(
+      titlePadding: EdgeInsets.symmetric(vertical: 15.h),
+      titleStyle: TextStyle(
           fontSize: 22.sp, fontWeight: FontWeight.bold, color: purple),
-      contentPadding:  EdgeInsets.all(15.w),
+      contentPadding: EdgeInsets.all(15.w),
       content: Textformfeilds(
         keyboardType: TextInputType.number,
         labelText: "Add Savings",
@@ -149,4 +149,3 @@ Future<void> showAddSavingDialogue(
         )
       ]);
 }
-

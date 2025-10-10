@@ -4,12 +4,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:my_travelo_app/Controller/Hive/user_functions.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/textfeild.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/constants/primary_button.dart';
-import 'package:my_travelo_app/Models/user_model.dart';
+import 'package:My Travelo/Controller/Hive/user_functions.dart';
+import 'package:My Travelo/Views/Screens/Widgets/textfeild.dart';
+import 'package:My Travelo/constants/constable.dart';
+import 'package:My Travelo/constants/constant.dart';
+import 'package:My Travelo/constants/primary_button.dart';
+import 'package:My Travelo/Models/user_model.dart';
 
 class AddDreamDestinationScreen extends StatefulWidget {
   final String? userId;
@@ -49,7 +49,7 @@ class _AddDreamDestinationScreenState extends State<AddDreamDestinationScreen> {
               Column(
                 children: [
                   Padding(
-                    padding:  EdgeInsets.all(10.w),
+                    padding: EdgeInsets.all(10.w),
                     child: InkWell(
                         onTap: pickPlaceImages,
                         child: Container(
@@ -78,14 +78,14 @@ class _AddDreamDestinationScreenState extends State<AddDreamDestinationScreen> {
                   ),
                   selectedImages.isNotEmpty
                       ? SizedBox(
-                          height: 100,
+                          height: 100.h,
                           width: double.infinity,
                           child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: selectedImages.length,
                               itemBuilder: (context, index) {
                                 return Padding(
-                                  padding:  EdgeInsets.symmetric(
+                                  padding: EdgeInsets.symmetric(
                                       horizontal: 10.w, vertical: 10.h),
                                   child: InkWell(
                                     onTap: () {
@@ -97,7 +97,7 @@ class _AddDreamDestinationScreenState extends State<AddDreamDestinationScreen> {
                                       width: 100.w,
                                       height: 80.h,
                                       decoration: BoxDecoration(
-                                          color: green,
+                                          color: Colors.grey[600],
                                           borderRadius:
                                               BorderRadius.circular(8.r),
                                           image: DecorationImage(
@@ -112,7 +112,7 @@ class _AddDreamDestinationScreenState extends State<AddDreamDestinationScreen> {
                       : const SizedBox()
                 ],
               ),
-               SizedBox(
+              SizedBox(
                 height: 20.h,
               ),
               newTextFeild(
@@ -148,7 +148,7 @@ class _AddDreamDestinationScreenState extends State<AddDreamDestinationScreen> {
                   return null;
                 },
               ),
-               SizedBox(
+              SizedBox(
                 height: 50.h,
               ),
             ],
@@ -176,7 +176,6 @@ class _AddDreamDestinationScreenState extends State<AddDreamDestinationScreen> {
                         content: TextWidget(
                           content: "please select the place images",
                           fontSize: 15.sp,
-                          
                           fontWeight: FontWeight.bold,
                           color: white,
                         )));

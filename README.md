@@ -1,4 +1,4 @@
-# my_travelo_app
+# My Travelo
 
 A new Flutter project.
 

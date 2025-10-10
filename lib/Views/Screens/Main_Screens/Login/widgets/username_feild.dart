@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/textFormFeilds.dart';
-import 'package:my_travelo_app/constants/constable.dart';
+import 'package:My Travelo/Views/Screens/Widgets/textFormFeilds.dart';
+import 'package:My Travelo/constants/constable.dart';
+
 // ignore: camel_case_types
 class buildLogUsernameFeild extends StatelessWidget {
   const buildLogUsernameFeild({

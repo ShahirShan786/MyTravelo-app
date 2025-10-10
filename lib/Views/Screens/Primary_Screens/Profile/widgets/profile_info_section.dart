@@ -1,9 +1,7 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_travelo_app/Models/singInModel.dart';
-import 'package:my_travelo_app/constants/constant.dart';
+import 'package:My Travelo/Models/singInModel.dart';
+import 'package:My Travelo/constants/constant.dart';
 
 class profileInfoSection extends StatelessWidget {
   const profileInfoSection({
@@ -33,7 +31,7 @@ class profileInfoSection extends StatelessWidget {
                   : "email",
               fontSize: 15.sp,
               fontWeight: FontWeight.w500),
-           SizedBox(height: 2.h),
+          SizedBox(height: 2.h),
           TextWidget(
               content: profileDetail != null
                   ? profileDetail!.phone ?? "phone"

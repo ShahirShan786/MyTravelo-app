@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:my_travelo_app/Controller/Hive/user_functions.dart';
-import 'package:my_travelo_app/Views/Screens/Trip_Screens/Completed_Screens/completed_details_page.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/constants/primary_button.dart';
-import 'package:my_travelo_app/Models/user_model.dart';
+import 'package:My Travelo/Controller/Hive/user_functions.dart';
+import 'package:My Travelo/Views/Screens/Trip_Screens/Completed_Screens/completed_details_page.dart';
+import 'package:My Travelo/constants/constable.dart';
+import 'package:My Travelo/constants/constant.dart';
+import 'package:My Travelo/constants/primary_button.dart';
+import 'package:My Travelo/Models/user_model.dart';
 
 class BlogPage extends StatefulWidget {
   final TripModel trip;
@@ -29,7 +28,6 @@ class _BlogPageState extends State<BlogPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     widget.blog != null ? blogController.text = widget.blog!.blog : "";
   }
@@ -47,7 +45,7 @@ class _BlogPageState extends State<BlogPage> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding:  EdgeInsets.all(8.0.w),
+          padding: EdgeInsets.all(8.0.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -55,14 +53,14 @@ class _BlogPageState extends State<BlogPage> {
                   content: "To ${widget.trip.destination}",
                   fontSize: 20.sp,
                   fontWeight: FontWeight.bold),
-               SizedBox(
+              SizedBox(
                 height: 10.w,
               ),
               TextWidget(
                   content: "Start on ${widget.startDate} to ${widget.endDate}",
                   fontSize: 18.sp,
                   fontWeight: FontWeight.w600),
-               SizedBox(
+              SizedBox(
                 height: 20.h,
               ),
               TextField(
@@ -77,7 +75,7 @@ class _BlogPageState extends State<BlogPage> {
                 maxLines: 2,
                 controller: blogController,
               ),
-               SizedBox(
+              SizedBox(
                 height: 20.h,
               ),
               Center(

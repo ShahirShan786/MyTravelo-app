@@ -1,8 +1,7 @@
-
 import 'dart:developer';
 
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:my_travelo_app/Models/singInModel.dart';
+import 'package:My Travelo/Models/singInModel.dart';
 
 class Signinservice {
   Box<Singinmodel>? _signInBox;
@@ -28,7 +27,9 @@ class Signinservice {
     if (_signInBox == null) {
       await openBox();
     }
-    final index = _signInBox!.values.toList().indexWhere((element) => element.id == value.id);
+    final index = _signInBox!.values
+        .toList()
+        .indexWhere((element) => element.id == value.id);
     if (index != -1) {
       await _signInBox!.putAt(index, value);
       log("data updated... $value");
@@ -43,14 +44,11 @@ class Signinservice {
     return _signInBox!.values.toList();
   }
 
-
 //  Get  sing in Data by Id
-Future<Singinmodel?>getSignInDataById(String id)async{
-  if(_signInBox == null){
-    await openBox();
+  Future<Singinmodel?> getSignInDataById(String id) async {
+    if (_signInBox == null) {
+      await openBox();
+    }
+    return _signInBox!.values.firstWhere((element) => element.id == id);
   }
-  return _signInBox!.values.firstWhere((element)=> element.id == id);
-}
-
-
 }

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_travelo_app/constants/constable.dart';
+import 'package:My Travelo/constants/constable.dart';
 
 class TExtFeilds extends StatelessWidget {
   String? labelText;
   String? hintText;
   TextEditingController? controller;
 
-  TExtFeilds({super.key, 
+  TExtFeilds({
+    super.key,
     required this.labelText,
     this.hintText,
     required this.controller,
@@ -23,9 +24,11 @@ class TExtFeilds extends StatelessWidget {
         decoration: InputDecoration(
           labelText: labelText,
           labelStyle: TextStyle(
-              fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.black),
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w600,
+              color: Colors.black),
           hintText: hintText,
-          hintStyle:TextStyle(
+          hintStyle: TextStyle(
               fontSize: 15.sp,
               fontWeight: FontWeight.w400,
               color: secondaryColor),

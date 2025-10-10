@@ -1,18 +1,14 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:my_travelo_app/Controller/Hive/user_functions.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/textFormFeilds.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/Models/user_model.dart';
-import 'package:my_travelo_app/Views/Screens/Primary_Screens/Schedule/Pages/schedule_screen.dart';
-
+import 'package:My Travelo/Controller/Hive/user_functions.dart';
+import 'package:My Travelo/Views/Screens/Widgets/textFormFeilds.dart';
+import 'package:My Travelo/constants/constable.dart';
+import 'package:My Travelo/constants/constant.dart';
+import 'package:My Travelo/Models/user_model.dart';
+import 'package:My Travelo/Views/Screens/Primary_Screens/Schedule/Pages/schedule_screen.dart';
 
 class EditTripDialogueBox {
-  
   final BuildContext context;
   final TripModel trip;
   final int index;
@@ -69,21 +65,22 @@ class EditTripDialogueBox {
                         return null;
                       },
                     ),
-                  trip.companion != null && trip.companion!.isNotEmpty?
-                    Textformfeilds(
-                      borderColor: secondaryColor,
-                      focusedColor: black,
-                      controller: companionController,
-                      keyboardType: TextInputType.text,
-                      labelColor: secondaryColor,
-                      labelText: "Companion",
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Add companion";
-                        }
-                        return null;
-                      },
-                    ): const SizedBox(),
+                    trip.companion != null && trip.companion!.isNotEmpty
+                        ? Textformfeilds(
+                            borderColor: secondaryColor,
+                            focusedColor: black,
+                            controller: companionController,
+                            keyboardType: TextInputType.text,
+                            labelColor: secondaryColor,
+                            labelText: "Companion",
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Add companion";
+                              }
+                              return null;
+                            },
+                          )
+                        : const SizedBox(),
                     Textformfeilds(
                       borderColor: secondaryColor,
                       focusedColor: black,
@@ -143,25 +140,26 @@ class EditTripDialogueBox {
                   onPressed: () {
                     trip.destination = destinationController.text;
                     trip.companion = companionController.text
-                    .split(",")
-                    .map((companion)=> companion.trim()).toList();
+                        .split(",")
+                        .map((companion) => companion.trim())
+                        .toList();
                     trip.rangeStart = startDate;
                     trip.rangeEnd = endDate;
 
-                    List<DateTime> newDays =getDaysInRange(startDate, endDate);
-                    Map<String , List<String>> updatedActivities = {};
+                    List<DateTime> newDays = getDaysInRange(startDate, endDate);
+                    Map<String, List<String>> updatedActivities = {};
 
-                    for(int i =0 ; i < newDays.length ; i++ ){
-                      String dayKey = "Day ${i+1}";
-                      updatedActivities[dayKey] = trip.activities[dayKey] ?? [];   
+                    for (int i = 0; i < newDays.length; i++) {
+                      String dayKey = "Day ${i + 1}";
+                      updatedActivities[dayKey] = trip.activities[dayKey] ?? [];
                     }
 
                     trip.activities = updatedActivities;
 
-                    updateTrip(trip: trip); 
-                   
-                  
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) =>const ScheduleScreen()));
+                    updateTrip(trip: trip);
+
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const ScheduleScreen()));
                   },
                   child: TextWidget(
                       content: "Update",
@@ -172,13 +170,11 @@ class EditTripDialogueBox {
         });
   }
 
-
-
   Future<void> selectDate(BuildContext context, DateTime initialDate,
       Function(DateTime) onDateSelected) async {
     final DateTime? picked = await showDatePicker(
         context: context,
-        initialDate:  initialDate,
+        initialDate: initialDate,
         firstDate: DateTime(2010),
         lastDate: DateTime(2050));
 
@@ -187,9 +183,9 @@ class EditTripDialogueBox {
     }
   }
 
-  List<DateTime>getDaysInRange(DateTime start , DateTime end){
+  List<DateTime> getDaysInRange(DateTime start, DateTime end) {
     List<DateTime> days = [];
-    for(int i = 0 ; i <= end.difference(start).inDays ; i++){
+    for (int i = 0; i <= end.difference(start).inDays; i++) {
       days.add(start.add(Duration(days: i)));
     }
     return days;

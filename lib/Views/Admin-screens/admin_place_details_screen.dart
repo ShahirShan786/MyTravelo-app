@@ -1,16 +1,15 @@
-
 import 'package:flutter/material.dart';
-import 'package:my_travelo_app/Controller/Firebase/firebase_functions.dart';
-import 'package:my_travelo_app/Controller/Hive/user_functions.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/details_page_image.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/constants/primary_button.dart';
+import 'package:My Travelo/Controller/Firebase/firebase_functions.dart';
+import 'package:My Travelo/Controller/Hive/user_functions.dart';
+import 'package:My Travelo/Views/Screens/Widgets/details_page_image.dart';
+import 'package:My Travelo/constants/constable.dart';
+import 'package:My Travelo/constants/constant.dart';
+import 'package:My Travelo/constants/primary_button.dart';
 
 class AdminPlaceDetailsScreen extends StatelessWidget {
   final index;
   const AdminPlaceDetailsScreen({super.key, this.index});
-  
+
   @override
   Widget build(BuildContext context) {
     final place = placeModelListener.value[index];
@@ -82,12 +81,12 @@ class AdminPlaceDetailsScreen extends StatelessWidget {
                 fontSize: 18,
                 fontWeight: FontWeight.w600),
             onPressed: () {
-                  navigateToPlace(lat: place.lattitude, long: place.longitude);
+              navigateToPlace(lat: place.lattitude, long: place.longitude);
             },
             height: 50,
             width: 250,
             backgroundColor: primaryColor,
-          ), 
+          ),
         )),
       ),
     );

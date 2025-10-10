@@ -5,17 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:my_travelo_app/Controller/Hive/signIn_service.dart';
-import 'package:my_travelo_app/Views/Screens/Primary_Screens/Profile/widgets/profile_info_section.dart';
-import 'package:my_travelo_app/Views/Screens/Primary_Screens/Profile/widgets/settings_section.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/app_bar.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/edit_dialogue.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/Models/singInModel.dart';
-import 'package:my_travelo_app/Views/Screens/Settings_Screens/Terms_page.dart';
-import 'package:my_travelo_app/Views/Screens/Settings_Screens/about_page.dart';
-import 'package:my_travelo_app/Views/Screens/Settings_Screens/logout_page.dart';
-import 'package:my_travelo_app/Views/Screens/Settings_Screens/privacy_page.dart';
+import 'package:My Travelo/Controller/Hive/signIn_service.dart';
+import 'package:My Travelo/Views/Screens/Primary_Screens/Profile/widgets/profile_info_section.dart';
+import 'package:My Travelo/Views/Screens/Primary_Screens/Profile/widgets/settings_section.dart';
+import 'package:My Travelo/Views/Screens/Widgets/app_bar.dart';
+import 'package:My Travelo/Views/Screens/Widgets/edit_dialogue.dart';
+import 'package:My Travelo/constants/constable.dart';
+import 'package:My Travelo/Models/singInModel.dart';
+import 'package:My Travelo/Views/Screens/Settings_Screens/Terms_page.dart';
+import 'package:My Travelo/Views/Screens/Settings_Screens/about_page.dart';
+import 'package:My Travelo/Views/Screens/Settings_Screens/logout_page.dart';
+import 'package:My Travelo/Views/Screens/Settings_Screens/privacy_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Profilescreen extends StatefulWidget {
@@ -67,7 +67,7 @@ class _ProfilescreenState extends State<Profilescreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:const PrimaryAppBar(
+      appBar: const PrimaryAppBar(
         titles: "Profile",
         backgroundColors: BoxColor,
       ),
@@ -166,7 +166,8 @@ class _ProfilescreenState extends State<Profilescreen> {
                   ],
                 ),
               ),
-              buildSettingsSection(profileScreens: profileScreens, icons: icons, titles: titles)
+              buildSettingsSection(
+                  profileScreens: profileScreens, icons: icons, titles: titles)
             ],
           ),
         ),
@@ -188,6 +189,3 @@ class _ProfilescreenState extends State<Profilescreen> {
     return null;
   }
 }
-
-
-

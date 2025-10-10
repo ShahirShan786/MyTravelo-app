@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_travelo_app/Controller/Hive/user_functions.dart';
-import 'package:my_travelo_app/Models/admin_model.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/constants/primary_button.dart';
+import 'package:My Travelo/Controller/Hive/user_functions.dart';
+import 'package:My Travelo/Models/admin_model.dart';
+import 'package:My Travelo/constants/constable.dart';
+import 'package:My Travelo/constants/constant.dart';
+import 'package:My Travelo/constants/primary_button.dart';
+
 class buildFavePlaceCard extends StatelessWidget {
   const buildFavePlaceCard({
     super.key,
@@ -19,25 +20,21 @@ class buildFavePlaceCard extends StatelessWidget {
     return Card(
       child: Container(
         width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15.r)),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.r)),
         child: Padding(
           padding: EdgeInsets.all(5.w),
           child: Row(
             children: [
               ClipRRect(
-                  borderRadius:
-                      BorderRadius.circular(15.r),
+                  borderRadius: BorderRadius.circular(15.r),
                   child: SizedBox(
                     width: 150.w,
                     height: 100.h,
                     child: CachedNetworkImage(
                       imageUrl: fav.subImage[0],
                       fit: BoxFit.cover,
-                      placeholder: (context, url) =>
-                          const Center(
-                        child:
-                            CircularProgressIndicator(
+                      placeholder: (context, url) => const Center(
+                        child: CircularProgressIndicator(
                           color: primaryLight,
                         ),
                       ),
@@ -46,8 +43,7 @@ class buildFavePlaceCard extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.all(9.w),
                 child: Column(
-                  crossAxisAlignment:
-                      CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextWidget(
                         content: fav.place,
@@ -58,54 +54,44 @@ class buildFavePlaceCard extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                         Icon(
+                        Icon(
                           Icons.location_on,
                           size: 15.w,
                         ),
                         TextWidget(
                             content: fav.district,
                             fontSize: 14.sp,
-                            fontWeight:
-                                FontWeight.normal),
+                            fontWeight: FontWeight.normal),
                       ],
                     ),
                     Row(
-                      mainAxisAlignment:
-                          MainAxisAlignment
-                              .spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         PrimaryButton(
-                            backgroundColor:
-                                primaryColor,
+                            backgroundColor: primaryColor,
                             content: TextWidget(
                                 content: "Direction",
                                 fontSize: 10.sp,
-                                fontWeight:
-                                    FontWeight.normal),
+                                fontWeight: FontWeight.normal),
                             width: 85.w,
                             height: 25.h,
                             onPressed: () {
                               navigateToPlace(
-                                  lat: fav.lattitude,
-                                  long: fav.longitude);
+                                  lat: fav.lattitude, long: fav.longitude);
                             }),
                         SizedBox(
                           width: 5.sp,
                         ),
                         PrimaryButton(
-                            backgroundColor:
-                                primaryColor,
+                            backgroundColor: primaryColor,
                             content: TextWidget(
                                 content: "Remove",
                                 fontSize: 10.sp,
-                                fontWeight:
-                                    FontWeight.normal),
+                                fontWeight: FontWeight.normal),
                             width: 85.w,
                             height: 25.h,
                             onPressed: () async {
-                              await removeFevorite(
-                                  fevoritePlace:
-                                      fav.id);
+                              await removeFevorite(fevoritePlace: fav.id);
                             }),
                       ],
                     )

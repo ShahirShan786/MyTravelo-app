@@ -2,42 +2,44 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:my_travelo_app/Controller/Hive/signIn_service.dart';
-import 'package:my_travelo_app/Models/singInModel.dart';
-import 'package:my_travelo_app/Models/user_model.dart';
+import 'package:My Travelo/Controller/Hive/signIn_service.dart';
+import 'package:My Travelo/Models/singInModel.dart';
+import 'package:My Travelo/Models/user_model.dart';
+import 'package:My Travelo/firebase_options.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 
 initialisation() async {
   WidgetsFlutterBinding.ensureInitialized();
-   try{
-    await Firebase.initializeApp();
-  await Hive.initFlutter();
-  if (!Hive.isAdapterRegistered(SinginmodelAdapter().typeId)) {
-    Hive.registerAdapter(SinginmodelAdapter());
-    await Signinservice().openBox();
-  }
-  if (!Hive.isAdapterRegistered(TripModelAdapter().typeId)) {
-    Hive.registerAdapter(TripModelAdapter());
-    // await Hive.openBox<TripModel>(tripDbName);
+  try {
+    await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform);
+    await Hive.initFlutter();
+    if (!Hive.isAdapterRegistered(SinginmodelAdapter().typeId)) {
+      Hive.registerAdapter(SinginmodelAdapter());
+      await Signinservice().openBox();
+    }
+    if (!Hive.isAdapterRegistered(TripModelAdapter().typeId)) {
+      Hive.registerAdapter(TripModelAdapter());
+      // await Hive.openBox<TripModel>(tripDbName);
 
-    if (!Hive.isAdapterRegistered(CompletedTripModelPhotosAdapter().typeId)) {
-      Hive.registerAdapter(CompletedTripModelPhotosAdapter());
-    }if(!Hive.isAdapterRegistered(CompletedTripModelBlogAdapter().typeId)){
-      Hive.registerAdapter(CompletedTripModelBlogAdapter());
+      if (!Hive.isAdapterRegistered(CompletedTripModelPhotosAdapter().typeId)) {
+        Hive.registerAdapter(CompletedTripModelPhotosAdapter());
+      }
+      if (!Hive.isAdapterRegistered(CompletedTripModelBlogAdapter().typeId)) {
+        Hive.registerAdapter(CompletedTripModelBlogAdapter());
+      }
+      if (!Hive.isAdapterRegistered(FevoriteModelAdapter().typeId)) {
+        Hive.registerAdapter(FevoriteModelAdapter());
+      }
+      if (!Hive.isAdapterRegistered(ExpenseModelAdapter().typeId)) {
+        Hive.registerAdapter(ExpenseModelAdapter());
+      }
+      if (!Hive.isAdapterRegistered(DreamDestinationModelAdapter().typeId)) {
+        Hive.registerAdapter(DreamDestinationModelAdapter());
+      }
     }
-    if (!Hive.isAdapterRegistered(FevoriteModelAdapter().typeId)) {
-      Hive.registerAdapter(FevoriteModelAdapter());
-    }
-    if (!Hive.isAdapterRegistered(ExpenseModelAdapter().typeId)) {
-      Hive.registerAdapter(ExpenseModelAdapter());
-    }
-    if(!Hive.isAdapterRegistered(DreamDestinationModelAdapter().typeId)){
-      Hive.registerAdapter(DreamDestinationModelAdapter());
-    }
-  }
-
-   }catch(e){
+  } catch (e) {
     log("error occure : ==$e");
-   }
+  }
 }

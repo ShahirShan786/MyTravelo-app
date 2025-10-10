@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/calender_view.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/text_feilds.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/time_picker.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/constants/primary_button.dart';
-import 'package:my_travelo_app/Views/Screens/Trip_Screens/Add_Trip_screens/Option/Pages/option_screen.dart';
+import 'package:My Travelo/Views/Screens/Widgets/calender_view.dart';
+import 'package:My Travelo/Views/Screens/Widgets/text_feilds.dart';
+import 'package:My Travelo/Views/Screens/Widgets/time_picker.dart';
+import 'package:My Travelo/constants/constable.dart';
+import 'package:My Travelo/constants/constant.dart';
+import 'package:My Travelo/constants/primary_button.dart';
+import 'package:My Travelo/Views/Screens/Trip_Screens/Add_Trip_screens/Option/Pages/option_screen.dart';
 
 class AddTripScreens extends StatefulWidget {
   const AddTripScreens({super.key});

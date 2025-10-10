@@ -1,18 +1,12 @@
-import 'dart:developer';
 import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:my_travelo_app/Controller/Firebase/firebase_functions.dart';
-import 'package:my_travelo_app/Controller/Hive/image_upload.dart';
-import 'package:my_travelo_app/Views/Admin-screens/Home_picture/widgets/add_home_picture_button.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/app_bar.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/show_dialogues.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/constants/primary_button.dart';
+import 'package:My Travelo/Controller/Firebase/firebase_functions.dart';
+import 'package:My Travelo/Views/Admin-screens/Home_picture/widgets/add_home_picture_button.dart';
+import 'package:My Travelo/Views/Screens/Widgets/app_bar.dart';
+import 'package:My Travelo/constants/constable.dart';
 
 class AddHomePictureScreen extends StatefulWidget {
   const AddHomePictureScreen({super.key});
@@ -33,7 +27,7 @@ class _AddHomePictureScreenState extends State<AddHomePictureScreen> {
         backgroundColors: BoxColor,
       ),
       body: Padding(
-        padding:  EdgeInsets.all(8.0.w),
+        padding: EdgeInsets.all(8.0.w),
         child: ListView.builder(
             scrollDirection: Axis.vertical,
             physics: const BouncingScrollPhysics(),
@@ -43,7 +37,7 @@ class _AddHomePictureScreenState extends State<AddHomePictureScreen> {
               return Stack(
                 children: [
                   Padding(
-                    padding:  EdgeInsets.symmetric(vertical: 5.h),
+                    padding: EdgeInsets.symmetric(vertical: 5.h),
                     child: SizedBox(
                       height: 230.h,
                       width: double.infinity,
@@ -82,13 +76,15 @@ class _AddHomePictureScreenState extends State<AddHomePictureScreen> {
             }),
       ),
       floatingActionButton: Padding(
-        padding:  EdgeInsets.only(bottom: 70.h),
+        padding: EdgeInsets.only(bottom: 70.h),
         child: FloatingActionButton(
           onPressed: () => uploadHomePicture(),
           child: const Icon(Icons.add),
         ),
       ),
-      bottomSheet: addHomePictureButton(homePictureList: homePictureList, fireStoreServices: fireStoreServices),
+      bottomSheet: addHomePictureButton(
+          homePictureList: homePictureList,
+          fireStoreServices: fireStoreServices),
     );
   }
 
@@ -103,5 +99,3 @@ class _AddHomePictureScreenState extends State<AddHomePictureScreen> {
     }
   }
 }
-
-

@@ -1,4 +1,4 @@
-name: my_travelo_app
+name: My Travelo
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -16,7 +16,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 1.0.1+2
 
 environment:
   sdk: ">=3.4.0 <4.0.0"
@@ -28,16 +28,18 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  awesome_dialog: ^3.2.1
   cached_network_image: ^3.4.0
-  carousel_slider: ^4.2.1
-  cloud_firestore: ^5.2.1
-  contacts_service: ^0.6.3
+  carousel_slider: ^5.0.0
+  cloud_firestore: ^6.0.2
+
   cupertino_icons: ^1.0.6
-  firebase_core: ^3.3.0
-  firebase_storage: ^12.1.3
+  firebase_core: ^4.1.1
+  firebase_storage: ^13.0.2
   flutter:
     sdk: flutter
-  flutter_native_contact_picker: ^0.0.6
+
+  flutter_contacts: ^1.1.9+2
   flutter_screenutil: ^5.9.3
   flutter_speed_dial: ^7.0.0
   flutter_svg: ^2.0.10+1
@@ -45,10 +47,10 @@ dependencies:
   get: ^4.6.6
   hive_flutter: ^1.1.0
   image_picker: ^1.1.2
-  intl: ^0.19.0
+  intl: ^0.20.2
   lottie: ^3.1.2
-  multi_contact_picker: ^1.0.0
-  permission_handler: ^11.3.1
+
+  permission_handler: 11.3.1
   photo_view: ^0.15.0
   shared_preferences: ^2.2.3
   table_calendar: ^3.1.2
@@ -56,10 +58,16 @@ dependencies:
 
 dev_dependencies:
   build_runner: ^2.4.11
-  flutter_lints: ^3.0.0
+  flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
   hive_generator: ^2.0.1
+  flutter_launcher_icons: ^0.14.4
+
+# flutter_launcher_icons:
+#   android: "launcher_icon"
+#   ios: true
+#   image_path: "assets/logo/appLogo.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -90,16 +98,16 @@ flutter:
         - asset: fonts/Rubik-Regular.ttf
         - asset: fonts/Rubik-Bold.ttf
         - asset: fonts/Rubik-SemiBold.ttf
-  #         style: italic
+    #         style: italic
     - family: HeaderFont
       fonts:
         - asset: fonts/PatuaOne-Regular.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+    #       - asset: fonts/TrajanPro_Bold.ttf
+    #         weight: 700
     - family: MainFont
       fonts:
         - asset: fonts/Lemon-Regular.ttf
-   
+
     - family: PrimaryFont
       fonts:
         - asset: fonts/Roboto-Regular.ttf

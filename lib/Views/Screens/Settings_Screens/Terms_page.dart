@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_travelo_app/constants/constant.dart';
+import 'package:My Travelo/constants/constant.dart';
 
 class Termspage extends StatelessWidget {
   const Termspage({super.key});
@@ -17,7 +17,7 @@ class Termspage extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding:  EdgeInsets.all(10.w),
+            padding: EdgeInsets.all(10.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -84,11 +84,9 @@ class Termspage extends StatelessWidget {
         ));
   }
 
- 
-
   Widget _buildSubHEading({required String content}) {
     return Padding(
-      padding:  EdgeInsets.symmetric(vertical: 5.h),
+      padding: EdgeInsets.symmetric(vertical: 5.h),
       child: TextWidget(
           content: content, fontSize: 23.sp, fontWeight: FontWeight.bold),
     );
@@ -96,7 +94,7 @@ class Termspage extends StatelessWidget {
 
   Widget _buildParagraph({required String content}) {
     return Padding(
-      padding:  EdgeInsets.symmetric(
+      padding: EdgeInsets.symmetric(
         vertical: 10.h,
       ),
       child: TextWidget(
@@ -108,13 +106,13 @@ class Termspage extends StatelessWidget {
     return Column(
         children: items
             .map((item) => Padding(
-                  padding:  EdgeInsets.all(8.0.w),
+                  padding: EdgeInsets.all(8.0.w),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding:  EdgeInsets.only(top: 6.h, right: 10.w),
-                        child:  Icon(
+                        padding: EdgeInsets.only(top: 6.h, right: 10.w),
+                        child: Icon(
                           Icons.circle,
                           size: 8.w,
                         ),

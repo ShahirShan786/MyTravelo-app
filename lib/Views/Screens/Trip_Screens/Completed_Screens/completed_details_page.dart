@@ -7,13 +7,13 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:my_travelo_app/Controller/Hive/user_functions.dart';
-import 'package:my_travelo_app/Views/Screens/Trip_Screens/Completed_Screens/blog_page.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/app_bar.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/photo_view_page.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/Models/user_model.dart';
+import 'package:My Travelo/Controller/Hive/user_functions.dart';
+import 'package:My Travelo/Views/Screens/Trip_Screens/Completed_Screens/blog_page.dart';
+import 'package:My Travelo/Views/Screens/Widgets/app_bar.dart';
+import 'package:My Travelo/Views/Screens/Widgets/photo_view_page.dart';
+import 'package:My Travelo/constants/constable.dart';
+import 'package:My Travelo/constants/constant.dart';
+import 'package:My Travelo/Models/user_model.dart';
 
 class CompletedDetailsPage extends StatefulWidget {
   final TripModel trip;
@@ -33,7 +33,7 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
   void initState() {
     tripBlogToList();
     completedTripToList();
-    
+
     _checkPhotos();
 
     completedTripListPhotos.addListener(_checkPhotos);
@@ -51,14 +51,6 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
         .any((photo) => photo.tripId == widget.trip.id);
     setState(() {});
   }
-
-  // void _checkBlogs(){
-  //   _blogEmpty =!completedTripListBlog.value
-  //   .any((blog)=> blog.tripId == widget.trip.id);
-  //   setState(() {
-
-  //   });
-  // }
 
   @override
   void dispose() {
@@ -130,7 +122,7 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
                   }
                 }
                 return Padding(
-                  padding:  EdgeInsets.all(10.w),
+                  padding: EdgeInsets.all(10.w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -138,25 +130,25 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
                           content: "To ${widget.trip.destination}",
                           fontSize: 24.sp,
                           fontWeight: FontWeight.bold),
-                       SizedBox(
+                      SizedBox(
                         height: 10.h,
                       ),
                       TextWidget(
                           content: "Started on $startDate to $endDate ",
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w600),
-                       SizedBox(
+                      SizedBox(
                         height: 10.h,
                       ),
                       blog.isEmpty
                           ? const SizedBox()
-                          :  TextWidget(
+                          : TextWidget(
                               content: "About Trip",
                               fontSize: 20.sp,
                               fontWeight: FontWeight.bold),
                       blog.isNotEmpty
                           ? Padding(
-                              padding:  EdgeInsets.symmetric(
+                              padding: EdgeInsets.symmetric(
                                   horizontal: 5.w, vertical: 2.h),
                               child: TextWidget(
                                   content: blog[0].blog,
@@ -166,7 +158,7 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
                           : const SizedBox(),
                       _photosEmpty
                           ? const SizedBox()
-                          :  TextWidget(
+                          : TextWidget(
                               content: "Trip Memmories",
                               fontSize: 20.sp,
                               fontWeight: FontWeight.bold),
@@ -210,7 +202,7 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       return Padding(
-                                        padding:  EdgeInsets.all(8.0.w),
+                                        padding: EdgeInsets.all(8.0.w),
                                         child: Container(
                                           decoration: BoxDecoration(
                                               borderRadius:

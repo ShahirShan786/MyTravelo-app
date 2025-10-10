@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/textFormFeilds.dart';
-import 'package:my_travelo_app/constants/constable.dart';
+import 'package:My Travelo/Views/Screens/Widgets/textFormFeilds.dart';
+import 'package:My Travelo/constants/constable.dart';
 
 class BuildSignEmailFeild extends StatelessWidget {
   const BuildSignEmailFeild({
@@ -30,7 +29,7 @@ class BuildSignEmailFeild extends StatelessWidget {
         if (!regex.hasMatch(value)) {
           return "Enter a valid email address";
         }
-    
+
         return null;
       },
     );

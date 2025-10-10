@@ -4,22 +4,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:my_travelo_app/Controller/Firebase/firebase_functions.dart';
-import 'package:my_travelo_app/Controller/Hive/image_upload.dart';
-import 'package:my_travelo_app/Views/Admin-screens/Add_Place/widgets/details_text_field.dart';
-import 'package:my_travelo_app/Views/Admin-screens/Add_Place/widgets/district_text_field.dart';
-import 'package:my_travelo_app/Views/Admin-screens/Add_Place/widgets/lattitude_text_field.dart';
-import 'package:my_travelo_app/Views/Admin-screens/Add_Place/widgets/logitude_text_field.dart';
-import 'package:my_travelo_app/Views/Admin-screens/Add_Place/widgets/place_text_field.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/show_dialogues.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/text_form_feild.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/constants/primary_button.dart';
+import 'package:My Travelo/Controller/Firebase/firebase_functions.dart';
+import 'package:My Travelo/Controller/Hive/image_upload.dart';
+import 'package:My Travelo/Views/Admin-screens/Add_Place/widgets/details_text_field.dart';
+import 'package:My Travelo/Views/Admin-screens/Add_Place/widgets/district_text_field.dart';
+import 'package:My Travelo/Views/Admin-screens/Add_Place/widgets/lattitude_text_field.dart';
+import 'package:My Travelo/Views/Admin-screens/Add_Place/widgets/logitude_text_field.dart';
+import 'package:My Travelo/Views/Admin-screens/Add_Place/widgets/place_text_field.dart';
+import 'package:My Travelo/Views/Screens/Widgets/show_dialogues.dart';
+import 'package:My Travelo/constants/constable.dart';
+import 'package:My Travelo/constants/constant.dart';
+import 'package:My Travelo/constants/primary_button.dart';
 
 class AdminAddPlaceScreen extends StatefulWidget {
- 
-  const AdminAddPlaceScreen({super.key,});
+  const AdminAddPlaceScreen({
+    super.key,
+  });
 
   @override
   State<AdminAddPlaceScreen> createState() => _AdminAddPlaceScreenState();
@@ -42,14 +42,12 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
   final CollectionReference places =
       FirebaseFirestore.instance.collection("Places");
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding:  EdgeInsets.all(8.0.w),
+          padding: EdgeInsets.all(8.0.w),
           child: Center(
             child: Column(
               children: [
@@ -63,7 +61,7 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold),
                 ),
-                 SizedBox(
+                SizedBox(
                   height: 20.h,
                 ),
                 InkWell(
@@ -100,7 +98,7 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                     ? Align(
                         alignment: Alignment.topLeft,
                         child: Padding(
-                          padding:  EdgeInsets.all(8.0.w),
+                          padding: EdgeInsets.all(8.0.w),
                           child: InkWell(
                             onTap: pickSubImages,
                             child: Container(
@@ -110,18 +108,17 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.grey[200],
                               ),
-                              child:const Center(
+                              child: const Center(
                                 child: Icon(Icons.photo_library_sharp),
                               ),
                             ),
                           ),
                         ),
                       )
-                    :
-                    Align(
+                    : Align(
                         alignment: Alignment.topLeft,
                         child: Padding(
-                          padding:  EdgeInsets.all(8.0.sp),
+                          padding: EdgeInsets.all(8.0.sp),
                           child: InkWell(
                             onTap: pickSubImages,
                             child: Container(
@@ -131,69 +128,68 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                                 borderRadius: BorderRadius.circular(10.r),
                                 color: Colors.grey[200],
                               ),
-                              child:const Center(
+                              child: const Center(
                                 child: Icon(Icons.photo_library_sharp),
                               ),
                             ),
                           ),
                         ),
                       ),
-
-                     Padding(
-                        padding:  EdgeInsets.all(8.0.w),
-                        child: Wrap(
-                            spacing: 9.w,
-                            runSpacing: 9.h,
-                            children: _imageFiles.map((file) {
-                              return InkWell(
-                                onLongPress: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (
-                                        context,
-                                      ) {
-                                        return AlertDialog(
-                                          title: TextWidget(
-                                              content: "Delete",
-                                              fontSize: 22.sp,
-                                              fontWeight: FontWeight.bold),
-                                          content: TextWidget(
-                                              content:
-                                                  "Are you sure you want to delete this image?",
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.normal),
-                                          actions: [
-                                            TextButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child:const Text("Cancel")),
-                                            TextButton(
-                                                onPressed: () {
-                                                  setState(() {
-                                                    _imageFiles.remove(file);
-                                                  });
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child:const Text("Delete")),
-                                          ],
-                                        );
-                                      });
-                                },
-                                child: SizedBox(
-                                  width: 80.w,
-                                  height: 80.h,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image.file(
-                                      File(file.path),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }).toList()),
-                      ),
+                Padding(
+                  padding: EdgeInsets.all(8.0.w),
+                  child: Wrap(
+                      spacing: 9.w,
+                      runSpacing: 9.h,
+                      children: _imageFiles.map((file) {
+                        return InkWell(
+                          onLongPress: () {
+                            showDialog(
+                                context: context,
+                                builder: (
+                                  context,
+                                ) {
+                                  return AlertDialog(
+                                    title: TextWidget(
+                                        content: "Delete",
+                                        fontSize: 22.sp,
+                                        fontWeight: FontWeight.bold),
+                                    content: TextWidget(
+                                        content:
+                                            "Are you sure you want to delete this image?",
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.normal),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text("Cancel")),
+                                      TextButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              _imageFiles.remove(file);
+                                            });
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text("Delete")),
+                                    ],
+                                  );
+                                });
+                          },
+                          child: SizedBox(
+                            width: 80.w,
+                            height: 80.h,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.file(
+                                File(file.path),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        );
+                      }).toList()),
+                ),
                 Align(
                     alignment: Alignment.topLeft,
                     child: TextWidget(
@@ -264,7 +260,8 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                           backgroundColor: red,
                         ));
                       } else {
-                        showLoadingDialogue(context: context, content: "Adding data..");
+                        showLoadingDialogue(
+                            context: context, content: "Adding data..");
                         urlOfMainImage = await uploadMainImage(image: _image);
                         urlsOfImage =
                             await uploadSubImages(images: _imageFiles);
@@ -274,7 +271,7 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                             double.parse(_logController.text);
                         log("lattitude value is :$lattitude ");
                         log("longitude value is :$longitude");
-                        
+
                         await fireStoreServices.addPlace(
                             place: _placeController.text,
                             district: _districtController.text,
@@ -283,9 +280,9 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
                             longitude: longitude,
                             mainImage: urlOfMainImage!,
                             subImages: urlsOfImage);
-                            Navigator.of(context).pop();
+                        Navigator.of(context).pop();
                       }
-      
+
                       // ignore: use_build_context_synchronously
                       Navigator.of(context).pop();
                     }),
@@ -319,7 +316,7 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
     setState(() {
       _imageFiles = images;
     });
-    }
+  }
 
   Future<void> showdeleteDailogue(int index) {
     return showDialog(
@@ -336,13 +333,3 @@ class _AdminAddPlaceScreenState extends State<AdminAddPlaceScreen> {
         });
   }
 }
-
-
-
-
-
-
-
-
-
-

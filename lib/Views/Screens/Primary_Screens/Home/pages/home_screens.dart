@@ -2,15 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_travelo_app/Controller/Firebase/firebase_functions.dart';
-import 'package:my_travelo_app/Views/Screens/Sub_Screens/dream_destination_screen.dart';
-import 'package:my_travelo_app/Views/Screens/Sub_Screens/place_details_screen.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/app_bar.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
+import 'package:My Travelo/Controller/Firebase/firebase_functions.dart';
+import 'package:My Travelo/Views/Screens/Sub_Screens/dream_destination_screen.dart';
+import 'package:My Travelo/Views/Screens/Sub_Screens/place_details_screen.dart';
+import 'package:My Travelo/Views/Screens/Widgets/app_bar.dart';
+import 'package:My Travelo/constants/constable.dart';
+import 'package:My Travelo/constants/constant.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:my_travelo_app/Models/admin_model.dart';
-import 'package:my_travelo_app/Views/Screens/Trip_Screens/Add_Trip_screens/Add_Trip/pages/add_trip_screen.dart';
+import 'package:My Travelo/Models/admin_model.dart';
+import 'package:My Travelo/Views/Screens/Trip_Screens/Add_Trip_screens/Add_Trip/pages/add_trip_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Homescreen extends StatefulWidget {
@@ -31,38 +31,43 @@ class _HomescreenState extends State<Homescreen> {
     fireStoreServices.getFirebaseDetails();
   }
 
-  void loadHomepictureUrl ()async{
+  void loadHomepictureUrl() async {
     final imageUrl = await fireStoreServices.getImageUrls();
-    setState(() {
-      homePictures = imageUrl;
-      isLoading = false;
-    });
+    if (mounted) {
+      setState(() {
+        homePictures = imageUrl;
+        isLoading = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: buildAppBar(),
       body: PreferredSize(
-        preferredSize:  Size.fromWidth(500.w),
+        preferredSize: Size.fromWidth(500.w),
         child: SafeArea(
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                isLoading 
-                ?const Center( child:  CircularProgressIndicator(),)
-                :  buildSliderCarousel(),
+                isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : buildSliderCarousel(),
                 SizedBox(height: 10.h),
                 Padding(
-                  padding:  EdgeInsets.only(left: 10.w),
+                  padding: EdgeInsets.only(left: 10.w),
                   child: TextWidget(
                     content: "Featured guides from users",
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                buildFeaturedPlaces(),
+                buildFeaturedPlaces(screenHeight),
               ],
             ),
           ),
@@ -95,7 +100,7 @@ class _HomescreenState extends State<Homescreen> {
             final userId = prefz.getString("currentuserId");
             Get.to(() => DreamDestinationScreen(userId: userId.toString()));
           },
-          icon:  Icon(
+          icon: Icon(
             Icons.public,
             size: 33.w,
             color: primaryColor,
@@ -108,13 +113,13 @@ class _HomescreenState extends State<Homescreen> {
   // Widget for the image slider
   Widget sliderWidget(String urlImage) {
     return Container(
-      color: Colors.grey.shade600,
-      width: double.infinity,
-      child: CachedNetworkImage(imageUrl: urlImage,
-      fit: BoxFit.fill,
-      width: double.infinity,
-      )
-    );
+        color: Colors.grey.shade600,
+        width: double.infinity,
+        child: CachedNetworkImage(
+          imageUrl: urlImage,
+          fit: BoxFit.fill,
+          width: double.infinity,
+        ));
   }
 
   // Slider Carousel Widget
@@ -167,9 +172,9 @@ class _HomescreenState extends State<Homescreen> {
   }
 
   // Widget for the list of featured places
-  Widget buildFeaturedPlaces() {
+  Widget buildFeaturedPlaces(double screenHeight) {
     return SizedBox(
-      height: 270.w,
+      height: screenHeight * 0.34,
       width: double.infinity,
       child: ValueListenableBuilder(
         valueListenable: placeModelListener,
@@ -236,7 +241,7 @@ class _HomescreenState extends State<Homescreen> {
                 ),
               ),
               Padding(
-                padding:  EdgeInsets.all(5.w),
+                padding: EdgeInsets.all(5.w),
                 child: Text(
                   place.details,
                   style: TextStyle(

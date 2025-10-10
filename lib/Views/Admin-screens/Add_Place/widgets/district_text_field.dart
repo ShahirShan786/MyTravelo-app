@@ -1,6 +1,5 @@
-
 import 'package:flutter/widgets.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/text_form_feild.dart';
+import 'package:My Travelo/Views/Screens/Widgets/text_form_feild.dart';
 
 class BuildDistrictTextField extends StatelessWidget {
   const BuildDistrictTextField({
@@ -15,7 +14,6 @@ class BuildDistrictTextField extends StatelessWidget {
     return TextFormFeild(
       hintText: "destrict",
       controller: _districtController,
-      
       validator: (value) {
         if (value == null || value.isEmpty) {
           return "Please enter the destination";

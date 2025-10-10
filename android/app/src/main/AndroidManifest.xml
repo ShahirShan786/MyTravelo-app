@@ -1,5 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
- package="com.example.my_travelo_app">
+ package="com.example.My Travelo">
+
+<!-- Permissions for accessing Internet -->
+ <uses-permission
+     android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+     android:maxSdkVersion="18" />
 
   <!-- Permissions for accessing contacts -->
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
@@ -7,9 +12,9 @@
 
 
     <application
-        android:label="my_travelo_app"
+        android:label="My Travelo"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"

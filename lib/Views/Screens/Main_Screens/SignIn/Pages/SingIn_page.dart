@@ -2,15 +2,14 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_travelo_app/Controller/Hive/signIn_service.dart';
-import 'package:my_travelo_app/Views/Screens/Main_Screens/SignIn/widgets/sign_email_feild.dart';
-import 'package:my_travelo_app/Views/Screens/Main_Screens/SignIn/widgets/sign_username_feild.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/textFormFeilds.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/Models/singInModel.dart';
-import 'package:my_travelo_app/Views/Screens/Main_Screens/Login/Pages/logIn_page.dart';
-
+import 'package:My Travelo/Controller/Hive/signIn_service.dart';
+import 'package:My Travelo/Views/Screens/Main_Screens/SignIn/widgets/sign_email_feild.dart';
+import 'package:My Travelo/Views/Screens/Main_Screens/SignIn/widgets/sign_username_feild.dart';
+import 'package:My Travelo/Views/Screens/Widgets/textFormFeilds.dart';
+import 'package:My Travelo/constants/constable.dart';
+import 'package:My Travelo/constants/constant.dart';
+import 'package:My Travelo/Models/singInModel.dart';
+import 'package:My Travelo/Views/Screens/Main_Screens/Login/Pages/logIn_page.dart';
 
 class SinginPage extends StatefulWidget {
   const SinginPage({super.key});
@@ -71,12 +70,14 @@ class _SinginPageState extends State<SinginPage> {
                   SizedBox(
                     height: 10.h,
                   ),
-                  buildSignUsernameFeild(usernameController: usernameController),
-                  
+                  buildSignUsernameFeild(
+                      usernameController: usernameController),
                   SizedBox(
                     height: 10.h,
                   ),
-                  BuildSignEmailFeild(emailController: emailController, emailPattern: emailPattern),
+                  BuildSignEmailFeild(
+                      emailController: emailController,
+                      emailPattern: emailPattern),
                   SizedBox(
                     height: 10.h,
                   ),
@@ -87,7 +88,9 @@ class _SinginPageState extends State<SinginPage> {
                     keyboardType: TextInputType.number,
                     labelText: "Phone",
                     labelColor: secondaryColor,
-                    textColor: formkey.currentState?.validate()== false ? red : Colors.black,
+                    textColor: formkey.currentState?.validate() == false
+                        ? red
+                        : Colors.black,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "please enter phone number";
@@ -133,10 +136,9 @@ class _SinginPageState extends State<SinginPage> {
                                 EdgeInsets.symmetric(
                                     horizontal: 130.w, vertical: 15.h))),
                         onPressed: () async {
-                       
                           if (formkey.currentState!.validate()) {
-                          final username = usernameController.text;
-                          final password = passwordController.text;
+                            final username = usernameController.text;
+                            final password = passwordController.text;
                             final signData = Singinmodel(
                               username: username,
                               password: password,
@@ -150,30 +152,29 @@ class _SinginPageState extends State<SinginPage> {
                             log('signing up');
                             await signInService.addsignInData(signData);
 
-                          usernameController.clear();
-                          passwordController.clear();
-                          emailController.clear();
-                          phoneController.clear();
+                            usernameController.clear();
+                            passwordController.clear();
+                            emailController.clear();
+                            phoneController.clear();
 
+                            // ignore: use_build_context_synchronously
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            backgroundColor: Colors.green,
-                            content: TextWidget(
-                                color: Colors.white,
-                                content: "Sign in Successfully",
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.w600),
-                          ));
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const LoginPage(),
-                              ));
-
-                        
+                              backgroundColor: Colors.green,
+                              content: TextWidget(
+                                  color: Colors.white,
+                                  content: "Sign in Successfully",
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.w600),
+                            ));
+                            Navigator.pushReplacement(
+                                // ignore: use_build_context_synchronously
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const LoginPage(),
+                                ));
                           }
-                         
+
                           // ignore: use_build_context_synchronously
-                         
                         },
                         child: TextWidget(
                             content: "sing Up",
@@ -188,23 +189,4 @@ class _SinginPageState extends State<SinginPage> {
       ),
     );
   }
-
-
-
-  // Future<void> showScafoldMessage(BuildContext context) async {
-  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //     backgroundColor: red,
-  //     content: TextWidget(
-  //         color: white,
-  //         content: "Please fill this form Section",
-  //         fontSize: 15.sp,
-  //         fontWeight: FontWeight.w600),
-  //   ));
-  // }
 }
-
-
-
-
-
-

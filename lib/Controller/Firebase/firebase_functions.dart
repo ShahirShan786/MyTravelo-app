@@ -2,12 +2,10 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:my_travelo_app/Models/admin_model.dart';
-
+import 'package:My Travelo/Models/admin_model.dart';
 
 ValueNotifier<List<PlaceModel>> placeModelListener = ValueNotifier([]);
 ValueNotifier<List<HomePictureModel>> homePictureListener = ValueNotifier([]);
-
 
 class FireStoreServices {
   final CollectionReference places =
@@ -143,15 +141,14 @@ class FireStoreServices {
         .toList();
   }
 
-   deleteHomePicture({required String id}) async {
+  deleteHomePicture({required String id}) async {
     homePicture.doc(id).delete();
     getFirebaseDetails();
   }
 
-   Future<List<String>> getImageUrls() async {
-    final snapshot = await FirebaseFirestore.instance
-        .collection('homePictures')
-        .get();
+  Future<List<String>> getImageUrls() async {
+    final snapshot =
+        await FirebaseFirestore.instance.collection('homePictures').get();
     return snapshot.docs.map((doc) => doc['homePictures'] as String).toList();
   }
 
@@ -168,7 +165,4 @@ class FireStoreServices {
       await docRef.update({'url': urls});
     }
   }
-
-
-
 }

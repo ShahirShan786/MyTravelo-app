@@ -2,12 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_travelo_app/Controller/Hive/user_functions.dart';
-import 'package:my_travelo_app/Views/Screens/Primary_Screens/Favorite/widgets/favorite_place_card_widget.dart';
-import 'package:my_travelo_app/Views/Screens/Sub_Screens/place_details_screen.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/app_bar.dart';
+import 'package:My Travelo/Controller/Hive/user_functions.dart';
+import 'package:My Travelo/Views/Screens/Primary_Screens/Favorite/widgets/favorite_place_card_widget.dart';
+import 'package:My Travelo/Views/Screens/Sub_Screens/place_details_screen.dart';
+import 'package:My Travelo/Views/Screens/Widgets/app_bar.dart';
 
-import 'package:my_travelo_app/constants/constable.dart';
+import 'package:My Travelo/constants/constable.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
@@ -44,7 +44,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                           final fav = fevoriteList.value[index];
                           return InkWell(
                             onTap: () {
-                              
                               Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => PlaceDetailsScreen(
                                   index: index,
@@ -62,4 +61,3 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     );
   }
 }
-

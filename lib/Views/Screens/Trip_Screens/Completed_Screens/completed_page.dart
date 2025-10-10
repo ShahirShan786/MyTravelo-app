@@ -3,10 +3,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:my_travelo_app/Controller/Hive/user_functions.dart';
-import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/Models/user_model.dart';
-import 'package:my_travelo_app/Views/Screens/Trip_Screens/Completed_Screens/completed_details_page.dart';
+import 'package:My Travelo/Controller/Hive/user_functions.dart';
+import 'package:My Travelo/constants/constant.dart';
+import 'package:My Travelo/Models/user_model.dart';
+import 'package:My Travelo/Views/Screens/Trip_Screens/Completed_Screens/completed_details_page.dart';
 
 class CompletedPage extends StatefulWidget {
   final String userId;
@@ -38,7 +38,7 @@ class _CompletedPageState extends State<CompletedPage> {
             builder: (context, value, child) {
               return tripListCompleted.value.isNotEmpty
                   ? ListView.builder(
-                      physics:const BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       itemCount: tripListCompleted.value.length,
                       itemBuilder: (BuildContext context, int index) {
                         TripModel completedTrip =
@@ -124,7 +124,7 @@ class _CompletedPageState extends State<CompletedPage> {
                                                             FontWeight.normal),
                                                     IconButton(
                                                         onPressed: () {},
-                                                        icon:const Icon(
+                                                        icon: const Icon(
                                                           Icons.delete,
                                                           color: Colors
                                                               .transparent,
@@ -142,7 +142,7 @@ class _CompletedPageState extends State<CompletedPage> {
                           ),
                         );
                       })
-                  :const Center(
+                  : const Center(
                       child: Text("No completed trips yet."),
                     );
             }));

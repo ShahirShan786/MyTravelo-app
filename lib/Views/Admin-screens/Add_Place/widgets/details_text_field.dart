@@ -1,6 +1,5 @@
-
 import 'package:flutter/widgets.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/text_form_feild.dart';
+import 'package:My Travelo/Views/Screens/Widgets/text_form_feild.dart';
 
 class BuildDetailsTextField extends StatelessWidget {
   const BuildDetailsTextField({

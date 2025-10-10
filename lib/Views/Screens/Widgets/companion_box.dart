@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/Models/user_model.dart';
+import 'package:My Travelo/constants/constable.dart';
+import 'package:My Travelo/constants/constant.dart';
+import 'package:My Travelo/Models/user_model.dart';
 
 class CompanionBox extends StatelessWidget {
   final List<String> companion;
@@ -19,7 +19,7 @@ class CompanionBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 140.h,
+      // height: 140.h,
       // color: Colors.blueAccent,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,7 +34,7 @@ class CompanionBox extends StatelessWidget {
             // color: Colors.amber,
             child: Center(
                 child: Padding(
-              padding:  EdgeInsets.all(8.0.w),
+              padding: EdgeInsets.all(8.0.w),
               child: GridView.builder(
                   itemCount: trip.companion!.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -44,12 +44,12 @@ class CompanionBox extends StatelessWidget {
                       childAspectRatio: 4),
                   itemBuilder: (context, index) {
                     return Padding(
-                        padding:  EdgeInsets.symmetric(
+                        padding: EdgeInsets.symmetric(
                           horizontal: 3.w,
                         ),
                         child: companion.isNotEmpty
                             ? Container(
-                                padding:  EdgeInsets.symmetric(
+                                padding: EdgeInsets.symmetric(
                                     horizontal: 10.w, vertical: 5.h),
                                 decoration: BoxDecoration(
                                     color: ScaffoldColor,

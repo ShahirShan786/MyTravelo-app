@@ -1,15 +1,13 @@
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_travelo_app/Controller/Firebase/firebase_functions.dart';
-import 'package:my_travelo_app/Controller/Hive/image_upload.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/show_dialogues.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/constants/primary_button.dart';
+import 'package:My Travelo/Controller/Firebase/firebase_functions.dart';
+import 'package:My Travelo/Controller/Hive/image_upload.dart';
+import 'package:My Travelo/Views/Screens/Widgets/show_dialogues.dart';
+import 'package:My Travelo/constants/constable.dart';
+import 'package:My Travelo/constants/constant.dart';
+import 'package:My Travelo/constants/primary_button.dart';
 
 class addHomePictureButton extends StatelessWidget {
   const addHomePictureButton({
@@ -49,16 +47,13 @@ class addHomePictureButton extends StatelessWidget {
                       )),
                 );
               } else {
-                showLoadingDialogue(
-                    context: context, content: "Adding data..");
+                showLoadingDialogue(context: context, content: "Adding data..");
                 for (File? image in homePictureList) {
                   if (image != null) {
                     String? imageUrl = await uploadHomeImage(image: image);
-    
+
                     if (imageUrl != null) {
-                      await fireStoreServices.addHomepictue(
-                          homePics: imageUrl);
-                      
+                      await fireStoreServices.addHomepictue(homePics: imageUrl);
                     }
                     // ignore: use_build_context_synchronously
                     Navigator.pop(context);

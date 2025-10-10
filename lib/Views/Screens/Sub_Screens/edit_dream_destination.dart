@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:my_travelo_app/Controller/Hive/user_functions.dart';
-import 'package:my_travelo_app/Views/Screens/Sub_Screens/dream_destination_screen.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/textfeild.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/constants/primary_button.dart';
-import 'package:my_travelo_app/Models/user_model.dart';
+import 'package:My Travelo/Controller/Hive/user_functions.dart';
+import 'package:My Travelo/Views/Screens/Sub_Screens/dream_destination_screen.dart';
+import 'package:My Travelo/Views/Screens/Widgets/textfeild.dart';
+import 'package:My Travelo/constants/constable.dart';
+import 'package:My Travelo/constants/constant.dart';
+import 'package:My Travelo/constants/primary_button.dart';
+import 'package:My Travelo/Models/user_model.dart';
 
 class EditDreamDestinationScreen extends StatefulWidget {
   final DreamDestinationModel editDestination;
@@ -40,7 +40,6 @@ class _EditDreamDestinationScreenState
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _destinationController.text = widget.editDestination.destination;
     _totalExpenseController.text =
@@ -73,7 +72,7 @@ class _EditDreamDestinationScreenState
               Column(
                 children: [
                   Padding(
-                    padding:  EdgeInsets.all(10.w),
+                    padding: EdgeInsets.all(10.w),
                     child: InkWell(
                         onTap: pickPlaceImages,
                         child: Container(
@@ -108,7 +107,7 @@ class _EditDreamDestinationScreenState
                               itemCount: selectedImages.length,
                               itemBuilder: (context, index) {
                                 return Padding(
-                                  padding:  EdgeInsets.symmetric(
+                                  padding: EdgeInsets.symmetric(
                                       horizontal: 10.w, vertical: 10.h),
                                   child: InkWell(
                                     onTap: () {
@@ -140,7 +139,7 @@ class _EditDreamDestinationScreenState
                               itemCount: reSelectedImages.length,
                               itemBuilder: (context, index) {
                                 return Padding(
-                                  padding:  EdgeInsets.symmetric(
+                                  padding: EdgeInsets.symmetric(
                                       horizontal: 10.w, vertical: 10.h),
                                   child: InkWell(
                                     onTap: () {
@@ -166,7 +165,7 @@ class _EditDreamDestinationScreenState
                               })),
                 ],
               ),
-               SizedBox(
+              SizedBox(
                 height: 20.h,
               ),
               newTextFeild(
@@ -202,7 +201,7 @@ class _EditDreamDestinationScreenState
                   return null;
                 },
               ),
-               SizedBox(
+              SizedBox(
                 height: 50.h,
               ),
             ],

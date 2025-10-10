@@ -1,12 +1,10 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_travelo_app/Controller/Firebase/firebase_functions.dart';
-import 'package:my_travelo_app/Models/admin_model.dart';
-import 'package:my_travelo_app/Views/Admin-screens/admin_place_details_screen.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
+import 'package:My Travelo/Controller/Firebase/firebase_functions.dart';
+import 'package:My Travelo/Models/admin_model.dart';
+import 'package:My Travelo/Views/Admin-screens/admin_place_details_screen.dart';
+import 'package:My Travelo/constants/constable.dart';
+import 'package:My Travelo/constants/constant.dart';
 
 class HomePlaceListenableBuilder extends StatelessWidget {
   const HomePlaceListenableBuilder({
@@ -25,19 +23,17 @@ class HomePlaceListenableBuilder extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: placeModelListener.value.length,
-          gridDelegate:
-              const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 5,
-                  childAspectRatio: 0.7,
-                  crossAxisSpacing: 5),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 5,
+              childAspectRatio: 0.7,
+              crossAxisSpacing: 5),
           itemBuilder: (context, index) {
             PlaceModel place = placeModelListener.value[index];
             return InkWell(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) =>
-                      AdminPlaceDetailsScreen(index: index),
+                  builder: (context) => AdminPlaceDetailsScreen(index: index),
                 ));
               },
               onLongPress: () async {
@@ -91,8 +87,17 @@ class HomePlaceListenableBuilder extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10.r),
                         child: Image.network(
                           place.mainImage,
-                          // loadingBuilder: (context, child, loadingProgress) =>  Center(child: CircularProgressIndicator(color: indicatorColor,)),
                           fit: BoxFit.cover,
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) {
+                              return child;
+                            } else {
+                              return Center(
+                                  child: CircularProgressIndicator(
+                                color: indicatorColor,
+                              ));
+                            }
+                          },
                         ),
                       ),
                     ),
@@ -107,12 +112,11 @@ class HomePlaceListenableBuilder extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                     ),
                     Padding(
-                      padding:  EdgeInsets.all(5.r),
+                      padding: EdgeInsets.all(5.r),
                       child: Text(
                         place.details,
                         style: TextStyle(
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.w500),
+                            fontSize: 13.sp, fontWeight: FontWeight.w500),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 4,
                       ),

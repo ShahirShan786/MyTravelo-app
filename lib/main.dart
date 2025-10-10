@@ -1,17 +1,21 @@
 import 'dart:async';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_travelo_app/Controller/Hive/initialisation.dart';
-import 'package:my_travelo_app/dashboard.dart';
-import 'package:my_travelo_app/Views/Screens/Main_Screens/Login/Pages/logIn_page.dart';
+import 'package:My Travelo/Controller/Hive/initialisation.dart';
+import 'package:My Travelo/dashboard.dart';
+import 'package:My Travelo/Views/Screens/Main_Screens/Login/Pages/logIn_page.dart';
+import 'package:My Travelo/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Future<void> main() async {
- 
-  
-  initialisation();
-  
+  WidgetsFlutterBinding.ensureInitialized(); // <-- REQUIRED before async code
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform, // <-- ADD THIS
+  );
+  await initialisation();
 
   runApp(const MyApp());
 }
@@ -22,7 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      builder: (Context , Widget) => GetMaterialApp(
+      builder: (Context, Widget) => GetMaterialApp(
           theme: ThemeData(
             primaryColor: Colors.green,
             scaffoldBackgroundColor: Colors.white,
@@ -42,7 +46,7 @@ class MyApp extends StatelessWidget {
               }
             },
           )),
-          designSize:const Size(392.72, 825.45),
+      designSize: const Size(392.72, 825.45),
     );
   }
 
@@ -53,8 +57,8 @@ class MyApp extends StatelessWidget {
 
   Future<String?> saveUserName(String id) async {
     SharedPreferences prefsUsername = await SharedPreferences.getInstance();
-    await prefsUsername.setString("currentuserId",id);
-    
+    await prefsUsername.setString("currentuserId", id);
+
     return null;
   }
 }

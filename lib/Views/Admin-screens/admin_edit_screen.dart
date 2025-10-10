@@ -5,15 +5,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:my_travelo_app/Controller/Firebase/firebase_functions.dart';
-import 'package:my_travelo_app/Controller/Hive/image_upload.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/admin_textfeild.dart';
-import 'package:my_travelo_app/Views/Screens/Widgets/show_dialogues.dart';
-import 'package:my_travelo_app/constants/constable.dart';
-import 'package:my_travelo_app/constants/constant.dart';
-import 'package:my_travelo_app/constants/primary_button.dart';
-import 'package:my_travelo_app/Models/admin_model.dart';
-import 'package:my_travelo_app/Views/Admin-screens/Home_Page/Pages/admin_home_page.dart';
+import 'package:My Travelo/Controller/Firebase/firebase_functions.dart';
+import 'package:My Travelo/Controller/Hive/image_upload.dart';
+import 'package:My Travelo/Views/Screens/Widgets/admin_textfeild.dart';
+import 'package:My Travelo/Views/Screens/Widgets/show_dialogues.dart';
+import 'package:My Travelo/constants/constable.dart';
+import 'package:My Travelo/constants/constant.dart';
+import 'package:My Travelo/constants/primary_button.dart';
+import 'package:My Travelo/Models/admin_model.dart';
+import 'package:My Travelo/Views/Admin-screens/Home_Page/Pages/admin_home_page.dart';
 
 class AdminEditPlaceScreen extends StatefulWidget {
   final PlaceModel? firebasePlaceModel;
@@ -48,11 +48,11 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding:  EdgeInsets.all(8.0.w),
+          padding: EdgeInsets.all(8.0.w),
           child: Center(
             child: Column(
               children: [
-                 SizedBox(
+                SizedBox(
                   height: 50.h,
                 ),
                 Align(
@@ -62,7 +62,7 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold),
                 ),
-                 SizedBox(
+                SizedBox(
                   height: 20.h,
                 ),
                 InkWell(
@@ -85,7 +85,7 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
                                 fit: BoxFit.cover,
                               ))),
                 ),
-                 SizedBox(
+                SizedBox(
                   height: 10.h,
                 ),
                 Align(
@@ -100,7 +100,7 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
                     Align(
                       alignment: Alignment.topLeft,
                       child: Padding(
-                        padding:  EdgeInsets.all(8.0.w),
+                        padding: EdgeInsets.all(8.0.w),
                         child: InkWell(
                           onTap: pickSubImages,
                           child: Container(
@@ -118,7 +118,7 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
                       ),
                     ),
                     Padding(
-                      padding:  EdgeInsets.all(8.0.w),
+                      padding: EdgeInsets.all(8.0.w),
                       child: SizedBox(
                           height: 100,
                           child: _imageFiles.isNotEmpty
@@ -169,7 +169,7 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
                                             });
                                       },
                                       child: Padding(
-                                        padding:  EdgeInsets.all(5.0.w),
+                                        padding: EdgeInsets.all(5.0.w),
                                         child: SizedBox(
                                           width: 110.w,
                                           height: 80.h,
@@ -233,7 +233,7 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
                                             });
                                       },
                                       child: Padding(
-                                        padding:  EdgeInsets.all(5.0.w),
+                                        padding: EdgeInsets.all(5.0.w),
                                         child: SizedBox(
                                           width: 110.w,
                                           height: 80.h,
@@ -294,7 +294,7 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
                     label: "place details",
                     controller: _detailsController,
                     text: widget.firebasePlaceModel?.details),
-                 SizedBox(
+                SizedBox(
                   height: 10.h,
                 ),
                 PrimaryButton(
@@ -340,7 +340,7 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
                           ),
                           (Route<dynamic> route) => false);
                     }),
-                 SizedBox(
+                SizedBox(
                   height: 10.h,
                 ),
               ],
@@ -370,7 +370,7 @@ class _AdminEditPlaceScreenState extends State<AdminEditPlaceScreen> {
     setState(() {
       _imageFiles = images;
     });
-    }
+  }
 
   Future<void> showdeleteDailogue(int index) {
     return showDialog(
