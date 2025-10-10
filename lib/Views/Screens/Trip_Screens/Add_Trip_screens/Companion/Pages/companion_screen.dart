@@ -4,11 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 
-import 'package:My Travelo/Views/Screens/Widgets/show_dialogues.dart';
-import 'package:My Travelo/constants/constable.dart';
-import 'package:My Travelo/constants/constant.dart';
-import 'package:My Travelo/constants/primary_button.dart';
-import 'package:My Travelo/Views/Screens/Trip_Screens/Add_Trip_screens/Trip_Plan/Pages/trip_plan_screen.dart';
+import 'package:MyTravelo/Views/Screens/Widgets/show_dialogues.dart';
+import 'package:MyTravelo/constants/constable.dart';
+import 'package:MyTravelo/constants/constant.dart';
+import 'package:MyTravelo/constants/primary_button.dart';
+import 'package:MyTravelo/Views/Screens/Trip_Screens/Add_Trip_screens/Trip_Plan/Pages/trip_plan_screen.dart';
 
 class CompanionScreen extends StatefulWidget {
   final String destination;

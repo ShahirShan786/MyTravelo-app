@@ -5,18 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "My Travelo",
+      "name": "MyTravelo",
       "request": "launch",
       "type": "dart"
     },
     {
-      "name": "My Travelo (profile mode)",
+      "name": "MyTravelo (profile mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile"
     },
     {
-      "name": "My Travelo (release mode)",
+      "name": "MyTravelo (release mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release",

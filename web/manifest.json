@@ -1,6 +1,6 @@
 {
-  "name": "My Travelo",
-  "short_name": "My Travelo",
+  "name": "MyTravelo",
+  "short_name": "MyTravelo",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#0175C2",

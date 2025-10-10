@@ -5,13 +5,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:My Travelo/Controller/Hive/user_functions.dart';
-import 'package:My Travelo/Views/Screens/Sub_Screens/add_dream_destination_screen.dart';
-import 'package:My Travelo/Views/Screens/Sub_Screens/edit_dream_destination.dart';
-import 'package:My Travelo/Views/Screens/Widgets/show_dialogues.dart';
-import 'package:My Travelo/constants/constable.dart';
-import 'package:My Travelo/constants/constant.dart';
-import 'package:My Travelo/Models/user_model.dart';
+import 'package:MyTravelo/Controller/Hive/user_functions.dart';
+import 'package:MyTravelo/Views/Screens/Sub_Screens/add_dream_destination_screen.dart';
+import 'package:MyTravelo/Views/Screens/Sub_Screens/edit_dream_destination.dart';
+import 'package:MyTravelo/Views/Screens/Widgets/show_dialogues.dart';
+import 'package:MyTravelo/constants/constable.dart';
+import 'package:MyTravelo/constants/constant.dart';
+import 'package:MyTravelo/Models/user_model.dart';
 
 class DreamDestinationScreen extends StatefulWidget {
   final String? userId;

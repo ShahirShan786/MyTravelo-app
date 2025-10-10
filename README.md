@@ -1,4 +1,4 @@
-# My Travelo
+# MyTravelo
 
 A new Flutter project.
 

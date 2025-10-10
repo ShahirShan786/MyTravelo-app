@@ -7,13 +7,13 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:My Travelo/Controller/Hive/user_functions.dart';
-import 'package:My Travelo/Views/Screens/Trip_Screens/Completed_Screens/blog_page.dart';
-import 'package:My Travelo/Views/Screens/Widgets/app_bar.dart';
-import 'package:My Travelo/Views/Screens/Widgets/photo_view_page.dart';
-import 'package:My Travelo/constants/constable.dart';
-import 'package:My Travelo/constants/constant.dart';
-import 'package:My Travelo/Models/user_model.dart';
+import 'package:MyTravelo/Controller/Hive/user_functions.dart';
+import 'package:MyTravelo/Views/Screens/Trip_Screens/Completed_Screens/blog_page.dart';
+import 'package:MyTravelo/Views/Screens/Widgets/app_bar.dart';
+import 'package:MyTravelo/Views/Screens/Widgets/photo_view_page.dart';
+import 'package:MyTravelo/constants/constable.dart';
+import 'package:MyTravelo/constants/constant.dart';
+import 'package:MyTravelo/Models/user_model.dart';
 
 class CompletedDetailsPage extends StatefulWidget {
   final TripModel trip;

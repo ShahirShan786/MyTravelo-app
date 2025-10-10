@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:My Travelo/Views/Screens/Main_Screens/Login/Pages/logIn_page.dart';
-import 'package:My Travelo/Views/Screens/Primary_Screens/Home/pages/home_screens.dart';
-import 'package:My Travelo/constants/constant.dart';
-import 'package:My Travelo/dashboard.dart';
+import 'package:MyTravelo/Views/Screens/Main_Screens/Login/Pages/logIn_page.dart';
+import 'package:MyTravelo/Views/Screens/Primary_Screens/Home/pages/home_screens.dart';
+import 'package:MyTravelo/constants/constant.dart';
+import 'package:MyTravelo/dashboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class buildSettingsSection extends StatelessWidget {

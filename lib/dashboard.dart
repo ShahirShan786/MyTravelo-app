@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:My Travelo/constants/constable.dart';
-import 'package:My Travelo/Models/singInModel.dart';
-import 'package:My Travelo/Views/Screens/Trip_Screens/Add_Trip_screens/Add_Trip/pages/add_trip_screen.dart';
-import 'package:My Travelo/Views/Screens/Primary_Screens/Favorite/Pages/favorite_screen.dart';
-import 'package:My Travelo/Views/Screens/Primary_Screens/Home/pages/home_screens.dart';
-import 'package:My Travelo/Views/Screens/Primary_Screens/Profile/Pages/profile_screen.dart';
-import 'package:My Travelo/Views/Screens/Primary_Screens/Schedule/Pages/schedule_screen.dart';
+import 'package:MyTravelo/constants/constable.dart';
+import 'package:MyTravelo/Models/singInModel.dart';
+import 'package:MyTravelo/Views/Screens/Trip_Screens/Add_Trip_screens/Add_Trip/pages/add_trip_screen.dart';
+import 'package:MyTravelo/Views/Screens/Primary_Screens/Favorite/Pages/favorite_screen.dart';
+import 'package:MyTravelo/Views/Screens/Primary_Screens/Home/pages/home_screens.dart';
+import 'package:MyTravelo/Views/Screens/Primary_Screens/Profile/Pages/profile_screen.dart';
+import 'package:MyTravelo/Views/Screens/Primary_Screens/Schedule/Pages/schedule_screen.dart';
 import 'package:get/get.dart';
 
 class Dashboard extends StatefulWidget {

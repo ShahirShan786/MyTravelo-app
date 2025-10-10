@@ -2,10 +2,10 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:My Travelo/Controller/Hive/initialisation.dart';
-import 'package:My Travelo/dashboard.dart';
-import 'package:My Travelo/Views/Screens/Main_Screens/Login/Pages/logIn_page.dart';
-import 'package:My Travelo/firebase_options.dart';
+import 'package:MyTravelo/Controller/Hive/initialisation.dart';
+import 'package:MyTravelo/dashboard.dart';
+import 'package:MyTravelo/Views/Screens/Main_Screens/Login/Pages/logIn_page.dart';
+import 'package:MyTravelo/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:My Travelo/Controller/Hive/user_functions.dart';
-import 'package:My Travelo/Views/Screens/Sub_Screens/dream_destination_screen.dart';
-import 'package:My Travelo/Views/Screens/Widgets/textfeild.dart';
-import 'package:My Travelo/constants/constable.dart';
-import 'package:My Travelo/constants/constant.dart';
-import 'package:My Travelo/constants/primary_button.dart';
-import 'package:My Travelo/Models/user_model.dart';
+import 'package:MyTravelo/Controller/Hive/user_functions.dart';
+import 'package:MyTravelo/Views/Screens/Sub_Screens/dream_destination_screen.dart';
+import 'package:MyTravelo/Views/Screens/Widgets/textfeild.dart';
+import 'package:MyTravelo/constants/constable.dart';
+import 'package:MyTravelo/constants/constant.dart';
+import 'package:MyTravelo/constants/primary_button.dart';
+import 'package:MyTravelo/Models/user_model.dart';
 
 class EditDreamDestinationScreen extends StatefulWidget {
   final DreamDestinationModel editDestination;

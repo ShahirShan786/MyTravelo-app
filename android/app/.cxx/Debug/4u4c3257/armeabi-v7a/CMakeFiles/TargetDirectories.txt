@@ -1,2 +1,2 @@
-D:/back-up/My Travelo/android/app/.cxx/Debug/4u4c3257/armeabi-v7a/CMakeFiles/edit_cache.dir
-D:/back-up/My Travelo/android/app/.cxx/Debug/4u4c3257/armeabi-v7a/CMakeFiles/rebuild_cache.dir
+D:/back-up/my_travelo_app/android/app/.cxx/Debug/4u4c3257/armeabi-v7a/CMakeFiles/edit_cache.dir
+D:/back-up/my_travelo_app/android/app/.cxx/Debug/4u4c3257/armeabi-v7a/CMakeFiles/rebuild_cache.dir

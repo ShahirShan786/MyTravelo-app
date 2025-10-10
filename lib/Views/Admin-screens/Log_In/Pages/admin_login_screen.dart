@@ -2,12 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:My Travelo/Views/Admin-screens/Log_In/widgets/admin_name_textfield.dart';
-import 'package:My Travelo/Views/Admin-screens/Log_In/widgets/admin_password_textfield.dart';
-import 'package:My Travelo/constants/constable.dart';
-import 'package:My Travelo/constants/constant.dart';
-import 'package:My Travelo/constants/primary_button.dart';
-import 'package:My Travelo/Views/Admin-screens/Home_Page/Pages/admin_home_page.dart';
+import 'package:MyTravelo/Views/Admin-screens/Log_In/widgets/admin_name_textfield.dart';
+import 'package:MyTravelo/Views/Admin-screens/Log_In/widgets/admin_password_textfield.dart';
+import 'package:MyTravelo/constants/constable.dart';
+import 'package:MyTravelo/constants/constant.dart';
+import 'package:MyTravelo/constants/primary_button.dart';
+import 'package:MyTravelo/Views/Admin-screens/Home_Page/Pages/admin_home_page.dart';
 
 class AdminLoginScreen extends StatelessWidget {
   AdminLoginScreen({super.key});

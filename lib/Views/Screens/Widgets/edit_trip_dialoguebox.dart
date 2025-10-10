@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:My Travelo/Controller/Hive/user_functions.dart';
-import 'package:My Travelo/Views/Screens/Widgets/textFormFeilds.dart';
-import 'package:My Travelo/constants/constable.dart';
-import 'package:My Travelo/constants/constant.dart';
-import 'package:My Travelo/Models/user_model.dart';
-import 'package:My Travelo/Views/Screens/Primary_Screens/Schedule/Pages/schedule_screen.dart';
+import 'package:MyTravelo/Controller/Hive/user_functions.dart';
+import 'package:MyTravelo/Views/Screens/Widgets/textFormFeilds.dart';
+import 'package:MyTravelo/constants/constable.dart';
+import 'package:MyTravelo/constants/constant.dart';
+import 'package:MyTravelo/Models/user_model.dart';
+import 'package:MyTravelo/Views/Screens/Primary_Screens/Schedule/Pages/schedule_screen.dart';
 
 class EditTripDialogueBox {
   final BuildContext context;

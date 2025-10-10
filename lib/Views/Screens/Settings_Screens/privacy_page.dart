@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:My Travelo/constants/constant.dart';
+import 'package:MyTravelo/constants/constant.dart';
 
 class Privacypage extends StatelessWidget {
   const Privacypage({super.key});

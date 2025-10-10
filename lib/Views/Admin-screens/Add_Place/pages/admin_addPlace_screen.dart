@@ -4,17 +4,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:My Travelo/Controller/Firebase/firebase_functions.dart';
-import 'package:My Travelo/Controller/Hive/image_upload.dart';
-import 'package:My Travelo/Views/Admin-screens/Add_Place/widgets/details_text_field.dart';
-import 'package:My Travelo/Views/Admin-screens/Add_Place/widgets/district_text_field.dart';
-import 'package:My Travelo/Views/Admin-screens/Add_Place/widgets/lattitude_text_field.dart';
-import 'package:My Travelo/Views/Admin-screens/Add_Place/widgets/logitude_text_field.dart';
-import 'package:My Travelo/Views/Admin-screens/Add_Place/widgets/place_text_field.dart';
-import 'package:My Travelo/Views/Screens/Widgets/show_dialogues.dart';
-import 'package:My Travelo/constants/constable.dart';
-import 'package:My Travelo/constants/constant.dart';
-import 'package:My Travelo/constants/primary_button.dart';
+import 'package:MyTravelo/Controller/Firebase/firebase_functions.dart';
+import 'package:MyTravelo/Controller/Hive/image_upload.dart';
+import 'package:MyTravelo/Views/Admin-screens/Add_Place/widgets/details_text_field.dart';
+import 'package:MyTravelo/Views/Admin-screens/Add_Place/widgets/district_text_field.dart';
+import 'package:MyTravelo/Views/Admin-screens/Add_Place/widgets/lattitude_text_field.dart';
+import 'package:MyTravelo/Views/Admin-screens/Add_Place/widgets/logitude_text_field.dart';
+import 'package:MyTravelo/Views/Admin-screens/Add_Place/widgets/place_text_field.dart';
+import 'package:MyTravelo/Views/Screens/Widgets/show_dialogues.dart';
+import 'package:MyTravelo/constants/constable.dart';
+import 'package:MyTravelo/constants/constant.dart';
+import 'package:MyTravelo/constants/primary_button.dart';
 
 class AdminAddPlaceScreen extends StatefulWidget {
   const AdminAddPlaceScreen({

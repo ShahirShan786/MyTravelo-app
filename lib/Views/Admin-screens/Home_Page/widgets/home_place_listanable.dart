@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:My Travelo/Controller/Firebase/firebase_functions.dart';
-import 'package:My Travelo/Models/admin_model.dart';
-import 'package:My Travelo/Views/Admin-screens/admin_place_details_screen.dart';
-import 'package:My Travelo/constants/constable.dart';
-import 'package:My Travelo/constants/constant.dart';
+import 'package:MyTravelo/Controller/Firebase/firebase_functions.dart';
+import 'package:MyTravelo/Models/admin_model.dart';
+import 'package:MyTravelo/Views/Admin-screens/admin_place_details_screen.dart';
+import 'package:MyTravelo/constants/constable.dart';
+import 'package:MyTravelo/constants/constant.dart';
 
 class HomePlaceListenableBuilder extends StatelessWidget {
   const HomePlaceListenableBuilder({

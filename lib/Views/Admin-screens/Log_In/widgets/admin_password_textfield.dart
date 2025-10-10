@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:My Travelo/Views/Screens/Widgets/textFormFeilds.dart';
-import 'package:My Travelo/constants/constable.dart';
+import 'package:MyTravelo/Views/Screens/Widgets/textFormFeilds.dart';
+import 'package:MyTravelo/constants/constable.dart';
 
 class AdminPasswordTextField extends StatelessWidget {
   const AdminPasswordTextField({

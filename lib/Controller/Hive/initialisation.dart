@@ -2,10 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:My Travelo/Controller/Hive/signIn_service.dart';
-import 'package:My Travelo/Models/singInModel.dart';
-import 'package:My Travelo/Models/user_model.dart';
-import 'package:My Travelo/firebase_options.dart';
+import 'package:MyTravelo/Controller/Hive/signIn_service.dart';
+import 'package:MyTravelo/Models/singInModel.dart';
+import 'package:MyTravelo/Models/user_model.dart';
+import 'package:MyTravelo/firebase_options.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 

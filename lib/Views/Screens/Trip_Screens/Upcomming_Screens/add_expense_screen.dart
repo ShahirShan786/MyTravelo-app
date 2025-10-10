@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:My Travelo/Controller/Hive/user_functions.dart';
-import 'package:My Travelo/constants/constable.dart';
-import 'package:My Travelo/constants/constant.dart';
-import 'package:My Travelo/constants/primary_button.dart';
+import 'package:MyTravelo/Controller/Hive/user_functions.dart';
+import 'package:MyTravelo/constants/constable.dart';
+import 'package:MyTravelo/constants/constant.dart';
+import 'package:MyTravelo/constants/primary_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:My Travelo/Models/user_model.dart';
+import 'package:MyTravelo/Models/user_model.dart';
 
 class AddExpenseScreen extends StatefulWidget {
   final String tripId;

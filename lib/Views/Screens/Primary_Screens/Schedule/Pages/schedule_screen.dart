@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:My Travelo/constants/constable.dart';
-import 'package:My Travelo/constants/constant.dart';
-import 'package:My Travelo/dashboard.dart';
-import 'package:My Travelo/Views/Screens/Trip_Screens/Completed_Screens/completed_page.dart';
-import 'package:My Travelo/Views/Screens/Trip_Screens/Upcomming_Screens/upcoming_page.dart';
+import 'package:MyTravelo/constants/constable.dart';
+import 'package:MyTravelo/constants/constant.dart';
+import 'package:MyTravelo/dashboard.dart';
+import 'package:MyTravelo/Views/Screens/Trip_Screens/Completed_Screens/completed_page.dart';
+import 'package:MyTravelo/Views/Screens/Trip_Screens/Upcomming_Screens/upcoming_page.dart';
 
 class ScheduleScreen extends StatelessWidget {
   final String? userId;

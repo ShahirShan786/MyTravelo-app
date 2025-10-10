@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:My Travelo/Views/Screens/Widgets/app_bar.dart';
-import 'package:My Travelo/Views/Screens/Widgets/companion_card.dart';
-import 'package:My Travelo/constants/constable.dart';
-import 'package:My Travelo/constants/constant.dart';
-import 'package:My Travelo/Views/Screens/Trip_Screens/Add_Trip_screens/Companion/Pages/companion_screen.dart';
-import 'package:My Travelo/Views/Screens/Trip_Screens/Add_Trip_screens/Trip_Plan/Pages/trip_plan_screen.dart';
+import 'package:MyTravelo/Views/Screens/Widgets/app_bar.dart';
+import 'package:MyTravelo/Views/Screens/Widgets/companion_card.dart';
+import 'package:MyTravelo/constants/constable.dart';
+import 'package:MyTravelo/constants/constant.dart';
+import 'package:MyTravelo/Views/Screens/Trip_Screens/Add_Trip_screens/Companion/Pages/companion_screen.dart';
+import 'package:MyTravelo/Views/Screens/Trip_Screens/Add_Trip_screens/Trip_Plan/Pages/trip_plan_screen.dart';
 
 class OptionScreen extends StatelessWidget {
   final String? destination;

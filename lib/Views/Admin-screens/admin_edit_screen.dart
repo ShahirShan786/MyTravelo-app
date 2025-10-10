@@ -5,15 +5,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:My Travelo/Controller/Firebase/firebase_functions.dart';
-import 'package:My Travelo/Controller/Hive/image_upload.dart';
-import 'package:My Travelo/Views/Screens/Widgets/admin_textfeild.dart';
-import 'package:My Travelo/Views/Screens/Widgets/show_dialogues.dart';
-import 'package:My Travelo/constants/constable.dart';
-import 'package:My Travelo/constants/constant.dart';
-import 'package:My Travelo/constants/primary_button.dart';
-import 'package:My Travelo/Models/admin_model.dart';
-import 'package:My Travelo/Views/Admin-screens/Home_Page/Pages/admin_home_page.dart';
+import 'package:MyTravelo/Controller/Firebase/firebase_functions.dart';
+import 'package:MyTravelo/Controller/Hive/image_upload.dart';
+import 'package:MyTravelo/Views/Screens/Widgets/admin_textfeild.dart';
+import 'package:MyTravelo/Views/Screens/Widgets/show_dialogues.dart';
+import 'package:MyTravelo/constants/constable.dart';
+import 'package:MyTravelo/constants/constant.dart';
+import 'package:MyTravelo/constants/primary_button.dart';
+import 'package:MyTravelo/Models/admin_model.dart';
+import 'package:MyTravelo/Views/Admin-screens/Home_Page/Pages/admin_home_page.dart';
 
 class AdminEditPlaceScreen extends StatefulWidget {
   final PlaceModel? firebasePlaceModel;

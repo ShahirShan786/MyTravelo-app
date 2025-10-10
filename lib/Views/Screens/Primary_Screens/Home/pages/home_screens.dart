@@ -2,15 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:My Travelo/Controller/Firebase/firebase_functions.dart';
-import 'package:My Travelo/Views/Screens/Sub_Screens/dream_destination_screen.dart';
-import 'package:My Travelo/Views/Screens/Sub_Screens/place_details_screen.dart';
-import 'package:My Travelo/Views/Screens/Widgets/app_bar.dart';
-import 'package:My Travelo/constants/constable.dart';
-import 'package:My Travelo/constants/constant.dart';
+import 'package:MyTravelo/Controller/Firebase/firebase_functions.dart';
+import 'package:MyTravelo/Views/Screens/Sub_Screens/dream_destination_screen.dart';
+import 'package:MyTravelo/Views/Screens/Sub_Screens/place_details_screen.dart';
+import 'package:MyTravelo/Views/Screens/Widgets/app_bar.dart';
+import 'package:MyTravelo/constants/constable.dart';
+import 'package:MyTravelo/constants/constant.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:My Travelo/Models/admin_model.dart';
-import 'package:My Travelo/Views/Screens/Trip_Screens/Add_Trip_screens/Add_Trip/pages/add_trip_screen.dart';
+import 'package:MyTravelo/Models/admin_model.dart';
+import 'package:MyTravelo/Views/Screens/Trip_Screens/Add_Trip_screens/Add_Trip/pages/add_trip_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Homescreen extends StatefulWidget {

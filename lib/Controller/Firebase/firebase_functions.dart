@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:My Travelo/Models/admin_model.dart';
+import 'package:MyTravelo/Models/admin_model.dart';
 
 ValueNotifier<List<PlaceModel>> placeModelListener = ValueNotifier([]);
 ValueNotifier<List<HomePictureModel>> homePictureListener = ValueNotifier([]);

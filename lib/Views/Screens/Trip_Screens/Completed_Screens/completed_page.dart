@@ -3,10 +3,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:My Travelo/Controller/Hive/user_functions.dart';
-import 'package:My Travelo/constants/constant.dart';
-import 'package:My Travelo/Models/user_model.dart';
-import 'package:My Travelo/Views/Screens/Trip_Screens/Completed_Screens/completed_details_page.dart';
+import 'package:MyTravelo/Controller/Hive/user_functions.dart';
+import 'package:MyTravelo/constants/constant.dart';
+import 'package:MyTravelo/Models/user_model.dart';
+import 'package:MyTravelo/Views/Screens/Trip_Screens/Completed_Screens/completed_details_page.dart';
 
 class CompletedPage extends StatefulWidget {
   final String userId;

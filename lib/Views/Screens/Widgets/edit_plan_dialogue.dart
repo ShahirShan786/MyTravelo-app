@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:My Travelo/Views/Screens/Widgets/textFormFeilds.dart';
-import 'package:My Travelo/constants/constable.dart';
-import 'package:My Travelo/constants/constant.dart';
+import 'package:MyTravelo/Views/Screens/Widgets/textFormFeilds.dart';
+import 'package:MyTravelo/constants/constable.dart';
+import 'package:MyTravelo/constants/constant.dart';
 
 class EditPlanDialogue {
   final BuildContext context;

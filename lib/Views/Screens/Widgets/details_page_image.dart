@@ -2,12 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:My Travelo/Controller/Hive/user_functions.dart';
-import 'package:My Travelo/Views/Screens/Widgets/photo_view_page.dart';
-import 'package:My Travelo/constants/constable.dart';
-import 'package:My Travelo/Models/admin_model.dart';
-import 'package:My Travelo/Models/user_model.dart';
-import 'package:My Travelo/Views/Admin-screens/admin_edit_screen.dart';
+import 'package:MyTravelo/Controller/Hive/user_functions.dart';
+import 'package:MyTravelo/Views/Screens/Widgets/photo_view_page.dart';
+import 'package:MyTravelo/constants/constable.dart';
+import 'package:MyTravelo/Models/admin_model.dart';
+import 'package:MyTravelo/Models/user_model.dart';
+import 'package:MyTravelo/Views/Admin-screens/admin_edit_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailsPageImage extends StatefulWidget {

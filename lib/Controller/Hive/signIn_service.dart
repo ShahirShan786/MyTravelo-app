@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:My Travelo/Models/singInModel.dart';
+import 'package:MyTravelo/Models/singInModel.dart';
 
 class Signinservice {
   Box<Singinmodel>? _signInBox;

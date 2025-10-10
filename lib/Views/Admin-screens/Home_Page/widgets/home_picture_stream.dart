@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:My Travelo/Controller/Firebase/firebase_functions.dart';
+import 'package:MyTravelo/Controller/Firebase/firebase_functions.dart';
 
 class HomePictureStreem extends StatelessWidget {
   const HomePictureStreem({

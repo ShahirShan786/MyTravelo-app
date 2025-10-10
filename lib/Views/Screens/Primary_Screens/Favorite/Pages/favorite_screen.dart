@@ -2,12 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:My Travelo/Controller/Hive/user_functions.dart';
-import 'package:My Travelo/Views/Screens/Primary_Screens/Favorite/widgets/favorite_place_card_widget.dart';
-import 'package:My Travelo/Views/Screens/Sub_Screens/place_details_screen.dart';
-import 'package:My Travelo/Views/Screens/Widgets/app_bar.dart';
+import 'package:MyTravelo/Controller/Hive/user_functions.dart';
+import 'package:MyTravelo/Views/Screens/Primary_Screens/Favorite/widgets/favorite_place_card_widget.dart';
+import 'package:MyTravelo/Views/Screens/Sub_Screens/place_details_screen.dart';
+import 'package:MyTravelo/Views/Screens/Widgets/app_bar.dart';
 
-import 'package:My Travelo/constants/constable.dart';
+import 'package:MyTravelo/constants/constable.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});

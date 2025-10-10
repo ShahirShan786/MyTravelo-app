@@ -2,14 +2,14 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:My Travelo/Controller/Hive/signIn_service.dart';
-import 'package:My Travelo/Views/Screens/Main_Screens/SignIn/widgets/sign_email_feild.dart';
-import 'package:My Travelo/Views/Screens/Main_Screens/SignIn/widgets/sign_username_feild.dart';
-import 'package:My Travelo/Views/Screens/Widgets/textFormFeilds.dart';
-import 'package:My Travelo/constants/constable.dart';
-import 'package:My Travelo/constants/constant.dart';
-import 'package:My Travelo/Models/singInModel.dart';
-import 'package:My Travelo/Views/Screens/Main_Screens/Login/Pages/logIn_page.dart';
+import 'package:MyTravelo/Controller/Hive/signIn_service.dart';
+import 'package:MyTravelo/Views/Screens/Main_Screens/SignIn/widgets/sign_email_feild.dart';
+import 'package:MyTravelo/Views/Screens/Main_Screens/SignIn/widgets/sign_username_feild.dart';
+import 'package:MyTravelo/Views/Screens/Widgets/textFormFeilds.dart';
+import 'package:MyTravelo/constants/constable.dart';
+import 'package:MyTravelo/constants/constant.dart';
+import 'package:MyTravelo/Models/singInModel.dart';
+import 'package:MyTravelo/Views/Screens/Main_Screens/Login/Pages/logIn_page.dart';
 
 class SinginPage extends StatefulWidget {
   const SinginPage({super.key});

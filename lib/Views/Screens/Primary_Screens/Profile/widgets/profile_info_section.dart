@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:My Travelo/Models/singInModel.dart';
-import 'package:My Travelo/constants/constant.dart';
+import 'package:MyTravelo/Models/singInModel.dart';
+import 'package:MyTravelo/constants/constant.dart';
 
 class profileInfoSection extends StatelessWidget {
   const profileInfoSection({

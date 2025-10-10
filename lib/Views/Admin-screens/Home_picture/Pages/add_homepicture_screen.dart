@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:My Travelo/Controller/Firebase/firebase_functions.dart';
-import 'package:My Travelo/Views/Admin-screens/Home_picture/widgets/add_home_picture_button.dart';
-import 'package:My Travelo/Views/Screens/Widgets/app_bar.dart';
-import 'package:My Travelo/constants/constable.dart';
+import 'package:MyTravelo/Controller/Firebase/firebase_functions.dart';
+import 'package:MyTravelo/Views/Admin-screens/Home_picture/widgets/add_home_picture_button.dart';
+import 'package:MyTravelo/Views/Screens/Widgets/app_bar.dart';
+import 'package:MyTravelo/constants/constable.dart';
 
 class AddHomePictureScreen extends StatefulWidget {
   const AddHomePictureScreen({super.key});

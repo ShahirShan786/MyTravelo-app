@@ -5,17 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:My Travelo/Controller/Hive/user_functions.dart';
-import 'package:My Travelo/Views/Screens/Trip_Screens/Add_Trip_screens/Trip_Plan/widgets/add_button.dart';
-import 'package:My Travelo/Views/Screens/Widgets/app_bar.dart';
-import 'package:My Travelo/Views/Screens/Widgets/textFormFeilds.dart';
-import 'package:My Travelo/Views/Screens/Widgets/trip_deatails_screen_widget.dart';
-import 'package:My Travelo/constants/constable.dart';
-import 'package:My Travelo/constants/constant.dart';
+import 'package:MyTravelo/Controller/Hive/user_functions.dart';
+import 'package:MyTravelo/Views/Screens/Trip_Screens/Add_Trip_screens/Trip_Plan/widgets/add_button.dart';
+import 'package:MyTravelo/Views/Screens/Widgets/app_bar.dart';
+import 'package:MyTravelo/Views/Screens/Widgets/textFormFeilds.dart';
+import 'package:MyTravelo/Views/Screens/Widgets/trip_deatails_screen_widget.dart';
+import 'package:MyTravelo/constants/constable.dart';
+import 'package:MyTravelo/constants/constant.dart';
 
-import 'package:My Travelo/Models/user_model.dart';
+import 'package:MyTravelo/Models/user_model.dart';
 
-import 'package:My Travelo/Views/Screens/Primary_Screens/Schedule/Pages/schedule_screen.dart';
+import 'package:MyTravelo/Views/Screens/Primary_Screens/Schedule/Pages/schedule_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TripPlanScreen extends StatefulWidget {

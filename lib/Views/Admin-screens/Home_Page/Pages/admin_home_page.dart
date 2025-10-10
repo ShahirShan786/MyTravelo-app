@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
-import 'package:My Travelo/Controller/Firebase/firebase_functions.dart';
-import 'package:My Travelo/Views/Admin-screens/Home_Page/widgets/home_picture_stream.dart';
-import 'package:My Travelo/Views/Admin-screens/Home_Page/widgets/home_place_listanable.dart';
-import 'package:My Travelo/constants/constant.dart';
-import 'package:My Travelo/Views/Admin-screens/Home_picture/Pages/add_homepicture_screen.dart';
-import 'package:My Travelo/Views/Admin-screens/Add_Place/pages/admin_addPlace_screen.dart';
+import 'package:MyTravelo/Controller/Firebase/firebase_functions.dart';
+import 'package:MyTravelo/Views/Admin-screens/Home_Page/widgets/home_picture_stream.dart';
+import 'package:MyTravelo/Views/Admin-screens/Home_Page/widgets/home_place_listanable.dart';
+import 'package:MyTravelo/constants/constant.dart';
+import 'package:MyTravelo/Views/Admin-screens/Home_picture/Pages/add_homepicture_screen.dart';
+import 'package:MyTravelo/Views/Admin-screens/Add_Place/pages/admin_addPlace_screen.dart';
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({super.key});
